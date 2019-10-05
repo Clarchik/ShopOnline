@@ -5,7 +5,6 @@ stages:
 
 build:
     stage: build
-    enviroment:
-        name: production
+    enviroment: Stage
     script:
         - npm force:build:prod
