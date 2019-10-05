@@ -7,6 +7,8 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
+    "force:build:prod": "npm run clean && npm install && npm run build --prod",
+    "clean": "rm -rf dist && rm -rf node_modules",
     "e2e": "ng e2e"
   },
   "private": true,

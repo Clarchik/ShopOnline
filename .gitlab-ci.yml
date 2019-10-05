@@ -1,0 +1,11 @@
+image: node:latest
+
+stages:
+    - build
+
+build:
+    stage: build
+    enviroment:
+        name: production
+    script:
+        - npm force:build:prod
