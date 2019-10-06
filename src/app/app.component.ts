@@ -9,6 +9,6 @@ export class AppComponent {
     title = 'OnlineShop';
     testing = 32;
     constructor() {
-        const er = new Object();
+        console.log('Hello');
     }
 }
