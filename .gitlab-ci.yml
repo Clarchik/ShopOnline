@@ -7,4 +7,4 @@ build:
     stage: build
     enviroment: Stage
     script:
-        - npm force:build:prodd
+        - npm force:build:prod
