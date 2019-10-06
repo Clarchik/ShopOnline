@@ -10,5 +10,6 @@ export class AppComponent {
     testing = 32;
     constructor() {
         console.log('Hello');
+        console.log('Hello2');
     }
 }
