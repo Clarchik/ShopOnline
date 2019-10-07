@@ -1,0 +1,17 @@
+image: node:12-alpine
+
+cache:
+  paths:
+    - node_modules/
+
+stages:
+  - compile
+
+compile:
+  stage: compile
+  script:
+    - npm run force:build:prod
+  except:
+    - master
+    - /^release*$/
+    - tags
