@@ -1,0 +1,35 @@
+@import '../../styles/variables.scss';
+
+.nav-link__effect:hover {
+    color: $main-color !important;
+}
+
+.nav-item__container {
+    position: relative;
+}
+
+.button-close__image {
+    transition: all .3s ease-in-out;
+    background-image: url('../../../assets/images/close-button.svg')!important;
+}
+
+.icon-counter {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;;
+    top: 0;
+    right: 0;
+    font-size: 11px;
+    background-color: $main-color;
+    color: #ffffff;
+    min-height: 15px;
+    min-width: 15px;
+    border-radius: 50%;
+}
+
+@media only screen and (min-width: 768px) {
+    .lg-order {
+        order: 2;
+    }
+}
