@@ -81,6 +81,7 @@
         "ter-arrow-body-style": true,
         "triple-equals": true,
         "no-string-literal": false,
+        "no-submodule-imports": false,
         "array-type": false,
         "arrow-parens": false,
         "max-classes-per-file": false,
