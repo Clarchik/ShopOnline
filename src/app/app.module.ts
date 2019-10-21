@@ -8,9 +8,6 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
-import { LanguageComponent } from './components/language/language.component';
-import { CurrencyComponent } from './components/currency/currency.component';
-import { CurrencyConverterPipe } from './shared/pipes/currency-converter/currency-converter.pipe';
 
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http);
@@ -20,9 +17,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     declarations: [
         AppComponent,
         HeaderComponent,
-        LanguageComponent,
-        CurrencyComponent,
-        CurrencyConverterPipe,
     ],
     imports: [
         BrowserModule,
