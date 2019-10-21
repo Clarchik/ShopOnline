@@ -1,52 +1,86 @@
 <mdb-navbar SideClass="navbar navbar-light navbar-expand-md fixed-top white scrolling-navbar top-nav-collapse">
-    <mdb-navbar-brand>
+    <mdb-navbar-brand class="navbar-sm">
         <a class="navbar-brand">
             <!-- TODO Change Logo image on our own -->
             <img src="../../../assets/images/logo.svg" alt="Logo image">
         </a>
+        <button id="top-toggler" class="navbar-toggler navbar-toggler__sm" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent">
+            <span [ngClass]="{'button-close__image': toggleHambugerView('top-toggler')}"
+                class="navbar-toggler-icon"></span>
+        </button>
     </mdb-navbar-brand>
-    <!-- Collapsible content -->
-    <links>
-        <!-- Links -->
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-                <a class="nav-link nav-link__effect">New Arrivals</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link nav-link__effect">Brands</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link nav-link__effect">Shoes</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link nav-link__effect">Clothes</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link nav-link__effect">Accessories</a>
-            </li>
-        </ul>
-    </links>
+
     <!-- Always visible links -->
-    <ul class="nav navbar-nav nav-flex-icons ml-auto lg-order">
+    <ul class="nav navbar-nav nav-flex-icons ml-auto navbar-nav__lg navbar-nav__sm">
         <li class="nav-item">
             <a class="nav-link nav-link__effect">
-                <mdb-icon far icon="star" size="lg"></mdb-icon>
+                <mdb-icon *ngIf="iconSize === 'lg'" far icon="star" size="lg"></mdb-icon>
+                <mdb-icon *ngIf="iconSize === 'sm'" far icon="star" size="sm"></mdb-icon>
             </a>
         </li>
         <li class="nav-item">
             <a class="nav-link nav-link__effect">
-                <mdb-icon fas icon="search" size="lg"></mdb-icon>
+                <mdb-icon *ngIf="iconSize === 'lg'" fas icon="search" size="lg"></mdb-icon>
+                <mdb-icon *ngIf="iconSize === 'sm'" fas icon="search" size="sm"></mdb-icon>
             </a>
         </li>
         <li class="nav-item nav-item__container">
             <a class="nav-link nav-link__effect">
-                <mdb-icon class="icon-container" fas icon="shopping-cart" size="lg">
-                </mdb-icon>
+                <mdb-icon *ngIf="iconSize === 'lg'" class="icon-container" fas icon="shopping-cart" size="lg"></mdb-icon>
+                <mdb-icon *ngIf="iconSize === 'sm'" class="icon-container" fas icon="shopping-cart" size="sm"></mdb-icon>
                 <span class="icon-counter">
                     <!-- TODO This counter should be replaced by real value -->
                     10
                 </span>
             </a>
         </li>
+        <div class="dropdown" mdbDropdown>
+            <button mdbDropdownToggle class="btn dropdown-toggle language__toggle">
+                <img src="../../../assets/flags/{{currentLanguage}}.svg" alt="Flag icon" class="flag__image">
+                <span>{{ currentLanguage.toUpperCase() }}</span>
+            </button>
+            <div class="dropdown-menu language__dropdown">
+                <a (click)="switchLanguage(language)" class="dropdown-item" *ngFor="let language of availableLanguages">
+                    <img src="../../../assets/flags/{{language}}.svg" class="flag__image" alt="Flag icon">
+                    <span>{{ language.toUpperCase() }}</span>
+                </a>
+            </div>
+        </div>
+        <button id="bottom-toggler" (click)="toggleHambugerView($event);" class="navbar-toggler navbar-toggler__md"
+            type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
+            <span [ngClass]="{'button-close__image': toggleHambugerView('bottom-toggler')}"
+                class="navbar-toggler-icon"></span>
+        </button>
     </ul>
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto align-items-center">
+            <li class="nav-item">
+                <a class="nav-link nav-link__effect">
+                    {{ 'Header.new' | translate }}
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link nav-link__effect">
+                    {{ 'Header.brands' | translate }}
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link nav-link__effect">
+                    {{ 'Header.shoes' | translate }}
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link nav-link__effect">
+                    {{ 'Header.clothes' | translate }}
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link nav-link__effect">
+                    {{ 'Header.accessories' | translate }}
+                </a>
+            </li>
+        </ul>
+    </div>
 </mdb-navbar>
