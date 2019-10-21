@@ -1,12 +1,12 @@
 <div class="dropdown" mdbDropdown>
-    <button mdbDropdownToggle class="btn dropdown-toggle language__toggle">
-        <img src="../../../assets/flags/{{currentLanguage}}.svg" alt="Flag icon" class="flag__image">
+    <button mdbDropdownToggle class="btn dropdown-toggle dropdown__toggle">
+        <img src="../../../assets/flags/{{currentLanguage}}.svg" alt="Flag icon" class="dropdown__image">
         <span>{{ currentLanguage.toUpperCase() }}</span>
     </button>
-    <div class="dropdown-menu language__dropdown">
-        <a (click)="switchLanguage(language)" class="dropdown-item" *ngFor="let language of availableLanguages">
-            <img src="../../../assets/flags/{{language}}.svg" class="flag__image" alt="Flag icon">
-            <span>{{ language.toUpperCase() }}</span>
+    <div class="dropdown-menu header__dropdown">
+        <a (click)="switchLanguage(language.name)" class="dropdown-item" *ngFor="let language of availableLanguages">
+            <img src="../../../assets/flags/{{language.name}}.svg" class="dropdown__image" alt="Flag icon">
+            <span>{{ language.name.toUpperCase() }}</span>
         </a>
     </div>
 </div>
