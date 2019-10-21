@@ -1,0 +1,16 @@
+.flag__image {
+    width: 25px;
+    height: 25px;
+    margin-right: 7px;
+}
+
+.language__toggle {
+    display: flex;
+    align-items: center;
+    justify-items: center;
+}
+
+.navbar-nav .dropdown .language__dropdown {
+    min-width: 0;
+    transform: translate3d(10px,0,0) !important;
+}

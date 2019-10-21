@@ -15,6 +15,9 @@ import { GalleryShoesDirective } from './shared/directives/gallery-shoes/gallery
 import { ImageGridComponent } from './components/main-page/image-grid/image-grid.component';
 import { ImageGridDirective } from './shared/directives/image-grid/image-grid.directive';
 import { ContactUsComponent } from './components/main-page/contact-us/contact-us.component';
+import { LanguageComponent } from './components/language/language.component';
+import { CurrencyComponent } from './components/currency/currency.component';
+import { CurrencyConverterPipe } from './shared/pipes/currency-converter/currency-converter.pipe';
 
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http);
@@ -31,6 +34,9 @@ export function HttpLoaderFactory(http: HttpClient) {
         ImageGridComponent,
         ImageGridDirective,
         ContactUsComponent,
+        LanguageComponent,
+        CurrencyComponent,
+        CurrencyConverterPipe,
     ],
     imports: [
         BrowserModule,
