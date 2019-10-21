@@ -27,26 +27,18 @@
         </li>
         <li class="nav-item nav-item__container">
             <a class="nav-link nav-link__effect">
-                <mdb-icon *ngIf="iconSize === 'lg'" class="icon-container" fas icon="shopping-cart" size="lg"></mdb-icon>
-                <mdb-icon *ngIf="iconSize === 'sm'" class="icon-container" fas icon="shopping-cart" size="sm"></mdb-icon>
+                <mdb-icon *ngIf="iconSize === 'lg'" class="icon-container" fas icon="shopping-cart" size="lg">
+                </mdb-icon>
+                <mdb-icon *ngIf="iconSize === 'sm'" class="icon-container" fas icon="shopping-cart" size="sm">
+                </mdb-icon>
                 <span class="icon-counter">
                     <!-- TODO This counter should be replaced by real value -->
                     10
                 </span>
             </a>
         </li>
-        <div class="dropdown" mdbDropdown>
-            <button mdbDropdownToggle class="btn dropdown-toggle language__toggle">
-                <img src="../../../assets/flags/{{currentLanguage}}.svg" alt="Flag icon" class="flag__image">
-                <span>{{ currentLanguage.toUpperCase() }}</span>
-            </button>
-            <div class="dropdown-menu language__dropdown">
-                <a (click)="switchLanguage(language)" class="dropdown-item" *ngFor="let language of availableLanguages">
-                    <img src="../../../assets/flags/{{language}}.svg" class="flag__image" alt="Flag icon">
-                    <span>{{ language.toUpperCase() }}</span>
-                </a>
-            </div>
-        </div>
+        <app-language></app-language>
+        <app-currency></app-currency>
         <button id="bottom-toggler" (click)="toggleHambugerView($event);" class="navbar-toggler navbar-toggler__md"
             type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
             <span [ngClass]="{'button-close__image': toggleHambugerView('bottom-toggler')}"
@@ -84,3 +76,8 @@
         </ul>
     </div>
 </mdb-navbar>
+
+
+<div style="margin-top: 200px;">
+    {{ 3.99 | currencyConverter }}
+</div>

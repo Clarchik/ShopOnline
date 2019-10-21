@@ -1,4 +1,4 @@
-import { Injectable, AfterViewInit, HostListener } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Subject, Observable } from 'rxjs';
 import { distinctUntilChanged } from 'rxjs/operators';
 import { SCREEN_SIZE } from '../../models/screen-size/screen-size';
@@ -8,7 +8,7 @@ export class ResizeService {
     private resizeSubject: Subject<SCREEN_SIZE>;
 
     get onResize$(): Observable<any> {
-        return this.resizeSubject.asObservable();
+        return this.resizeSubject.asObservable().pipe(distinctUntilChanged());
     }
 
     constructor() {
