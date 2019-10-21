@@ -1,26 +1,27 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
+import { LANGUAGE_NAMES } from '../../shared/models/languages/language-names';
+import { Language } from '../../shared/models/languages/language';
 
 @Component({
     selector: 'app-language',
     templateUrl: './language.component.html',
     styleUrls: ['./language.component.scss'],
-    encapsulation: ViewEncapsulation.None
 })
 export class LanguageComponent {
-    public allLanguages: Array<string>;
-    public availableLanguages: Array<string>;
-    public currentLanguage: string;
+    public allLanguages: Array<Language>;
+    public availableLanguages: Array<Language>;
+    public currentLanguage: LANGUAGE_NAMES;
     constructor(private translate: TranslateService) {
-        const language = localStorage.getItem('language');
-        const defaultLanguage = language ? language : 'en';
+        const language: LANGUAGE_NAMES = LANGUAGE_NAMES[localStorage.getItem('language')];
+        const defaultLanguage: LANGUAGE_NAMES = language ? language : LANGUAGE_NAMES.en;
         translate.setDefaultLang(defaultLanguage);
-        this.allLanguages = ['en', 'pl'];
+        this.allLanguages = [{ name: LANGUAGE_NAMES.en }, { name: LANGUAGE_NAMES.pl }];
         this.currentLanguage = defaultLanguage;
         this.filterAvailableLanguages();
     }
 
-    switchLanguage(language: string) {
+    switchLanguage(language: LANGUAGE_NAMES) {
         localStorage.setItem('language', language);
         this.translate.use(language);
         this.currentLanguage = language;
@@ -28,7 +29,7 @@ export class LanguageComponent {
     }
 
     filterAvailableLanguages() {
-        this.availableLanguages = this.allLanguages.filter((item) => item !== this.currentLanguage);
+        this.availableLanguages = this.allLanguages.filter((item) => item.name !== this.currentLanguage);
     }
 
 }
