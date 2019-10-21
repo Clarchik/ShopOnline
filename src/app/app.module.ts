@@ -8,6 +8,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
+import { CarouselComponent } from './components/carousel/carousel.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http);
@@ -17,6 +18,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     declarations: [
         AppComponent,
         HeaderComponent,
+        CarouselComponent,
     ],
     imports: [
         BrowserModule,
