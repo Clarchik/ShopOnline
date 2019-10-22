@@ -4,3 +4,20 @@
 body {
     font-family: $monsterrat !important;
 }
+
+.dropdown__image {
+    width: 25px;
+    height: 25px;
+    margin-right: 7px;
+}
+
+.dropdown__toggle {
+    display: flex;
+    align-items: center;
+    justify-items: center;
+}
+
+.navbar-nav .dropdown .header__dropdown {
+    min-width: 0;
+    transform: translate3d(10px,0,0) !important;
+}
