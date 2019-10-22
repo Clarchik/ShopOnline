@@ -1,4 +1,5 @@
 import {Component} from '@angular/core';
+import {CurrencyRatesService} from './shared/services/currency/currency-rates.service';
 
 @Component({
     selector: 'app-root',
@@ -7,12 +8,5 @@ import {Component} from '@angular/core';
 })
 export class AppComponent {
     title = 'OnlineShop';
-    testing = 32;
-    constructor() {
-        console.log('Hello');
-        console.log('Hello2');
-        console.log('Hello3');
-        console.log('Hello4');
-        console.log('Hello5');
-    }
+    constructor() {}
 }
