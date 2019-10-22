@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Slides } from '../../shared/models/slider-json/slides';
-import { Slide } from '../../shared/interfaces/slide-interface';
+import { Slides } from '../../../shared/models/slider-json/slides';
+import { Slide } from '../../../shared/interfaces/slide-interface';
 @Component({
     selector: 'app-carousel',
     templateUrl: './carousel.component.html',

@@ -1,4 +1,4 @@
-@import '../../styles/variables.scss';
+@import '../../../styles/variables.scss';
 
 .nav-link__effect:hover {
     color: $main-color !important;
@@ -10,7 +10,7 @@
 
 .button-close__image {
     transition: all .3s ease-in-out;
-    background-image: url('../../../assets/images/close-button.svg')!important;
+    background-image: url('../../../../assets/images/close-button.svg')!important;
 }
 
 .icon-counter {

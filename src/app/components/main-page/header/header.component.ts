@@ -1,8 +1,8 @@
 import { Component, ViewEncapsulation, HostListener, AfterViewInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { ResizeService } from '../../shared/services/resize/resize.service';
-import { UtilsService } from '../../shared/services/utils/utils.service';
-import { SCREEN_SIZE } from '../../shared/models/screen-size/screen-size';
+import { ResizeService } from '../../../shared/services/resize/resize.service';
+import { UtilsService } from '../../../shared/services/utils/utils.service';
+import { SCREEN_SIZE } from '../../../shared/models/screen-size/screen-size';
 
 @Component({
     selector: 'app-header',
