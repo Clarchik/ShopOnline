@@ -1,7 +1,7 @@
-import {Component} from '@angular/core';
-import {Currency} from '../../shared/models/currency/currency';
-import {CurrencyRates} from '../../shared/models/currency/currency-rates';
-import {CurrencyStorageService} from '../../shared/services/currency/currency-storage.service';
+import { Component } from '@angular/core';
+import { Currency } from '../../shared/models/currency/currency';
+import { CurrencyRates } from '../../shared/models/currency/currency-rates';
+import { CurrencyStorageService } from '../../shared/services/currency/currency-storage.service';
 
 @Component({
     selector: 'app-currency',
