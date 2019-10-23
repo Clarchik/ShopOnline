@@ -15,7 +15,7 @@ export class CurrencyComponent {
     constructor(private css: CurrencyStorageService) {
         const currencyRates = new CurrencyRates();
         const currencyFromLocalStorage = localStorage.getItem('currency') ? JSON.parse(localStorage.getItem('currency')) : null;
-        const currencyFromServiceStorage = this.css.currentCurrency ? this.css.currentCurrency : null;
+        const currencyFromServiceStorage = this.css.lastCurrency ? this.css.lastCurrency : null;
         const currencyAvailable = currencyFromLocalStorage || currencyFromServiceStorage;
         const currency = currencyAvailable ? currencyAvailable : currencyRates.defaultCurrency;
         this.allCurencies = currencyRates.rates;
@@ -33,6 +33,7 @@ export class CurrencyComponent {
     }
 
     saveCurrency(currency: Currency) {
+        console.log(JSON.stringify(currency));
         this.css.onCurrencyChange(currency);
         localStorage.setItem('currency', JSON.stringify(currency));
         this.currentCurrency = currency;
