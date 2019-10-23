@@ -17,18 +17,13 @@ export class LanguageComponent {
         const defaultLanguage: LANGUAGE_NAMES = language ? language : LANGUAGE_NAMES.en;
         translate.setDefaultLang(defaultLanguage);
         this.allLanguages = [{ name: LANGUAGE_NAMES.en }, { name: LANGUAGE_NAMES.pl }];
-        this.currentLanguage = defaultLanguage;
-        this.filterAvailableLanguages();
+        this.switchLanguage(defaultLanguage);
     }
 
     switchLanguage(language: LANGUAGE_NAMES) {
+        this.currentLanguage = language;
         localStorage.setItem('language', language);
         this.translate.use(language);
-        this.currentLanguage = language;
-        this.filterAvailableLanguages();
-    }
-
-    filterAvailableLanguages() {
         this.availableLanguages = this.allLanguages.filter((item) => item.name !== this.currentLanguage);
     }
 
