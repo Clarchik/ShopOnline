@@ -23,6 +23,7 @@ import {CurrencyRatesService} from './shared/services/currency/currency-rates.se
 import {CurrencyRates} from './shared/models/currency/currency-rates';
 import { PreferencesModalComponent } from './components/main-page/preferences-modal/preferences-modal.component';
 import { FooterComponent } from './components/main-page/footer/footer.component';
+import { PreferencesModalComponent } from './components/main-page/preferences-modal/preferences-modal.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http);
@@ -49,6 +50,7 @@ export function setupInitFactory(crs: CurrencyRatesService) {
         TextBoldPipe,
         PreferencesModalComponent,
         FooterComponent,
+        PreferencesModalComponent,
     ],
     imports: [
         BrowserModule,
