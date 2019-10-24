@@ -1,0 +1,12 @@
+.preferences {
+    &-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+        &__title {
+            font-size: 15px;
+            margin-bottom: 0;
+            font-weight: bold;
+        }
+    }
+}

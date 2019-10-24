@@ -4,6 +4,9 @@
         "brands": "Marki",
         "shoes": "Obuwie",
         "clothes": "Odzież",
-        "accessories": "Akcesoria"
+        "accessories": "Akcesoria",
+        "preferences": "Ustaw swoje preferencje",
+        "language": "Język",
+        "currency": "Waluta"
     }
 }

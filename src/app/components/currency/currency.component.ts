@@ -6,7 +6,7 @@ import { CurrencyStorageService } from '../../shared/services/currency/currency-
 @Component({
     selector: 'app-currency',
     templateUrl: './currency.component.html',
-    styleUrls: ['./currency.component.scss'],
+    styleUrls: ['./currency.component.scss']
 })
 export class CurrencyComponent {
     public currentCurrency: Currency;
@@ -21,7 +21,7 @@ export class CurrencyComponent {
         const currencyFromLocalStorage: Currency = localStorage.getItem('currency') ? JSON.parse(localStorage.getItem('currency')) : null;
         const currencyFromServiceStorage: Currency = this.css.lastCurrency ? this.css.lastCurrency : null;
         const currencyFromStorage = currencyFromLocalStorage || currencyFromServiceStorage;
-        const refreshIfFound = currencyRates.length ? currencyRates.find(((item) => item.name === currencyFromStorage.name)) : null;
+        const refreshIfFound = currencyRates.length && currencyFromStorage ? currencyRates.find(((item) => item.name === currencyFromStorage.name)) : null;
         const currency = refreshIfFound ? refreshIfFound : this.cs.defaultCurrency;
         this.allCurencies = currencyRates.length ? currencyRates : [currency];
         this.switchCurrency(currency);
