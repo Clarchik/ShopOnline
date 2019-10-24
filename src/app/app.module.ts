@@ -21,6 +21,7 @@ import {CurrencyConverterPipe} from './shared/pipes/currency-converter/currency-
 import {TextBoldPipe} from './shared/pipes/text-bold/text-bold.pipe';
 import {CurrencyRatesService} from './shared/services/currency/currency-rates.service';
 import {CurrencyRates} from './shared/models/currency/currency-rates';
+import { FooterComponent } from './components/main-page/footer/footer.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http);
@@ -45,6 +46,7 @@ export function setupInitFactory(crs: CurrencyRatesService) {
         ImageGridDirective,
         CurrencyConverterPipe,
         TextBoldPipe,
+        FooterComponent,
     ],
     imports: [
         BrowserModule,
