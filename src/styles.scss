@@ -11,13 +11,24 @@ body {
     margin-right: 7px;
 }
 
-.dropdown__toggle {
+.btn.dropdown__toggle {
     display: flex;
     align-items: center;
     justify-items: center;
+    border: 1px solid lightgrey;
+    min-width: 110px;
+    &:active,
+    &:focus {
+        outline: none;
+        box-shadow: none;
+    }
 }
 
-.navbar-nav .dropdown .header__dropdown {
+.dropdown__toggle.dropdown-toggle::after {
+    margin-left: auto;
+}
+
+.dropdown .header__dropdown {
     min-width: 0;
-    transform: translate3d(10px,0,0) !important;
+    transform: translate3d(0, 34px, 0) !important;
 }

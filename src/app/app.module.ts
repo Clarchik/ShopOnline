@@ -1,7 +1,7 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule, APP_INITIALIZER} from '@angular/core';
 import {AppRoutingModule} from './app-routing.module';
-import {MDBBootstrapModule} from 'angular-bootstrap-md';
+import {MDBBootstrapModule, MDBModalRef} from 'angular-bootstrap-md';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
 import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
@@ -22,6 +22,7 @@ import {TextBoldPipe} from './shared/pipes/text-bold/text-bold.pipe';
 import {CurrencyRatesService} from './shared/services/currency/currency-rates.service';
 import {CurrencyRates} from './shared/models/currency/currency-rates';
 import { FooterComponent } from './components/main-page/footer/footer.component';
+import { PreferencesModalComponent } from './components/main-page/preferences-modal/preferences-modal.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http);
@@ -47,6 +48,7 @@ export function setupInitFactory(crs: CurrencyRatesService) {
         CurrencyConverterPipe,
         TextBoldPipe,
         FooterComponent,
+        PreferencesModalComponent,
     ],
     imports: [
         BrowserModule,
@@ -63,6 +65,7 @@ export function setupInitFactory(crs: CurrencyRatesService) {
     ],
     providers: [
         CurrencyRates,
+        MDBModalRef,
         CurrencyRatesService,
         {
             provide: APP_INITIALIZER,
@@ -71,6 +74,7 @@ export function setupInitFactory(crs: CurrencyRatesService) {
             multi: true
         }
     ],
-    bootstrap: [AppComponent]
+    bootstrap: [AppComponent],
+    entryComponents: [PreferencesModalComponent]
 })
 export class AppModule {}

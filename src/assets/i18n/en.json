@@ -4,6 +4,9 @@
         "brands": "Brands",
         "shoes": "Shoes",
         "clothes": "Clothes",
-        "accessories": "Accessories"
+        "accessories": "Accessories",
+        "preferences": "Set your preferences",
+        "language": "Language",
+        "currency": "Currency"
     }
 }
