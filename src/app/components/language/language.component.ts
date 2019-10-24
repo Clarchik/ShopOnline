@@ -15,7 +15,6 @@ export class LanguageComponent {
     constructor(private translate: TranslateService) {
         const language: LANGUAGE_NAMES = LANGUAGE_NAMES[localStorage.getItem('language')];
         const defaultLanguage: LANGUAGE_NAMES = language ? language : LANGUAGE_NAMES.en;
-        translate.setDefaultLang(defaultLanguage);
         this.allLanguages = [{ name: LANGUAGE_NAMES.en }, { name: LANGUAGE_NAMES.pl }];
         this.switchLanguage(defaultLanguage);
     }

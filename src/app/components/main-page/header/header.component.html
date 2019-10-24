@@ -37,8 +37,12 @@
                 </span>
             </a>
         </li>
-        <app-language></app-language>
-        <app-currency></app-currency>
+        <li class="nav-item">
+            <a class="nav-link nav-link__effect" (click)="openPreferencesModal();">
+                <mdb-icon *ngIf="iconSize === 'lg'" fas icon="exchange-alt" size="lg"></mdb-icon>
+                <mdb-icon *ngIf="iconSize === 'sm'" far icon="exchange-alt" size="sm"></mdb-icon>
+            </a>
+        </li>
         <button id="bottom-toggler" (click)="toggleHambugerView($event);" class="navbar-toggler navbar-toggler__md"
             type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
             <span [ngClass]="{'button-close__image': toggleHambugerView('bottom-toggler')}"
@@ -76,4 +80,4 @@
         </ul>
     </div>
 </mdb-navbar>
-
+<app-preferences-modal [hidden]="true"></app-preferences-modal>
