@@ -2,8 +2,8 @@ import { Component, ViewEncapsulation, HostListener, AfterViewInit } from '@angu
 import { ResizeService } from '../../../shared/services/resize/resize.service';
 import { UtilsService } from '../../../shared/services/utils/utils.service';
 import { SCREEN_SIZE } from '../../../shared/models/screen-size/screen-size';
-import {MDBModalRef, MDBModalService} from 'angular-bootstrap-md';
-import {PreferencesModalComponent} from '../preferences-modal/preferences-modal.component';
+import { MDBModalRef, MDBModalService } from 'angular-bootstrap-md';
+import { PreferencesModalComponent } from '../preferences-modal/preferences-modal.component';
 
 @Component({
     selector: 'app-header',
