@@ -1,4 +1,4 @@
-import { HeaderComponent } from './main-page/header/header.component';
+import { HeaderComponent } from './header/header.component';
 import { CarouselComponent } from './main-page/carousel/carousel.component';
 import { ShoesSliderComponent } from './main-page/shoes-slider/shoes-slider.component';
 import { ImageGridComponent } from './main-page/image-grid/image-grid.component';
@@ -8,6 +8,7 @@ import { PreferencesModalComponent } from './main-page/preferences-modal/prefere
 import { MainPageComponent } from './main-page/main-page.component';
 import { CurrencyComponent } from './currency/currency.component';
 import { LanguageComponent } from './language/language.component';
+import { LoginComponent } from './login/login.component';
 
 
 
@@ -21,7 +22,8 @@ export const Components: any[] = [
     PreferencesModalComponent,
     MainPageComponent,
     CurrencyComponent,
-    LanguageComponent
+    LanguageComponent,
+    LoginComponent
 ];
 
 

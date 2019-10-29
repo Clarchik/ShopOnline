@@ -8,5 +8,14 @@
         "preferences": "Set your preferences",
         "language": "Language",
         "currency": "Currency"
+    },
+    "Authentication": {
+        "login": "Login",
+        "password": "Password",
+        "signIn": "Sign in",
+        "createAccount": "Create Account"
+    },
+    "Store": {
+        "backToStore": "Return to Store"
     }
 }
