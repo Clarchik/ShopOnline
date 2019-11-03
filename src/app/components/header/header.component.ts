@@ -1,9 +1,13 @@
 import { Component, ViewEncapsulation, HostListener, AfterViewInit } from '@angular/core';
-import { ResizeService } from '../../../shared/services/resize/resize.service';
-import { UtilsService } from '../../../shared/services/utils/utils.service';
-import { SCREEN_SIZE } from '../../../shared/models/screen-size/screen-size';
+import { ResizeService } from '../../shared/services/resize/resize.service';
+import { UtilsService } from '../../shared/services/utils/utils.service';
+import { SCREEN_SIZE } from '../../shared/models/screen-size/screen-size';
 import { MDBModalRef, MDBModalService } from 'angular-bootstrap-md';
-import { PreferencesModalComponent } from '../preferences-modal/preferences-modal.component';
+import { PreferencesModalComponent } from '../main-page/preferences-modal/preferences-modal.component';
+import { Store } from '@ngrx/store';
+
+import * as fromStore from '../../store';
+import { Observable } from 'rxjs';
 
 @Component({
     selector: 'app-header',
@@ -15,10 +19,15 @@ import { PreferencesModalComponent } from '../preferences-modal/preferences-moda
 export class HeaderComponent implements AfterViewInit {
     public screenSize: SCREEN_SIZE;
     private modalRef: MDBModalRef;
+    public user$: Observable<boolean>;
+    public noUser$: Observable<boolean>;
     constructor(
         public resizeService: ResizeService,
         private utilsService: UtilsService,
-        private modalService: MDBModalService) {
+        private modalService: MDBModalService,
+        private store: Store<fromStore.UserState>) {
+        this.noUser$ = this.store.select(fromStore.isNotUserLogged);
+        this.user$ = this.store.select(fromStore.isUserLogged);
     }
 
     @HostListener('window:resize', ['$event'])

@@ -1,0 +1,45 @@
+<div class="container">
+    <div class="row align-items-center">
+        <div class="col-md-6 offset-md-3">
+            <div class="form-wrapper">
+                <header class="login-header">
+                    <h1 class="login-header__title">
+                        {{ 'Authentication.login' | translate }}
+                    </h1>
+                    <hr class="hr__small">
+                </header>
+                <section class="login-form">
+                    <form [formGroup]="loginForm">
+                        <div class="md-form">
+                            <input mdbInput type="text" id="form1" class="form-control" formControlName="email">
+                            <label for="form1" class="">
+                                {{ 'Authentication.login' | translate }}
+                            </label>
+                        </div>
+                        <div class="md-form">
+                            <input mdbInput type="password" id="form2" class="form-control" formControlName="password">
+                            <label for="form2" class="">
+                                {{ 'Authentication.password' | translate }}
+                            </label>
+                        </div>
+                    </form>
+                    <button class="w-100" type="button" mdbBtn color="dark" mdbWavesEffect (click)="loginIn();">
+                        <span [hidden]="userIsLoading$ | async">
+                            {{ 'Authentication.signIn' | translate }}
+                        </span>
+                        <mdb-icon *ngIf="userIsLoading$ | async" fas icon="spinner" class="animated rotateOut infinite">
+                        </mdb-icon>
+                    </button>
+                </section>
+                <footer class="login-footer">
+                    <a class="login-footer__link" routerLink="/main">
+                        {{ 'Authentication.createAccount' | translate }}
+                    </a>
+                    <a class="login-footer__link" routerLink="/main">
+                        {{ 'Store.backToStore' | translate }}
+                    </a>
+                </footer>
+            </div>
+        </div>
+    </div>
+</div>

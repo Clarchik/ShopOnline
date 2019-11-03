@@ -1,6 +1,6 @@
 <mdb-navbar SideClass="navbar navbar-light navbar-expand-md white scrolling-navbar top-nav-collapse" #Hello>
     <mdb-navbar-brand class="navbar-sm">
-        <a class="navbar-brand">
+        <a class="navbar-brand" routerLink="/main">
             <!-- TODO Change Logo image on our own -->
             <img src="../../../assets/images/logo.svg" alt="Logo image">
         </a>
@@ -41,6 +41,12 @@
             <a class="nav-link nav-link__effect" (click)="openPreferencesModal();">
                 <mdb-icon *ngIf="iconSize === 'lg'" fas icon="exchange-alt" size="lg"></mdb-icon>
                 <mdb-icon *ngIf="iconSize === 'sm'" far icon="exchange-alt" size="sm"></mdb-icon>
+            </a>
+        </li>
+        <li class="nav-item" *ngIf="noUser$| async">
+            <a class="nav-link nav-link__effect" routerLink="/login" routerLinkActive="nav-link__activated" >
+                <mdb-icon *ngIf="iconSize === 'lg'" fas icon="user" size="lg"></mdb-icon>
+                <mdb-icon *ngIf="iconSize === 'sm'" far icon="user" size="sm"></mdb-icon>
             </a>
         </li>
         <button id="bottom-toggler" (click)="toggleHambugerView($event);" class="navbar-toggler navbar-toggler__md"

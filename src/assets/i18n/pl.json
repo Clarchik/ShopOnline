@@ -8,5 +8,14 @@
         "preferences": "Ustaw swoje preferencje",
         "language": "Język",
         "currency": "Waluta"
+    },
+    "Authentication": {
+        "login": "Login",
+        "password": "Hasło",
+        "signIn": "Zaloguj się",
+        "createAccount": "Utwórz konto"
+    },
+    "Store": {
+        "backToStore": "Powrót do sklepu"
     }
 }
