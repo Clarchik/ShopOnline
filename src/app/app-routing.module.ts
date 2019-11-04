@@ -5,8 +5,8 @@ import { MainPageComponent } from './components/main-page/main-page.component';
 
 const routes: Routes = [
     { path: '', redirectTo: 'main', pathMatch: 'full' },
-    { path: 'main', component: MainPageComponent },
-    { path: 'login', component: LoginComponent }
+    { path: 'main', component: MainPageComponent, data: { animation: 'swipeLeft' } },
+    { path: 'login', component: LoginComponent, data: { animation: 'swipeRight' } }
 ];
 
 @NgModule({
