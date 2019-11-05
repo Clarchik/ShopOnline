@@ -1,14 +1,14 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {ReactiveFormsModule} from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuthModule } from '@angular/fire/auth';
-import {StoreModule} from '@ngrx/store';
+import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import {EffectsModule} from '@ngrx/effects';
+import { EffectsModule } from '@ngrx/effects';
 import { ToastrModule } from 'ngx-toastr';
 import { MDBBootstrapModule, MDBModalRef } from 'angular-bootstrap-md';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
@@ -25,10 +25,9 @@ import { AppComponent } from './app.component';
 import { environment } from '../environments/environment.prod';
 
 import { reducers as userReducers, effects as userEffects } from './store';
-import {AuthenticationService} from './shared/services/authentication/authentication.service';
 
 import * as fromComponents from './components';
-import {SessionService} from './shared/services/authentication/session.service';
+import { SessionService } from './shared/services/authentication/session.service';
 
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http);

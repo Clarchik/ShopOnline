@@ -5,6 +5,10 @@ body {
     font-family: $monsterrat !important;
 }
 
+.routeContainer > * {
+    display: block;
+}
+
 .dropdown__image {
     width: 25px;
     height: 25px;
