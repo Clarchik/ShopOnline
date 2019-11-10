@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { SCREEN_SIZE, } from '../../models/screen-size/screen-size';
 import { SCREEN_COFIG } from '../../models/screen-size/screen-size-config';
+import { SESSION } from '../../models/session/session';
 
 @Injectable({
     providedIn: 'root'
@@ -21,5 +22,29 @@ export class UtilsService {
         } else if (width >= SCREEN_COFIG.xl.min) {
             return SCREEN_SIZE.xl;
         }
+    }
+
+    public setSession(id: string, accessToken: string, refreshToken: string) {
+        localStorage.setItem(SESSION._id, id);
+        localStorage.setItem(SESSION['x-access-token'], accessToken);
+        localStorage.setItem(SESSION['x-refresh-token'], refreshToken);
+    }
+
+    public removeSession() {
+        localStorage.removeItem(SESSION._id);
+        localStorage.removeItem(SESSION['x-access-token']);
+        localStorage.removeItem(SESSION['x-refresh-token']);
+    }
+
+    getAccessToken() {
+        return localStorage.getItem(SESSION['x-access-token']);
+    }
+
+    getRefreshToken() {
+        return localStorage.getItem(SESSION['x-refresh-token']);
+    }
+
+    getUserId() {
+        return localStorage.getItem(SESSION._id);
     }
 }

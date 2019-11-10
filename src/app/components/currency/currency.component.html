@@ -5,7 +5,7 @@
             class="dropdown__image">
         <span>{{ currentCurrency.name.toUpperCase() }}</span>
     </button>
-    <button class="btn" *ngIf="availableCurrenciesSize < 1">
+    <button class="btn dropdown__toggle" *ngIf="availableCurrenciesSize < 1">
         <img src="../../../assets/flags/{{currentCurrency.name.toLowerCase()}}.svg" alt="Currency icon"
             class="dropdown__image">
         <span>{{ currentCurrency.name.toUpperCase() }}</span>

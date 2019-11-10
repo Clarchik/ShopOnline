@@ -1,8 +1,9 @@
-import {Injectable} from '@angular/core';
-import {AngularFireAuth} from '@angular/fire/auth';
-import {from, Observable} from 'rxjs';
-import {AngularFirestore} from '@angular/fire/firestore';
-import {firestore} from 'firebase';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { HttpClient, HttpResponse, HttpHeaders } from '@angular/common/http';
+import { tap, map } from 'rxjs/operators';
+import { SESSION } from '../../models/session/session';
+import { UtilsService } from '../utils/utils.service';
 
 
 
@@ -12,21 +13,21 @@ import {firestore} from 'firebase';
 })
 export class AuthenticationService {
 
-    constructor(
-        private afAuth: AngularFireAuth,
-        private afStore: AngularFirestore) {}
+    constructor(private http: HttpClient, private utilsService: UtilsService) { }
 
-
-    loginUserWithEmailAndPassword(email: string, password: string): Observable<firebase.auth.UserCredential> {
-        return from(this.afAuth.auth.signInWithEmailAndPassword(email, password));
+    public signInFromSession() {
+        return this.http.get('http://localhost:3000/users/login/session');
     }
 
-    findUserDataByUid(uid: string): Observable<firestore.DocumentSnapshot> {
-        const docRef = this.afStore.collection('users').doc(uid);
-        return docRef.get();
-    }
-
-    get authState() {
-        return this.afAuth.authState;
+    public signInWithEmailAndPassword(email: string, password: string): Observable<any> {
+        return this.http.post('http://localhost:3000/users/login', { email, password }, { observe: 'response' }).pipe(
+            tap((response: HttpResponse<any>) => {
+                const id = response.body._id;
+                const accessToken = response.headers.get(SESSION['x-access-token']);
+                const refreshToken = response.headers.get(SESSION['x-refresh-token']);
+                this.utilsService.setSession(id, accessToken, refreshToken);
+            }),
+            map((response) => response.body)
+        );
     }
 }

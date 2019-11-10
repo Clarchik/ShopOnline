@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 
 import { Observable } from 'rxjs';
 
-import { User } from '../../shared/interfaces/user/user';
-
 import * as fromStore from '../../store';
+
+
 
 @Component({
     selector: 'app-login',
@@ -20,8 +20,14 @@ export class LoginComponent implements OnInit {
         private fb: FormBuilder,
         private store: Store<fromStore.UserState>) {
         this.loginForm = this.fb.group({
-            email: [''],
-            password: ['']
+            email: [
+                null,
+                Validators.required,
+            ],
+            password: [
+                null,
+                Validators.required
+            ]
         });
         this.userIsLoading$ = this.store.select(fromStore.isUserLoading);
     }
