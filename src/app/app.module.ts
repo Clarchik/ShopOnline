@@ -3,15 +3,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
-import { AngularFireModule } from '@angular/fire';
-import { AngularFirestoreModule } from '@angular/fire/firestore';
-import { AngularFireAuthModule } from '@angular/fire/auth';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
 import { ToastrModule } from 'ngx-toastr';
 import { MDBBootstrapModule, MDBModalRef } from 'angular-bootstrap-md';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
@@ -28,6 +25,7 @@ import { reducers as userReducers, effects as userEffects } from './store';
 
 import * as fromComponents from './components';
 import { SessionService } from './shared/services/authentication/session.service';
+import { WebReqInterceptor } from './interceptor/web-req.interceptor';
 
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http);
@@ -54,9 +52,6 @@ export function setupInitFactory(crs: CurrencyRatesService, sessionService: Sess
         ReactiveFormsModule,
         AppRoutingModule,
         HttpClientModule,
-        AngularFireModule.initializeApp(environment.firebaseConfig),
-        AngularFirestoreModule,
-        AngularFireAuthModule,
         StoreModule.forRoot(userReducers),
         StoreDevtoolsModule.instrument(),
         EffectsModule.forRoot(userEffects),
@@ -79,7 +74,8 @@ export function setupInitFactory(crs: CurrencyRatesService, sessionService: Sess
             useFactory: setupInitFactory,
             deps: [CurrencyRatesService, SessionService],
             multi: true
-        }
+        },
+        { provide: HTTP_INTERCEPTORS, useClass: WebReqInterceptor, multi: true }
     ],
     bootstrap: [AppComponent],
     entryComponents: [fromComponents.PreferencesModalComponent]
