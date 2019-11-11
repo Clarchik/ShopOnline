@@ -35,7 +35,7 @@ UserSchema.methods.generateAccessAuthToken = function () {
 
 UserSchema.methods.generateRefreshAuthToken = function () {
     return new Promise((resolve, reject) => {
-        crypto.randomBytes(64, (err, buf) => {
+        crypto.randomBytes(128, (err, buf) => {
             if (!err) {
                 const token = buf.toString('hex');
                 return resolve(token);
@@ -55,6 +55,15 @@ UserSchema.methods.createSession = function () {
     }).catch((e) => {
         return Promise.reject('Failed to save session to database.\n' + e);
     })
+}
+
+UserSchema.methods.checkRefreshTokenOnExpiry = function (token) {
+    const user = this;
+    const foundToken = _.find(user.sessions, (item) => item.token === token);
+    if (foundToken) {
+        return User.hasRefreshTokenExpired(foundToken.expiriesAt);
+    }
+    return true;
 }
 
 /* Module Methods */
@@ -145,9 +154,9 @@ const verifyJWTToken = (req, res, next) => {
 
 const verifySession = (req, res, next) => {
     // grab the refresh token from the request header
-    let refreshToken = req.header('x-refresh-token');
+    const refreshToken = req.header('x-refresh-token');
     // grab the _id from the request header
-    let _id = req.header('_id');
+    const _id = req.header('_id');
 
     User.findByIdAndToken(_id, refreshToken).then((user) => {
         if (!user) {

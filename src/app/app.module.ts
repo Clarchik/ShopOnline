@@ -19,7 +19,6 @@ import { CurrencyConverterPipe } from './shared/pipes/currency-converter/currenc
 import { CurrencyRates } from './shared/models/currency/currency-rates';
 
 import { AppComponent } from './app.component';
-import { environment } from '../environments/environment.prod';
 
 import { reducers as userReducers, effects as userEffects } from './store';
 

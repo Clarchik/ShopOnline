@@ -21,11 +21,11 @@ export class LoginComponent implements OnInit {
         private store: Store<fromStore.UserState>) {
         this.loginForm = this.fb.group({
             email: [
-                null,
+                'no-name@mail.ru',
                 Validators.required,
             ],
             password: [
-                null,
+                'helloworld',
                 Validators.required
             ]
         });
