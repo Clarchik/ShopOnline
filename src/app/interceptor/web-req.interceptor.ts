@@ -26,13 +26,14 @@ export class WebReqInterceptor implements HttpInterceptor {
             requestObject._id = userId;
         }
 
-        if (accessToken) {
+        if (refreshToken) {
             requestObject['x-refresh-token'] = refreshToken;
         }
 
         if (accessToken) {
             requestObject['x-access-token'] = accessToken;
         }
+
 
         return request.clone({
             setHeaders: requestObject

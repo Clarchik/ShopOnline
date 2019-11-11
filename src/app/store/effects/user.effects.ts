@@ -44,7 +44,7 @@ export class UserEffects {
         ofType(userActions.LOGIN_USER_SUCCESS),
         map((action: userActions.LoginUserSuccess) => action.payload),
         tap((data) => {
-            this.router.navigateByUrl('/main');
+            // this.router.navigateByUrl('/main');
             this.toastr.success(`Hello ${data.email}`, 'Successfuly logged');
         })
     );

@@ -30,11 +30,24 @@ module.exports = function (user) {
         }
 
         User.findByCredentials(email, password).then((user) => {
-            return user.createSession().then((refreshToken) => {
+            const refToken = req.get('x-refresh-token');
+            const expired = user.checkRefreshTokenOnExpiry(refToken);
+
+            let backFunction = user.createSession().then((refreshToken) => {
                 return user.generateAccessAuthToken().then((accessToken) => {
                     return { accessToken, refreshToken };
                 })
-            }).then((authTokens) => {
+            });
+
+            if (refToken) {
+                if (!expired) {
+                    const refreshToken = refToken;
+                    backFunction = user.generateAccessAuthToken().then((accessToken) => {
+                        return { accessToken, refreshToken };
+                    });
+                }
+            }
+            backFunction.then((authTokens) => {
                 res
                     .header('x-refresh-token', authTokens.refreshToken)
                     .header('x-access-token', authTokens.accessToken)
