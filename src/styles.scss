@@ -4,10 +4,14 @@
 body {
     font-family: $monsterrat !important;
 }
+.routeContainer {
+    min-height: calc(100vh - 180px);
 
-.routeContainer > * {
-    display: block;
+    & > * {
+        display: block;
+    }
 }
+
 
 .dropdown__image {
     width: 25px;
@@ -45,4 +49,12 @@ body {
     border-width: 1px 0 0 0;
     margin: 20px auto;
     border-color: #1c1c1c;
+}
+
+
+
+@media screen and (min-device-width: 0px) and (max-device-width: 991.98px) {
+    .routeContainer {
+        min-height: calc(100vh - 500px);
+    }
 }

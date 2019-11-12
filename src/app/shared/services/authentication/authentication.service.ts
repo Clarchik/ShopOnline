@@ -30,4 +30,12 @@ export class AuthenticationService {
             map((response) => response.body)
         );
     }
+
+    public signUpUser(email: string, password: string, name: string, surname: string): Observable<any> {
+        return this.http.post('http://localhost:3000/users', { email, password, name, surname });
+    }
+
+    public chekUserEmail(email: string): Observable<any> {
+        return this.http.post('http://localhost:3000/users/login/exists', { email });
+    }
 }

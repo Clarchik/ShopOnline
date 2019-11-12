@@ -25,6 +25,8 @@ import { reducers as userReducers, effects as userEffects } from './store';
 import * as fromComponents from './components';
 import { SessionService } from './shared/services/authentication/session.service';
 import { WebReqInterceptor } from './interceptor/web-req.interceptor';
+import { RegistrationComponent } from './components/registration/registration.component';
+import { RegistrationAutoFocusDirective } from './shared/directives/registration/registration-auto-focus.directive';
 
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http);
@@ -44,6 +46,8 @@ export function setupInitFactory(crs: CurrencyRatesService, sessionService: Sess
         GalleryShoesDirective,
         ImageGridDirective,
         CurrencyConverterPipe,
+        RegistrationComponent,
+        RegistrationAutoFocusDirective,
     ],
     imports: [
         BrowserModule,
