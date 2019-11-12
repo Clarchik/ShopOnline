@@ -5,14 +5,15 @@ module.exports = function (user) {
     /* SIGN UP */
     user.post('/users', (req, res) => {
         const body = req.body;
+        console.log(body);
         if (!body.email || !body.password) {
-            res.send(400).send('You didnt provide credentials')
+            res.send(400).send('You didnt provide credentials');
         }
 
         const newUser = new User(body);
         User.checkIfUserExists(newUser.email).then(() => {
             return newUser.save().then(() => {
-                res.status(200).send('Successfuly registered')
+                res.status(200).send({message: 'Successfuly registered'});
             }).catch((e) => {
                 res.status(400).send(e);
             });
@@ -53,7 +54,7 @@ module.exports = function (user) {
                     .header('x-access-token', authTokens.accessToken)
                     .status(200)
                     .send(user)
-            })
+            });
         }).catch((e) => {
             res.status(400).send(e);
         })

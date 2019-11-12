@@ -10,6 +10,7 @@ import { User } from '../../shared/interfaces/user/user';
 
 import * as userActions from '../actions/user.actions';
 import { Router } from '@angular/router';
+import { Location } from '@angular/common';
 
 @Injectable()
 export class UserEffects {
@@ -17,7 +18,8 @@ export class UserEffects {
         private actions$: Actions,
         private authService: AuthenticationService,
         private toastr: ToastrService,
-        private router: Router) { }
+        private router: Router,
+        private location: Location) { }
 
 
     @Effect()
@@ -38,6 +40,50 @@ export class UserEffects {
         map((action: userActions.LoginUserFail) => action.payload),
         tap((error) => this.toastr.error(error.message))
     );
+
+    @Effect()
+    SignUpUser$ = this.actions$.pipe(
+        ofType(userActions.REGISTRATION_USER),
+        map((action: userActions.RegistrationUser) => action.payload),
+            switchMap(({ email, password, name, surname }) => this.authService.signUpUser(email, password, name, surname).pipe(
+                map((status) =>  new userActions.RegistrationUserSuccess(status.message)),
+                // tslint:disable-next-line: ter-arrow-body-style
+                catchError((err) => {
+                    return of(new userActions.RegistrationUserFail(err));
+                })
+            ))
+    );
+
+    @Effect({ dispatch: false })
+    SignUpSuccess$ = this.actions$.pipe(
+        ofType(userActions.REGISTRATION_USER_SUCCESS),
+        map((action: userActions.RegistrationUserSuccess) => action.payload),
+        tap((data) => {
+            this.toastr.success('', `${data}`);
+
+            // LOCATION AND ROUTER DOESN'T WORKK , THAT'S WHY I MADE SIMPLE MOOVE, BUT SHOUD REMAKE IT !
+            setTimeout(() => {
+                window.location.href = '/login';
+            }, 1500);
+        })
+    );
+
+    @Effect({ dispatch: false })
+    SignUpFail$ = this.actions$.pipe(
+        ofType(userActions.REGISTRATION_USER_FAIL),
+        map((action: userActions.RegistrationUserFail) => action.payload),
+        tap((data) => {
+
+            if (typeof data.error === 'object') {
+                this.toastr.error(`${data.error.message}`, 'Sorry dude :(');
+            } else {
+                this.toastr.error(`${data.error}`, 'Sorry dude :(');
+            }
+        })
+    );
+
+
+
 
     @Effect({ dispatch: false })
     loginInUserSuccess$ = this.actions$.pipe(

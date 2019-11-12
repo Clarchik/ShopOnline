@@ -16,6 +16,20 @@ const UserSchema = new mongoose.Schema({
         trim: true,
         unique: true
     },
+    name: {
+        type: String,
+        required: true,
+        minlength: 1,
+        trim: true,
+        unique: false
+    },
+    surname: {
+        type: String,
+        required: true,
+        minlength: 1,
+        trim: true,
+        unique: false
+    },
     sessions: [{
         token: {
             type: String,

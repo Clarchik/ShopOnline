@@ -1,0 +1,174 @@
+<section class="container section__login">
+    <h1 class="section__login-h1">Create Your Account</h1>
+    <form [formGroup]="registrationForm" class="row">
+        <div class="col-lg-5 col-md-5 col-xl-5 col-10 col-sm-10">
+            <div class="md-form">
+                <input mdbInput mdbValidate type="text" id="form1" class="form-control" formControlName="name"
+                    appRegistrationAutoFocus autocomplete="off">
+                <label for="form1">
+                    Name
+                </label>
+                <div *ngIf="registrationForm.get('name').invalid && registrationForm.get('name').touched">
+                    <mdb-error *ngIf="registrationForm.get('name').errors.required">
+                        Required field
+                    </mdb-error>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-1 col-md-1 col-xl-1 col-2 col-sm-2  registration-form"
+            [ngClass]="{'registration-form--opacity': registrationForm.get('name').touched}">
+            <mdb-icon fas icon="check" class="green-text"
+                *ngIf="registrationForm.get('name').valid && registrationForm.get('name').touched"></mdb-icon>
+            <mdb-icon fas icon="times" class="red-text"
+                *ngIf="registrationForm.get('name').invalid && registrationForm.get('name').touched"></mdb-icon>
+        </div>
+
+
+
+        <div class="col-lg-5 col-md-5 col-xl-5 col-10 col-sm-10">
+            <div class="md-form">
+                <input mdbInput mdbValidate type="text" id="form1" class="form-control" formControlName="surname"
+                    autocomplete="off">
+                <label for="form1">
+                    Surname
+                </label>
+                <div *ngIf="registrationForm.get('surname').invalid && registrationForm.get('surname').touched">
+                    <mdb-error *ngIf="registrationForm.get('surname').errors.required">
+                        Required field
+                    </mdb-error>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-1 col-md-1 col-xl-1 col-2 col-sm-2  registration-form"
+            [ngClass]="{'registration-form--opacity': registrationForm.get('surname').touched}">
+            <mdb-icon fas icon="check" class="green-text"
+                *ngIf="registrationForm.get('surname').valid && registrationForm.get('surname').touched"></mdb-icon>
+            <mdb-icon fas icon="times" class="red-text"
+                *ngIf="registrationForm.get('surname').invalid && registrationForm.get('surname').touched">
+            </mdb-icon>
+        </div>
+
+
+
+        <div class="col-lg-11 col-md-11 col-xl-11 col-10 col-sm-10 ">
+            <div class="md-form">
+                <input mdbInput mdbValidate type="text" id="form1" class="form-control" formControlName="email"
+                    autocomplete="off">
+                <label for="form1" class="">
+                    Email
+                </label>
+                <div *ngIf="registrationForm.get('email').invalid && registrationForm.get('email').touched">
+                    <mdb-error *ngIf="registrationForm.get('email').errors.required">
+                        Required field
+                    </mdb-error>
+                    <mdb-error *ngIf="registrationForm.get('email').errors.uniqEmail">
+                        Such mail already exists
+                    </mdb-error>
+                    <mdb-error *ngIf="registrationForm.get('email').errors.email">
+                        Incorrect input
+                    </mdb-error>
+                </div>
+                <mdb-success *ngIf="registrationForm.get('email').status === 'VALID'">
+                    Email is available!
+                </mdb-success>
+            </div>
+        </div>
+        <div *ngIf="registrationForm.get('email').status === 'PENDING'"
+            class="col-lg-1 col-md-1 col-xl-1 col-2 col-sm-2 registration-form--pending">
+            <div class="spinner-border text-light" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+
+        <div class="col-lg-1 col-md-1 col-xl-1 col-2 col-sm-2 registration-form"
+            [ngClass]="{'registration-form--opacity': registrationForm.get('email').touched}">
+            <mdb-icon fas icon="check" class="green-text"
+                *ngIf="registrationForm.get('email').valid && registrationForm.get('email').touched"></mdb-icon>
+            <mdb-icon fas icon="times" class="red-text"
+                *ngIf="registrationForm.get('email').invalid && registrationForm.get('email').touched">
+            </mdb-icon>
+        </div>
+        <div class="col-lg-5 col-md-5 col-xl-5 col-10 col-sm-10">
+            <div class="md-form">
+                <input mdbInput mdbValidate type="password" id="form1" class="form-control" formControlName="password"
+                    autocomplete="off">
+                <label for="form1">
+                    Password
+                </label>
+                <div *ngIf="registrationForm.get('password').invalid && registrationForm.get('password').touched">
+                    <small *ngIf="registrationForm.get('password').errors.required">
+                        Required field
+                    </small>
+                    <small *ngIf="registrationForm.get('password').errors.minlength">
+                        Password must be at least 8 characters long
+                    </small>
+                </div>
+
+
+                <!-- SHOULD REFACTORING THIS PART (RUDOLF) -->
+                <div *ngIf="registrationForm.get('password').valid && registrationForm.get('password').touched"
+                    class="login__password-protection">
+                    <div class="password__difficulty">
+                        <div *ngIf="difficulty === 'weak'" style="width: 30%; background-color: #f44336; height: 100%;">
+                        </div>
+                        <div *ngIf="difficulty === 'common'"
+                            style="width: 50%; background-color: #ffc107; height: 100%;"></div>
+                        <div *ngIf="difficulty === 'well'" style="width: 80%; background-color: #00c851; height: 100%;">
+                        </div>
+                        <div *ngIf="difficulty === 'super'"
+                            style="width: 100%; background-color: #00c851; height: 100%;"></div>
+                    </div>
+                    <span>Password protection level</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-1 col-md-1 col-xl-1 col-2 col-sm-2  registration-form"
+            [ngClass]="{'registration-form--opacity': registrationForm.get('password').touched}">
+            <mdb-icon fas icon="check" class="green-text"
+                *ngIf="registrationForm.get('password').valid && registrationForm.get('password').touched"></mdb-icon>
+            <mdb-icon fas icon="times" class="red-text"
+                *ngIf="registrationForm.get('password').invalid && registrationForm.get('password').touched">
+            </mdb-icon>
+        </div>
+        <div class="col-lg-5 col-md-5 col-xl-5 col-10 col-sm-10">
+            <div class="md-form">
+                <input mdbInput type="password" id="form1" class="form-control"
+                    [ngClass]="{protected_input: registrationForm.hasError('notSame') && registrationForm.get('confirmPassword').touched,
+                    success_input: registrationForm.valid && registrationForm.get('confirmPassword').touched}"
+                    formControlName="confirmPassword" autocomplete="off">
+                <label for="form1" [ngClass]="{protected_label: registrationForm.hasError('notSame') && registrationForm.get('confirmPassword').touched,
+                success_label: registrationForm.valid && registrationForm.get('confirmPassword').touched}">
+                    Confirm Password
+                </label>
+                <div
+                    *ngIf="registrationForm.get('confirmPassword').invalid && registrationForm.get('confirmPassword').touched || registrationForm.hasError('notSame')">
+                    <small
+                        *ngIf="registrationForm.get('confirmPassword').errors?.required && registrationForm.get('confirmPassword').touched">
+                        Required field
+                    </small>
+                    <small
+                        *ngIf="registrationForm.hasError('notSame') && registrationForm.get('confirmPassword').touched">
+                        Passwords do not match
+                    </small>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-1 col-md-1 col-xl-1 col-2 col-sm-2  registration-form"
+            [ngClass]="{'registration-form--opacity': registrationForm.get('confirmPassword').touched}">
+            <mdb-icon fas icon="check" class="green-text" [hidden]="registrationForm.hasError('notSame')"
+                *ngIf="registrationForm.get('confirmPassword').valid && registrationForm.get('confirmPassword').touched">
+            </mdb-icon>
+            <mdb-icon fas icon="times" class="red-text"
+                *ngIf="(registrationForm.get('confirmPassword').invalid && registrationForm.get('confirmPassword').touched)  || registrationForm.hasError('notSame')">
+            </mdb-icon>
+        </div>
+    </form>
+    <div class="row registration__button">
+        <div class="col-12  registration__button_block">
+            <button (click)="SignUp()" lass="w-100" type="button" mdbBtn color="dark" mdbWavesEffect
+                [disabled]="registrationForm.invalid || registrationForm.pending">
+                Sign Up
+            </button>
+        </div>
+    </div>
+</section>

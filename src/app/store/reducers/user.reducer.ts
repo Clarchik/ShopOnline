@@ -8,13 +8,15 @@ export interface UserState {
     loggining: boolean;
     logged: boolean;
     error: AuthError;
+    message: any;
 }
 
 export const initialState: UserState = {
     data: {},
     loggining: false,
     logged: false,
-    error: {}
+    error: {},
+    message: ''
 };
 
 export function reducer(state = initialState, action: fromUser.UserActions): UserState {
@@ -31,6 +33,16 @@ export function reducer(state = initialState, action: fromUser.UserActions): Use
 
         case fromUser.LOGIN_USER_FAIL: {
             return { ...initialState, loggining: false, logged: false };
+        }
+
+        case fromUser.REGISTRATION_USER_SUCCESS: {
+            const message = action.payload;
+            return { ...initialState, loggining: false, logged: false, message };
+        }
+
+        case fromUser.REGISTRATION_USER_FAIL: {
+            const message = action.payload;
+            return { ...initialState, loggining: false, logged: false, message};
         }
 
         default: {
