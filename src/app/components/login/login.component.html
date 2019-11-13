@@ -11,25 +11,26 @@
                 <section class="login-form">
                     <form [formGroup]="loginForm">
                         <div class="md-form">
-                            <input mdbInput type="text" id="form1" class="form-control" formControlName="email">
-                            <label for="form1" class="">
+                            <input mdbInput type="text" id="email" class="form-control" formControlName="email">
+                            <label for="email">
                                 {{ 'Authentication.login' | translate }}
                             </label>
                         </div>
                         <div class="md-form">
-                            <input mdbInput type="password" id="form2" class="form-control" formControlName="password">
-                            <label for="form2" class="">
+                            <input mdbInput type="password" id="password" class="form-control" formControlName="password">
+                            <label for="password">
                                 {{ 'Authentication.password' | translate }}
                             </label>
                         </div>
+                        <button [disabled]="loginForm.invalid" class="w-100" type="button" mdbBtn color="dark" mdbWavesEffect (click)="loginIn();">
+                            <span [hidden]="userIsLoading$ | async">
+                                {{ 'Authentication.signIn' | translate }}
+                            </span>
+                            <mdb-icon *ngIf="userIsLoading$ | async" fas icon="spinner" class="animated rotateOut infinite">
+                            </mdb-icon>
+                        </button>
                     </form>
-                    <button class="w-100" type="button" mdbBtn color="dark" mdbWavesEffect (click)="loginIn();">
-                        <span [hidden]="userIsLoading$ | async">
-                            {{ 'Authentication.signIn' | translate }}
-                        </span>
-                        <mdb-icon *ngIf="userIsLoading$ | async" fas icon="spinner" class="animated rotateOut infinite">
-                        </mdb-icon>
-                    </button>
+
                 </section>
                 <footer class="login-footer">
                     <a class="login-footer__link" routerLink="/registration">

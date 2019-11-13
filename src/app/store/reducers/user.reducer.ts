@@ -42,7 +42,7 @@ export function reducer(state = initialState, action: fromUser.UserActions): Use
 
         case fromUser.REGISTRATION_USER_FAIL: {
             const message = action.payload;
-            return { ...initialState, loggining: false, logged: false, message};
+            return { ...initialState, loggining: false, logged: false, message };
         }
 
         default: {

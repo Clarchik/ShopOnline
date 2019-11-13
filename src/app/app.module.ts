@@ -9,7 +9,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { ToastrModule } from 'ngx-toastr';
 import { MDBBootstrapModule, MDBModalRef } from 'angular-bootstrap-md';
 import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { TranslateModule, TranslateLoader, TranslateService } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 import { CurrencyRatesService } from './shared/services/currency/currency-rates.service';
@@ -23,7 +23,7 @@ import { AppComponent } from './app.component';
 import { reducers as userReducers, effects as userEffects } from './store';
 
 import * as fromComponents from './components';
-import { SessionService } from './shared/services/authentication/session.service';
+import { InitService } from './shared/services/authentication/init.service';
 import { WebReqInterceptor } from './interceptor/web-req.interceptor';
 import { RegistrationComponent } from './components/registration/registration.component';
 import { RegistrationAutoFocusDirective } from './shared/directives/registration/registration-auto-focus.directive';
@@ -32,10 +32,14 @@ export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http);
 }
 
-export function setupInitFactory(crs: CurrencyRatesService, sessionService: SessionService) {
+export function setupInitFactory(
+    crs: CurrencyRatesService,
+    sessionService: InitService
+) {
     return (): Promise<any[]> => Promise.all([
         crs.getCurrencyRates(),
-        sessionService.findUserFromSessinon()
+        sessionService.findUserFromSessinon(),
+        sessionService.setLanguage()
     ]);
 }
 
@@ -75,7 +79,7 @@ export function setupInitFactory(crs: CurrencyRatesService, sessionService: Sess
         {
             provide: APP_INITIALIZER,
             useFactory: setupInitFactory,
-            deps: [CurrencyRatesService, SessionService],
+            deps: [CurrencyRatesService, InitService],
             multi: true
         },
         { provide: HTTP_INTERCEPTORS, useClass: WebReqInterceptor, multi: true }

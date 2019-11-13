@@ -40,7 +40,7 @@ UserSchema.methods.generateRefreshAuthToken = function () {
                 const token = buf.toString('hex');
                 return resolve(token);
             } else {
-                return reject('Couldnt generate Refresh token');
+                return reject({ message: 'Couldnt generate Refresh token' });
             }
         })
     })
@@ -53,7 +53,7 @@ UserSchema.methods.createSession = function () {
     }).then((refreshToken) => {
         return refreshToken;
     }).catch((e) => {
-        return Promise.reject('Failed to save session to database.\n' + e);
+        return Promise.reject({ message: 'Failed to save session to database.\n' + e });
     })
 }
 
@@ -79,10 +79,10 @@ UserSchema.statics.findByIdAndToken = function (_id, token) {
 UserSchema.statics.findByCredentials = function (email, password) {
     const user = this;
     return user.findOne({ email }).then((user) => {
-        if (!user) return Promise.reject('User doesnt exists');
+        if (!user) return Promise.reject({ message: 'User doesnt exists' });
         return new Promise((resolve, reject) => {
             bcrypt.compare(password, user.password, (err, res) => {
-                res ? resolve(user) : reject('Email or password is not correct')
+                res ? resolve(user) : reject({ message: 'Email or password is not correct' })
             })
         })
     })

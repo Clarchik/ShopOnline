@@ -13,7 +13,7 @@ module.exports = function (user) {
         const newUser = new User(body);
         User.checkIfUserExists(newUser.email).then(() => {
             return newUser.save().then(() => {
-                res.status(200).send({message: 'Successfuly registered'});
+                res.status(200).send({ message: 'Successfuly registered' });
             }).catch((e) => {
                 res.status(400).send(e);
             });
@@ -27,7 +27,9 @@ module.exports = function (user) {
         const email = req.body.email;
         const password = req.body.password;
         if (!email || !password) {
-            res.send(400).send('You didnt provide credentials')
+            res.send(400).send({
+                message: 'badCredentials'
+            });
         }
 
         User.findByCredentials(email, password).then((user) => {

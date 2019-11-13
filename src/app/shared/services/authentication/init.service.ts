@@ -6,15 +6,18 @@ import { of } from 'rxjs';
 import { User } from '../../interfaces/user/user';
 
 import * as fromStore from '../../../store';
+import { TranslateService } from '@ngx-translate/core';
+import { LANGUAGE_NAMES } from '../../models/languages/language-names';
 
 @Injectable({
     providedIn: 'root'
 })
-export class SessionService {
+export class InitService {
 
     constructor(
         private store: Store<fromStore.UserState>,
-        private authService: AuthenticationService) { }
+        private authService: AuthenticationService,
+        private translate: TranslateService) { }
 
     public findUserFromSessinon() {
         return new Promise<any>((resolve) => {
@@ -28,6 +31,14 @@ export class SessionService {
                     return of(err);
                 })
             ).subscribe();
+        });
+    }
+
+    public setLanguage() {
+        return new Promise<any>((resolve) => {
+            const language: LANGUAGE_NAMES = LANGUAGE_NAMES[localStorage.getItem('language')];
+            this.translate.use(language ? language : 'en');
+            resolve(true);
         });
     }
 }

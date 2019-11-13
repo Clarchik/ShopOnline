@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 
 import { Observable } from 'rxjs';
 
 import * as fromStore from '../../store';
+import { Authenticate } from '../../shared/interfaces/user/authenticate';
 
 
 
@@ -14,18 +15,18 @@ import * as fromStore from '../../store';
     styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
-    public loginForm: FormGroup;
+    private _loginForm: FormGroup;
     public userIsLoading$: Observable<boolean>;
     constructor(
         private fb: FormBuilder,
         private store: Store<fromStore.UserState>) {
-        this.loginForm = this.fb.group({
+        this._loginForm = this.fb.group({
             email: [
-                'no-name@mail.ru',
+                null,
                 Validators.required,
             ],
             password: [
-                'helloworld',
+                null,
                 Validators.required
             ]
         });
@@ -34,8 +35,13 @@ export class LoginComponent implements OnInit {
 
     ngOnInit() { }
 
-    loginIn() {
-        const { email, password } = this.loginForm.value;
-        this.store.dispatch(new fromStore.LoginUser({ email, password }));
+    public loginIn() {
+        const { email, password } = this._loginForm.value;
+        const credentials: Authenticate = { email, password };
+        this.store.dispatch(new fromStore.LoginUser(credentials));
+    }
+
+    get loginForm() {
+        return this._loginForm;
     }
 }

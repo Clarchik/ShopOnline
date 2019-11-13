@@ -10,16 +10,16 @@ import { User } from '../../shared/interfaces/user/user';
 
 import * as userActions from '../actions/user.actions';
 import { Router } from '@angular/router';
-import { Location } from '@angular/common';
+import { TranslateService } from '@ngx-translate/core';
 
 @Injectable()
 export class UserEffects {
     constructor(
         private actions$: Actions,
         private authService: AuthenticationService,
+        private translate: TranslateService,
         private toastr: ToastrService,
-        private router: Router,
-        private location: Location) { }
+        private router: Router) { }
 
 
     @Effect()
@@ -29,29 +29,36 @@ export class UserEffects {
         switchMap(({ email, password }) => this.authService.signInWithEmailAndPassword(email, password)
             .pipe(
                 map((user) => new userActions.LoginUserSuccess(user)),
-                catchError((err) => of(new userActions.LoginUserFail({ message: err.error }))),
+                catchError(({ error }) => of(new userActions.LoginUserFail({ message: error.message }))),
             )
         )
+    );
+
+    @Effect({ dispatch: false })
+    loginInUserSuccess$ = this.actions$.pipe(
+        ofType(userActions.LOGIN_USER_SUCCESS),
+        map((action: userActions.LoginUserSuccess) => action.payload),
+        tap((data) => {
+            this.router.navigateByUrl('/main');
+            this.toastr.success(`${this.translate.instant('Shared.hello')}, ${data.email}`, `${this.translate.instant('Authorization.success')}`);
+        })
     );
 
     @Effect({ dispatch: false })
     loginInUserFailed$ = this.actions$.pipe(
         ofType(userActions.LOGIN_USER_FAIL),
         map((action: userActions.LoginUserFail) => action.payload),
-        tap((error) => this.toastr.error(error.message))
+        tap((error) => this.toastr.error(error.message, this.translate.instant('Authorization.fail')))
     );
 
     @Effect()
     SignUpUser$ = this.actions$.pipe(
         ofType(userActions.REGISTRATION_USER),
         map((action: userActions.RegistrationUser) => action.payload),
-            switchMap(({ email, password, name, surname }) => this.authService.signUpUser(email, password, name, surname).pipe(
-                map((status) =>  new userActions.RegistrationUserSuccess(status.message)),
-                // tslint:disable-next-line: ter-arrow-body-style
-                catchError((err) => {
-                    return of(new userActions.RegistrationUserFail(err));
-                })
-            ))
+        switchMap(({ email, password, name, surname }) => this.authService.signUpUser(email, password, name, surname).pipe(
+            map((status) => new userActions.RegistrationUserSuccess(status.message)),
+            catchError((err) => of(new userActions.RegistrationUserFail(err)))
+        ))
     );
 
     @Effect({ dispatch: false })
@@ -60,7 +67,6 @@ export class UserEffects {
         map((action: userActions.RegistrationUserSuccess) => action.payload),
         tap((data) => {
             this.toastr.success('', `${data}`);
-
             // LOCATION AND ROUTER DOESN'T WORKK , THAT'S WHY I MADE SIMPLE MOOVE, BUT SHOUD REMAKE IT !
             setTimeout(() => {
                 window.location.href = '/login';
@@ -79,19 +85,6 @@ export class UserEffects {
             } else {
                 this.toastr.error(`${data.error}`, 'Sorry dude :(');
             }
-        })
-    );
-
-
-
-
-    @Effect({ dispatch: false })
-    loginInUserSuccess$ = this.actions$.pipe(
-        ofType(userActions.LOGIN_USER_SUCCESS),
-        map((action: userActions.LoginUserSuccess) => action.payload),
-        tap((data) => {
-            // this.router.navigateByUrl('/main');
-            this.toastr.success(`Hello ${data.email}`, 'Successfuly logged');
         })
     );
 }
