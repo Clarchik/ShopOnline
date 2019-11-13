@@ -133,11 +133,11 @@
         <div class="col-lg-5 col-md-5 col-xl-5 col-10 col-sm-10">
             <div class="md-form">
                 <input mdbInput type="password" id="form1" class="form-control"
-                    [ngClass]="{protected_input: registrationForm.hasError('notSame') && registrationForm.get('confirmPassword').touched,
-                    success_input: registrationForm.valid && registrationForm.get('confirmPassword').touched}"
+                    [ngClass]="{protected_input: ( registrationForm.hasError('notSame') && registrationForm.get('confirmPassword').touched ) || ( registrationForm.get('confirmPassword').invalid && registrationForm.get('confirmPassword').touched ) ,
+                    success_input: registrationForm.get('confirmPassword').valid && registrationForm.get('confirmPassword').touched && !!registrationForm.errors === false}"
                     formControlName="confirmPassword" autocomplete="off">
-                <label for="form1" [ngClass]="{protected_label: registrationForm.hasError('notSame') && registrationForm.get('confirmPassword').touched,
-                success_label: registrationForm.valid && registrationForm.get('confirmPassword').touched}">
+                <label for="form1" [ngClass]="{protected_label: ( registrationForm.hasError('notSame') && registrationForm.get('confirmPassword').touched ) || ( registrationForm.get('confirmPassword').invalid && registrationForm.get('confirmPassword').touched ),
+                success_label: registrationForm.get('confirmPassword').valid && registrationForm.get('confirmPassword').touched && !!registrationForm.errors === false}">
                     Confirm Password
                 </label>
                 <div
