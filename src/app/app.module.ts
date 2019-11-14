@@ -47,7 +47,7 @@ export function setupInitFactory(crs: CurrencyRatesService, sessionService: Sess
         ImageGridDirective,
         CurrencyConverterPipe,
         RegistrationComponent,
-        RegistrationAutoFocusDirective,
+        RegistrationAutoFocusDirective
     ],
     imports: [
         BrowserModule,
