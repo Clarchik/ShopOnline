@@ -1,21 +1,17 @@
-import { FormControl, AbstractControl, FormGroup } from '@angular/forms';
-import { Observable } from 'rxjs';
+import { AbstractControl, FormGroup } from '@angular/forms';
 import { AuthenticationService } from '../../services/authentication/authentication.service';
-import { map } from 'rxjs/operators';
+import { map, distinctUntilChanged, debounceTime, switchMap, first } from 'rxjs/operators';
 
 
 export class RegistrationValidators {
     static uniqEmail(authService: AuthenticationService) {
-        // tslint:disable-next-line: ter-arrow-body-style
-        return (control: AbstractControl) => {
-            return authService.chekUserEmail(control.value).pipe(
-                map(resolve => {
-                    if (control.touched) {
-                        return (resolve) ? { 'uniqEmail': true} : null;
-                    }
-                })
-            );
-        };
+        return (control: AbstractControl) => control.valueChanges.pipe(
+            distinctUntilChanged(),
+            debounceTime(750),
+            switchMap((email) => authService.chekUserEmail(email)),
+            map((response) => response ? { uniqEmail: true} : null),
+        first()
+        );
     }
 
     static checkPassword(group: FormGroup) {

@@ -51,7 +51,7 @@ export function setupInitFactory(
         ImageGridDirective,
         CurrencyConverterPipe,
         RegistrationComponent,
-        RegistrationAutoFocusDirective,
+        RegistrationAutoFocusDirective
     ],
     imports: [
         BrowserModule,

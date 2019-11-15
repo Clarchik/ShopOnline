@@ -42,6 +42,7 @@
         "jsonwebtoken": "^8.5.1",
         "lodash": "^4.17.15",
         "mongoose": "^5.7.9",
+        "ng-animate": "^0.3.4",
         "ngx-toastr": "^10.2.0",
         "npm-registry-client": "^8.6.0",
         "rxjs": "^6.5.3",

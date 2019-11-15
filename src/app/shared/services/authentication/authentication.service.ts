@@ -36,6 +36,6 @@ export class AuthenticationService {
     }
 
     public chekUserEmail(email: string): Observable<any> {
-        return this.http.post('http://localhost:3000/users/login/exists', { email });
+            return this.http.post('http://localhost:3000/users/login/exists', { email });
     }
 }
