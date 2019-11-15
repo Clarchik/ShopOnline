@@ -1,4 +1,7 @@
 {
+    "Shared": {
+        "hello": "Hello"
+    },
     "Header": {
         "new": "New Arrivals",
         "brands": "Brands",
@@ -14,6 +17,10 @@
         "password": "Password",
         "signIn": "Sign in",
         "createAccount": "Create Account"
+    },
+    "Authorization": {
+        "success": "Successfully logged in",
+        "fail": "Failed logining"
     },
     "Store": {
         "backToStore": "Return to Store"

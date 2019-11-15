@@ -1,4 +1,7 @@
 {
+    "Shared": {
+        "hello": "Cześć"
+    },
     "Header": {
         "new": "News",
         "brands": "Marki",
@@ -14,6 +17,10 @@
         "password": "Hasło",
         "signIn": "Zaloguj się",
         "createAccount": "Utwórz konto"
+    },
+    "Authorization": {
+        "success": "Z powodzeniem zalogowany",
+        "fail": "Nieudane logowanie"
     },
     "Store": {
         "backToStore": "Powrót do sklepu"

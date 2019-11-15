@@ -12,6 +12,10 @@ body {
     }
 }
 
+.btn:disabled {
+    cursor: not-allowed;
+    pointer-events: all !important;
+}
 
 .dropdown__image {
     width: 25px;
