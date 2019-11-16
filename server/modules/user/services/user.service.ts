@@ -24,7 +24,6 @@ export class UserService {
     }
 
     public signInUser(req: Request, res: Response) {
-        console.log('sign iniiit');
         const email = req.body.email;
         const password = req.body.password;
         if (!email || !password) {
@@ -36,12 +35,15 @@ export class UserService {
         User.findByCredentials(email, password).then((foundUser: any) => {
             const refToken = req.get('x-refresh-token');
             const expired = foundUser.checkRefreshTokenOnExpiry(refToken);
-            console.log(foundUser, 'FOUND USER');
-            let backFunction = foundUser.createSession().then((refreshToken: any) => {
-                return foundUser.generateAccessAuthToken().then((accessToken: any) => {
-                    return { accessToken, refreshToken };
+            let backFunction;
+
+            if (!refToken || expired) {
+                backFunction = foundUser.createSession().then((refreshToken: any) => {
+                    return foundUser.generateAccessAuthToken().then((accessToken: any) => {
+                        return { accessToken, refreshToken };
+                    });
                 });
-            });
+            }
 
             if (refToken) {
                 if (!expired) {
@@ -51,6 +53,7 @@ export class UserService {
                     });
                 }
             }
+
             backFunction.then((authTokens: any) => {
                 res
                     .header('x-refresh-token', authTokens.refreshToken)
@@ -59,7 +62,6 @@ export class UserService {
                     .send(foundUser);
             });
         }).catch((e: any) => {
-            console.log('ERROR');
             res.status(400).send(e);
         });
     }
