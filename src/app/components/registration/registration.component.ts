@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import { RegistrationValidators } from '../../shared/validators/registration-validators/registration.validators';
 import { AuthenticationService } from '../../shared/services/authentication/authentication.service';
 import { UtilsService } from '../../shared/services/utils/utils.service';
-import { transition, trigger, useAnimation  } from '@angular/animations';
+import { transition, trigger, useAnimation } from '@angular/animations';
 import { wobble, shake, zoomOutRight, rubberBand } from 'ng-animate';
 
 @Component({
@@ -36,19 +36,19 @@ export class RegistrationComponent implements OnInit, OnChanges {
     constructor(private fb: FormBuilder, private store: Store<fromStore.UserState>, private http: HttpClient, private authService: AuthenticationService, private utils: UtilsService) {
         this.registrationForm = this.fb.group({
             email: [
-                '', [Validators.required, Validators.email], RegistrationValidators.uniqEmail(this.authService)
+                null, [Validators.required, Validators.email], RegistrationValidators.uniqEmail(this.authService)
             ],
             password: [
-                '', [Validators.required, Validators.minLength(8)]
+                null, [Validators.required, Validators.minLength(8)]
             ],
             confirmPassword: [
-                '', Validators.required
+                null, Validators.required
             ],
             name: [
-                '', Validators.required
+                null, Validators.required
             ],
             surname: [
-                '', Validators.required
+                null, Validators.required
             ]
         }, {
             validators: RegistrationValidators.checkPassword
