@@ -33,7 +33,9 @@ export class RegistrationComponent implements OnInit, OnChanges {
     public difficulty = '';
     public passwordToRead = true;
     @ViewChild('passwordInput', { static: false }) passwordInput: ElementRef;
-    constructor(private fb: FormBuilder, private store: Store<fromStore.UserState>, private http: HttpClient, private authService: AuthenticationService, private utils: UtilsService) {
+    constructor(
+        private fb: FormBuilder, private store: Store<fromStore.UserState>,
+        private http: HttpClient, private authService: AuthenticationService, private utils: UtilsService) {
         this.registrationForm = this.fb.group({
             email: [
                 null, [Validators.required, Validators.email], RegistrationValidators.uniqEmail(this.authService)

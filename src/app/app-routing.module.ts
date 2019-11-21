@@ -8,7 +8,7 @@ const routes: Routes = [
     { path: '', redirectTo: 'main', pathMatch: 'full' },
     { path: 'main', component: MainPageComponent, data: { animation: 'swipeLeft' } },
     { path: 'login', component: LoginComponent, data: { animation: 'swipeRight' } },
-    { path: 'registration', component: RegistrationComponent }
+    { path: 'registration', component: RegistrationComponent, data: { animation: 'FlipY'} }
 ];
 
 @NgModule({
