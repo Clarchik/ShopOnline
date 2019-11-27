@@ -38,7 +38,11 @@ export class RegistrationComponent implements OnInit, OnChanges {
         private http: HttpClient, private authService: AuthenticationService, private utils: UtilsService) {
         this.registrationForm = this.fb.group({
             email: [
-                null, [Validators.required, Validators.email], RegistrationValidators.uniqEmail(this.authService)
+                null,
+                [
+                    Validators.required,
+                    Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')
+                ], RegistrationValidators.uniqEmail(this.authService)
             ],
             password: [
                 null, [Validators.required, Validators.minLength(8)]

@@ -74,7 +74,7 @@
                     <mdb-error [@errors] *ngIf="registrationForm.get('email').errors.uniqEmail">
                         Such mail already exists
                     </mdb-error>
-                    <mdb-error [@errors] *ngIf="registrationForm.get('email').errors.email">
+                    <mdb-error [@errors] *ngIf="registrationForm.get('email').errors.pattern">
                         Incorrect input
                     </mdb-error>
                 </div>
