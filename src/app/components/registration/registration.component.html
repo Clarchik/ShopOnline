@@ -8,17 +8,16 @@
                 <label for="form1"> Name </label>
 
                 <div class="registration-form__icons">
-                    <mdb-icon [@bird] fas icon="check" class="green-text"
-                        *ngIf="registrationForm.get('name').valid && registrationForm.get('name').dirty">
+                    <mdb-icon [@bird] fas icon="check" class="green-text" *ngIf="name.valid && name.dirty">
                     </mdb-icon>
-                    <mdb-icon [@cancel] fas icon="times" class="red-text" *ngIf="registrationForm.get('name').invalid && registrationForm.get('name').dirty ||
-                        registrationForm.get('name').invalid && registrationForm.get('name').touched">
+                    <mdb-icon [@cancel] fas icon="times" class="red-text" *ngIf="name.invalid && name.dirty ||
+                    name.invalid && name.touched">
                     </mdb-icon>
                 </div>
-                <div [@errors_wrapper] *ngIf="registrationForm.get('name').invalid && registrationForm.get('name').dirty
-                    || registrationForm.get('name').invalid && registrationForm.get('name').touched">
+                <div [@errors_wrapper] *ngIf="name.invalid && name.dirty
+                    || name.invalid && name.touched">
 
-                    <mdb-error [@errors] *ngIf="registrationForm.get('name').errors.required">
+                    <mdb-error [@errors] *ngIf="name.errors.required">
                         Required field
                     </mdb-error>
                 </div>
@@ -32,16 +31,15 @@
                     Surname
                 </label>
                 <div class="registration-form__icons">
-                    <mdb-icon [@bird] fas icon="check" class="green-text"
-                        *ngIf="registrationForm.get('surname').valid && registrationForm.get('surname').dirty">
+                    <mdb-icon [@bird] fas icon="check" class="green-text" *ngIf="surname.valid && surname.dirty">
                     </mdb-icon>
-                    <mdb-icon [@cancel] fas icon="times" class="red-text" *ngIf="registrationForm.get('surname').invalid && registrationForm.get('surname').dirty ||
-                    registrationForm.get('surname').invalid && registrationForm.get('surname').touched">
+                    <mdb-icon [@cancel] fas icon="times" class="red-text" *ngIf="surname.invalid && surname.dirty ||
+                    surname.invalid && surname.touched">
                     </mdb-icon>
                 </div>
-                <div [@errors_wrapper] *ngIf="registrationForm.get('surname').invalid && registrationForm.get('surname').dirty
-                || registrationForm.get('surname').invalid && registrationForm.get('surname').touched">
-                    <mdb-error [@errors] *ngIf="registrationForm.get('surname').errors.required">
+                <div [@errors_wrapper] *ngIf="surname.invalid && surname.dirty
+                || surname.invalid && surname.touched">
+                    <mdb-error [@errors] *ngIf="surname.errors.required">
                         Required field
                     </mdb-error>
                 </div>
@@ -55,30 +53,28 @@
                     Email
                 </label>
                 <div class="registration-form__icons">
-                    <mdb-icon [@bird] fas icon="check" class="green-text"
-                        *ngIf="registrationForm.get('email').valid && registrationForm.get('email').dirty"></mdb-icon>
+                    <mdb-icon [@bird] fas icon="check" class="green-text" *ngIf="email.valid && email.dirty"></mdb-icon>
 
-                    <mdb-icon [@cancel] fas icon="times" class="red-text" *ngIf="registrationForm.get('email').invalid && registrationForm.get('email').dirty||
-                    registrationForm.get('email').invalid && registrationForm.get('email').touched"></mdb-icon>
+                    <mdb-icon [@cancel] fas icon="times" class="red-text" *ngIf="email.invalid && email.dirty||
+                    email.invalid && email.touched"></mdb-icon>
 
-                    <div class="spinner-border text-light" *ngIf="registrationForm.get('email').status === 'PENDING'"
-                        role="status">
+                    <div class="spinner-border text-light" *ngIf="email.status === 'PENDING'" role="status">
                         <span class="sr-only">Loading...</span>
                     </div>
                 </div>
-                <div [@errors_wrapper] *ngIf="registrationForm.get('email').invalid && registrationForm.get('email').dirty
-                || registrationForm.get('email').invalid && registrationForm.get('email').touched">
-                    <mdb-error [@errors] *ngIf="registrationForm.get('email').errors.required">
+                <div [@errors_wrapper] *ngIf="email.invalid && email.dirty
+                || email.invalid && email.touched">
+                    <mdb-error [@errors] *ngIf="email.errors.required">
                         Required field
                     </mdb-error>
-                    <mdb-error [@errors] *ngIf="registrationForm.get('email').errors.uniqEmail">
+                    <mdb-error [@errors] *ngIf="email.errors.uniqEmail">
                         Such mail already exists
                     </mdb-error>
-                    <mdb-error [@errors] *ngIf="registrationForm.get('email').errors.pattern">
+                    <mdb-error [@errors] *ngIf="email.errors.pattern">
                         Incorrect input
                     </mdb-error>
                 </div>
-                <mdb-success *ngIf="registrationForm.get('email').status === 'VALID'">
+                <mdb-success *ngIf="email.status === 'VALID'">
                     Email is available!
                 </mdb-success>
             </div>
@@ -92,28 +88,26 @@
                 </label>
                 <div class="registration-form__icons">
                     <mdb-icon [@bird] fas icon="check" class="green-text icon__margin"
-                        *ngIf="registrationForm.get('password').valid && registrationForm.get('password').dirty">
+                        *ngIf="password.valid && password.dirty">
                     </mdb-icon>
 
-                    <mdb-icon [@cancel] fas icon="times" class="red-text icon__margin" *ngIf="registrationForm.get('password').invalid && registrationForm.get('password').dirty ||
-                    registrationForm.get('password').invalid && registrationForm.get('password').touched"></mdb-icon>
+                    <mdb-icon [@cancel] fas icon="times" class="red-text icon__margin" *ngIf="password.invalid && password.dirty ||
+                    password.invalid && password.touched"></mdb-icon>
 
-                    <div class="spinner-border text-light" *ngIf="registrationForm.get('password').status === 'PENDING'"
-                        role="status">
+                    <div class="spinner-border text-light" *ngIf="password.status === 'PENDING'" role="status">
                         <span class="sr-only">Loading...</span>
                     </div>
                 </div>
-                <div *ngIf="registrationForm.get('password').invalid && registrationForm.get('password').dirty || registrationForm.get('password').invalid && registrationForm.get('password').touched">
-                    <small [@errors] *ngIf="registrationForm.get('password').errors.required">
+                <div *ngIf="password.invalid && password.dirty || password.invalid && password.touched">
+                    <small [@errors] *ngIf="password.errors.required">
                         Required field
                     </small>
-                    <small [@errors] *ngIf="registrationForm.get('password').errors.minlength">
+                    <small [@errors] *ngIf="password.errors.minlength">
                         Password must be at least 8 characters long
                     </small>
                 </div>
                 <!-- SHOULD REFACTORING THIS PART (RUDOLF) -->
-                <div [@bird] *ngIf="registrationForm.get('password').valid && registrationForm.get('password').dirty"
-                    class="login__password-protection">
+                <div [@bird] *ngIf="password.valid && password.dirty" class="login__password-protection">
                     <div class="password__difficulty">
                         <div *ngIf="difficulty === 'weak'" style="width: 30%; background-color: #f44336; height: 100%;">
                         </div>
@@ -134,33 +128,31 @@
         <div class="col-lg-6 col-md-6 col-xl-6 col-12 col-sm-12">
             <div class="md-form">
                 <input mdbInput type="password" id="form5" class="form-control"
-                    [ngClass]="{protected_input: ( registrationForm.hasError('notSame') && registrationForm.get('confirmPassword').dirty ) ||
-                    ( registrationForm.get('confirmPassword').invalid && registrationForm.get('confirmPassword').dirty ) || ( registrationForm.get('confirmPassword').invalid && registrationForm.get('confirmPassword').touched ),
-                    success_input: registrationForm.get('confirmPassword').valid && registrationForm.get('confirmPassword').dirty && !!registrationForm.errors === false}"
-                    formControlName="confirmPassword" autocomplete="off">
-                <label for="form5"
-                    [ngClass]="{protected_label: ( registrationForm.hasError('notSame') && registrationForm.get('confirmPassword').dirty ) ||
-                    ( registrationForm.get('confirmPassword').invalid && registrationForm.get('confirmPassword').dirty) || ( registrationForm.get('confirmPassword').invalid && registrationForm.get('confirmPassword').touched ),
-                success_label: registrationForm.get('confirmPassword').valid && registrationForm.get('confirmPassword').dirty && !!registrationForm.errors === false}">
+                    [ngClass]="{protected_input: ( registrationForm.hasError('notSame') && confirmPassword.dirty ) ||
+                    ( confirmPassword.invalid && confirmPassword.dirty ) || ( confirmPassword.invalid && confirmPassword.touched ),
+                    success_input: confirmPassword.valid && confirmPassword.dirty && !!registrationForm.errors === false}" formControlName="confirmPassword" autocomplete="off">
+                <label for="form5" [ngClass]="{protected_label: ( registrationForm.hasError('notSame') && confirmPassword.dirty ) ||
+                    ( confirmPassword.invalid && confirmPassword.dirty) || ( confirmPassword.invalid && confirmPassword.touched ),
+                success_label: confirmPassword.valid && confirmPassword.dirty && !!registrationForm.errors === false}">
                     Confirm Password
                 </label>
                 <div class="registration-form__icons">
                     <mdb-icon [@bird] fas icon="check" class="green-text"
                         [hidden]="registrationForm.hasError('notSame')"
-                        *ngIf="registrationForm.get('confirmPassword').valid && registrationForm.get('confirmPassword').dirty">
+                        *ngIf="confirmPassword.valid && confirmPassword.dirty">
                     </mdb-icon>
                     <mdb-icon [@cancel] fas icon="times" class="red-text"
-                        *ngIf="(registrationForm.get('confirmPassword').invalid && registrationForm.get('confirmPassword').dirty)  ||  registrationForm.get('confirmPassword').dirty && registrationForm.hasError('notSame') || ( registrationForm.get('confirmPassword').invalid && registrationForm.get('confirmPassword').touched )">
+                        *ngIf="(confirmPassword.invalid && confirmPassword.dirty)  ||  confirmPassword.dirty && registrationForm.hasError('notSame') || ( confirmPassword.invalid && confirmPassword.touched )">
                     </mdb-icon>
                 </div>
                 <div class="registration__confirm-pass"
-                    *ngIf="registrationForm.get('confirmPassword').invalid && registrationForm.get('confirmPassword').dirty || registrationForm.hasError('notSame') || ( registrationForm.get('confirmPassword').invalid && registrationForm.get('confirmPassword').touched )">
+                    *ngIf="confirmPassword.invalid && confirmPassword.dirty || registrationForm.hasError('notSame') || ( confirmPassword.invalid && confirmPassword.touched )">
                     <small [@errors]
-                        *ngIf="registrationForm.get('confirmPassword').errors?.required && registrationForm.get('confirmPassword').dirty || ( registrationForm.get('confirmPassword').invalid && registrationForm.get('confirmPassword').touched )">
+                        *ngIf="confirmPassword.errors?.required && confirmPassword.dirty || ( confirmPassword.invalid && confirmPassword.touched )">
                         Required field
                     </small>
                     <small [@errors]
-                        *ngIf="registrationForm.hasError('notSame') && registrationForm.get('confirmPassword').dirty || ( registrationForm.get('confirmPassword').invalid && registrationForm.get('confirmPassword').touched )">
+                        *ngIf="registrationForm.hasError('notSame') && confirmPassword.dirty || ( confirmPassword.invalid && confirmPassword.touched )">
                         Passwords do not match
                     </small>
                 </div>
