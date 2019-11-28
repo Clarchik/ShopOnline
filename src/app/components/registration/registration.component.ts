@@ -29,10 +29,13 @@ import { wobble, shake, zoomOutRight, rubberBand } from 'ng-animate';
     ]
 })
 export class RegistrationComponent implements OnInit, OnChanges {
+
     public registrationForm: FormGroup;
     public difficulty = '';
     public passwordToRead = true;
     @ViewChild('passwordInput', { static: false }) passwordInput: ElementRef;
+
+
     constructor(
         private fb: FormBuilder, private store: Store<fromStore.UserState>,
         private http: HttpClient, private authService: AuthenticationService, private utils: UtilsService) {
@@ -88,5 +91,21 @@ export class RegistrationComponent implements OnInit, OnChanges {
             this.passwordInput.nativeElement.setAttribute('type', 'password');
             this.passwordToRead = true;
         }
+    }
+
+    private get email() {
+        return this.registrationForm.get('email');
+    }
+    private get password() {
+        return this.registrationForm.get('password');
+    }
+    private get confirmPassword() {
+        return this.registrationForm.get('confirmPassword');
+    }
+    private get name() {
+        return this.registrationForm.get('name');
+    }
+    private get surname() {
+        return this.registrationForm.get('surname');
     }
 }
