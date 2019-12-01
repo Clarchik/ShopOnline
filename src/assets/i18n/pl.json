@@ -12,6 +12,9 @@
         "language": "Język",
         "currency": "Waluta"
     },
+    "Profile": {
+        "details": "Szczegóły profilu"
+    },
     "Authentication": {
         "login": "Login",
         "password": "Hasło",

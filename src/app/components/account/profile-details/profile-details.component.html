@@ -1,0 +1,170 @@
+<div class="container">
+    <div class="row">
+        <div class="profile-details__container">
+            <h3 class="component-header">
+                {{ "Profile.details" | translate }}
+            </h3>
+            <div class="profile-data">
+                <form [formGroup]="profileData">
+                    <div class="col-12">
+                        <div class="md-form">
+                            <input mdbInput mdbValidate type="text" id="form-name"
+                                class="form-control input-field__input" formControlName="name" autocomplete="off">
+                            <label for="form-name">Name</label>
+
+                            <div class="registration-form__icons">
+                                <mdb-icon [@bird] fas icon="check" class="green-text" *ngIf="name.valid && name.dirty">
+                                </mdb-icon>
+                                <mdb-icon [@cancel] fas icon="times" class="red-text"
+                                    *ngIf="name.invalid && (name.dirty || name.touched)">
+                                </mdb-icon>
+                            </div>
+                            <div [@errors_wrapper] *ngIf="name.invalid && (name.dirty || name.touched)">
+                                <mdb-error [@errors] *ngIf="name.errors['required']">
+                                    Required field
+                                </mdb-error>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="md-form">
+                            <input mdbInput mdbValidate type="text" id="form-surname" class="form-control"
+                                formControlName="surname" autocomplete="off">
+                            <label for="form-surname">
+                                Surname
+                            </label>
+                            <div class="registration-form__icons">
+                                <mdb-icon [@bird] fas icon="check" class="green-text"
+                                    *ngIf="surname.valid && surname.dirty">
+                                </mdb-icon>
+                                <mdb-icon [@cancel] fas icon="times" class="red-text"
+                                    *ngIf="surname.invalid && (surname.dirty || surname.touched)">
+                                </mdb-icon>
+                            </div>
+                            <div [@errors_wrapper]
+                                *ngIf="surname.invalid && (surname.dirty || surname.touched)">
+                                <mdb-error [@errors] *ngIf="surname.errors['required']">
+                                    Required field
+                                </mdb-error>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="md-form">
+                            <input mdbInput mdbValidate type="text" id="form-email" class="form-control"
+                                formControlName="email" autocomplete="off">
+                            <label for="form-email">
+                                Email
+                            </label>
+                            <div class="registration-form__icons">
+                                <mdb-icon [@bird] fas icon="check" class="green-text"
+                                    *ngIf="email.valid && email.dirty"></mdb-icon>
+
+                                <mdb-icon [@cancel] fas icon="times" class="red-text"
+                                    *ngIf="email.invalid && (email.dirty || email.touched)"></mdb-icon>
+                            </div>
+                            <div [@errors_wrapper] *ngIf="email.invalid && (email.dirty || email.touched)">
+                                <mdb-error [@errors] *ngIf="email.errors['required']">
+                                    Required field
+                                </mdb-error>
+                                <mdb-error [@errors] *ngIf="email.errors['pattern']">
+                                    Incorrect input
+                                </mdb-error>
+                            </div>
+                        </div>
+                    </div>
+                    <button [disabled]="profileData.invalid" class="w-100" type="button" mdbBtn color="dark"
+                        mdbWavesEffect (click)="changeProfileData();">
+                        Save
+                        <!-- <span [hidden]="userIsLoading$ | async">
+                            {{ 'Authentication.signIn' | translate }}
+                        </span>
+                        <mdb-icon *ngIf="userIsLoading$ | async" fas icon="spinner" class="animated rotateOut infinite">
+                        </mdb-icon> -->
+                    </button>
+                </form>
+            </div>
+            <div class="profile-passwors">
+                <form [formGroup]="profilePassword">
+                    <div class="col-12">
+                        <div class="md-form">
+                            <input mdbInput mdbValidate type="password" id="form-password"
+                                class="form-control" formControlName="password" autocomplete="off">
+                            <label for="form-password">
+                                Password
+                            </label>
+                            <div class="registration-form__icons">
+                                <mdb-icon [@bird] fas icon="check" class="green-text icon__margin"
+                                    *ngIf="password.valid && password.dirty">
+                                </mdb-icon>
+
+                                <mdb-icon [@cancel] fas icon="times" class="red-text icon__margin"
+                                    *ngIf="password.invalid && (password.dirty || password.touched)">
+                                </mdb-icon>
+
+                                <div class="spinner-border text-light" *ngIf="password.status === 'PENDING'"
+                                    role="status">
+                                    <span class="sr-only">Loading...</span>
+                                </div>
+                            </div>
+                            <div [@errors_wrapper] *ngIf="password.invalid && (password.dirty || password.touched)">
+                                <mdb-error [@errors] *ngIf="password.errors['required']">
+                                    Required field
+                                </mdb-error>
+                                <mdb-error [@errors] *ngIf="password.errors['minlength']">
+                                    Password must be at least 8 characters long
+                                </mdb-error>
+                            </div>
+                            <!-- SHOULD REFACTORING THIS PART (RUDOLF) -->
+                            <!-- <div [@bird] *ngIf="password.valid && password.dirty" class="login__password-protection">
+                                <div class="password__difficulty">
+                                    <div *ngIf="difficulty === 'weak'" style="width: 25%; background-color: #f44336; height: 100%;">
+                                    </div>
+                                    <div *ngIf="difficulty === 'common'" style="width: 50%; background-color: #ffc107; height: 100%;"></div>
+                                    <div *ngIf="difficulty === 'well'" style="width: 75%; background-color: #80ba29; height: 100%;">
+                                    </div>
+                                    <div *ngIf="difficulty === 'super'" style="width: 100%; background-color: #00c851; height: 100%;"></div>
+                                </div>
+                                <span>Password protection level</span>
+                            </div> -->
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="md-form">
+                            <input mdbInput type="password" id="form-confirmPassword" class="form-control"
+                                compareTo="password" formControlName="confirmPassword" autocomplete="off">
+                            <label for="form-confirmPassword">
+                                Confirm Password
+                            </label>
+                            <div class="registration-form__icons">
+                                <mdb-icon [@bird] fas icon="check" class="green-text"
+                                    *ngIf="confirmPassword.valid && confirmPassword.dirty">
+                                </mdb-icon>
+                                <mdb-icon [@cancel] fas icon="times" class="red-text"
+                                    *ngIf="confirmPassword.invalid && (confirmPassword.dirty || confirmPassword.touched)">
+                                </mdb-icon>
+                            </div>
+                            <div [@errors_wrapper] *ngIf="confirmPassword.invalid && (confirmPassword.dirty || confirmPassword.touched)">
+                                <mdb-error [@errors] *ngIf="confirmPassword.errors['required']">
+                                    Required field
+                                </mdb-error>
+                                <mdb-error [@errors] *ngIf="confirmPassword.errors['notEqual']">
+                                    Passwords do not match
+                                </mdb-error>
+                            </div>
+                        </div>
+                    </div>
+                    <button [disabled]="profilePassword.invalid" class="w-100" type="button" mdbBtn color="dark"
+                        mdbWavesEffect>
+                        Save
+                        <!-- <span [hidden]="userIsLoading$ | async">
+                            {{ 'Authentication.signIn' | translate }}
+                        </span>
+                        <mdb-icon *ngIf="userIsLoading$ | async" fas icon="spinner" class="animated rotateOut infinite">
+                        </mdb-icon> -->
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

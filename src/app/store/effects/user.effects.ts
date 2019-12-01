@@ -87,4 +87,31 @@ export class UserEffects {
             }
         })
     );
+
+    @Effect()
+    updateUserData = this.actions$.pipe(
+        ofType(userActions.UPDATE_USER_DATA),
+        map((action: userActions.UpdateUserData) => action.payload),
+        switchMap((userData) => this.authService.updateUserData(userData).pipe(
+            map((user: User) => new userActions.UpdateUserDataSuccess(user)),
+            catchError((err) => of(new userActions.UpdateUserDataFail(err.error)))
+        ))
+    );
+
+    @Effect({ dispatch: false })
+    updateUserDataSuccess = this.actions$.pipe(
+        ofType(userActions.UPDATE_USER_DATA_SUCCESS),
+        tap(() => {
+            this.toastr.success('Success', 'Data is updated');
+        })
+    );
+
+    @Effect({ dispatch: false })
+    updateUserDataFail = this.actions$.pipe(
+        ofType(userActions.UPDATE_USER_DATA_FAIL),
+        map((action: userActions.UpdateUserDataFail) => action.payload),
+        tap((err) => {
+            this.toastr.error(`${err.message}`, `Error`);
+        })
+    );
 }

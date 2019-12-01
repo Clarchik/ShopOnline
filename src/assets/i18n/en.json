@@ -12,6 +12,9 @@
         "language": "Language",
         "currency": "Currency"
     },
+    "Profile": {
+        "details": "Profile details"
+    },
     "Authentication": {
         "login": "Login",
         "password": "Password",

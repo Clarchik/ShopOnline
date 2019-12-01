@@ -2,13 +2,20 @@ import { Action } from '@ngrx/store';
 import { User } from '../../shared/interfaces/user/user';
 import { Authenticate } from '../../shared/interfaces/user/authenticate';
 import { AuthError } from '../../shared/interfaces/auth/auth-error';
+import { UserData } from '../../shared/models/user/user-data';
 
 export const LOGIN_USER = '[Auth] Login User';
 export const LOGIN_USER_SUCCESS = '[Auth] Login User Success';
 export const LOGIN_USER_FAIL = '[Auth] Login User Fail';
+
 export const REGISTRATION_USER = '[Auth] Registration User';
 export const REGISTRATION_USER_SUCCESS = '[Auth] Registration User Success';
-export const REGISTRATION_USER_FAIL = '[AUTH] Registration User Fail';
+export const REGISTRATION_USER_FAIL = '[Auth] Registration User Fail';
+
+export const UPDATE_USER_DATA = '[Update] Update User Data';
+export const UPDATE_USER_DATA_SUCCESS = '[Update] Update User Data Success';
+export const UPDATE_USER_DATA_FAIL = '[Update] Update User Data Fail';
+
 
 export class LoginUser implements Action {
     readonly type = LOGIN_USER;
@@ -27,18 +34,42 @@ export class LoginUserFail implements Action {
 
 export class RegistrationUser implements Action {
     readonly type = REGISTRATION_USER;
-    constructor(public payload: User) {}
+    constructor(public payload: User) { }
 }
 
 export class RegistrationUserSuccess implements Action {
     readonly type = REGISTRATION_USER_SUCCESS;
-    constructor(public payload: string) {}
+    constructor(public payload: string) { }
 }
 export class RegistrationUserFail implements Action {
     readonly type = REGISTRATION_USER_FAIL;
-    constructor(public payload: any) {}
+    constructor(public payload: any) { }
+}
+
+export class UpdateUserData implements Action {
+    readonly type = UPDATE_USER_DATA;
+    constructor(public payload: UserData) { }
+}
+
+export class UpdateUserDataSuccess implements Action {
+    readonly type = UPDATE_USER_DATA_SUCCESS;
+    constructor(public payload: User) { }
+}
+
+export class UpdateUserDataFail implements Action {
+    readonly type = UPDATE_USER_DATA_FAIL;
+    constructor(public payload: any) { }
 }
 
 
 
-export type UserActions = LoginUser | LoginUserSuccess | LoginUserFail | RegistrationUser | RegistrationUserSuccess | RegistrationUserFail;
+export type UserActions =
+    LoginUser |
+    LoginUserSuccess |
+    LoginUserFail |
+    RegistrationUser |
+    RegistrationUserSuccess |
+    RegistrationUserFail |
+    UpdateUserData |
+    UpdateUserDataSuccess |
+    UpdateUserDataFail;

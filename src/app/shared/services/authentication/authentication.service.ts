@@ -4,6 +4,7 @@ import { HttpClient, HttpResponse, HttpHeaders } from '@angular/common/http';
 import { tap, map } from 'rxjs/operators';
 import { SESSION } from '../../models/session/session';
 import { UtilsService } from '../utils/utils.service';
+import { UserData } from '../../models/user/user-data';
 
 
 
@@ -36,6 +37,11 @@ export class AuthenticationService {
     }
 
     public chekUserEmail(email: string): Observable<any> {
-            return this.http.post('http://localhost:3000/users/login/exists', { email });
+        return this.http.post('http://localhost:3000/users/login/exists', { email });
+    }
+
+    public updateUserData(userData: UserData): Observable<any> {
+        const { name, surname, email } = userData;
+        return this.http.put(`http://localhost:3000/users/update/${userData._id}`, { name, surname, email });
     }
 }

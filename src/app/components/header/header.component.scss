@@ -1,5 +1,8 @@
 @import '../../styles/variables.scss';
 
+.navbar__container {
+    align-items: center;
+}
 
 .nav-link__activated,
 .nav-link__effect:hover {
