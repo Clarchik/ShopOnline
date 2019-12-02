@@ -1,9 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { HttpClient, HttpResponse, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { tap, map } from 'rxjs/operators';
 import { SESSION } from '../../models/session/session';
 import { UtilsService } from '../utils/utils.service';
+import { UserData } from '../../models/user/user-data';
+import { UserPasswords } from '../../models/user/user-passwords';
+import { Router } from '@angular/router';
 
 
 
@@ -13,7 +16,9 @@ import { UtilsService } from '../utils/utils.service';
 })
 export class AuthenticationService {
 
-    constructor(private http: HttpClient, private utilsService: UtilsService) { }
+    constructor(
+        private http: HttpClient,
+        private utilsService: UtilsService) { }
 
     public signInFromSession() {
         return this.http.get('http://localhost:3000/users/login/session');
@@ -36,6 +41,19 @@ export class AuthenticationService {
     }
 
     public chekUserEmail(email: string): Observable<any> {
-            return this.http.post('http://localhost:3000/users/login/exists', { email });
+        return this.http.post('http://localhost:3000/users/login/exists', { email });
+    }
+
+    public updateUserData(userData: UserData): Observable<any> {
+        const { name, surname, email } = userData;
+        return this.http.put(`http://localhost:3000/users/update/${userData._id}`, { name, surname, email });
+    }
+
+    public updateUserPasswords(userPasswords: UserPasswords, id: string): Observable<any> {
+        return this.http.put(`http://localhost:3000/users/updatePassword/${id}`, userPasswords);
+    }
+
+    public logoutUser() {
+        localStorage.removeItem(SESSION['x-access-token']);
     }
 }

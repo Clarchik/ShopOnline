@@ -22,9 +22,13 @@ export class UserController {
 
         /* SIGN IN FROM SESSION */
         this.app.route('/users/login/session').get([verifyJWTToken, verifySession], this.userService.signInFromSession);
+
+        /* UPDATE USER DATA */
+        this.app.route('/users/update/:id').put([verifyJWTToken, verifySession], this.userService.changeUserProfileData);
+
+        /* UPDATE USER PASSWORD */
+        this.app.route('/users/updatePassword/:id').put([verifyJWTToken, verifySession], this.userService.changeUserPassword);
     }
-
-
 }
 
 

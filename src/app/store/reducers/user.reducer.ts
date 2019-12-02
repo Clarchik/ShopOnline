@@ -22,11 +22,13 @@ export const initialState: UserState = {
 export function reducer(state = initialState, action: fromUser.UserActions): UserState {
     switch (action.type) {
 
-        case fromUser.LOGIN_USER: {
+        case fromUser.LOGIN_USER:
+        case fromUser.UPDATE_USER_DATA: {
             return { ...state, loggining: true };
         }
 
-        case fromUser.LOGIN_USER_SUCCESS: {
+        case fromUser.LOGIN_USER_SUCCESS:
+        case fromUser.UPDATE_USER_DATA_SUCCESS: {
             const data = action.payload;
             return { ...state, data, loggining: false, logged: true };
         }
@@ -45,8 +47,12 @@ export function reducer(state = initialState, action: fromUser.UserActions): Use
             return { ...initialState, loggining: false, logged: false, message };
         }
 
+        case fromUser.UPDATE_USER_DATA_FAIL: {
+            return { ...state, loggining: false };
+        }
+
         default: {
-            return state;
+            return initialState;
         }
     }
 }

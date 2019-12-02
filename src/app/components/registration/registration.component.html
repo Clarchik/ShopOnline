@@ -17,7 +17,7 @@
                 <div [@errors_wrapper] *ngIf="name.invalid && name.dirty
                     || name.invalid && name.touched">
 
-                    <mdb-error [@errors] *ngIf="name.errors.required">
+                    <mdb-error [@errors] *ngIf="name.errors['required']">
                         Required field
                     </mdb-error>
                 </div>
@@ -39,7 +39,7 @@
                 </div>
                 <div [@errors_wrapper] *ngIf="surname.invalid && surname.dirty
                 || surname.invalid && surname.touched">
-                    <mdb-error [@errors] *ngIf="surname.errors.required">
+                    <mdb-error [@errors] *ngIf="surname.errors['required']">
                         Required field
                     </mdb-error>
                 </div>
@@ -64,13 +64,13 @@
                 </div>
                 <div [@errors_wrapper] *ngIf="email.invalid && email.dirty
                 || email.invalid && email.touched">
-                    <mdb-error [@errors] *ngIf="email.errors.required">
+                    <mdb-error [@errors] *ngIf="email.errors['required']">
                         Required field
                     </mdb-error>
-                    <mdb-error [@errors] *ngIf="email.errors.uniqEmail">
+                    <mdb-error [@errors] *ngIf="email.errors['uniqEmail']">
                         Such mail already exists
                     </mdb-error>
-                    <mdb-error [@errors] *ngIf="email.errors.pattern">
+                    <mdb-error [@errors] *ngIf="email.errors['pattern']">
                         Incorrect input
                     </mdb-error>
                 </div>
@@ -99,10 +99,10 @@
                     </div>
                 </div>
                 <div *ngIf="password.invalid && password.dirty || password.invalid && password.touched">
-                    <small [@errors] *ngIf="password.errors.required">
+                    <small [@errors] *ngIf="password.errors['required']">
                         Required field
                     </small>
-                    <small [@errors] *ngIf="password.errors.minlength">
+                    <small [@errors] *ngIf="password.errors['minlength']">
                         Password must be at least 8 characters long
                     </small>
                 </div>
@@ -148,7 +148,7 @@
                 <div class="registration__confirm-pass"
                     *ngIf="confirmPassword.invalid && confirmPassword.dirty || registrationForm.hasError('notSame') || ( confirmPassword.invalid && confirmPassword.touched )">
                     <small [@errors]
-                        *ngIf="confirmPassword.errors?.required && confirmPassword.dirty || ( confirmPassword.invalid && confirmPassword.touched )">
+                        *ngIf="confirmPassword.errors['required'] && confirmPassword.dirty || ( confirmPassword.invalid && confirmPassword.touched )">
                         Required field
                     </small>
                     <small [@errors]

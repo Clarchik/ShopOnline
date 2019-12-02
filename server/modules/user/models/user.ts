@@ -53,7 +53,7 @@ UserSchema.methods.toJSON = function() {
     const user = this;
     const userObject = user.toObject();
 
-    return _.omit(userObject, ['password', 'sessions']);
+    return _.omit(userObject, ['password', 'sessions', '__v']);
 }
 
 UserSchema.methods.generateAccessAuthToken = function() {

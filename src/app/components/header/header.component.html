@@ -12,7 +12,7 @@
     </mdb-navbar-brand>
 
     <!-- Always visible links -->
-    <ul class="nav navbar-nav nav-flex-icons ml-auto navbar-nav__lg navbar-nav__sm">
+    <ul class="nav navbar-nav nav-flex-icons ml-auto navbar-nav__lg navbar-nav__sm navbar__container">
         <li class="nav-item">
             <a class="nav-link nav-link__effect">
                 <mdb-icon *ngIf="iconSize === 'lg'" far icon="star" size="lg"></mdb-icon>
@@ -48,6 +48,9 @@
                 <mdb-icon *ngIf="iconSize === 'lg'" fas icon="user" size="lg"></mdb-icon>
                 <mdb-icon *ngIf="iconSize === 'sm'" far icon="user" size="sm"></mdb-icon>
             </a>
+        </li>
+        <li class="nav-item" *ngIf="user$ | async">
+            <app-profile></app-profile>
         </li>
         <button id="bottom-toggler" (click)="toggleHambugerView($event);" class="navbar-toggler navbar-toggler__md"
             type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
