@@ -13,7 +13,8 @@
         "currency": "Currency"
     },
     "Profile": {
-        "details": "Profile details"
+        "details": "Profile details",
+        "logout": "Logout"
     },
     "Authentication": {
         "login": "Login",

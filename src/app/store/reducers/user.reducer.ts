@@ -52,7 +52,7 @@ export function reducer(state = initialState, action: fromUser.UserActions): Use
         }
 
         default: {
-            return state;
+            return initialState;
         }
     }
 }

@@ -25,9 +25,10 @@ export class UserController {
 
         /* UPDATE USER DATA */
         this.app.route('/users/update/:id').put([verifyJWTToken, verifySession], this.userService.changeUserProfileData);
+
+        /* UPDATE USER PASSWORD */
+        this.app.route('/users/updatePassword/:id').put([verifyJWTToken, verifySession], this.userService.changeUserPassword);
     }
-
-
 }
 
 

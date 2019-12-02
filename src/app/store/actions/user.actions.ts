@@ -3,10 +3,14 @@ import { User } from '../../shared/interfaces/user/user';
 import { Authenticate } from '../../shared/interfaces/user/authenticate';
 import { AuthError } from '../../shared/interfaces/auth/auth-error';
 import { UserData } from '../../shared/models/user/user-data';
+import { UserPasswords } from '../../shared/models/user/user-passwords';
 
 export const LOGIN_USER = '[Auth] Login User';
 export const LOGIN_USER_SUCCESS = '[Auth] Login User Success';
 export const LOGIN_USER_FAIL = '[Auth] Login User Fail';
+
+export const LOGOUT_USER = '[Auth] Logout User';
+export const LOGOUT_USER_SUCCESS = '[Auth] Logout User Success';
 
 export const REGISTRATION_USER = '[Auth] Registration User';
 export const REGISTRATION_USER_SUCCESS = '[Auth] Registration User Success';
@@ -15,6 +19,10 @@ export const REGISTRATION_USER_FAIL = '[Auth] Registration User Fail';
 export const UPDATE_USER_DATA = '[Update] Update User Data';
 export const UPDATE_USER_DATA_SUCCESS = '[Update] Update User Data Success';
 export const UPDATE_USER_DATA_FAIL = '[Update] Update User Data Fail';
+
+export const UPDATE_USER_PASSWORDS = '[Update] Update User Passwords';
+export const UPDATE_USER_PASSWORDS_SUCCESS = '[Update] Update User Passwords Success';
+export const UPDATE_USER_PASSWORDS_FAIL = '[Update] Update User Passwords Fail';
 
 
 export class LoginUser implements Action {
@@ -30,6 +38,10 @@ export class LoginUserSuccess implements Action {
 export class LoginUserFail implements Action {
     readonly type = LOGIN_USER_FAIL;
     constructor(public payload: AuthError) { }
+}
+
+export class LogoutUser implements Action {
+    readonly type = LOGOUT_USER;
 }
 
 export class RegistrationUser implements Action {
@@ -61,7 +73,20 @@ export class UpdateUserDataFail implements Action {
     constructor(public payload: any) { }
 }
 
+export class UpdateUserPasswords implements Action {
+    readonly type = UPDATE_USER_PASSWORDS;
+    constructor(public payload: { userPasswords: UserPasswords, id: string }) { }
+}
 
+export class UpdateUserPasswordsSuccess implements Action {
+    readonly type = UPDATE_USER_PASSWORDS_SUCCESS;
+    constructor(public payload: any) { }
+}
+
+export class UpdateUserPasswordsFail implements Action {
+    readonly type = UPDATE_USER_PASSWORDS_FAIL;
+    constructor(public payload: any) { }
+}
 
 export type UserActions =
     LoginUser |
@@ -72,4 +97,8 @@ export type UserActions =
     RegistrationUserFail |
     UpdateUserData |
     UpdateUserDataSuccess |
-    UpdateUserDataFail;
+    UpdateUserDataFail |
+    UpdateUserPasswords |
+    UpdateUserPasswordsSuccess |
+    UpdateUserPasswordsFail |
+    LogoutUser;

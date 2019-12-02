@@ -13,7 +13,8 @@
         "currency": "Waluta"
     },
     "Profile": {
-        "details": "Szczegóły profilu"
+        "details": "Szczegóły profilu",
+        "logout": "Wyloguj"
     },
     "Authentication": {
         "login": "Login",

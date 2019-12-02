@@ -1,6 +1,8 @@
 import { Request, Response } from 'express';
 import { User } from '../models/user';
 
+import * as bcrypt from 'bcryptjs';
+
 export class UserService {
 
     public signUpUser(req: Request, res: Response) {
@@ -121,5 +123,60 @@ export class UserService {
                 message: 'Email is already taken'
             })
         })
+    }
+
+    public changeUserPassword(req: Request, res: Response) {
+        const id = req.params.id;
+        if (!id) {
+            res.status(400).send({
+                message: 'ID not defined'
+            });
+        }
+
+        const { oldPassword, newPassword, newPasswordConfirm } = req.body;
+        if (!oldPassword || !newPassword || !newPasswordConfirm) {
+            res.status(400).send({
+                message: 'New data is incorrect'
+            });
+        }
+
+        if (newPassword !== newPasswordConfirm) {
+            res.status(400).send({
+                message: 'New paswords are not the same'
+            });
+        }
+
+        User.findOne({ _id: id }).then((user) => {
+            if (!user) {
+                res.status(400).send({
+                    message: 'User not found'
+                });
+            } else {
+                bcrypt.compare(oldPassword, user.password).then((match) => {
+                    if (match) {
+                        user.password = newPassword;
+                        user.save().then(() => {
+                            res.status(200).send({
+                                message: 'Password has been updated'
+                            });
+                        }).catch((err) => {
+                            res.status(400).send({
+                                message: 'Couldnt update user password',
+                                err
+                            });
+                        });
+                    } else {
+                        res.status(400).send({
+                            message: 'Old password doesnt match'
+                        });
+                    }
+                });
+            }
+        }).catch((err) => {
+            res.status(400).send({
+                message: 'User not found',
+                err
+            });
+        });
     }
 }

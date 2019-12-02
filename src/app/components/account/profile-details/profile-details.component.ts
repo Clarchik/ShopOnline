@@ -6,7 +6,8 @@ import { UserData } from '../../../shared/models/user/user-data';
 import { USER_DATA_FIELD_NAMES } from '../../../shared/models/user/user-data-names';
 import { trigger, useAnimation, transition } from '@angular/animations';
 import { wobble, rubberBand, shake, zoomOutRight } from 'ng-animate';
-import { RegistrationValidators } from '../../../shared/validators/registration-validators/registration.validators';
+
+import { UserPasswords } from '../../../shared/models/user/user-passwords';
 
 import * as fromStore from '../../../store';
 
@@ -61,11 +62,12 @@ export class ProfileDetailsComponent implements OnInit {
     }
 
     private initProfilePasswordControls() {
+        const oldPasswordControl = new FormControl(null, [Validators.required, Validators.minLength(8)]);
         const passwordControl = new FormControl(null, [Validators.required, Validators.minLength(8)]);
         const confirmPassword = new FormControl(null, [Validators.required]);
-        this.profilePassword.addControl(USER_DATA_FIELD_NAMES.password, passwordControl);
-        this.profilePassword.addControl(USER_DATA_FIELD_NAMES.confirmPassword, confirmPassword);
-        this.profilePassword.validator = RegistrationValidators.checkPassword;
+        this.profilePassword.addControl(USER_DATA_FIELD_NAMES.oldPassword, oldPasswordControl);
+        this.profilePassword.addControl(USER_DATA_FIELD_NAMES.newPassword, passwordControl);
+        this.profilePassword.addControl(USER_DATA_FIELD_NAMES.newPasswordConfirm, confirmPassword);
     }
 
     private getValidatorsObjectByField(field: string) {
@@ -95,6 +97,14 @@ export class ProfileDetailsComponent implements OnInit {
         this.store.dispatch(new fromStore.UpdateUserData(updatedUser));
     }
 
+    public changeProfilePassword() {
+        const id = this.user._id;
+        const { oldPassword, newPassword, newPasswordConfirm } = this.profilePassword.value;
+        const userPasswords = new UserPasswords(oldPassword, newPassword, newPasswordConfirm);
+        this.store.dispatch(new fromStore.UpdateUserPasswords({ userPasswords, id }));
+        this.profilePassword.reset();
+    }
+
     get name(): AbstractControl {
         return this.profileData.controls[USER_DATA_FIELD_NAMES.name];
     }
@@ -107,11 +117,15 @@ export class ProfileDetailsComponent implements OnInit {
         return this.profileData.controls[USER_DATA_FIELD_NAMES.email];
     }
 
-    get password(): AbstractControl {
-        return this.profilePassword.controls[USER_DATA_FIELD_NAMES.password];
+    get oldPassword(): AbstractControl {
+        return this.profilePassword.controls[USER_DATA_FIELD_NAMES.oldPassword];
     }
 
-    get confirmPassword(): AbstractControl {
-        return this.profilePassword.controls[USER_DATA_FIELD_NAMES.confirmPassword];
+    get newPassword(): AbstractControl {
+        return this.profilePassword.controls[USER_DATA_FIELD_NAMES.newPassword];
+    }
+
+    get newPasswordConfirm(): AbstractControl {
+        return this.profilePassword.controls[USER_DATA_FIELD_NAMES.newPasswordConfirm];
     }
 }
