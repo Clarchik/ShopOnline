@@ -1,13 +1,14 @@
 import { Component, OnInit, OnChanges, DoCheck, ViewChild, ElementRef } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import * as fromStore from '../../store';
 import { HttpClient } from '@angular/common/http';
 import { RegistrationValidators } from '../../shared/validators/registration-validators/registration.validators';
 import { AuthenticationService } from '../../shared/services/authentication/authentication.service';
 import { UtilsService } from '../../shared/services/utils/utils.service';
 import { transition, trigger, useAnimation } from '@angular/animations';
 import { wobble, shake, zoomOutRight, rubberBand } from 'ng-animate';
+
+import * as fromStore from '../../store';
 
 @Component({
     selector: 'app-registration',
@@ -70,8 +71,8 @@ export class RegistrationComponent implements OnInit, OnChanges {
     }
 
     ngOnChanges() {
-        this.registrationForm.get('password').valueChanges.subscribe(val => {
-            this.utils.getPasswordDifficulty(val).subscribe(value => {
+        this.registrationForm.get('password').valueChanges.subscribe((val) => {
+            this.utils.getPasswordDifficulty(val).subscribe((value) => {
                 this.difficulty = value;
             });
         });
@@ -79,7 +80,6 @@ export class RegistrationComponent implements OnInit, OnChanges {
 
     SignUp() {
         const { email, password, name, surname } = this.registrationForm.value;
-        console.log({ email, password, name, surname });
         this.store.dispatch(new fromStore.RegistrationUser({ email, password, name, surname }));
     }
 
@@ -93,19 +93,19 @@ export class RegistrationComponent implements OnInit, OnChanges {
         }
     }
 
-    private get email() {
+    get email() {
         return this.registrationForm.get('email');
     }
-    private get password() {
+    get password() {
         return this.registrationForm.get('password');
     }
-    private get confirmPassword() {
+    get confirmPassword() {
         return this.registrationForm.get('confirmPassword');
     }
-    private get name() {
+    get name() {
         return this.registrationForm.get('name');
     }
-    private get surname() {
+    get surname() {
         return this.registrationForm.get('surname');
     }
 }
