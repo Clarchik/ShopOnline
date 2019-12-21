@@ -1,6 +1,5 @@
 import { Session } from '../models/session';
-import { Document } from 'mongoose';
-import mongoose from '../../../db/mongoose';
+import mongoose, { Document } from 'mongoose';
 
 export interface UserData extends Document {
     email: string;
