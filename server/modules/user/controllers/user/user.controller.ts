@@ -1,8 +1,8 @@
-import { UserService } from "../services/user.service";
-import { Application } from "express";
-import { verifyJWTToken, verifySession } from "../models/user";
+import { UserService } from '../../services/user.service';
+import { Application } from 'express';
+import { verifySession, verifyJWTToken } from '../../../../shared';
 
-export class UserController {
+export default class UserController {
     private userService: UserService;
 
     constructor(private app: Application) {

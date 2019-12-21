@@ -1,12 +1,12 @@
-import { Request, Response } from 'express';
-import { User } from '../models/user';
+import express, { Request, Response } from 'express';
 
 import * as bcrypt from 'bcryptjs';
+import { User } from '../models';
 
 export class UserService {
 
-    public signUpUser(req: Request, res: Response) {
-        const body = req.body;
+    public signUpUser(req: express.Request, res: express.Response) {
+        const { body } = req;
         if (!body.email || !body.password) {
             res.send(400).send({
                 message: 'You didnt provide credentials'
@@ -15,7 +15,7 @@ export class UserService {
 
         const newUser = new User(body);
         User.checkIfUserExists(newUser.email).then(() => {
-            return newUser.save().then((user) => {
+            return newUser.save().then(() => {
                 res.status(200).send({ message: 'Successfuly registered' });
             }).catch((e: any) => {
                 res.status(400).send(e);
@@ -26,8 +26,8 @@ export class UserService {
     }
 
     public signInUser(req: Request, res: Response) {
-        const email = req.body.email;
-        const password = req.body.password;
+        const { email } = req.body;
+        const { password } = req.body;
         if (!email || !password) {
             res.send(400).send({
                 message: 'badCredentials'
@@ -85,8 +85,8 @@ export class UserService {
         }
     }
 
-    public changeUserProfileData(req: Request, res: Response) {
-        const id = req.params.id;
+    public changeUserProfileData(req: express.Request, res: express.Response) {
+        const { id } = req.params;
         if (!id) {
             res.status(400).send({
                 message: 'ID not defined'
@@ -99,14 +99,14 @@ export class UserService {
             });
         }
         User.checkIfUserExists(email).then(() => {
-            User.findOne({ _id: id }).then((user) => {
+            User.findOne({ _id: id }).then((user: any) => {
                 if (user) {
                     user.name = name;
                     user.surname = surname;
                     user.email = email;
-                    user.save().then((updatedUser) => {
+                    user.save().then((updatedUser: any) => {
                         res.status(200).send(updatedUser);
-                    }).catch((err) => {
+                    }).catch((err: any) => {
                         res.status(400).send({
                             message: 'Couldnt update user',
                             err
@@ -126,7 +126,7 @@ export class UserService {
     }
 
     public changeUserPassword(req: Request, res: Response) {
-        const id = req.params.id;
+        const { id } = req.params;
         if (!id) {
             res.status(400).send({
                 message: 'ID not defined'
@@ -146,7 +146,7 @@ export class UserService {
             });
         }
 
-        User.findOne({ _id: id }).then((user) => {
+        User.findOne({ _id: id }).then((user: any) => {
             if (!user) {
                 res.status(400).send({
                     message: 'User not found'
@@ -159,7 +159,7 @@ export class UserService {
                             res.status(200).send({
                                 message: 'Password has been updated'
                             });
-                        }).catch((err) => {
+                        }).catch((err: any) => {
                             res.status(400).send({
                                 message: 'Couldnt update user password',
                                 err
@@ -172,7 +172,7 @@ export class UserService {
                     }
                 });
             }
-        }).catch((err) => {
+        }).catch((err: any) => {
             res.status(400).send({
                 message: 'User not found',
                 err

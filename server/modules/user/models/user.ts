@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import CONFIG from '../../../shared/config/config';
+import CONFIG from '../../../shared/config';
 import * as jwt from 'jsonwebtoken';
 import * as crypto from 'crypto';
 import * as bcrypt from 'bcryptjs';
@@ -54,7 +54,7 @@ UserSchema.methods.toJSON = function() {
     const userObject = user.toObject();
 
     return _.omit(userObject, ['password', 'sessions', '__v']);
-}
+};
 
 UserSchema.methods.generateAccessAuthToken = function() {
     const user = this;
@@ -72,7 +72,7 @@ UserSchema.methods.generateAccessAuthToken = function() {
                 }
             });
     });
-}
+};
 
 UserSchema.methods.generateRefreshAuthToken = function() {
     return new Promise((resolve, reject) => {
@@ -83,9 +83,9 @@ UserSchema.methods.generateRefreshAuthToken = function() {
             } else {
                 return reject({ message: 'Couldnt generate Refresh token' });
             }
-        })
-    })
-}
+        });
+    });
+};
 
 UserSchema.methods.createSession = function() {
     const user = this;
@@ -96,7 +96,7 @@ UserSchema.methods.createSession = function() {
     }).catch((e: any) => {
         return Promise.reject({ message: 'Failed to save session to database.\n' + e });
     })
-}
+};
 
 UserSchema.methods.checkRefreshTokenOnExpiry = function(token: string) {
     const user = this;
@@ -105,7 +105,7 @@ UserSchema.methods.checkRefreshTokenOnExpiry = function(token: string) {
         return User.hasRefreshTokenExpired(foundToken.expiriesAt);
     }
     return true;
-}
+};
 
 /* Module Methods */
 
@@ -139,10 +139,8 @@ UserSchema.statics.checkIfUserExists = function(email: string) {
 
 UserSchema.statics.hasRefreshTokenExpired = (expiriesAt: number) => {
     const secondsSinceEpoch = Date.now() / 1000;
-    return expiriesAt > secondsSinceEpoch ? false : true;
+    return !(expiriesAt > secondsSinceEpoch);
 };
-
-UserSchema.statics.getJWTSecret = () => CONFIG.jwtSecret;
 
 
 /* MiddleWare */
@@ -163,7 +161,6 @@ UserSchema.pre('save', function(next) {
     }
 });
 
-
 /* Help Methods */
 
 const generateRefreshTokenExpiryTime = () => {
@@ -180,64 +177,6 @@ const saveSessionToDatabase = (user: any, refreshToken: string) => new Promise((
         .catch((e: any) => reject(e));
 });
 
-const verifyJWTToken = (req: any, res: any, next: any) => {
-    const token = req.header('x-access-token');
-    // verify the JWT
-    jwt.verify(token, User.getJWTSecret(), (err: any) => {
-        err ? res.status(401).send(err) : next();
-    });
-};
-
-const verifySession = (req: any, res: any, next: any) => {
-    // grab the refresh token from the request header
-    const refreshToken = req.header('x-refresh-token');
-    // grab the _id from the request header
-    const _id = req.header('_id');
-
-    User.findByIdAndToken(_id, refreshToken).then((user: any) => {
-        if (!user) {
-            // user couldn't be found
-            return Promise.reject({
-                error: 'User not found. Make sure that the refresh token and user id are correct'
-            });
-        }
-        // if the code reaches here - the user was found
-        // therefore the refresh token exists in the database - but we still have to check if it has expired or not
-
-        req.user_id = user._id;
-        req.userObject = user;
-        req.refreshToken = refreshToken;
-
-        let isSessionValid = false;
-
-        user.sessions.forEach((session: any) => {
-            if (session.token === refreshToken) {
-                // check if the session has expired
-                if (User.hasRefreshTokenExpired(session.expiresAt)) {
-                    // refresh token has not expired
-                    isSessionValid = true;
-                }
-            }
-        });
-
-        if (isSessionValid) {
-            // the session is VALID - call next() to continue with processing this web request
-            next();
-        } else {
-            // the session is not valid
-            return Promise.reject({
-                error: 'Refresh token has expired or the session is invalid'
-            });
-        }
-    }).catch((e: any) => {
-        res.status(401).send(e);
-    });
-};
-
 const User = mongoose.model<UserData, UserModel>('User', UserSchema);
 
-export {
-    User,
-    verifyJWTToken,
-    verifySession
-}
+export default User;
