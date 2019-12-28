@@ -35,7 +35,7 @@ export class ProfileDetailsComponent implements OnInit {
     public profilePassword: FormGroup;
     private user: UserData;
     constructor(
-        private store: Store<fromStore.UserState>,
+        private store: Store<fromStore.ShopState>,
         private fb: FormBuilder) {
         this.profileData = this.fb.group({});
         this.profilePassword = this.fb.group({});

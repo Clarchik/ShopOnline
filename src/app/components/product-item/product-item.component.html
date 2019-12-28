@@ -1,0 +1,16 @@
+<div class="product-wrapper" [routerLink]="['/product', product._id]">
+    <div class="product-sale" *ngIf="product.sale">
+        Sale
+    </div>
+    <div class="product-image" [ngStyle]="{'background': getUrl()}"></div>
+    <div class="product-description">
+        <h5 class="product-description__title">
+            {{ product.title }}
+        </h5>
+        <div class="product-description__price">
+            <span [ngClass]="{sale: product.sale}">{{ product.price | currencyConverter | async }}</span>
+            <br>
+            <span *ngIf="product.sale">{{ product['sale-price'] | currencyConverter | async }}</span>
+        </div>
+    </div>
+</div>

@@ -14,13 +14,13 @@
         font-weight: bold;
         padding: .675rem 0;
         width: 11.5rem;
-        font-size: .75rem;
+        font-size: 1rem;
         border: 1px solid #fff;
         border-radius: 3px;
         background-color: transparent;
         transition: all 0.6s ease-out;
         color: #fff;
-
+        text-transform: uppercase;
         &:hover {
             color: #fff;
             border-color: #000;

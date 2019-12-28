@@ -11,7 +11,7 @@ import * as fromStore from '../../../store';
 })
 export class ProfileComponent implements OnInit {
 
-    constructor(private store: Store<fromStore.UserState>) { }
+    constructor(private store: Store<fromStore.ShopState>) { }
 
     ngOnInit() {
     }

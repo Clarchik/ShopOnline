@@ -1,0 +1,39 @@
+@font-face {
+    font-family: lato-r;
+    src: url('../../assets/fonts/Lato-Regular/Lato-Regular.ttf') format("truetype"),
+        url('../../assets/fonts/Lato-Regular/Lato-Regular.woff') format("woff"),
+        url('../../assets/fonts/Lato-Regular/Lato-Regular.woff2') format("woff2");
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: lato-b;
+    src: url('../../assets/fonts/Lato-Bold/Lato-Semibold.ttf') format("truetype"),
+        url('../../assets/fonts/Lato-Bold/Lato-Semibold.woff') format("woff"),
+        url('../../assets/fonts/Lato-Bold/Lato-Semibold.woff2') format("woff2");
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: avenir-r;
+    src: local("Avenir"),
+        local("Avenir"),
+        url('../../assets/fonts/Avenir-Regular/Avenir-Roman.ttf') format("truetype"),
+        url('../../assets/fonts/Avenir-Regular/Avenir-Roman.woff') format("woff"),
+        url('../../assets/fonts/Avenir-Regular/Avenir-Roman.woff2') format("woff2");
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: avenir-m;
+    src: local("Avenir-medium"),
+        local("Avenir-medium"),
+        url('../../assets/fonts/Avenir-Medium/Avenir-Medium.ttf') format("truetype"),
+        url('../../assets/fonts/Avenir-Medium/Avenir-Medium.woff') format("woff"),
+        url('../../assets/fonts/Avenir-Medium/Avenir-Medium.woff2') format("woff2");
+    font-weight: 400;
+    font-style: normal;
+}

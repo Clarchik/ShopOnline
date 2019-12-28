@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { StoreModule } from '@ngrx/store';
@@ -29,6 +29,9 @@ import { CopmareValidatorDirective } from './shared/validators/compare-validator
 
 import * as fromComponents from './components';
 import { reducers as userReducers, effects as userEffects } from './store';
+import { ProductsComponent } from './components/products/products.component';
+import { ProductItemComponent } from './components/product-item/product-item.component';
+import { ProductItemDetailsComponent } from './components/product-item-details/product-item-details.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http);
@@ -56,12 +59,16 @@ export function setupInitFactory(
         RegistrationAutoFocusDirective,
         ProfileComponent,
         ProfileDetailsComponent,
-        CopmareValidatorDirective
+        CopmareValidatorDirective,
+        ProductsComponent,
+        ProductItemComponent,
+        ProductItemDetailsComponent
     ],
     imports: [
         BrowserModule,
         BrowserAnimationsModule,
         ReactiveFormsModule,
+        FormsModule,
         AppRoutingModule,
         HttpClientModule,
         StoreModule.forRoot(userReducers),

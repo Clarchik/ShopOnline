@@ -38,7 +38,7 @@ export class RegistrationComponent implements OnInit, OnChanges {
 
 
     constructor(
-        private fb: FormBuilder, private store: Store<fromStore.UserState>,
+        private fb: FormBuilder, private store: Store<fromStore.ShopState>,
         private http: HttpClient, private authService: AuthenticationService, private utils: UtilsService) {
         this.registrationForm = this.fb.group({
             email: [

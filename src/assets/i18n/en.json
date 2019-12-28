@@ -1,9 +1,17 @@
 {
     "Shared": {
-        "hello": "Hello"
+        "hello": "Hello",
+        "sale": "Sale",
+        "empty": "Sorry, there are no products in this collection."
+    },
+    "Product": {
+        "size": "Size",
+        "quantity": "Quantity",
+        "addToCart": "Add to bag"
     },
     "Header": {
         "new": "New Arrivals",
+        "shop": "Shop",
         "brands": "Brands",
         "shoes": "Shoes",
         "clothes": "Clothes",

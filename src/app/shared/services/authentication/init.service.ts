@@ -15,7 +15,7 @@ import { LANGUAGE_NAMES } from '../../models/languages/language-names';
 export class InitService {
 
     constructor(
-        private store: Store<fromStore.UserState>,
+        private store: Store<fromStore.ShopState>,
         private authService: AuthenticationService,
         private translate: TranslateService) { }
 

@@ -9,7 +9,7 @@ export class CurrencyStorageService {
     private static _lastCurrency: Currency;
     private currencySource = new BehaviorSubject<Currency>(null);
 
-    currentCurrency = this.currencySource.asObservable();
+    public currentCurrency = this.currencySource.asObservable();
 
     constructor() {
         if (CurrencyStorageService._lastCurrency) {

@@ -8,6 +8,7 @@ import { Store } from '@ngrx/store';
 
 import * as fromStore from '../../store';
 import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-header',
@@ -22,10 +23,11 @@ export class HeaderComponent implements AfterViewInit {
     public user$: Observable<boolean>;
     public noUser$: Observable<boolean>;
     constructor(
+        private router: Router,
         public resizeService: ResizeService,
         private utilsService: UtilsService,
         private modalService: MDBModalService,
-        private store: Store<fromStore.UserState>) {
+        private store: Store<fromStore.ShopState>) {
         this.noUser$ = this.store.select(fromStore.isNotUserLogged);
         this.user$ = this.store.select(fromStore.isUserLogged);
     }
@@ -40,6 +42,10 @@ export class HeaderComponent implements AfterViewInit {
         const button = document.getElementById(id);
         const buttonAttr = button ? button.getAttribute('aria-expanded') : null;
         return buttonAttr === 'true';
+    }
+
+    showProducts(category: string) {
+        this.router.navigate(['products'], { queryParams: { category } });
     }
 
     ngAfterViewInit() {

@@ -2,12 +2,12 @@ import { ActionReducerMap } from '@ngrx/store';
 
 import * as userReducer from './user.reducer';
 
-export interface UserState {
+export interface ShopState {
     user: userReducer.UserState;
 }
 
-export const reducers: ActionReducerMap<UserState> = {
+export const reducers: ActionReducerMap<ShopState> = {
     user: userReducer.reducer
 };
 
-export const getUserState = (state: UserState) => state.user;
+export const getUserState = (state: ShopState) => state.user;

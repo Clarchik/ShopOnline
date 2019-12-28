@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
     public userIsLoading$: Observable<boolean>;
     constructor(
         private fb: FormBuilder,
-        private store: Store<fromStore.UserState>) {
+        private store: Store<fromStore.ShopState>) {
         this._loginForm = this.fb.group({
             email: [
                 null,
