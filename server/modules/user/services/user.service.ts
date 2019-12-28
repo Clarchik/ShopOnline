@@ -1,6 +1,6 @@
 import express, { Request, Response } from 'express';
-
 import * as bcrypt from 'bcryptjs';
+import axios from 'axios';
 import { User } from '../models';
 
 export class UserService {
@@ -178,5 +178,15 @@ export class UserService {
                 err
             });
         });
+    }
+
+    public exchangeRate(req: Request, res: Response) {
+        axios.get('https://api.exchangeratesapi.io/latest?base=USD')
+            .then((rates) => {
+                res.status(200).send(rates.data);
+            })
+            .catch((err) => {
+                res.status(400).send(err);
+            });
     }
 }

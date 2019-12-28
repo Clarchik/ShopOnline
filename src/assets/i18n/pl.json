@@ -1,10 +1,18 @@
 {
     "Shared": {
-        "hello": "Cześć"
+        "hello": "Cześć",
+        "sale": "Wyprzedaż",
+        "empty": "Przepraszamy, nie ma produktów w tej kolekcji."
+    },
+    "Product": {
+        "size": "Rozmiar",
+        "quantity": "Ilość",
+        "addToCart": "Dodaj do koszyka"
     },
     "Header": {
         "new": "News",
         "brands": "Marki",
+        "shop": "Sklep",
         "shoes": "Obuwie",
         "clothes": "Odzież",
         "accessories": "Akcesoria",

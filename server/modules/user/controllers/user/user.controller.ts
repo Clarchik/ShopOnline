@@ -28,6 +28,9 @@ export default class UserController {
 
         /* UPDATE USER PASSWORD */
         this.app.route('/users/updatePassword/:id').put([verifyJWTToken, verifySession], this.userService.changeUserPassword);
+
+        /* GET USER CHANGE RATE */
+        this.app.route('/exchange').get(this.userService.exchangeRate);
     }
 }
 

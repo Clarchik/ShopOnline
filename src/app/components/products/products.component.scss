@@ -1,0 +1,18 @@
+:host {
+    margin-top: 30px;
+}
+
+.products-footer {
+    display: flex;
+    justify-content: center;
+    margin: 50px 0;
+}
+
+.pagination.pg-blue .page-item.active .page-link {
+    color: #a26b25;
+    background-color: rgb(230, 230, 230);
+    box-shadow: none;
+    &:hover {
+        cursor: default;
+    }
+}

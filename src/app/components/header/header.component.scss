@@ -4,6 +4,12 @@
     align-items: center;
 }
 
+.nav-item {
+    letter-spacing: 0.1rem;
+    text-transform: uppercase;
+    font-size: 12px;
+}
+
 .nav-link__activated,
 .nav-link__effect:hover {
     color: $main-color !important;

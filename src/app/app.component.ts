@@ -18,7 +18,7 @@ import * as fromStore from './store';
 export class AppComponent implements OnInit {
     title = 'OnlineShop';
     noUser$: Observable<boolean>;
-    constructor(private store: Store<fromStore.UserState>) { }
+    constructor(private store: Store<fromStore.ShopState>) { }
 
     ngOnInit() {
         this.noUser$ = this.store.select(fromStore.isNotUserLogged);

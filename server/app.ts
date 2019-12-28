@@ -2,12 +2,14 @@ import express, { Application } from 'express';
 import { UserController } from './modules/user/controllers';
 import { MongoDB } from './db/mongoose';
 import Cors from './cors/cors';
+import { ProductsController } from './modules/products/controllers';
 
 class App {
     public app: Application;
     private cors: Cors;
     private mongoDB: MongoDB;
     private userController: UserController;
+    private productsController: ProductsController;
     constructor() {
         this.app = express();
 
@@ -19,6 +21,7 @@ class App {
 
         // Controllers initialization
         this.userController = new UserController(this.app);
+        this.productsController = new ProductsController(this.app);
     }
 }
 

@@ -2,7 +2,8 @@
 @import './app/styles/variables.scss';
 
 body {
-    font-family: $monsterrat !important;
+    font-family: $primary-font !important;
+    font-weight: $regular !important;
 }
 .routeContainer {
     min-height: calc(100vh - 180px);
