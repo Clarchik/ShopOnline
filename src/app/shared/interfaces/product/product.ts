@@ -5,11 +5,11 @@ export interface Product {
     title: string;
     sizes: Array<ProductSize>;
     category: string;
+    gender: string;
     price: number;
     sale: boolean;
     slides: Array<{ imageUrl: string }>;
-    'sale-price': number;
-    'main-image': string;
-    'hidden-image': string;
+    salePrice: number;
+    mainImage: string;
 }
 

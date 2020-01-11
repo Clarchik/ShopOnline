@@ -9,6 +9,10 @@ const ProductSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    genger: {
+        type: String,
+        required: true,
+    },
     price: {
         type: Number,
         required: true
@@ -21,18 +25,14 @@ const ProductSchema = new mongoose.Schema({
         type: Array,
         require: true
     },
-    'sale-price': {
+    salePrice: {
         type: Number,
         required: true
     },
-    'main-image': {
+    mainImage: {
         type: String,
         required: true
-    },
-    'hidden-image': {
-        type: String,
-        required: true
-    },
+    }
 });
 
 const Product = mongoose.model('Product', ProductSchema);

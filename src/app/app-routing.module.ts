@@ -6,6 +6,7 @@ import { RegistrationComponent } from './components/registration/registration.co
 import { ProfileDetailsComponent } from './components/account/profile-details/profile-details.component';
 import { ProductsComponent } from './components/products/products.component';
 import { ProductItemDetailsComponent } from './components/product-item-details/product-item-details.component';
+import { SizesComponent } from './components/sizes/sizes.component';
 
 const routes: Routes = [
     { path: '', redirectTo: 'main', pathMatch: 'full' },
@@ -14,7 +15,8 @@ const routes: Routes = [
     { path: 'registration', component: RegistrationComponent, data: { animation: 'FlipY' } },
     { path: 'profile-details', component: ProfileDetailsComponent },
     { path: 'products', component: ProductsComponent },
-    { path: 'product/:id', component: ProductItemDetailsComponent }
+    { path: 'product/:id', component: ProductItemDetailsComponent },
+    { path: 'size-guide', component: SizesComponent }
 ];
 
 @NgModule({

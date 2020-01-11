@@ -6,6 +6,11 @@
 
 .product {
 
+    &-header {
+        display: flex;
+
+    }
+
     &-title {
         font-family: $lato-b;
         font-size: 24px;
@@ -25,6 +30,19 @@
     }
 
     &-size {
+        &__header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+
+            .title {
+                margin-bottom: 0 !important;
+            }
+
+            .size-guide {
+                margin-left: 45px;
+            }
+        }
         margin-bottom: 30px;
         &-wrapper {
             display: flex;

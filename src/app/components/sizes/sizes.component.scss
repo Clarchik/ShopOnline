@@ -1,0 +1,99 @@
+@import '../../styles/variables.scss';
+
+.nike-cq-table {
+    background-color: #e5e5e5;
+    padding: 10px 20px;
+
+    &-header {
+        height: 65px;
+        color: #666666;
+    }
+
+    .table {
+        table-layout: fixed;
+        font-weight: bold;
+    }
+
+    .table-cell {
+        text-align: center;
+        border: 1px solid #e5e5e5;
+        height: 40px;
+        font-size: 12px;
+        font-weight: 600;
+        &:hover {
+            background: #fa5400;
+            color: white;
+            cursor: default;
+        }
+    }
+
+    th {
+        text-overflow: ellipsis;
+        overflow: hidden;
+        border: 1px solid #e5e5e5;
+        font-size: 13px;
+        padding: 15px 0;
+        vertical-align: middle;
+        font-weight: bold;
+        text-align: center;
+    }
+}
+
+.size-header {
+    margin-top: 35px;
+    font-size: 2rem;
+    font-family: $lato-b;
+    text-transform: uppercase;
+}
+
+.gender {
+    list-style-type: none;
+    display: flex;
+    margin-top: 10px;
+    &-item {
+        padding: 0 15px;
+        font-size: 14px;
+        font-style: italic;
+        font-family: $avenir-m;
+        text-transform: uppercase;
+        color: #666666;
+        border-right: 1px #CCC solid;
+        transition: color .15s ease-in-out;
+        &:last-child {
+            margin-right: 0;
+            border-right: none;
+        }
+        &.active,
+        &:hover {
+            color: $secondary-color;
+        }
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+}
+
+.nsg-bg--white {
+    background-color: #fff;
+    border-color: #e5e5e5;
+    color: #000;
+}
+
+.nsg-bg--grey {
+    background-color: #ddd;
+    border-color: #ddd;
+    color: #000;
+}
+
+.highlight-orange-light {
+    background: #ffccb2;
+    color: #000;
+}
+
+.highlight-orange-dark {
+    background: #fa5400;
+    color: #fff;
+}
+
+

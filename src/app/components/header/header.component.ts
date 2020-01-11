@@ -21,6 +21,7 @@ export class HeaderComponent implements AfterViewInit {
     public screenSize: SCREEN_SIZE;
     private modalRef: MDBModalRef;
     public user$: Observable<boolean>;
+    public cartLength$: Observable<number>;
     public noUser$: Observable<boolean>;
     constructor(
         private router: Router,
@@ -30,6 +31,7 @@ export class HeaderComponent implements AfterViewInit {
         private store: Store<fromStore.ShopState>) {
         this.noUser$ = this.store.select(fromStore.isNotUserLogged);
         this.user$ = this.store.select(fromStore.isUserLogged);
+        this.cartLength$ = this.store.select(fromStore.getCartItemsLength);
     }
 
     @HostListener('window:resize', ['$event'])

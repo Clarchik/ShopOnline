@@ -10,7 +10,7 @@
         <div class="product-description__price">
             <span [ngClass]="{sale: product.sale}">{{ product.price | currencyConverter | async }}</span>
             <br>
-            <span *ngIf="product.sale">{{ product['sale-price'] | currencyConverter | async }}</span>
+            <span *ngIf="product.sale">{{ product.salePrice | currencyConverter | async }}</span>
         </div>
     </div>
 </div>
