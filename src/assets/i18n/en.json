@@ -7,7 +7,15 @@
     "Product": {
         "size": "Size",
         "quantity": "Quantity",
-        "addToCart": "Add to bag"
+        "addToCart": "Add to bag",
+        "sizeGuide": "Size guide"
+    },
+    "Size": {
+        "header": "Size tables",
+        "cm": "Length from heel to toes (cm)",
+        "ue": "UE",
+        "uk": "UK",
+        "us": "US"
     },
     "Header": {
         "new": "New Arrivals",

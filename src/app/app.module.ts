@@ -32,6 +32,7 @@ import { reducers as userReducers, effects as userEffects } from './store';
 import { ProductsComponent } from './components/products/products.component';
 import { ProductItemComponent } from './components/product-item/product-item.component';
 import { ProductItemDetailsComponent } from './components/product-item-details/product-item-details.component';
+import { SizesComponent } from './components/sizes/sizes.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http);
@@ -62,7 +63,8 @@ export function setupInitFactory(
         CopmareValidatorDirective,
         ProductsComponent,
         ProductItemComponent,
-        ProductItemDetailsComponent
+        ProductItemDetailsComponent,
+        SizesComponent
     ],
     imports: [
         BrowserModule,

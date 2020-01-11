@@ -7,7 +7,15 @@
     "Product": {
         "size": "Rozmiar",
         "quantity": "Ilość",
-        "addToCart": "Dodaj do koszyka"
+        "addToCart": "Dodaj do koszyka",
+        "sizeGuide": "Tabela rozmiarów"
+    },
+    "Size": {
+        "header": "Tabele rozmiarów",
+        "cm": "Długość od pięty do palców (cm)",
+        "ue": "UE",
+        "uk": "UK",
+        "us": "US"
     },
     "Header": {
         "new": "News",

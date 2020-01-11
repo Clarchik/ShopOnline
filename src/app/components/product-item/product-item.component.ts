@@ -11,7 +11,7 @@ export class ProductItemComponent {
     constructor() { }
 
     getUrl() {
-        return `url(${this.product['main-image']})`;
+        return `url(${this.product.mainImage})`;
     }
 
 }

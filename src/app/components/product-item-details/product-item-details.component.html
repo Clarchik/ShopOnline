@@ -4,7 +4,8 @@
             <div class="product-slides">
                 <ul class="product-slides__list">
                     <li class="product-slides__list-item" *ngFor="let item of product?.slides">
-                        <img [src]="item.imageUrl" [ngClass]="{active: item.imageUrl === productViewImage}" (click)="changeProductView(item.imageUrl);" alt="Product Image" />
+                        <img [src]="item.imageUrl" [ngClass]="{active: item.imageUrl === productViewImage}"
+                            (click)="changeProductView(item.imageUrl);" alt="Product Image" />
                     </li>
                 </ul>
             </div>
@@ -16,18 +17,23 @@
         </div>
         <div class="col-md-4">
             <div class="product-wrapper">
-                <h3 class="product-title">
-                    {{ product?.title }}
-                </h3>
+                    <h3 class="product-title">
+                        {{ product?.title }}
+                    </h3>
                 <p class="product-price">
                     <span [ngClass]="{sale: product?.sale}">{{ product?.price | currencyConverter | async }}</span>
                     <br>
-                    <span *ngIf="product?.sale">{{ product['sale-price'] | currencyConverter | async }}</span>
+                    <span *ngIf="product?.sale">{{ product.salePrice | currencyConverter | async }}</span>
                 </p>
                 <div class="product-size">
-                    <h4 class="title">
-                        {{ "Product.size" | translate }}
-                    </h4>
+                    <div class="product-size__header">
+                        <p class="title">
+                            {{ "Product.size" | translate }}
+                        </p>
+                        <a class="size-guide" [routerLink]="['/size-guide']" [queryParams]="{gender: product.gender}"  target="_blank">
+                            {{ "Product.sizeGuide" | translate }}
+                        </a>
+                    </div>
                     <div class="size-wrapper">
                         <label *ngFor="let size of product?.sizes" [for]="size.size">
                             <input [id]="size.size" [value]="size.size" type="radio" name="radio"
@@ -56,7 +62,8 @@
                 </div>
 
                 <div class="product-add">
-                    <button [disabled]="!sizeChoice" type="button" mdbBtn color="dark" mdbWavesEffect
+                    <button [disabled]="!sizeChoice" (click)="addToBag(product, sizeChoice, productQuantity);"
+                        type="button" mdbBtn color="dark" mdbWavesEffect
                         class="w-100 m-0">{{ "Product.addToCart" | translate }}</button>
                 </div>
             </div>

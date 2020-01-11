@@ -7,11 +7,10 @@ import { ToastrService } from 'ngx-toastr';
 import { of } from 'rxjs';
 
 import { User } from '../../shared/interfaces/user/user';
-
-import * as userActions from '../actions/user.actions';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { SESSION } from '../../shared/models/session/session';
+
+import * as userActions from '../actions/user.actions';
 
 @Injectable()
 export class UserEffects {

@@ -1,0 +1,35 @@
+<div class="container">
+    <div class="row d-flex align-items-center flex-column">
+        <h3 class="size-header">
+            {{ "Size.header" | translate }}
+        </h3>
+        <ul class="gender">
+            <li class="gender-item" (click)="onChange(item);" [ngClass]="{active: item === choosedGender}" *ngFor="let item of gender">
+                {{ item }}
+            </li>
+        </ul>
+        <div class="col-6">
+            <div class="nike-cq-table mt-2">
+                <table class="table">
+                    <thead>
+                        <tr class="nike-cq-table-header">
+                            <th>{{ "Size.cm" | translate }}</th>
+                            <th>{{ "Size.ue" | translate }}</th>
+                            <th>{{ "Size.uk" | translate }}</th>
+                            <th>{{ "Size.us" | translate }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of sizes; let itemIndex = index" [id]="itemIndex" class="table-row">
+                            <td *ngFor="let size of item | keyvalue; let sizeIndex = index" class="table-cell"
+                                (mouseenter)="highlightSelected(itemIndex, sizeIndex);" (mouseout)="clearAll();"
+                                [ngClass]="{'nsg-bg--white': isEven(itemIndex), 'nsg-bg--grey': !isEven(itemIndex)}">
+                                {{ size.value | json }}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

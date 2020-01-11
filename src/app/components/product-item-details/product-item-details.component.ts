@@ -1,9 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
 import { Product } from '../../shared/interfaces/product/product';
 import { ActivatedRoute } from '@angular/router';
-import { tap, switchMap, map } from 'rxjs/operators';
+import { switchMap, map } from 'rxjs/operators';
 import { ProductsService } from '../services/products/products.service';
+import { Store } from '@ngrx/store';
+
+import * as fromStore from '../../store';
+import { CartProduct } from '../../shared/models/cart-product/cart-product';
+import { Observable } from 'rxjs';
 
 @Component({
     selector: 'app-product-item-details',
@@ -18,7 +22,8 @@ export class ProductItemDetailsComponent implements OnInit {
     public productViewImage: string;
     constructor(
         private route: ActivatedRoute,
-        private ps: ProductsService) { }
+        private ps: ProductsService,
+        private store: Store<fromStore.ShopState>) { }
 
     ngOnInit() {
         this.route.params.pipe(
@@ -28,6 +33,11 @@ export class ProductItemDetailsComponent implements OnInit {
             this._product = product;
             this.productViewImage = this._product.slides[0].imageUrl;
         });
+    }
+
+    public addToBag(product, size, quantity) {
+        const productToAdd = new CartProduct(product, size, quantity);
+        this.store.dispatch(new fromStore.AddProduct(productToAdd));
     }
 
     public sizeChanged(size: number) {

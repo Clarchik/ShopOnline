@@ -32,8 +32,7 @@
                 <mdb-icon *ngIf="iconSize === 'sm'" class="icon-container" fas icon="shopping-cart" size="sm">
                 </mdb-icon>
                 <span class="icon-counter">
-                    <!-- TODO This counter should be replaced by real value -->
-                    10
+                    {{ cartLength$ | async }}
                 </span>
             </a>
         </li>
