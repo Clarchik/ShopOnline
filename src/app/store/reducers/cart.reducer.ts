@@ -49,5 +49,5 @@ export function reducer(state = initialState, action: fromCart.CartActions): Car
 
 
 export const getCart = (state: CartState) => state.entities;
-export const getCartTotalPrice = (state: CartState) => Object.values(state.entities).reduce((_, next) => next.qunatity * next.price, 0);
+export const getCartTotalPrice = (state: CartState) => Object.values(state.entities).reduce((prev, next) => prev + (next.qunatity * next.price), 0);
 export const cartLength = (state: CartState) => Object.values(state.entities).length;
