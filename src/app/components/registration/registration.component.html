@@ -148,7 +148,7 @@
                 <div class="registration__confirm-pass"
                     *ngIf="confirmPassword.invalid && confirmPassword.dirty || registrationForm.hasError('notSame') || ( confirmPassword.invalid && confirmPassword.touched )">
                     <small [@errors]
-                        *ngIf="confirmPassword.errors['required'] && confirmPassword.dirty || ( confirmPassword.invalid && confirmPassword.touched )">
+                        *ngIf="confirmPassword.errors?.required && confirmPassword.dirty || ( confirmPassword.invalid && confirmPassword.touched )">
                         Required field
                     </small>
                     <small [@errors]
