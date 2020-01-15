@@ -26,7 +26,8 @@
         "accessories": "Akcesoria",
         "preferences": "Ustaw swoje preferencje",
         "language": "Język",
-        "currency": "Waluta"
+        "currency": "Waluta",
+        "total": "Cena całkowita"
     },
     "Profile": {
         "details": "Szczegóły profilu",

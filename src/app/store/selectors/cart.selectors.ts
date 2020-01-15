@@ -17,3 +17,13 @@ export const getCartItemsLength = createSelector(
     fromUserFeature.getCartState,
     cartReducer.cartLength
 );
+
+export const getCartItemsAsArray = createSelector(
+    fromUserFeature.getCartState,
+    cartReducer.getCartAsArray
+);
+
+export const isCartEmpty = createSelector(
+    fromUserFeature.getCartState,
+    cartReducer.isEmptyCart
+);

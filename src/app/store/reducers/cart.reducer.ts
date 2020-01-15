@@ -40,6 +40,19 @@ export function reducer(state = initialState, action: fromCart.CartActions): Car
             };
         }
 
+        case fromCart.Actions.REMOVE_PRODUCT: {
+            const product = action.payload;
+            const productId = `${product.id}${product.size}`;
+            const { [productId]: removed, ...entities } = state.entities;
+
+            localStorage.setItem('cartProducts', JSON.stringify(entities));
+
+            return {
+                ...state,
+                entities
+            };
+        }
+
         default: {
             return state;
         }
@@ -49,5 +62,7 @@ export function reducer(state = initialState, action: fromCart.CartActions): Car
 
 
 export const getCart = (state: CartState) => state.entities;
+export const getCartAsArray = (state: CartState) => Object.values(state.entities);
 export const getCartTotalPrice = (state: CartState) => Object.values(state.entities).reduce((prev, next) => prev + (next.qunatity * next.price), 0);
 export const cartLength = (state: CartState) => Object.values(state.entities).length;
+export const isEmptyCart = (state: CartState) => Object.values(state.entities).length <= 0;

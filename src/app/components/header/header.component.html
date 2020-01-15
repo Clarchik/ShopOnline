@@ -19,31 +19,88 @@
                 <mdb-icon *ngIf="iconSize === 'sm'" far icon="star" size="sm"></mdb-icon>
             </a>
         </li>
+
         <li class="nav-item">
             <a class="nav-link nav-link__effect">
                 <mdb-icon *ngIf="iconSize === 'lg'" fas icon="search" size="lg"></mdb-icon>
                 <mdb-icon *ngIf="iconSize === 'sm'" fas icon="search" size="sm"></mdb-icon>
             </a>
         </li>
-        <li class="nav-item nav-item__container">
+
+        <li class="nav-item nav-item__container cart" [ngClass]="{empty: emptyCart}">
             <a class="nav-link nav-link__effect">
                 <mdb-icon *ngIf="iconSize === 'lg'" class="icon-container" fas icon="shopping-cart" size="lg">
                 </mdb-icon>
                 <mdb-icon *ngIf="iconSize === 'sm'" class="icon-container" fas icon="shopping-cart" size="sm">
                 </mdb-icon>
-                <span class="icon-counter">
+                <span class="icon-counter" *ngIf="!emptyCart">
                     {{ cartLength$ | async }}
                 </span>
             </a>
+            <!-- Cart Products -->
+            <div class="cart-products">
+                <div class="cart-products__content">
+                    <div class="cart-products__list">
+                        <div class="cart-products__item" *ngFor="let product of cartProducts">
+                            <a [routerLink]="['/product', product.id]" class="cart-products__link">
+                                <div class="row no-gutters">
+                                    <div class="col-4">
+                                        <img class="item-image" [src]="product.slides[0].imageUrl" alt="Product Image">
+                                    </div>
+                                    <div class="col-7">
+                                        <div class="item-description">
+                                            <h4 class="title">
+                                                {{ product.title }}
+                                            </h4>
+                                            <p class="price">
+                                                <span>{{ product.price | currencyConverter | async }}</span>
+                                                <span> x </span>
+                                                <span>
+                                                    <strong>{{ product.qunatity }}</strong>
+                                                </span>
+                                            </p>
+                                            <p class="size">{{ product.size }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                            <button class="cart-products__remove" (click)="removeFromCart(product);" type="button">
+                                <i class="far fa-times-circle"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="cart-products__footer">
+                    <div class="row no-gutters w-100 d-flex align-items-center">
+                        <div class="col-4">
+                            <div class="price">
+                                <span class="price__title">
+                                    {{ "Header.total" | translate }}
+                                </span>
+                                <br>
+                                <span class="price__number">
+                                    <strong>{{ cartPrice$ | async | currencyConverter | async }}</strong>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-8">
+                            <button type="button" mdbBtn color="dark" class="w-100" mdbWavesEffect>
+                                Maker order
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </li>
+
         <li class="nav-item">
             <a class="nav-link nav-link__effect" (click)="openPreferencesModal();">
                 <mdb-icon *ngIf="iconSize === 'lg'" fas icon="exchange-alt" size="lg"></mdb-icon>
                 <mdb-icon *ngIf="iconSize === 'sm'" far icon="exchange-alt" size="sm"></mdb-icon>
             </a>
         </li>
-        <li class="nav-item" *ngIf="noUser$| async">
-            <a class="nav-link nav-link__effect" routerLink="/login" routerLinkActive="nav-link__activated" >
+        <li class="nav-item" *ngIf="noUser$ | async">
+            <a class="nav-link nav-link__effect" routerLink="/login" routerLinkActive="nav-link__activated">
                 <mdb-icon *ngIf="iconSize === 'lg'" fas icon="user" size="lg"></mdb-icon>
                 <mdb-icon *ngIf="iconSize === 'sm'" far icon="user" size="sm"></mdb-icon>
             </a>
@@ -72,5 +129,7 @@
             </li>
         </ul>
     </div>
+
+
 </mdb-navbar>
 <app-preferences-modal [hidden]="true"></app-preferences-modal>

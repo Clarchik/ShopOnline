@@ -17,6 +17,12 @@ export class AddProduct implements Action {
     constructor(public payload: CartProduct) { }
 }
 
+export class RemoveProduct implements Action {
+    readonly type = Actions.REMOVE_PRODUCT;
+    constructor(public payload: CartProduct) { }
+}
+
 export type CartActions =
     LoadProducts |
-    AddProduct;
+    AddProduct |
+    RemoveProduct;
