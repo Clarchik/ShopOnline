@@ -37,15 +37,15 @@ export class UtilsService {
         localStorage.removeItem(SESSION['x-refresh-token']);
     }
 
-    getAccessToken() {
+    public getAccessToken() {
         return localStorage.getItem(SESSION['x-access-token']);
     }
 
-    getRefreshToken() {
+    public getRefreshToken() {
         return localStorage.getItem(SESSION['x-refresh-token']);
     }
 
-    getUserId() {
+    public getUserId() {
         return localStorage.getItem(SESSION._id);
     }
 
@@ -89,5 +89,12 @@ export class UtilsService {
                 break;
         }
         return of(difficulty);
+    }
+
+    public offset(el): { top, left } {
+        const rect = el.getBoundingClientRect();
+        const scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        return { top: rect.top + scrollTop, left: rect.left + scrollLeft };
     }
 }

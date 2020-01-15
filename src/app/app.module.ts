@@ -33,6 +33,8 @@ import { ProductsComponent } from './components/products/products.component';
 import { ProductItemComponent } from './components/product-item/product-item.component';
 import { ProductItemDetailsComponent } from './components/product-item-details/product-item-details.component';
 import { SizesComponent } from './components/sizes/sizes.component';
+import { ResizeService } from './shared/services/resize/resize.service';
+import { UtilsService } from './shared/services/utils/utils.service';
 
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http);
@@ -90,6 +92,8 @@ export function setupInitFactory(
         CurrencyRates,
         MDBModalRef,
         CurrencyRatesService,
+        ResizeService,
+        UtilsService,
         {
             provide: APP_INITIALIZER,
             useFactory: setupInitFactory,

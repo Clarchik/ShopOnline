@@ -26,7 +26,8 @@
         "accessories": "Accessories",
         "preferences": "Set your preferences",
         "language": "Language",
-        "currency": "Currency"
+        "currency": "Currency",
+        "total": "Total price"
     },
     "Profile": {
         "details": "Profile details",

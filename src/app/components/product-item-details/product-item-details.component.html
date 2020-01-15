@@ -30,7 +30,7 @@
                         <p class="title">
                             {{ "Product.size" | translate }}
                         </p>
-                        <a class="size-guide" [routerLink]="['/size-guide']" [queryParams]="{gender: product.gender}"  target="_blank">
+                        <a class="size-guide" [routerLink]="['/size-guide']" [queryParams]="{gender: product?.gender}"  target="_blank">
                             {{ "Product.sizeGuide" | translate }}
                         </a>
                     </div>
