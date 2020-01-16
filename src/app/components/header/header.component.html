@@ -1,4 +1,4 @@
-<mdb-navbar SideClass="navbar navbar-light navbar-expand-md white scrolling-navbar top-nav-collapse" #Hello>
+<mdb-navbar SideClass="navbar navbar-light navbar-expand-md white scrolling-navbar top-nav-collapse" [ngStyle]="{'box-shadow': (showMenu) ? 'none' : '0 2px 5px 0 rgba(0,0,0,.16),0 2px 10px 0 rgba(0,0,0,.12)'}" #Hello>
     <mdb-navbar-brand class="navbar-sm">
         <a class="navbar-brand" routerLink="/main">
             <!-- TODO Change Logo image on our own -->
@@ -123,11 +123,38 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link nav-link__effect" [routerLink]="['/products']" [queryParams]="{category: 'nike'}">
+                <a class="nav-link nav-link__effect" (mouseenter)="showMenu = true">
                     {{ 'Header.brands' | translate }}
                 </a>
             </li>
         </ul>
+    </div>
+    <div (mouseleave)="showMenu = false" [@pulse] *ngIf="showMenu" class="nav__showHide-menu container-fluid">
+        <div class="row">
+            <div class="col-12 nav__showHide-menu-wrapper">
+                <h1>Brands available</h1>
+                <ul>
+                    <li>
+                        <a class="nav-link nav-link__effect flex__link" [routerLink]="['/products']" [queryParams]="{category: 'nike'}">
+                            <img src="../../../assets/images/nike.svg">
+                            <span>Nike</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="nav-link nav-link__effect flex__link" [routerLink]="['/products']" [queryParams]="{category: 'adidas'}">
+                            <img src="../../../assets/images/adidas.svg">
+                            <span>Adidas</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="nav-link nav-link__effect flex__link" [routerLink]="['/products']" [queryParams]="{category: 'reebok'}">
+                            <img src="../../../assets/images/reebok.svg">
+                            <span>Reebok</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
     </div>
 
 

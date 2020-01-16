@@ -10,7 +10,7 @@ import { Product } from '../../shared/interfaces/product/product';
     styleUrls: ['./products.component.scss']
 })
 export class ProductsComponent implements OnInit {
-    private _products: Product[];
+    private _products: Product[] = [];
     public _category: string;
     private _pager: any;
     private _emptyProducts: boolean = false;
@@ -30,6 +30,7 @@ export class ProductsComponent implements OnInit {
                     this._emptyProducts = true;
                 }
                 this._products = data.items;
+                console.log(this._products);
                 this._pager = data.pager;
             })
         ).subscribe();
@@ -53,5 +54,4 @@ export class ProductsComponent implements OnInit {
     public get emptyProducts(): boolean {
         return this._emptyProducts;
     }
-
 }

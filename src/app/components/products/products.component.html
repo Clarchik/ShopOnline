@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" *ngIf="products.length !== 0; else spinner">
     <div class="row">
         <div class="col-md-4" *ngFor="let product of products">
             <app-product-item [product]="product"></app-product-item>
@@ -7,9 +7,10 @@
             {{ "Shared.empty" | translate }}
         </div>
     </div>
+
     <div class="products-footer">
         <ul class="pagination pg-blue" *ngIf="pager?.pages && pager?.pages?.length > 1">
-            <li class="page-item" *ngIf="pager.currentPage !== 1">
+            <li class="page-item" *ngIf="pager.currentPage !== 1" (click)="products.length = 0">
                 <a [routerLink]="['/products']" [queryParams]="{ page: pager.currentPage - 1 }"
                     queryParamsHandling="merge" class="page-link">
                     <span aria-hidden="true" class="fas fa-long-arrow-alt-left"></span>
@@ -17,12 +18,12 @@
                 </a>
             </li>
             <li class="page-item number-item" *ngFor="let page of pager.pages"
-                [ngClass]="{active:pager.currentPage === page}">
+                [ngClass]="{active:pager.currentPage === page}" (click)="products.length = 0">
                 <a [routerLink]="['/products']" [queryParams]="{ page: page }" queryParamsHandling="merge"
                     class="page-link">{{page}}
                 </a>
             </li>
-            <li class="page-item" *ngIf="pager.currentPage !== pager.totalPages">
+            <li class="page-item" *ngIf="pager.currentPage !== pager.totalPages" (click)="products.length = 0">
                 <a [routerLink]="['/products']" [queryParams]="{ page: pager.currentPage + 1 }" queryParamsHandling="merge"
                     class="page-link">
                     <span aria-hidden="true" class="fas fa-long-arrow-alt-right"></span>
@@ -55,6 +56,15 @@
         </ul> -->
     </div>
 </div>
+
+<ng-template #spinner>
+    <div class="spinner__wrapper">
+        <div class="spinner-border text-dark" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+</ng-template>
+
 
 <!-- <ul *ngIf="pager?.pages && pager?.pages?.length" class="pagination">
     <li [ngClass]="{disabled:pager.currentPage === 1}" class="page-item first-item">
