@@ -9,12 +9,19 @@ import * as fromStore from '../../store';
 import { Observable, of } from 'rxjs';
 import { Router } from '@angular/router';
 import { CartProduct } from '../../shared/models/cart-product/cart-product';
+import { transition, trigger, useAnimation } from '@angular/animations';
+import { pulse, flash, swing, tada, bounceIn, zoomOutRight } from 'ng-animate';
 
 @Component({
     selector: 'app-header',
     templateUrl: './header.component.html',
     styleUrls: ['./header.component.scss'],
     encapsulation: ViewEncapsulation.None,
+    animations: [
+        trigger('pulse', [
+            transition('void => *', useAnimation(bounceIn))
+        ])
+    ]
 })
 export class HeaderComponent implements AfterViewInit, AfterViewChecked {
     public screenSize: SCREEN_SIZE;
@@ -24,6 +31,7 @@ export class HeaderComponent implements AfterViewInit, AfterViewChecked {
     public noUser$: Observable<boolean>;
     public cartProducts: CartProduct[] = [];
     public emptyCart: boolean = true;
+    public showMenu = false;
     public cartPrice$: Observable<number>;
     constructor(
         private cd: ChangeDetectorRef,
