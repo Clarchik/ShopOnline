@@ -8,18 +8,29 @@ export default class ProductsService {
     public getProductsByCategory(req: express.Request, res: Response) {
         const { category } = req.query;
         const { page } = req.query;
+        const pageNumber = parseInt(page, undefined) || 1;
         const param = category === 'all' ? {} : { category };
-        Product.find(param, null, null, (err, products: any) => {
-            if (err) {
-                res.status(400).send({
-                    message: 'Error occured'
-                });
+        const query = {
+            skip: CONFIG.itemsPerPage * (pageNumber - 1),
+            limit: CONFIG.itemsPerPage
+        };
+
+        Product.count(param, (error, totalCount) => {
+            if (error) {
+                res.status(400).send({ message: 'Error occured' });
             }
-            const pageNumber = parseInt(page, undefined) || 1;
-            const pageSize = CONFIG.itemsPerPage;
-            const pager = paginate(products.length, pageNumber, pageSize, CONFIG.pageSizeToShow);
-            const items = products.slice(pager.startIndex, pager.endIndex + 1);
-            res.status(200).json({ pager, items });
+
+            Product.find(param, null, query, (err, products: any) => {
+                if (err) {
+                    res.status(400).send({
+                        message: 'Error occured'
+                    });
+                }
+                const pageSize = CONFIG.itemsPerPage;
+                const pager = paginate(totalCount, pageNumber, pageSize, CONFIG.pageSizeToShow);
+                res.status(200).json({ pager, items: products });
+            });
+
         });
     }
 
