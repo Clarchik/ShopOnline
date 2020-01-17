@@ -3,7 +3,10 @@
 .navbar__container {
     align-items: center;
 }
-
+.navbar.scrolling-navbar {
+    padding-top: 8px !important;
+    padding-bottom: 0px !important;
+}
 .nav-item {
     letter-spacing: 0.1rem;
     text-transform: uppercase;
@@ -142,7 +145,7 @@
     width: 100%;
     left: 0;
     background-color: #ffffff;
-    bottom: -150%;
+    bottom: -130%;
     z-index: 11;
     font-family: $avenir-r !important;
     box-shadow: 0px 30px 41px -17px rgba(0,0,0,0.33);
@@ -235,12 +238,12 @@
         order: 2;
     }
     .nav__showHide-menu {
-        bottom: -150%;
+        bottom: -168%;
     }
 }
 @media only screen and (max-width: 393px) {
     .nav__showHide-menu {
-        bottom: -70%;
+        bottom: -80%;
     }
 }
 
