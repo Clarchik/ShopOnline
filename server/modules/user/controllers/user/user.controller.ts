@@ -31,6 +31,8 @@ export default class UserController {
 
         /* GET USER CHANGE RATE */
         this.app.route('/exchange').get(this.userService.exchangeRate);
+
+        this.app.get('/', (req, res) => res.send(`HELL I'm WORKING`));
     }
 }
 
