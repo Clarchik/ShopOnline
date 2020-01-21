@@ -16,7 +16,7 @@ export class CurrencyRatesService {
 
     getCurrencyRates(): Promise<Array<Currency>> {
         return new Promise<Array<Currency>>((resolve) => {
-            this.http.get('http://localhost:3000/exchange').pipe(
+            this.http.get('/exchange').pipe(
                 map((response: any) => {
                     const { rates } = response;
                     const currencyRates: Array<Currency> = [];

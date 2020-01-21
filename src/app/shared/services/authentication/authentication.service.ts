@@ -21,11 +21,11 @@ export class AuthenticationService {
         private utilsService: UtilsService) { }
 
     public signInFromSession() {
-        return this.http.get('http://localhost:3000/users/login/session');
+        return this.http.get('/users/login/session');
     }
 
     public signInWithEmailAndPassword(email: string, password: string): Observable<any> {
-        return this.http.post('http://localhost:3000/users/login', { email, password }, { observe: 'response' }).pipe(
+        return this.http.post('/users/login', { email, password }, { observe: 'response' }).pipe(
             tap((response: HttpResponse<any>) => {
                 const id = response.body._id;
                 const accessToken = response.headers.get(SESSION['x-access-token']);
@@ -37,20 +37,20 @@ export class AuthenticationService {
     }
 
     public signUpUser(email: string, password: string, name: string, surname: string): Observable<any> {
-        return this.http.post('http://localhost:3000/users', { email, password, name, surname });
+        return this.http.post('/users', { email, password, name, surname });
     }
 
     public chekUserEmail(email: string): Observable<any> {
-        return this.http.post('http://localhost:3000/users/login/exists', { email });
+        return this.http.post('/users/login/exists', { email });
     }
 
     public updateUserData(userData: UserData): Observable<any> {
         const { name, surname, email } = userData;
-        return this.http.put(`http://localhost:3000/users/update/${userData._id}`, { name, surname, email });
+        return this.http.put(`/users/update/${userData._id}`, { name, surname, email });
     }
 
     public updateUserPasswords(userPasswords: UserPasswords, id: string): Observable<any> {
-        return this.http.put(`http://localhost:3000/users/updatePassword/${id}`, userPasswords);
+        return this.http.put(`/users/updatePassword/${id}`, userPasswords);
     }
 
     public logoutUser() {
