@@ -5,12 +5,13 @@ import { MDBModalRef, MDBModalService } from 'angular-bootstrap-md';
 import { PreferencesModalComponent } from '../main-page/preferences-modal/preferences-modal.component';
 import { Store } from '@ngrx/store';
 
-import * as fromStore from '../../store';
-import { Observable, of } from 'rxjs';
+import { ShopState, FavoriteSelectors, CartActions, CartSelectors, UserSelectors } from '../../store';
+import { Observable, of, combineLatest } from 'rxjs';
 import { Router } from '@angular/router';
 import { CartProduct } from '../../shared/models/cart-product/cart-product';
 import { transition, trigger, useAnimation } from '@angular/animations';
 import { pulse, flash, swing, tada, bounceIn, zoomOutRight } from 'ng-animate';
+import { tap } from 'rxjs/operators';
 
 @Component({
     selector: 'app-header',
@@ -26,11 +27,12 @@ import { pulse, flash, swing, tada, bounceIn, zoomOutRight } from 'ng-animate';
 export class HeaderComponent implements AfterViewInit, AfterViewChecked {
     public screenSize: SCREEN_SIZE;
     public modalRef: MDBModalRef;
-    public user$: Observable<boolean>;
+    public isLogged: boolean;
     public cartLength$: Observable<number>;
-    public noUser$: Observable<boolean>;
+    public favoritesLength$: Observable<number>;
     public cartProducts: CartProduct[] = [];
     public emptyCart: boolean = true;
+    public emptyFavorites: boolean = true;
     public showMenu = false;
     public cartPrice$: Observable<number>;
     constructor(
@@ -38,11 +40,10 @@ export class HeaderComponent implements AfterViewInit, AfterViewChecked {
         private router: Router,
         public resizeService: ResizeService,
         private modalService: MDBModalService,
-        private store: Store<fromStore.ShopState>) {
-        this.noUser$ = this.store.select(fromStore.isNotUserLogged);
-        this.user$ = this.store.select(fromStore.isUserLogged);
-        this.cartLength$ = this.store.select(fromStore.getCartItemsLength);
-        this.cartPrice$ = this.store.select(fromStore.getCartTotalPrice);
+        private store: Store<ShopState>) {
+        this.cartLength$ = this.store.select(CartSelectors.getCartItemsLength);
+        this.cartPrice$ = this.store.select(CartSelectors.getCartTotalPrice);
+        this.favoritesLength$ = this.store.select(FavoriteSelectors.getFavoriteItemsLength);
     }
 
     toggleHambugerView(id: string): boolean {
@@ -56,7 +57,7 @@ export class HeaderComponent implements AfterViewInit, AfterViewChecked {
     }
 
     removeFromCart(product: CartProduct) {
-        this.store.dispatch(new fromStore.RemoveProduct(product));
+        this.store.dispatch(new CartActions.RemoveProduct(product));
     }
 
     ngAfterViewInit() {
@@ -66,14 +67,23 @@ export class HeaderComponent implements AfterViewInit, AfterViewChecked {
             }
         });
 
-        this.store.select(fromStore.getCartItemsAsArray).subscribe((items: CartProduct[]) => {
+        this.store.select(UserSelectors.isUserLogged).subscribe((value: boolean) => {
+            this.isLogged = value;
+        });
+
+        this.store.select(CartSelectors.getCartItemsAsArray).subscribe((items: CartProduct[]) => {
             if (items) {
                 this.cartProducts = items;
             }
         });
 
-        this.store.select(fromStore.isCartEmpty).subscribe((empty: boolean) => {
-            this.emptyCart = empty;
+        combineLatest([
+            this.store.select(CartSelectors.isCartEmpty),
+            this.store.select(FavoriteSelectors.isFavoritesEmpty
+            )]
+        ).subscribe(([cart, favorites]: [boolean, boolean]) => {
+            this.emptyCart = cart;
+            this.emptyFavorites = favorites;
         });
     }
 
@@ -100,5 +110,4 @@ export class HeaderComponent implements AfterViewInit, AfterViewChecked {
             animated: true
         });
     }
-
 }

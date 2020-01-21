@@ -3,6 +3,10 @@ import { ActivatedRoute } from '@angular/router';
 import { tap, map, switchMap } from 'rxjs/operators';
 import { ProductsService } from '../services/products/products.service';
 import { Product } from '../../shared/interfaces/product/product';
+import { Store } from '@ngrx/store';
+import { ShopState } from '../../store';
+import { Observable } from 'rxjs';
+import { notLoadingStatus } from '../../store/selectors/loader.selectors';
 
 @Component({
     selector: 'app-products',
@@ -14,9 +18,11 @@ export class ProductsComponent implements OnInit {
     public _category: string;
     private _pager: any;
     private _emptyProducts: boolean = false;
+    public isNotLoading: Observable<boolean>;
     constructor(
         private route: ActivatedRoute,
-        private ps: ProductsService) { }
+        private ps: ProductsService,
+        private store: Store<ShopState>) { }
 
     ngOnInit() {
         this.route.queryParams.pipe(
@@ -30,10 +36,11 @@ export class ProductsComponent implements OnInit {
                     this._emptyProducts = true;
                 }
                 this._products = data.items;
-                console.log(this._products);
                 this._pager = data.pager;
             })
         ).subscribe();
+
+        this.isNotLoading = this.store.select(notLoadingStatus);
     }
 
     public loadPage(page: number) {

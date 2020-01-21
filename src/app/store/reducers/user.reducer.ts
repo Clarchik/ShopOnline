@@ -1,6 +1,6 @@
 import { User } from '../../shared/interfaces/user/user';
 
-import * as fromUser from '../actions';
+import { UserActions as UserActions } from '../actions';
 import { AuthError } from '../../shared/interfaces/auth/auth-error';
 
 export interface UserState {
@@ -19,40 +19,44 @@ export const initialState: UserState = {
     message: ''
 };
 
-export function reducer(state = initialState, action: fromUser.UserActions): UserState {
+export function reducer(state = initialState, action: UserActions.UserActions): UserState {
     switch (action.type) {
 
-        case fromUser.LOGIN_USER:
-        case fromUser.UPDATE_USER_DATA: {
+        case UserActions.LOGIN_USER:
+        case UserActions.UPDATE_USER_DATA: {
             return { ...state, loggining: true };
         }
 
-        case fromUser.LOGIN_USER_SUCCESS:
-        case fromUser.UPDATE_USER_DATA_SUCCESS: {
+        case UserActions.LOGIN_USER_SUCCESS:
+        case UserActions.UPDATE_USER_DATA_SUCCESS: {
             const data = action.payload;
             return { ...state, data, loggining: false, logged: true };
         }
 
-        case fromUser.LOGIN_USER_FAIL: {
+        case UserActions.LOGIN_USER_FAIL: {
             return { ...initialState, loggining: false, logged: false };
         }
 
-        case fromUser.REGISTRATION_USER_SUCCESS: {
+        case UserActions.REGISTRATION_USER_SUCCESS: {
             const message = action.payload;
             return { ...initialState, loggining: false, logged: false, message };
         }
 
-        case fromUser.REGISTRATION_USER_FAIL: {
+        case UserActions.REGISTRATION_USER_FAIL: {
             const message = action.payload;
             return { ...initialState, loggining: false, logged: false, message };
         }
 
-        case fromUser.UPDATE_USER_DATA_FAIL: {
+        case UserActions.UPDATE_USER_DATA_FAIL: {
             return { ...state, loggining: false };
         }
 
-        default: {
+        case UserActions.LOGOUT_USER_SUCCESS: {
             return initialState;
+        }
+
+        default: {
+            return state;
         }
     }
 }

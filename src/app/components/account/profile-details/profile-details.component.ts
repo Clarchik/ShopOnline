@@ -9,7 +9,7 @@ import { wobble, rubberBand, shake, zoomOutRight } from 'ng-animate';
 
 import { UserPasswords } from '../../../shared/models/user/user-passwords';
 
-import * as fromStore from '../../../store';
+import { ShopState, UserSelectors, UserActions } from '../../../store';
 
 @Component({
     selector: 'app-profile-details',
@@ -35,14 +35,14 @@ export class ProfileDetailsComponent implements OnInit {
     public profilePassword: FormGroup;
     private user: UserData;
     constructor(
-        private store: Store<fromStore.ShopState>,
+        private store: Store<ShopState>,
         private fb: FormBuilder) {
         this.profileData = this.fb.group({});
         this.profilePassword = this.fb.group({});
     }
 
     ngOnInit() {
-        this.store.select(fromStore.getUser).subscribe((user: UserData) => {
+        this.store.select(UserSelectors.getUser).subscribe((user: UserData) => {
             this.initProfileDataControls(user);
             this.user = user;
         });
@@ -94,14 +94,14 @@ export class ProfileDetailsComponent implements OnInit {
     public changeProfileData() {
         const { email, name, surname } = this.profileData.value;
         const updatedUser = new UserData(this.user._id, email, name, surname);
-        this.store.dispatch(new fromStore.UpdateUserData(updatedUser));
+        this.store.dispatch(new UserActions.UpdateUserData(updatedUser));
     }
 
     public changeProfilePassword() {
         const id = this.user._id;
         const { oldPassword, newPassword, newPasswordConfirm } = this.profilePassword.value;
         const userPasswords = new UserPasswords(oldPassword, newPassword, newPasswordConfirm);
-        this.store.dispatch(new fromStore.UpdateUserPasswords({ userPasswords, id }));
+        this.store.dispatch(new UserActions.UpdateUserPasswords({ userPasswords, id }));
         this.profilePassword.reset();
     }
 

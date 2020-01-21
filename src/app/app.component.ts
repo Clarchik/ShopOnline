@@ -8,7 +8,7 @@ import { RouterOutlet } from '@angular/router';
 import { UtilsService } from './shared/services/utils/utils.service';
 import { ResizeService } from './shared/services/resize/resize.service';
 
-import * as fromStore from './store';
+import { UserSelectors, FavoriteActions, CartActions, ShopState } from './store';
 
 @Component({
     selector: 'app-root',
@@ -20,7 +20,7 @@ export class AppComponent implements OnInit {
     public title = 'OnlineShop';
     public noUser$: Observable<boolean>;
     constructor(
-        private store: Store<fromStore.ShopState>,
+        private store: Store<ShopState>,
         private utilsService: UtilsService,
         private resizeService: ResizeService) { }
 
@@ -32,9 +32,13 @@ export class AppComponent implements OnInit {
 
     ngOnInit() {
         const userCartProducts = JSON.parse(localStorage.getItem('cartProducts'));
-        this.noUser$ = this.store.select(fromStore.isNotUserLogged);
+        const userFavoriteProducts = JSON.parse(localStorage.getItem('favoriteProducts'));
+        this.noUser$ = this.store.select(UserSelectors.isNotUserLogged);
         if (userCartProducts) {
-            this.store.dispatch(new fromStore.LoadProducts(userCartProducts));
+            this.store.dispatch(new CartActions.LoadProducts(userCartProducts));
+        }
+        if (userFavoriteProducts) {
+            this.store.dispatch(new FavoriteActions.LoadProducts(userFavoriteProducts));
         }
     }
 

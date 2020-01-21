@@ -1,4 +1,4 @@
-<div class="container" *ngIf="products.length !== 0; else spinner">
+<div class="container" *ngIf="isNotLoading | async; else spinner">
     <div class="row">
         <div class="col-md-4" *ngFor="let product of products">
             <app-product-item [product]="product"></app-product-item>
@@ -31,29 +31,6 @@
                 </a>
             </li>
         </ul>
-        <!-- <ul *ngIf="pager?.pages && pager?.pages?.length > 1" class="pagination">
-            <li [ngClass]="{disabled:pager.currentPage === 1}" class="page-item first-item">
-                <a [routerLink]="['/products']" [queryParams]="{ page: 1}" queryParamsHandling="merge"
-                    class="page-link">First</a>
-            </li>
-            <li [ngClass]="{disabled:pager.currentPage === 1}" class="page-item previous-item">
-                <a [routerLink]="['/products']" [queryParams]="{ page: pager.currentPage - 1 }"
-                    queryParamsHandling="merge" class="page-link">Previous</a>
-            </li>
-            <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}"
-                class="page-item number-item">
-                <a [routerLink]="['/products']" [queryParams]="{ page: page }" queryParamsHandling="merge"
-                    class="page-link">{{page}}</a>
-            </li>
-            <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}" class="page-item next-item">
-                <a [routerLink]="['/products']" [queryParams]="{ page: pager.currentPage + 1 }"
-                    queryParamsHandling="merge" class="page-link">Next</a>
-            </li>
-            <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}" class="page-item last-item">
-                <a [routerLink]="['/products']" [queryParams]="{ page: pager.totalPages }" queryParamsHandling="merge"
-                    class="page-link">Last</a>
-            </li>
-        </ul> -->
     </div>
 </div>
 
@@ -64,41 +41,3 @@
         </div>
     </div>
 </ng-template>
-
-
-<!-- <ul *ngIf="pager?.pages && pager?.pages?.length" class="pagination">
-    <li [ngClass]="{disabled:pager.currentPage === 1}" class="page-item first-item">
-        <a [routerLink]="['/products']" [queryParams]="{ page: 1}" queryParamsHandling="merge" class="page-link">First</a>
-    </li>
-    <li [ngClass]="{disabled:pager.currentPage === 1}" class="page-item previous-item">
-        <a [routerLink]="['/products']" [queryParams]="{ page: pager.currentPage - 1 }" queryParamsHandling="merge" class="page-link">Previous</a>
-    </li>
-    <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}" class="page-item number-item">
-        <a [routerLink]="['/products']" [queryParams]="{ page: page }" queryParamsHandling="merge" class="page-link">{{page}}</a>
-    </li>
-    <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}" class="page-item next-item">
-        <a [routerLink]="['/products']" [queryParams]="{ page: pager.currentPage + 1 }" queryParamsHandling="merge" class="page-link">Next</a>
-    </li>
-    <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}" class="page-item last-item">
-        <a [routerLink]="['/products']" [queryParams]="{ page: pager.totalPages }" queryParamsHandling="merge" class="page-link">Last</a>
-    </li>
-</ul> -->
-
-<!-- <ul *ngIf="pager?.pages && pager?.pages?.length" class="pagination">
-    <li [ngClass]="{disabled:pager.currentPage === 1}" class="page-item first-item">
-        <a (click)="loadPage(1);" class="page-link">First</a>
-    </li>
-    <li [ngClass]="{disabled:pager.currentPage === 1}" class="page-item previous-item">
-        <a (click)="loadPage(pager.currentPage - 1);" class="page-link">Previous</a>
-    </li>
-    <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}"
-        class="page-item number-item">
-        <a (click)="loadPage(page);" class="page-link">{{page}}</a>
-    </li>
-    <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}" class="page-item next-item">
-        <a (click)="loadPage(pager.currentPage + 1);" class="page-link">Next</a>
-    </li>
-    <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}" class="page-item last-item">
-        <a (click)="loadPage(pager.totalPages);" class="page-link">Last</a>
-    </li>
-</ul> -->

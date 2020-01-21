@@ -9,8 +9,8 @@ export class CartProduct {
     public qunatity: number;
     constructor(
         { _id, title, price, slides }: Product,
-        size: number,
-        quantity: number) {
+        size: number = 0,
+        quantity: number = 0) {
         this.id = _id;
         this.title = title;
         this.price = price;

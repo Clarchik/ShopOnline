@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 
 import { Observable } from 'rxjs';
 
-import * as fromStore from '../../store';
+import { UserActions, UserSelectors, ShopState } from '../../store';
 import { Authenticate } from '../../shared/interfaces/user/authenticate';
 
 
@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
     public userIsLoading$: Observable<boolean>;
     constructor(
         private fb: FormBuilder,
-        private store: Store<fromStore.ShopState>) {
+        private store: Store<ShopState>) {
         this._loginForm = this.fb.group({
             email: [
                 null,
@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
                 Validators.required
             ]
         });
-        this.userIsLoading$ = this.store.select(fromStore.isUserLoading);
+        this.userIsLoading$ = this.store.select(UserSelectors.isUserLoading);
     }
 
     ngOnInit() { }
@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit {
     public loginIn() {
         const { email, password } = this._loginForm.value;
         const credentials: Authenticate = { email, password };
-        this.store.dispatch(new fromStore.LoginUser(credentials));
+        this.store.dispatch(new UserActions.LoginUser(credentials));
     }
 
     get loginForm() {

@@ -5,7 +5,7 @@ import { switchMap, map } from 'rxjs/operators';
 import { ProductsService } from '../services/products/products.service';
 import { Store } from '@ngrx/store';
 
-import * as fromStore from '../../store';
+import { CartActions, ShopState } from '../../store';
 import { CartProduct } from '../../shared/models/cart-product/cart-product';
 import { Observable } from 'rxjs';
 
@@ -23,7 +23,7 @@ export class ProductItemDetailsComponent implements OnInit {
     constructor(
         private route: ActivatedRoute,
         private ps: ProductsService,
-        private store: Store<fromStore.ShopState>) { }
+        private store: Store<ShopState>) { }
 
     ngOnInit() {
         this.route.params.pipe(
@@ -37,7 +37,7 @@ export class ProductItemDetailsComponent implements OnInit {
 
     public addToBag(product, size, quantity) {
         const productToAdd = new CartProduct(product, size, quantity);
-        this.store.dispatch(new fromStore.AddProduct(productToAdd));
+        this.store.dispatch(new CartActions.AddProduct(productToAdd));
     }
 
     public sizeChanged(size: number) {

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { Store } from '@ngrx/store';
 
-import * as fromStore from '../../../store';
+import { ShopState, UserActions } from '../../../store';
 
 @Component({
     selector: 'app-profile',
@@ -11,13 +11,13 @@ import * as fromStore from '../../../store';
 })
 export class ProfileComponent implements OnInit {
 
-    constructor(private store: Store<fromStore.ShopState>) { }
+    constructor(private store: Store<ShopState>) { }
 
     ngOnInit() {
     }
 
     logout() {
-        this.store.dispatch(new fromStore.LogoutUser());
+        this.store.dispatch(new UserActions.LogoutUser());
     }
 
 }

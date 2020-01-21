@@ -3,9 +3,8 @@ import { Store } from '@ngrx/store';
 import { switchMap, map, catchError } from 'rxjs/operators';
 import { AuthenticationService } from './authentication.service';
 import { of } from 'rxjs';
-import { User } from '../../interfaces/user/user';
 
-import * as fromStore from '../../../store';
+import { UserActions, ShopState } from '../../../store';
 import { TranslateService } from '@ngx-translate/core';
 import { LANGUAGE_NAMES } from '../../models/languages/language-names';
 
@@ -15,7 +14,7 @@ import { LANGUAGE_NAMES } from '../../models/languages/language-names';
 export class InitService {
 
     constructor(
-        private store: Store<fromStore.ShopState>,
+        private store: Store<ShopState>,
         private authService: AuthenticationService,
         private translate: TranslateService) { }
 
@@ -23,7 +22,7 @@ export class InitService {
         return new Promise<any>((resolve) => {
             this.authService.signInFromSession().pipe(
                 map((user) => {
-                    this.store.dispatch(new fromStore.LoginUserSuccess(user));
+                    this.store.dispatch(new UserActions.LoginUserSuccess(user));
                     resolve(true);
                 }),
                 catchError((err) => {
