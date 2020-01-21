@@ -8,7 +8,7 @@
         "test": "ng test",
         "lint": "ng lint",
         "e2e": "ng e2e",
-        "force:build:prod": "npm run clean:dist && yarn install && npm run build:prod",
+        "force:build:prod": "npm run clean:dist && npm run build:prod",
         "build:prod": "ng build --prod --aot",
         "clean:dist": "rm -rf dist",
         "serve": "node dist/server/server.js",
