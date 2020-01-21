@@ -13,7 +13,7 @@
         "clean:dist": "rm -rf dist",
         "serve": "node dist/server/server.js",
         "watch-node": "nodemon dist/server.js",
-        "postinstall": "npm run force:build:prod && npm run --prefix ./src/server build",
+        "postinstall": "npm run force:build:prod && npm run --prefix ./src/server build"
     },
     "private": true,
     "dependencies": {
