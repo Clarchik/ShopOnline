@@ -1,4 +1,5 @@
 import express, { Application } from 'express';
+import path from 'path';
 import { UserController } from './modules/user/controllers';
 import { MongoDB } from './db/mongoose';
 import Cors from './cors/cors';
@@ -13,6 +14,8 @@ class App {
     private productsController: ProductsController;
     private staticController: StaticController;
     constructor() {
+        const pathdir = path.resolve(__dirname, '..');
+        (global as any).pathdir = pathdir;
         this.app = express();
 
         // CORS
