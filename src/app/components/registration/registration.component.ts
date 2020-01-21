@@ -8,7 +8,7 @@ import { UtilsService } from '../../shared/services/utils/utils.service';
 import { transition, trigger, useAnimation } from '@angular/animations';
 import { wobble, shake, zoomOutRight, rubberBand } from 'ng-animate';
 
-import * as fromStore from '../../store';
+import { ShopState, UserActions } from '../../store';
 
 @Component({
     selector: 'app-registration',
@@ -38,7 +38,7 @@ export class RegistrationComponent implements OnInit, OnChanges {
 
 
     constructor(
-        private fb: FormBuilder, private store: Store<fromStore.ShopState>,
+        private fb: FormBuilder, private store: Store<ShopState>,
         private http: HttpClient, private authService: AuthenticationService, private utils: UtilsService) {
         this.registrationForm = this.fb.group({
             email: [
@@ -80,7 +80,7 @@ export class RegistrationComponent implements OnInit, OnChanges {
 
     SignUp() {
         const { email, password, name, surname } = this.registrationForm.value;
-        this.store.dispatch(new fromStore.RegistrationUser({ email, password, name, surname }));
+        this.store.dispatch(new UserActions.RegistrationUser({ email, password, name, surname }));
     }
 
     showHidePassword() {

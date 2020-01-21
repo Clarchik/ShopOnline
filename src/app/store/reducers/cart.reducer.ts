@@ -1,4 +1,4 @@
-import * as fromCart from '../actions';
+import { CartActions } from '../actions';
 import { CartProduct } from '../../shared/models/cart-product/cart-product';
 
 export interface CartState {
@@ -13,10 +13,10 @@ export const initialState: CartState = {
     loaded: false
 };
 
-export function reducer(state = initialState, action: fromCart.CartActions): CartState {
+export function reducer(state = initialState, action: CartActions.CartActions): CartState {
     switch (action.type) {
 
-        case fromCart.Actions.LOAD_PRODUCTS: {
+        case CartActions.Actions.LOAD_PRODUCTS: {
             const entities = action.payload;
 
             return {
@@ -25,7 +25,7 @@ export function reducer(state = initialState, action: fromCart.CartActions): Car
             };
         }
 
-        case fromCart.Actions.ADD_PRODUCT: {
+        case CartActions.Actions.ADD_PRODUCT: {
             const product = action.payload;
             const entities = {
                 ...state.entities,
@@ -40,7 +40,7 @@ export function reducer(state = initialState, action: fromCart.CartActions): Car
             };
         }
 
-        case fromCart.Actions.REMOVE_PRODUCT: {
+        case CartActions.Actions.REMOVE_PRODUCT: {
             const product = action.payload;
             const productId = `${product.id}${product.size}`;
             const { [productId]: removed, ...entities } = state.entities;

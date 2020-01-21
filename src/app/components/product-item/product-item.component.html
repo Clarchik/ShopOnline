@@ -1,8 +1,14 @@
-<div class="product-wrapper" [routerLink]="['/product', product._id]">
-    <div class="product-sale" *ngIf="product.sale">
-        Sale
+<div class="product-wrapper" [routerLink]="!frozenWrapper ? ['/product', product._id] :  'null'">
+    <div class="product-image" [ngStyle]="{'background': getUrl()}">
+        <div class="product-favorite" (mouseover)="freezeWrapper();" (mouseleave)="unfreezeWrapper();">
+            <button type="button" (click)="toggleFavorite(product);">
+                <i class="fa-star" [ngClass]="{'fas': isFavorite, 'far': !isFavorite, 'filled': isFavorite}"></i>
+            </button>
+        </div>
+        <div class="product-sale" *ngIf="product.sale">
+            Sale
+        </div>
     </div>
-    <div class="product-image" [ngStyle]="{'background': getUrl()}"></div>
     <div class="product-description">
         <h5 class="product-description__title">
             {{ product.title }}
@@ -14,3 +20,4 @@
         </div>
     </div>
 </div>
+

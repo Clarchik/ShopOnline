@@ -44,6 +44,10 @@ export class LogoutUser implements Action {
     readonly type = LOGOUT_USER;
 }
 
+export class LogoutUserSuccess implements Action {
+    readonly type = LOGOUT_USER_SUCCESS;
+}
+
 export class RegistrationUser implements Action {
     readonly type = REGISTRATION_USER;
     constructor(public payload: User) { }
@@ -101,4 +105,5 @@ export type UserActions =
     UpdateUserPasswords |
     UpdateUserPasswordsSuccess |
     UpdateUserPasswordsFail |
-    LogoutUser;
+    LogoutUser |
+    LogoutUserSuccess;
