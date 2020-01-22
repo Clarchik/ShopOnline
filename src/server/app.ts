@@ -26,8 +26,8 @@ class App {
 
         // Controllers initialization
         this.userController = new UserController(this.app);
-        this.staticController = new StaticController(this.app);
         this.productsController = new ProductsController(this.app);
+        this.staticController = new StaticController(this.app);
     }
 }
 

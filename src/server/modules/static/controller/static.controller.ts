@@ -15,6 +15,7 @@ export default class StaticController {
         this.app.use(express.static(pathdir));
 
         this.app.get('*', (req, res) => {
+            console.log('*****');
             res.status(200)
                 .sendFile(`${pathdir}/index.html`);
         });
@@ -29,6 +30,6 @@ export default class StaticController {
         //         .sendFile(`${pathdir}/index.html`);
         // });
 
-        this.app.use('/products', express.static(`${pathdir}/products`));
+        // this.app.use('/products', express.static(`${pathdir}/products`));
     }
 }
