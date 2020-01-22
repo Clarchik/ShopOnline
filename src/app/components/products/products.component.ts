@@ -26,12 +26,13 @@ export class ProductsComponent implements OnInit {
 
     ngOnInit() {
         this.route.queryParams.pipe(
-            map((params) => ({ category: params.category, page: params.page })),
-            switchMap(({ category, page }) => {
+            map((params) => ({ category: params.category, page: params.page, search: params.search })),
+            switchMap(({ category, page, search }) => {
                 this._category = category;
-                return this.ps.getProducts(category, page);
+                return this.ps.getProducts(category, page, search);
             }),
             tap((data) => {
+                console.log(data);
                 if (!data.items.length) {
                     this._emptyProducts = true;
                 }

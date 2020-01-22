@@ -1,0 +1,31 @@
+<h3 class="dumb_title" *ngIf="findedShoes.length > 0">Searching results for '{{ searchStr }}'</h3>
+<div class="row no-gutters">
+    <div class="col-6" *ngFor="let product of findedShoes; let i=index">
+        <div *ngIf="i < 4" class="row dumb__row">
+            <div class="col-lg-5 col-xl-5 col-md-5 col-sm-5 col-11">
+                <a [routerLink]="['/product', product._id]" class="cart-products__link">
+                    <img class="dumb__img" [src]="product.slides[0].imageUrl">
+                </a>
+            </div>
+            <div class="col-lg-7 col-xl-7 col-md-7 col-sm-7 col-11">
+                <div class="item-description">
+                    <h4 class="img__title"> {{ product.title }}</h4>
+                    <p class="price">
+                        <span>{{ product.price | currencyConverter | async }}</span>
+                        <span>
+                            <strong>{{ product.qunatity }}</strong>
+                        </span>
+                    </p>
+                    <p class="size">{{ product.size }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div *ngIf="findedShoes.length === 0" class="dumb__error">
+    Unfortunately, we do not have such a product
+</div>
+<div class="dumb__link">
+    <a class="nav-link nav-link__effect" *ngIf="findedShoes.length > 4" [routerLink]="['/products']" [queryParams]="{category: 'all' ,search: searchStr | uppercase}"
+        routerLinkActive="router-link-active">See all search results ({{ findedShoes.length }})</a>
+</div>
