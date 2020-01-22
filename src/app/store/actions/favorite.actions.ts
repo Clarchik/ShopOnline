@@ -20,7 +20,7 @@ export class AddProduct implements Action {
 
 export class RemoveProduct implements Action {
     readonly type = Actions.REMOVE_FAVORITE;
-    constructor(public payload: CartProduct) { }
+    constructor(public payload: CartProduct) {}
 }
 
 export type FavoriteActions =

@@ -1,4 +1,4 @@
-<div class="product-wrapper" [routerLink]="!frozenWrapper ? ['/product', product._id] :  'null'">
+<div class="product-wrapper" [routerLink]="!frozenWrapper ? ['/product', product._id] : null">
     <div class="product-image" [ngStyle]="{'background': getUrl()}">
         <div class="product-favorite" (mouseover)="freezeWrapper();" (mouseleave)="unfreezeWrapper();">
             <button type="button" (click)="toggleFavorite(product);">

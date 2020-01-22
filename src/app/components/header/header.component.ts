@@ -30,8 +30,6 @@ export class HeaderComponent implements AfterViewInit, AfterViewChecked {
     public isLogged: boolean;
     public cartLength$: Observable<number>;
     public favoritesLength$: Observable<number>;
-    public cartProducts: CartProduct[] = [];
-    public cartPrice$: Observable<number>;
     public emptyFavorites: boolean = true;
     public emptyCart: boolean = true;
     public showMenu = false;
@@ -42,7 +40,6 @@ export class HeaderComponent implements AfterViewInit, AfterViewChecked {
         private modalService: MDBModalService,
         private store: Store<ShopState>) {
         this.cartLength$ = this.store.select(CartSelectors.getCartItemsLength);
-        this.cartPrice$ = this.store.select(CartSelectors.getCartTotalPrice);
         this.favoritesLength$ = this.store.select(FavoriteSelectors.getFavoriteItemsLength);
     }
 
@@ -56,10 +53,6 @@ export class HeaderComponent implements AfterViewInit, AfterViewChecked {
         this.router.navigate(['products'], { queryParams: { category } });
     }
 
-    removeFromCart(product: CartProduct) {
-        this.store.dispatch(new CartActions.RemoveProduct(product));
-    }
-
     ngAfterViewInit() {
         this.resizeService.onResize$.subscribe({
             next: (size: SCREEN_SIZE) => {
@@ -69,12 +62,6 @@ export class HeaderComponent implements AfterViewInit, AfterViewChecked {
 
         this.store.select(UserSelectors.isUserLogged).subscribe((value: boolean) => {
             this.isLogged = value;
-        });
-
-        this.store.select(CartSelectors.getCartItemsAsArray).subscribe((items: CartProduct[]) => {
-            if (items) {
-                this.cartProducts = items;
-            }
         });
 
         combineLatest([

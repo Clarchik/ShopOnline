@@ -32,7 +32,6 @@ export class ProductsComponent implements OnInit, OnDestroy {
                 return this.ps.getProducts(category, page, title);
             }),
             tap((data: any) => {
-                console.log('TAPP');
                 this._emptyProducts = !data.items;
                 this._products = data.items;
                 this._pager = data.pager;
