@@ -1,6 +1,6 @@
-import {Component, OnInit, Input} from '@angular/core';
-import {FormBuilder, FormGroup} from '@angular/forms';
-import {Router} from '@angular/router';
+import { Component, OnInit, Input } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-search',
@@ -8,7 +8,7 @@ import {Router} from '@angular/router';
     styleUrls: ['./search.component.scss']
 })
 export class SearchComponent implements OnInit {
-    public isOpen: boolean = false;
+    public isOpen: boolean;
     public searchFormGroup: FormGroup;
     @Input() iconSize: string;
     constructor(
@@ -21,17 +21,16 @@ export class SearchComponent implements OnInit {
         });
     }
 
-    public toggleInput() {
-        this.isOpen = !this.isOpen;
-        if (this.isOpen) {
-            setTimeout(() => {
-                document.getElementById('search').focus();
-            }, 400);
-        }
+    public openSearch() {
+        this.isOpen = true;
+        setTimeout(() => {
+            document.getElementById('search').focus();
+        }, 400);
     }
 
     public focusOut() {
         this.isOpen = false;
+        this.search();
     }
 
     get searchControl() {
@@ -39,9 +38,9 @@ export class SearchComponent implements OnInit {
     }
 
     public search() {
-        const {value} = this.searchControl;
+        const { value } = this.searchControl;
         if (value) {
-            this.router.navigate(['/products'], {queryParams: {category: 'all', title: String(value).toUpperCase()}});
+            this.router.navigate(['/products'], { queryParams: { category: 'all', title: String(value).toUpperCase() } });
             this.searchCloseAndClear();
         }
     }
@@ -50,5 +49,4 @@ export class SearchComponent implements OnInit {
         this.isOpen = false;
         this.searchControl.setValue(null);
     }
-
 }
