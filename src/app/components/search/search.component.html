@@ -1,9 +1,9 @@
 <form [formGroup]="searchFormGroup" class="search-form">
 
     <!-- MY EXAMPLE -->
-    <input id="search" autofocus="true" [ngClass]="{'visible': isOpen}" class="search-input form-control" formControlName="search" (keyup.enter)="search();" />
-    <mdb-icon [ngClass]="{'visible': isOpen}" (click)="toggle();" class="search-close" fas icon="times" size="lg"></mdb-icon>
-    <mdb-icon [ngClass]="{'hidden': isOpen}" (click)="toggle();" class="search-icon"  fas icon="search" size="lg"></mdb-icon>
+    <input id="search" autofocus="true" (blur)="focusOut();" [ngClass]="{'visible': isOpen}" class="search-input form-control" formControlName="search" (keyup.enter)="search();" />
+    <mdb-icon [ngClass]="{'visible': isOpen}" (click)="toggleInput();" class="search-close" fas icon="times" size="lg"></mdb-icon>
+    <mdb-icon [ngClass]="{'hidden': isOpen}" (click)="toggleInput();" class="search-icon"  fas icon="search" size="lg"></mdb-icon>
 
     <!-- NIKE EXAMPLE -->
     <!-- <input autocomplete="off" id="search" class="search-input form-control" formControlName="search" />

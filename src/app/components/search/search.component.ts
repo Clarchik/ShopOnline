@@ -21,7 +21,7 @@ export class SearchComponent implements OnInit {
         });
     }
 
-    public toggle() {
+    public toggleInput() {
         this.isOpen = !this.isOpen;
         if (this.isOpen) {
             setTimeout(() => {
@@ -30,21 +30,25 @@ export class SearchComponent implements OnInit {
         }
     }
 
-    get serachControl() {
+    public focusOut() {
+        this.isOpen = false;
+    }
+
+    get searchControl() {
         return this.searchFormGroup.controls['search'];
     }
 
     public search() {
-        const {value} = this.serachControl;
+        const {value} = this.searchControl;
         if (value) {
-            this.router.navigate(['/products'], {queryParams: {category: 'all', title: value}});
+            this.router.navigate(['/products'], {queryParams: {category: 'all', title: String(value).toUpperCase()}});
             this.searchCloseAndClear();
         }
     }
 
     private searchCloseAndClear() {
         this.isOpen = false;
-        this.serachControl.setValue(null);
+        this.searchControl.setValue(null);
     }
 
 }
