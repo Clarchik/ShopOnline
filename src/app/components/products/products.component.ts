@@ -5,7 +5,7 @@ import { ProductsService } from '../services/products/products.service';
 import { Product } from '../../shared/interfaces/product/product';
 import { Store } from '@ngrx/store';
 import { ShopState } from '../../store';
-import { Observable, Subscription } from 'rxjs';
+import { Observable } from 'rxjs';
 import { notLoadingStatus } from '../../store/selectors/loader.selectors';
 
 @Component({
@@ -19,14 +19,13 @@ export class ProductsComponent implements OnInit, OnDestroy {
     private _pager: any;
     private _emptyProducts: boolean = false;
     public isNotLoading: Observable<boolean>;
-    private subscription: Subscription;
     constructor(
         private route: ActivatedRoute,
         private ps: ProductsService,
         private store: Store<ShopState>) { }
 
     ngOnInit() {
-        this.subscription.add(this.route.queryParams.pipe(
+        this.route.queryParams.pipe(
             map((params) => ({ category: params.category, page: params.page, search: params.search })),
             switchMap(({ category, page, search }) => {
                 this._category = category;
@@ -39,7 +38,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
                 this._products = data.items;
                 this._pager = data.pager;
             })
-        ).subscribe());
+        ).subscribe();
 
         this.isNotLoading = this.store.select(notLoadingStatus);
     }
@@ -64,6 +63,5 @@ export class ProductsComponent implements OnInit, OnDestroy {
     }
 
     public ngOnDestroy() {
-        this.subscription.unsubscribe();
     }
 }
