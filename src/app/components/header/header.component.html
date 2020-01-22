@@ -13,6 +13,11 @@
 
     <!-- Always visible links -->
     <ul class="nav navbar-nav nav-flex-icons ml-auto navbar-nav__lg navbar-nav__sm navbar__container">
+
+        <li class="nav-item">
+            <app-search [iconSize]="iconSize"></app-search>
+        </li>
+
         <li class="nav-item nav-item__container">
             <a class="nav-link nav-link__effect">
                 <mdb-icon *ngIf="iconSize === 'lg'" far icon="star" size="lg"></mdb-icon>
@@ -20,13 +25,6 @@
                 <span class="icon-counter" *ngIf="!emptyFavorites">
                     {{ favoritesLength$ | async }}
                 </span>
-            </a>
-        </li>
-
-        <li class="nav-item search__wrapper">
-            <a class="nav-link nav-link__effect">
-                <mdb-icon class="search__icon" *ngIf="iconSize === 'lg'" fas icon="search" size="lg"></mdb-icon>
-                <mdb-icon class="search__icon" *ngIf="iconSize === 'sm'" fas icon="search" size="sm"></mdb-icon>
             </a>
         </li>
 

@@ -26,10 +26,10 @@ export class ProductsComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         this.route.queryParams.pipe(
-            map((params) => ({ category: params.category, page: params.page, search: params.search })),
-            switchMap(({ category, page, search }) => {
+            map((params) => ({ category: params.category, page: params.page, title: params.title })),
+            switchMap(({ category, page, title }) => {
                 this._category = category;
-                return this.ps.getProducts(category, page);
+                return this.ps.getProducts(category, page, title);
             }),
             tap((data: any) => {
                 if (!data.items.length) {

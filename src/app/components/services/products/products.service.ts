@@ -11,8 +11,8 @@ export class ProductsService {
     constructor(private http: HttpClient) { }
 
 
-    public getProducts(category: string, page: number = 1): Observable<{ pager: any, items: Product[] }> {
-        return this.http.get<{ pager: any, items: Product[] }>(`/api/products?category=${category}&page=${page}`);
+    public getProducts(category: string, page: number = 1, title: string): Observable<{ pager: any, items: Product[] }> {
+        return this.http.get<{ pager: any, items: Product[] }>(`/api/products?category=${category}&page=${page}&title=${title}`);
     }
 
     public getSingleProduct(id: number): Observable<Product> {

@@ -1,0 +1,116 @@
+@import '../../styles/variables.scss';
+
+// MY EXAMPLE
+.search {
+    &-form {
+        display: flex;
+        position: relative;
+        align-items: center;
+    }
+
+    &-input {
+        background: #FFF;
+        width: 0;
+        height: 0;
+        opacity: 0;
+        height: 30px;
+        visibility: hidden;
+        transition: all .5s;
+        &.visible {
+            width: 300px;
+            opacity: 1;
+            visibility: visible;
+        }
+    }
+
+    &-icon,
+    &-close {
+        position: absolute;
+        top: 50%;
+        right: 3px;
+        transform: translateY(-50%);
+        &:hover {
+            cursor: pointer;
+            color: $main-color;
+        }
+    }
+
+    &-icon {
+        transition: visibility .3s ease .15s, opacity .45s ease .35s;
+        visibility: visible;
+        opacity: 1;
+        &.hidden {
+            visibility: hidden;
+            opacity: 0;
+        }
+    }
+
+    &-close {
+        transition: visibility .3s ease .15s, opacity .45s ease .35s;
+        visibility: hidden;
+        opacity: 0;
+        &.visible {
+            visibility: visible;
+            opacity: 1;
+        }
+    }
+}
+
+// NIKE EXAMPLE
+// .search {
+//     &-form {
+//         display: flex;
+//         position: relative;
+//         align-items: center;
+//     }
+
+//     &-input {
+//         background: #FFF;
+//         text-indent: 15px;
+//         width: 50px;
+//         height: 30px;
+//         transition: all .5s;
+//         &:focus {
+//             width: 300px;
+//         }
+//     }
+
+//     &-icon,
+//     &-close {
+//         position: absolute;
+//         top: 50%;
+//         transform: translateY(-50%);
+//         &:hover {
+//             cursor: pointer;
+//             color: $main-color;
+//         }
+//     }
+
+//     &-icon {
+//         right: 3px;
+//     }
+
+//     &-close {
+//         left: 10px;
+//     }
+
+    // &-icon {
+    //     transition: visibility .3s ease .15s, opacity .45s ease .35s;
+    //     visibility: visible;
+    //     opacity: 1;
+    //     &.hidden {
+    //         visibility: hidden;
+    //         opacity: 0;
+    //     }
+    // }
+
+    // &-close {
+    //     transition: visibility .3s ease .15s, opacity .45s ease .35s;
+    //     visibility: hidden;
+    //     opacity: 0;
+    //     &.visible {
+    //         visibility: visible;
+    //         opacity: 1;
+    //     }
+    // }
+// }

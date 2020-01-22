@@ -7,10 +7,10 @@ export default class ProductsService {
 
     public getProductsByCategory(req: express.Request, res: Response) {
             const { category } = req.query;
-            // const { search } = req.query;
+            const { title } = req.query;
             const { page } = req.query;
             const pageNumber = parseInt(page, undefined) || 1;
-            const param = category === 'all' ? {} : { category };
+            const param = category === 'all' ? {title} : { title, category };
             const query = {
                 skip: CONFIG.itemsPerPage * (pageNumber - 1),
                 limit: CONFIG.itemsPerPage

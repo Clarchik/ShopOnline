@@ -35,6 +35,7 @@ import { ProductItemDetailsComponent } from './components/product-item-details/p
 import { SizesComponent } from './components/sizes/sizes.component';
 import { ResizeService } from './shared/services/resize/resize.service';
 import { UtilsService } from './shared/services/utils/utils.service';
+import { SearchComponent } from './components/search/search.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http);
@@ -67,6 +68,7 @@ export function setupInitFactory(
         ProductItemComponent,
         ProductItemDetailsComponent,
         SizesComponent,
+        SearchComponent,
     ],
     imports: [
         BrowserModule,
