@@ -22,10 +22,11 @@
                 </span>
             </a>
         </li>
+
         <li class="nav-item search__wrapper">
-            <a class="nav-link nav-link__effect header__search-link">
-                <mdb-icon class="search__icon" *ngIf="iconSize === 'lg'" fas icon="search" [routerLink]="['/products']" [queryParams]="{category: 'all', search: search | uppercase}" size="lg"></mdb-icon>
-                <mdb-icon class="search__icon" *ngIf="iconSize === 'sm'" fas icon="search" [routerLink]="['/products']" [queryParams]="{category: 'all', search: search | uppercase}" size="sm"></mdb-icon>
+            <a class="nav-link nav-link__effect">
+                <mdb-icon class="search__icon" *ngIf="iconSize === 'lg'" fas icon="search" size="lg"></mdb-icon>
+                <mdb-icon class="search__icon" *ngIf="iconSize === 'sm'" fas icon="search" size="sm"></mdb-icon>
             </a>
         </li>
 

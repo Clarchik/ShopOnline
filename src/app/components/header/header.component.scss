@@ -187,40 +187,6 @@
     transition: all .2s ease-in-out .2s;
 }
 
-.header__search-link {
-    position: absolute;
-    left: 0;
-    padding: 0 !important;
-
-    &--clear {
-        position: absolute;
-        right: 0;
-        padding: 0 !important;
-    }
-}
-.BORA {
-    position: absolute;
-}
-.search__wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-
-    & input {
-        font-family: $avenir-r;
-        height: 24px;
-        font-size: 15px;
-        padding-left: 25px;
-    }
-}
-.dumb__wrapper {
-    position: fixed;
-    z-index: 10;
-    right: 0;
-    background-color: #ffffff;
-}
-
 
 @media only screen and (max-width: 575.98px) {
     .navbar-sm {

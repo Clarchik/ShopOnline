@@ -14,5 +14,7 @@ export default class StaticController {
         this.app.all('/', (req, res) => {
             res.sendFile(`${pathdir}/index.html`);
         });
+
+        this.app.use('/products', express.static(`${pathdir}/products`));
     }
 }
