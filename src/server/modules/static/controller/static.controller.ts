@@ -8,12 +8,18 @@ export default class StaticController {
 
 
     private staticRoutes() {
-        const { pathdir } = (global as any);
+        const {pathdir} = (global as any);
         this.app.use(express.static(pathdir));
 
-        this.app.all('/', (req, res) => {
-            res.sendFile(`${pathdir}/index.html`);
+        this.app.get('/:anyreq',  (req, res) => {
+            express.static(pathdir);
         });
+
+        // this.app.all('/', (req, res) => {
+        //     res.status(200)
+        //         .set({'content-type': 'text/html; charset=utf-8'})
+        //         .sendFile(`${pathdir}/index.html`);
+        // });
 
         this.app.use('/products', express.static(`${pathdir}/products`));
     }
