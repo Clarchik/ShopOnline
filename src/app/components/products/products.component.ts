@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { tap, map, switchMap } from 'rxjs/operators';
 import { ProductsService } from '../services/products/products.service';
 import { Product } from '../../shared/interfaces/product/product';
 import { Store } from '@ngrx/store';
 import { ShopState } from '../../store';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { notLoadingStatus } from '../../store/selectors/loader.selectors';
 
 @Component({
@@ -13,33 +13,33 @@ import { notLoadingStatus } from '../../store/selectors/loader.selectors';
     templateUrl: './products.component.html',
     styleUrls: ['./products.component.scss']
 })
-export class ProductsComponent implements OnInit {
+export class ProductsComponent implements OnInit, OnDestroy {
     private _products: Product[] = [];
     public _category: string;
     private _pager: any;
     private _emptyProducts: boolean = false;
     public isNotLoading: Observable<boolean>;
+    private subscription: Subscription;
     constructor(
         private route: ActivatedRoute,
         private ps: ProductsService,
         private store: Store<ShopState>) { }
 
     ngOnInit() {
-        this.route.queryParams.pipe(
+        this.subscription.add(this.route.queryParams.pipe(
             map((params) => ({ category: params.category, page: params.page, search: params.search })),
             switchMap(({ category, page, search }) => {
                 this._category = category;
-                return this.ps.getProducts(category, page, search);
+                return this.ps.getProducts(category, page);
             }),
-            tap((data) => {
-                console.log(data);
+            tap((data: any) => {
                 if (!data.items.length) {
                     this._emptyProducts = true;
                 }
                 this._products = data.items;
                 this._pager = data.pager;
             })
-        ).subscribe();
+        ).subscribe());
 
         this.isNotLoading = this.store.select(notLoadingStatus);
     }
@@ -61,5 +61,9 @@ export class ProductsComponent implements OnInit {
 
     public get emptyProducts(): boolean {
         return this._emptyProducts;
+    }
+
+    public ngOnDestroy() {
+        this.subscription.unsubscribe();
     }
 }

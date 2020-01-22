@@ -35,7 +35,6 @@ import { ProductItemDetailsComponent } from './components/product-item-details/p
 import { SizesComponent } from './components/sizes/sizes.component';
 import { ResizeService } from './shared/services/resize/resize.service';
 import { UtilsService } from './shared/services/utils/utils.service';
-import { SearchdumbbedComponent } from './components/header/searchdumbbed/searchdumbbed.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http);
@@ -68,7 +67,6 @@ export function setupInitFactory(
         ProductItemComponent,
         ProductItemDetailsComponent,
         SizesComponent,
-        SearchdumbbedComponent
     ],
     imports: [
         BrowserModule,
@@ -105,6 +103,6 @@ export function setupInitFactory(
         { provide: HTTP_INTERCEPTORS, useClass: WebReqInterceptor, multi: true }
     ],
     bootstrap: [AppComponent],
-    entryComponents: [fromComponents.PreferencesModalComponent, SearchdumbbedComponent]
+    entryComponents: [fromComponents.PreferencesModalComponent]
 })
 export class AppModule { }

@@ -6,7 +6,6 @@ const paginate = require('jw-paginate');
 export default class ProductsService {
 
     public getProductsByCategory(req: express.Request, res: Response) {
-            console.log(req.query.search);
             const { category } = req.query;
             const { search } = req.query;
             const { page } = req.query;

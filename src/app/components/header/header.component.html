@@ -27,12 +27,6 @@
                 <mdb-icon class="search__icon" *ngIf="iconSize === 'lg'" fas icon="search" [routerLink]="['/products']" [queryParams]="{category: 'all', search: search | uppercase}" size="lg"></mdb-icon>
                 <mdb-icon class="search__icon" *ngIf="iconSize === 'sm'" fas icon="search" [routerLink]="['/products']" [queryParams]="{category: 'all', search: search | uppercase}" size="sm"></mdb-icon>
             </a>
-            <form [formGroup]="searchForm">
-                <input type="text" formControlName="searchStr">
-            </form>
-            <a class="nav-link nav-link__effect header__search-link--clear" *ngIf="search.length > 0" (click)="ClearSearchBar()">
-                <mdb-icon fas icon="times"></mdb-icon>
-            </a>
         </li>
 
         <li class="nav-item nav-item__container cart" [ngClass]="{empty: emptyCart}">
@@ -165,16 +159,5 @@
         </div>
     </div>
 </mdb-navbar>
-<div class="container dumb__wrapper"  [@pulse]>
-    <div class="row">
-        <div class="col-12">
-            <template #searchResult>
-            </template>
-        </div>
-        <button class="cart-products__remove" type="button" *ngIf="closedButton" (click)="closeSearch()">
-            <i class="far fa-times-circle"></i>
-        </button>
-    </div>
-</div>
 
 <app-preferences-modal [hidden]="true"></app-preferences-modal>

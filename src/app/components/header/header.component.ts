@@ -31,10 +31,10 @@ export class HeaderComponent implements AfterViewInit, AfterViewChecked {
     public cartLength$: Observable<number>;
     public favoritesLength$: Observable<number>;
     public cartProducts: CartProduct[] = [];
-    public emptyCart: boolean = true;
-    public emptyFavorites: boolean = true;
-    public showMenu = false;
     public cartPrice$: Observable<number>;
+    public emptyFavorites: boolean = true;
+    public emptyCart: boolean = true;
+    public showMenu = false;
     constructor(
         private cd: ChangeDetectorRef,
         private router: Router,

@@ -6,7 +6,6 @@ const paginate = require('jw-paginate');
 export default class ProductsService {
 
     public getProductsByCategory(req: express.Request, res: Response) {
-            console.log(req.query.search);
             const { category } = req.query;
             const { search } = req.query;
             const { page } = req.query;
@@ -17,12 +16,12 @@ export default class ProductsService {
                 limit: CONFIG.itemsPerPage
             };
 
-            Product.count(param, (error, totalCount) => {
+            Product.count(param, (error: any, totalCount: number) => {
                 if (error) {
                     res.status(400).send({ message: 'Error occured' });
                 }
 
-                Product.find(param, null, query, (err, products: any) => {
+                Product.find(param, null, query, (err: any, products: any) => {
                     if (err) {
                         res.status(400).send({
                             message: 'Error occured'
@@ -38,7 +37,7 @@ export default class ProductsService {
 
     public getProductById(req: express.Request, res: Response) {
         const { id } = req.params;
-        Product.findById(id, null, (err, data) => {
+        Product.findById(id, null, (err: any, data: any) => {
             if (err) {
                 res.status(404).send({
                     message: 'Product not found'

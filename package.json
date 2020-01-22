@@ -29,7 +29,6 @@
         "@ngrx/store": "^8.4.0",
         "@ngx-translate/core": "^11.0.1",
         "@ngx-translate/http-loader": "^4.0.0",
-        "@types/axios": "^0.14.0",
         "@types/bcryptjs": "^2.4.2",
         "@types/body-parser": "^1.17.1",
         "@types/chart.js": "^2.7.40",
