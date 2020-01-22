@@ -1,4 +1,4 @@
-<div class="product-wrapper" [routerLink]="!frozenWrapper ? ['/product', product._id] : null">
+<a class="product-wrapper" [routerLink]="!frozenWrapper ? ['/product', product._id] : []" [queryParamsHandling]="'merge'">
     <div class="product-image" [ngStyle]="{'background': getUrl()}">
         <div class="product-favorite" (mouseover)="freezeWrapper();" (mouseleave)="unfreezeWrapper();">
             <button type="button" (click)="toggleFavorite(product);">
@@ -19,5 +19,5 @@
             <span *ngIf="product.sale">{{ product.salePrice | currencyConverter | async }}</span>
         </div>
     </div>
-</div>
+</a>
 
