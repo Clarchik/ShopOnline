@@ -16,7 +16,6 @@ export default class StaticController {
 
         this.app.get('*', (req, res) => {
             res.status(200)
-                .set({'content-type': 'text/html; charset=utf-8'})
                 .sendFile(`${pathdir}/index.html`);
         });
 
