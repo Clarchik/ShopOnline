@@ -54,7 +54,7 @@
         &__button {
             border: 1px solid #1c1d1d;
             color: #1c1d1d;
-            max-width: 125px;
+            max-width: 150px;
             display: flex;
             box-sizing: border-box;
             font-family: $avenir-r;
@@ -69,13 +69,15 @@
 
             .quantity-input {
                 border: none;
-                width: 57%;
+                width: 100%;
                 text-align: center;
                 padding: 10px 25px;
                 display: block;
             }
 
             .button {
+                width: 100%;
+                outline: none;
                 background-color: transparent;
                 border: none;
                 transition: background-color .35s ease-in-out;

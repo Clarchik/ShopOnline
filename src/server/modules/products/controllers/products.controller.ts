@@ -11,9 +11,9 @@ export default class ProductsController {
 
     private useProductsRoutes() {
         /* GET PRODUCTS BY CATEGORY */
-        this.app.route('/products').get(this.productsService.getProductsByCategory);
+        this.app.route('/api/products').get(this.productsService.getProductsByCategory);
 
         /* GET SINGLE PRODUCT BY ID */
-        this.app.route('/products/:id').get(this.productsService.getProductById);
+        this.app.route('/api/products/:id').get(this.productsService.getProductById);
     }
 }

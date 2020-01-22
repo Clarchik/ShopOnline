@@ -12,10 +12,10 @@ export class ProductsService {
 
 
     public getProducts(category: string, page: number = 1): Observable<{ pager: any, items: Product[] }> {
-        return this.http.get<{ pager: any, items: Product[] }>(`/products?category=${category}&page=${page}`);
+        return this.http.get<{ pager: any, items: Product[] }>(`/api/products?category=${category}&page=${page}`);
     }
 
     public getSingleProduct(id: number): Observable<Product> {
-        return this.http.get<Product>(`/products/${id}`);
+        return this.http.get<Product>(`/api/products/${id}`);
     }
 }
