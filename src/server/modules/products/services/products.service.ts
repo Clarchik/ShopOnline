@@ -7,16 +7,16 @@ export default class ProductsService {
 
     public getProductsByCategory(req: express.Request, res: Response) {
             const { category } = req.query;
-            const { search } = req.query;
+            // const { search } = req.query;
             const { page } = req.query;
             const pageNumber = parseInt(page, undefined) || 1;
-            const param = category === 'all' ? {title: { $regex: search, $options: search} } : {title: { $regex: search, $options: search}, category };
+            const param = category === 'all' ? {} : { category };
             const query = {
                 skip: CONFIG.itemsPerPage * (pageNumber - 1),
                 limit: CONFIG.itemsPerPage
             };
 
-            Product.count(param, (error: any, totalCount: number) => {
+            Product.countDocuments(param, (error: any, totalCount: number) => {
                 if (error) {
                     res.status(400).send({ message: 'Error occured' });
                 }
