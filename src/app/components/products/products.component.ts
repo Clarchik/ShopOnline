@@ -13,7 +13,7 @@ import { notLoadingStatus } from '../../store/selectors/loader.selectors';
     templateUrl: './products.component.html',
     styleUrls: ['./products.component.scss']
 })
-export class ProductsComponent implements OnInit, OnDestroy {
+export class ProductsComponent implements OnInit {
     private _products: Product[] = [];
     public _category: string;
     private _pager: any;
@@ -32,7 +32,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
                 return this.ps.getProducts(category, page, title);
             }),
             tap((data: any) => {
-                this._emptyProducts = !data.items;
+                this._emptyProducts = !data.items.length;
                 this._products = data.items;
                 this._pager = data.pager;
             })
@@ -58,8 +58,5 @@ export class ProductsComponent implements OnInit, OnDestroy {
 
     public get emptyProducts(): boolean {
         return this._emptyProducts;
-    }
-
-    public ngOnDestroy() {
     }
 }
