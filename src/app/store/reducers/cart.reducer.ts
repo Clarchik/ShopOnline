@@ -53,6 +53,11 @@ export function reducer(state = initialState, action: CartActions.CartActions): 
             };
         }
 
+        case CartActions.Actions.CLEAR_PRODUCTS: {
+            localStorage.removeItem('cartProducts');
+            return initialState;
+        }
+
         default: {
             return state;
         }

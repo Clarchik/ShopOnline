@@ -2,10 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Order } from '../../shared/models/order/order';
 import { OrderService } from '../../shared/services/order/order.service';
-import { ShopState, CartSelectors, UserSelectors } from '../../store';
+import { ShopState, CartSelectors, UserSelectors, CartActions } from '../../store';
 import { Store } from '@ngrx/store';
 import { CartProduct } from '../../shared/models/cart-product/cart-product';
 import { ToastrService } from 'ngx-toastr';
+import { finalize } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-order',
@@ -20,7 +22,8 @@ export class OrderComponent implements OnInit {
         private fb: FormBuilder,
         private orderSerivce: OrderService,
         private store: Store<ShopState>,
-        private toastr: ToastrService) { }
+        private toastr: ToastrService,
+        private router: Router) { }
 
     ngOnInit() {
         this.orderForm = this.fb.group({
@@ -49,12 +52,14 @@ export class OrderComponent implements OnInit {
         this.orderSerivce.saveOrder(newOrder).subscribe({
             next: () => {
                 this.toastr.success('Your order have been saved', 'Success');
+                this.orderForm.reset();
+                this.store.dispatch(new CartActions.ClearProducts());
+                setTimeout(() => {
+                    this.router.navigate(['/main']);
+                }, 500);
             },
             error: () => {
                 this.toastr.error('Your order have been not saved', 'Error');
-            },
-            complete: () => {
-                this.orderForm.reset();
             }
         });
     }
