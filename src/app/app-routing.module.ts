@@ -19,7 +19,7 @@ const routes: Routes = [
     { path: 'products', component: ProductsComponent },
     { path: 'product/:id', component: ProductItemDetailsComponent },
     { path: 'size-guide', component: SizesComponent },
-    { path: 'order', component: OrderComponent }
+    { path: 'order', component: OrderComponent, canActivate: [AuthGuard] }
 ];
 
 @NgModule({
