@@ -1,5 +1,6 @@
 import { Application } from 'express';
 import { OrdersService } from '../services';
+import { verifyJWTToken, verifySession } from '../../../shared/middlewares';
 
 export default class OrdersController {
     private ordersService: OrdersService;
@@ -11,6 +12,6 @@ export default class OrdersController {
 
 
     private orderRoutes() {
-        this.app.post('/api/saveorder', this.ordersService.saveOrder);
+        this.app.route('/api/saveorder').post([verifyJWTToken, verifySession], this.ordersService.saveOrder);
     }
 }

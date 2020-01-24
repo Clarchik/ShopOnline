@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Order</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="../styles/style.css">
+</head>
+
+<body>
+
+    <style>
+        .product-image__preview {
+            width: 100%;
+        }
+
+        .product-title {
+            font-size: 15px;
+        }
+
+        .product-details {
+            margin-top: 20px;
+            text-align: center;
+        }
+    </style>
+
+
+    <h3>Hi, <%=fio %></h3>
+    <p>Thank you for ordering out products.</p>
+    <p>Here your order details.</p>
+    <div class="container">
+        <div class="row">
+            <% for(var i=0; i<products.length;i++) {%>
+            <div class="col-sm-12 col-md-4 col-lg-3">
+                <img style="width: 100%;" class="product-image__preview" src="<%=products[i].slides[0].imageUrl %>"
+                    alt="Product Image">
+                <div class="product-details" style="margin-top: 20px; text-align: center;">
+                    <h4 style="font-size: 15px;" class="product-title">
+                        <strong><%=products[i].title %></strong>
+                    </h4>
+                    <p class="product-description">Size: <strong><%=products[i].size %></strong></p>
+                    <p class="product-description">Price: <strong><%=products[i].price %>$</strong></p>
+                    <p class="product-description">Qunatity: <strong><%=products[i].qunatity %></strong></p>
+                </div>
+            </div>
+            <%} %>
+        </div>
+    </div>
+</body>
+<html>

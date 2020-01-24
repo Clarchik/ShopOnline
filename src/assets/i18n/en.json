@@ -15,6 +15,7 @@
         "email": "Email",
         "fio": "Name and surname",
         "city": "City",
+        "address": "Address",
         "postindex": "Index"
     },
     "Size": {

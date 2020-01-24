@@ -15,6 +15,7 @@
         "email": "Email",
         "fio": "Imię i nazwisko",
         "city": "Miasto",
+        "address": "Adres",
         "postindex": "Kod pocztowy"
     },
     "Size": {

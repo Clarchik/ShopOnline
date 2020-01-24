@@ -6,8 +6,11 @@ import { ShopState, CartSelectors, UserSelectors, CartActions } from '../../stor
 import { Store } from '@ngrx/store';
 import { CartProduct } from '../../shared/models/cart-product/cart-product';
 import { ToastrService } from 'ngx-toastr';
-import { finalize } from 'rxjs/operators';
+import { finalize, switchMap, map } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { combineLatest, of } from 'rxjs';
+import { ShippingAddress } from '../../shared/models/shipping/shipping';
+import { User } from '../../shared/interfaces/user/user';
 
 @Component({
     selector: 'app-order',
@@ -16,8 +19,6 @@ import { Router } from '@angular/router';
 })
 export class OrderComponent implements OnInit {
     public orderForm: FormGroup;
-    public items: CartProduct[];
-    public userId: string;
     constructor(
         private fb: FormBuilder,
         private orderSerivce: OrderService,
@@ -27,50 +28,47 @@ export class OrderComponent implements OnInit {
 
     ngOnInit() {
         this.orderForm = this.fb.group({
-            email: ['', [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]],
-            fio: ['', Validators.required],
             city: ['', Validators.required],
+            address: ['', Validators.required],
             index: ['', Validators.required]
-        });
-
-        this.store.select(CartSelectors.getCartItemsAsArray).subscribe((items) => {
-            this.items = items;
-        });
-        this.store.select(UserSelectors.getUser).subscribe((user) => {
-            this.userId = user._id;
         });
     }
 
     public placeOrder() {
-        const email = this.email.value;
-        const fio = this.fio.value;
-        const city = this.city.value;
-        const index = this.index.value;
-        const newOrder = new Order({ email, city, fio, index }, this.items, this.userId);
-
-
-        this.orderSerivce.saveOrder(newOrder).subscribe({
+        const { city, address, index } = this.orderForm.controls;
+        const shippingAddress = new ShippingAddress(
+            {
+                city: city.value,
+                address: address.value,
+                index: index.value
+            });
+        combineLatest([
+            this.store.select(CartSelectors.getCartItemsAsArray),
+        ]).pipe(
+            map(([products]: [CartProduct[]]) => this.getOrderObject(shippingAddress, products)),
+            switchMap((order: Order) => this.orderSerivce.saveOrder(order))
+        ).subscribe({
             next: () => {
                 this.toastr.success('Your order have been saved', 'Success');
-                this.orderForm.reset();
-                this.store.dispatch(new CartActions.ClearProducts());
-                setTimeout(() => {
-                    this.router.navigate(['/main']);
-                }, 500);
+                // this.orderForm.reset();
+                // this.store.dispatch(new CartActions.ClearProducts());
+                // setTimeout(() => {
+                //     this.router.navigate(['/main']);
+                // }, 1000);
             },
             error: () => {
-                this.toastr.error('Your order have been not saved', 'Error');
+                this.toastr.error('Your order have not been saved', 'Error');
             }
         });
     }
 
 
-    get email() {
-        return this.orderForm.controls['email'];
+    private getOrderObject(shippingAddress: ShippingAddress, products: CartProduct[]): Order {
+        return new Order(shippingAddress, products);
     }
 
-    get fio() {
-        return this.orderForm.controls['fio'];
+    get address() {
+        return this.orderForm.controls['address'];
     }
 
     get city() {

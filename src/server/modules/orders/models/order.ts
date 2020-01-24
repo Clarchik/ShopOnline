@@ -1,20 +1,23 @@
 import mongoose from 'mongoose';
 
 const OrderSchema = new mongoose.Schema({
+    city: String,
+    address: String,
+    index: String,
     userId: {
         type: String,
         ref: 'User'
     },
-    email: String,
-    index: String,
     fio: String,
-    city: String,
     products: [
         {
             title: String,
             qunatity: Number,
             price: Number,
-            size: Number
+            size: Number,
+            slides: [
+                { imageUrl: String }
+            ]
         }
     ]
 });
