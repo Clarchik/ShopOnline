@@ -1,5 +1,6 @@
 {
     "scripts": {
-        "build": "tsc"
+        "build": "tsc && npm run copy-assets",
+        "copy-assets": "ts-node tools/copyAssets"
     }
 }

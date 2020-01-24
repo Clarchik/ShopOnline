@@ -12,7 +12,8 @@
         "clean:dist": "rm -rf dist",
         "serve": "node dist/server/server.js",
         "watch-node": "nodemon dist/server.js",
-        "postinstall": "npm run force:build:prod && npm run --prefix ./src/server build"
+        "postinstall": "npm run force:build:prod && npm run --prefix ./src/server build",
+        "build:dev": "ng build --prod --aot && npm run --prefix ./src/server build && nodemon dist/server/server.js"
     },
     "private": true,
     "dependencies": {
@@ -74,6 +75,7 @@
         "@types/jasmine": "~3.3.8",
         "@types/jasminewd2": "~2.0.3",
         "@types/node": "^8.9.5",
+        "@types/shelljs": "^0.8.6",
         "@typescript-eslint/eslint-plugin": "^2.3.2",
         "@typescript-eslint/parser": "^2.3.2",
         "codelyzer": "^5.1.2",
@@ -87,6 +89,7 @@
         "karma-jasmine-html-reporter": "^1.4.0",
         "nodemon": "^2.0.2",
         "protractor": "~5.4.0",
+        "shelljs": "^0.8.3",
         "tslint": "~5.15.0",
         "tslint-eslint-rules": "^5.4.0",
         "typescript": "~3.4.5"

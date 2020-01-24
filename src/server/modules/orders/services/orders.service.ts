@@ -10,7 +10,6 @@ export default class OrdersService {
         const user = (req as any).userObject;
 
         if (user) {
-            const { pathdir } = (global as any);
             const { _id, email, name, surname } = user;
             const { shippingAddress } = req.body;
             const { products } = req.body;
@@ -21,7 +20,7 @@ export default class OrdersService {
                     { _id },
                     { $push: { orders: savedOrder } }
                 ).then(() => {
-                    createHTMLTemplate(fio, products, pathdir).then((html) => {
+                    createHTMLTemplate(fio, products).then((html) => {
                         const request = mailjet
                             .post('send', { version: 'v3.1' })
                             .request({
