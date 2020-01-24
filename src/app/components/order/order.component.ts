@@ -22,10 +22,10 @@ export class OrderComponent implements OnInit {
 
     ngOnInit() {
         this.orderForm = this.fb.group({
-            email: ['calvinclark666@gmail.com', [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]],
-            fio: ['FDF fffsdf ', Validators.required],
-            city: ['Lodz', Validators.required],
-            index: ['90-231', Validators.required]
+            email: ['', [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]],
+            fio: ['', Validators.required],
+            city: ['', Validators.required],
+            index: ['', Validators.required]
         });
 
         this.store.select(CartSelectors.getCartItemsAsArray).subscribe((items) => {
