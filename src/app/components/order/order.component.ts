@@ -50,11 +50,11 @@ export class OrderComponent implements OnInit {
         ).subscribe({
             next: () => {
                 this.toastr.success('Your order have been saved', 'Success');
-                // this.orderForm.reset();
-                // this.store.dispatch(new CartActions.ClearProducts());
-                // setTimeout(() => {
-                //     this.router.navigate(['/main']);
-                // }, 1000);
+                this.orderForm.reset();
+                this.store.dispatch(new CartActions.ClearProducts());
+                setTimeout(() => {
+                    this.router.navigate(['/main']);
+                }, 1000);
             },
             error: () => {
                 this.toastr.error('Your order have not been saved', 'Error');
