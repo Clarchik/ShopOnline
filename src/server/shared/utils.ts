@@ -4,7 +4,7 @@ import path from 'path';
 const createHTMLTemplate = (fio: string, products: any, pathdir: string) => {
     const newPath = path.resolve(pathdir, '..', '..');
     console.log(`${newPath}server/modules/orders/ejs/order.ejs`, 'new path');
-    const html = ejs.renderFile(`${newPath}/server/modules/orders/ejs/order.ejs`, { fio, products });
+    const html = ejs.renderFile(`${newPath}server/modules/orders/ejs/order.ejs`, { fio, products });
     return html;
 };
 
