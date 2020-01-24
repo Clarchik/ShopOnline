@@ -1,8 +1,8 @@
 @import '../../../app/styles/variables.scss';
 
 .product {
+    position: relative;
     &-wrapper {
-        position: relative;
         outline: none;
         &:hover {
             cursor: pointer;
@@ -21,8 +21,8 @@
         text-transform: uppercase;
         height: 50px;
         width: 50px;
-        top: 25px;
-        right: 40px;
+        top: 10px;
+        right: 30px;
         font-size: .75rem;
     }
 
@@ -46,7 +46,7 @@
     &-favorite {
         transition: all .25s ease-in-out;
         position: absolute;
-        left: 15px;
+        left: 30px;
         opacity: 0;
         visibility: hidden;
         background-color: #fff;

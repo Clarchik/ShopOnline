@@ -1,0 +1,66 @@
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Order } from '../../shared/models/order/order';
+import { OrderService } from '../../shared/services/order/order.service';
+import { ShopState, CartSelectors, UserSelectors } from '../../store';
+import { Store } from '@ngrx/store';
+import { CartProduct } from '../../shared/models/cart-product/cart-product';
+
+@Component({
+    selector: 'app-order',
+    templateUrl: './order.component.html',
+    styleUrls: ['./order.component.scss']
+})
+export class OrderComponent implements OnInit {
+    public orderForm: FormGroup;
+    public items: CartProduct[];
+    public userId: string;
+    constructor(
+        private fb: FormBuilder,
+        private orderSerivce: OrderService,
+        private store: Store<ShopState>) { }
+
+    ngOnInit() {
+        this.orderForm = this.fb.group({
+            email: ['calvinclark666@gmail.com', [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]],
+            fio: ['FDF fffsdf ', Validators.required],
+            city: ['Lodz', Validators.required],
+            index: ['90-231', Validators.required]
+        });
+
+        this.store.select(CartSelectors.getCartItemsAsArray).subscribe((items) => {
+            this.items = items;
+        });
+        this.store.select(UserSelectors.getUser).subscribe((user) => {
+            this.userId = user._id;
+        });
+    }
+
+    public placeOrder() {
+        const email = this.email.value;
+        const fio = this.fio.value;
+        const city = this.city.value;
+        const index = this.index.value;
+        const newOrder = new Order({ email, city, fio, index }, this.items, this.userId);
+
+        this.orderSerivce.saveOrder(newOrder).subscribe();
+    }
+
+
+    get email() {
+        return this.orderForm.controls['email'];
+    }
+
+    get fio() {
+        return this.orderForm.controls['fio'];
+    }
+
+    get city() {
+        return this.orderForm.controls['city'];
+    }
+
+    get index() {
+        return this.orderForm.controls['index'];
+    }
+
+}

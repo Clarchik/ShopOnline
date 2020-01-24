@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+import mongoose, { Schema } from 'mongoose';
 import CONFIG from '../../../shared/config';
 import * as jwt from 'jsonwebtoken';
 import * as crypto from 'crypto';
@@ -35,6 +35,9 @@ const UserSchema = new mongoose.Schema({
         trim: true,
         unique: false
     },
+    orders: [
+        { type: Schema.Types.ObjectId, ref: 'Order' }
+    ],
     sessions: [{
         token: {
             type: String,

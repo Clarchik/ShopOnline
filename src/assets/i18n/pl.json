@@ -10,6 +10,13 @@
         "addToCart": "Dodaj do koszyka",
         "sizeGuide": "Tabela rozmiarów"
     },
+    "Order": {
+        "title": "Złóż zamówienie",
+        "email": "Email",
+        "fio": "Imię i nazwisko",
+        "city": "Miasto",
+        "postindex": "Kod pocztowy"
+    },
     "Size": {
         "header": "Tabele rozmiarów",
         "cm": "Długość od pięty do palców (cm)",

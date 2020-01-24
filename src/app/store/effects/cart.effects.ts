@@ -1,21 +1,31 @@
 import { Injectable } from '@angular/core';
 import { Actions, ofType, Effect } from '@ngrx/effects';
+import { CartActions } from '../actions';
+import { tap, switchMap } from 'rxjs/operators';
+import { CartSelectors } from '../selectors';
+import { ShopState } from '../reducers';
+import { Store } from '@ngrx/store';
+import { ActivatedRoute, Router } from '@angular/router';
 
-import * as cartAction from '../actions';
-import { CartProduct } from '../../shared/models/cart-product/cart-product';
-import { map, tap, switchMap } from 'rxjs/operators';
 
-import * as fromStore from '../index';
 
 
 
 @Injectable()
 export class CartEffects {
-    constructor(private actions$: Actions) { }
+    constructor(
+        private actions$: Actions,
+        private store: Store<ShopState>,
+        private router: Router) { }
 
-    // @Effect({ dispatch: false })
-    // addProduct = this.actions$.pipe(
-    //     ofType(cartAction.Actions.ADD_PRODUCT),
-
-    // );
+    @Effect({ dispatch: false })
+    addProduct = this.actions$.pipe(
+        ofType(CartActions.Actions.REMOVE_PRODUCT),
+        switchMap(() => this.store.select(CartSelectors.isCartEmpty)),
+        tap((isEmpty) => {
+            if (isEmpty && this.router.url === '/order') {
+                this.router.navigate(['/products']);
+            }
+        })
+    );
 }

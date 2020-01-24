@@ -27,3 +27,8 @@ export const isCartEmpty = createSelector(
     fromUserFeature.getCartState,
     cartReducer.isEmptyCart
 );
+
+export const isCartNotEmpty = createSelector(
+    fromUserFeature.getCartState,
+    cartReducer.isNotEmptyCart
+);

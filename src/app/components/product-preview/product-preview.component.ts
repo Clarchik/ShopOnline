@@ -3,6 +3,7 @@ import { CartProduct } from '../../shared/models/cart-product/cart-product';
 import { ShopState, CartSelectors, CartActions, FavoriteActions, FavoriteSelectors } from '../../store';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-product-preview',
@@ -17,7 +18,9 @@ export class ProductPreviewComponent implements OnInit {
     public favoriteProducts: CartProduct[];
     public cartPrice$: Observable<number>;
 
-    constructor(private store: Store<ShopState>) { }
+    constructor(
+        private router: Router,
+        private store: Store<ShopState>) { }
 
     ngOnInit() {
         this.store.select(CartSelectors.getCartItemsAsArray).subscribe((items: CartProduct[]) => {
@@ -32,6 +35,10 @@ export class ProductPreviewComponent implements OnInit {
 
         this.cartPrice$ = this.store.select(CartSelectors.getCartTotalPrice);
 
+    }
+
+    public makeOrder() {
+        this.router.navigateByUrl('order');
     }
 
     public removeFromCart(product: CartProduct) {
