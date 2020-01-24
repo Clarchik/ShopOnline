@@ -10,6 +10,13 @@
         "addToCart": "Add to bag",
         "sizeGuide": "Size guide"
     },
+    "Order": {
+        "title": "Place an order",
+        "email": "Email",
+        "fio": "Name and surname",
+        "city": "City",
+        "postindex": "Index"
+    },
     "Size": {
         "header": "Size tables",
         "cm": "Length from heel to toes (cm)",

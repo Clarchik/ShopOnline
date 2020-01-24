@@ -7,6 +7,8 @@ import { ProfileDetailsComponent } from './components/account/profile-details/pr
 import { ProductsComponent } from './components/products/products.component';
 import { ProductItemDetailsComponent } from './components/product-item-details/product-item-details.component';
 import { SizesComponent } from './components/sizes/sizes.component';
+import { OrderComponent } from './components/order/order.component';
+import { AuthGuard } from './shared/guards/auth.guard';
 
 const routes: Routes = [
     { path: '', redirectTo: 'main', pathMatch: 'full' },
@@ -16,7 +18,8 @@ const routes: Routes = [
     { path: 'profile-details', component: ProfileDetailsComponent },
     { path: 'products', component: ProductsComponent },
     { path: 'product/:id', component: ProductItemDetailsComponent },
-    { path: 'size-guide', component: SizesComponent }
+    { path: 'size-guide', component: SizesComponent },
+    { path: 'order', component: OrderComponent, canActivate: [AuthGuard] }
 ];
 
 @NgModule({
