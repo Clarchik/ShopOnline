@@ -5,6 +5,7 @@ import { OrderService } from '../../shared/services/order/order.service';
 import { ShopState, CartSelectors, UserSelectors } from '../../store';
 import { Store } from '@ngrx/store';
 import { CartProduct } from '../../shared/models/cart-product/cart-product';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
     selector: 'app-order',
@@ -18,7 +19,8 @@ export class OrderComponent implements OnInit {
     constructor(
         private fb: FormBuilder,
         private orderSerivce: OrderService,
-        private store: Store<ShopState>) { }
+        private store: Store<ShopState>,
+        private toastr: ToastrService) { }
 
     ngOnInit() {
         this.orderForm = this.fb.group({
@@ -43,7 +45,18 @@ export class OrderComponent implements OnInit {
         const index = this.index.value;
         const newOrder = new Order({ email, city, fio, index }, this.items, this.userId);
 
-        this.orderSerivce.saveOrder(newOrder).subscribe();
+
+        this.orderSerivce.saveOrder(newOrder).subscribe({
+            next: () => {
+                this.toastr.success('Your order have been saved', 'Success');
+            },
+            error: () => {
+                this.toastr.error('Your order have been not saved', 'Error');
+            },
+            complete: () => {
+                this.orderForm.reset();
+            }
+        });
     }
 
 
