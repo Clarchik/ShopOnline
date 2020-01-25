@@ -9,11 +9,12 @@ import { ProductItemDetailsComponent } from './components/product-item-details/p
 import { SizesComponent } from './components/sizes/sizes.component';
 import { OrderComponent } from './components/order/order.component';
 import { AuthGuard } from './shared/guards/auth.guard';
+import { AuthLoginGuard } from './shared/guards/auth-login.guard';
 
 const routes: Routes = [
     { path: '', redirectTo: 'main', pathMatch: 'full' },
     { path: 'main', component: MainPageComponent, data: { animation: 'swipeLeft' } },
-    { path: 'login', component: LoginComponent, data: { animation: 'swipeRight' } },
+    { path: 'login', component: LoginComponent, canActivate: [AuthLoginGuard], data: { animation: 'swipeRight' } },
     { path: 'registration', component: RegistrationComponent, data: { animation: 'FlipY' } },
     { path: 'profile-details', component: ProfileDetailsComponent },
     { path: 'products', component: ProductsComponent },

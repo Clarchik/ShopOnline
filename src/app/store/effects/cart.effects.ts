@@ -19,7 +19,7 @@ export class CartEffects {
         private router: Router) { }
 
     @Effect({ dispatch: false })
-    addProduct = this.actions$.pipe(
+    removeProduct = this.actions$.pipe(
         ofType(CartActions.Actions.REMOVE_PRODUCT),
         switchMap(() => this.store.select(CartSelectors.isCartEmpty)),
         tap((isEmpty) => {

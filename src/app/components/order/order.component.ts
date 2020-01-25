@@ -56,9 +56,14 @@ export class OrderComponent implements OnInit, OnDestroy {
                     this.onSuccessOrder();
                 },
                 error: () => {
-                    this.toastr.error('Your order have not been saved', 'Error');
+                    this.onErrorOrder();
                 }
             }));
+    }
+
+    private onErrorOrder() {
+        this.subscription.unsubscribe();
+        this.toastr.error('Your order have not been saved', 'Error');
     }
 
     private onSuccessOrder() {
