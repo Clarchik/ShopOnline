@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Order } from '../../shared/models/order/order';
 import { OrderService } from '../../shared/services/order/order.service';
@@ -8,7 +8,7 @@ import { CartProduct } from '../../shared/models/cart-product/cart-product';
 import { ToastrService } from 'ngx-toastr';
 import { finalize, switchMap, map } from 'rxjs/operators';
 import { Router } from '@angular/router';
-import { combineLatest, of } from 'rxjs';
+import { combineLatest, of, Subscription } from 'rxjs';
 import { ShippingAddress } from '../../shared/models/shipping/shipping';
 import { User } from '../../shared/interfaces/user/user';
 
@@ -17,8 +17,9 @@ import { User } from '../../shared/interfaces/user/user';
     templateUrl: './order.component.html',
     styleUrls: ['./order.component.scss']
 })
-export class OrderComponent implements OnInit {
+export class OrderComponent implements OnInit, OnDestroy {
     public orderForm: FormGroup;
+    private subscription: Subscription = new Subscription();
     constructor(
         private fb: FormBuilder,
         private orderSerivce: OrderService,
@@ -34,6 +35,10 @@ export class OrderComponent implements OnInit {
         });
     }
 
+    ngOnDestroy() {
+        this.subscription.unsubscribe();
+    }
+
     public placeOrder() {
         const { city, address, index } = this.orderForm.controls;
         const shippingAddress = new ShippingAddress(
@@ -42,24 +47,28 @@ export class OrderComponent implements OnInit {
                 address: address.value,
                 index: index.value
             });
-        combineLatest([
-            this.store.select(CartSelectors.getCartItemsAsArray),
-        ]).pipe(
-            map(([products]: [CartProduct[]]) => this.getOrderObject(shippingAddress, products)),
-            switchMap((order: Order) => this.orderSerivce.saveOrder(order))
-        ).subscribe({
-            next: () => {
-                this.toastr.success('Your order have been saved', 'Success');
-                this.orderForm.reset();
-                this.store.dispatch(new CartActions.ClearProducts());
-                setTimeout(() => {
-                    this.router.navigate(['/main']);
-                }, 1000);
-            },
-            error: () => {
-                this.toastr.error('Your order have not been saved', 'Error');
-            }
-        });
+        this.subscription.add(
+            this.store.select(CartSelectors.getCartItemsAsArray).pipe(
+                map((products: CartProduct[]) => this.getOrderObject(shippingAddress, products)),
+                switchMap((order: Order) => this.orderSerivce.saveOrder(order))
+            ).subscribe({
+                next: () => {
+                    this.onSuccessOrder();
+                },
+                error: () => {
+                    this.toastr.error('Your order have not been saved', 'Error');
+                }
+            }));
+    }
+
+    private onSuccessOrder() {
+        this.subscription.unsubscribe();
+        this.toastr.success('Your order have been saved', 'Success');
+        this.orderForm.reset();
+        this.store.dispatch(new CartActions.ClearProducts());
+        setTimeout(() => {
+            this.router.navigate(['/main']);
+        }, 1000);
     }
 
 
