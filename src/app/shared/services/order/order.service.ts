@@ -14,4 +14,8 @@ export class OrderService {
     public saveOrder(order: Order): Observable<any> {
         return this.http.post('/api/saveorder', order);
     }
+
+    public getUserOrders(): Observable<any> {
+        return this.http.get('/api/getUserOrders');
+    }
 }
