@@ -8,11 +8,14 @@ import { ProductsComponent } from './components/products/products.component';
 import { ProductItemDetailsComponent } from './components/product-item-details/product-item-details.component';
 import { SizesComponent } from './components/sizes/sizes.component';
 import { OrderComponent } from './components/order/order.component';
-import { AuthGuard } from './shared/guards/auth.guard';
+import { LoginGuard } from './shared/guards/login-guard.guard';
 import { AuthLoginGuard } from './shared/guards/auth-login.guard';
+import { UserOrdersComponent } from './components/user-orders/user-orders.component';
+import { AuthGuard } from './shared/guards/auth.guard';
+import { UserOrdersResolver } from './resolvers/user-orders/user-orders.resolver';
 
 const routes: Routes = [
-    { path: '', redirectTo: 'main', pathMatch: 'full' },
+    { path: '', redirectTo: 'orders', pathMatch: 'full' },
     { path: 'main', component: MainPageComponent, data: { animation: 'swipeLeft' } },
     { path: 'login', component: LoginComponent, canActivate: [AuthLoginGuard], data: { animation: 'swipeRight' } },
     { path: 'registration', component: RegistrationComponent, data: { animation: 'FlipY' } },
@@ -20,11 +23,20 @@ const routes: Routes = [
     { path: 'products', component: ProductsComponent },
     { path: 'product/:id', component: ProductItemDetailsComponent },
     { path: 'size-guide', component: SizesComponent },
-    { path: 'order', component: OrderComponent, canActivate: [AuthGuard] }
+    { path: 'make-order', component: OrderComponent, canActivate: [LoginGuard] },
+    {
+        path: 'orders',
+        component: UserOrdersComponent,
+        canActivate: [AuthGuard],
+        resolve: { orders: UserOrdersResolver }
+    }
 ];
 
 @NgModule({
     imports: [RouterModule.forRoot(routes)],
-    exports: [RouterModule]
+    exports: [RouterModule],
+    providers: [
+        UserOrdersResolver
+    ]
 })
 export class AppRoutingModule { }

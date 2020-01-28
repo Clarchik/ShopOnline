@@ -38,7 +38,7 @@ export class ProductPreviewComponent implements OnInit {
     }
 
     public makeOrder() {
-        this.router.navigateByUrl('order');
+        this.router.navigateByUrl('make-order');
     }
 
     public removeFromCart(product: CartProduct) {

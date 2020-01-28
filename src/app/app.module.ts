@@ -9,6 +9,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { ToastrModule } from 'ngx-toastr';
 import { MDBBootstrapModule, MDBModalRef } from 'angular-bootstrap-md';
 import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { MatExpansionModule } from '@angular/material/expansion';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
@@ -38,6 +39,7 @@ import { UtilsService } from './shared/services/utils/utils.service';
 import { SearchComponent } from './components/search/search.component';
 import { ProductPreviewComponent } from './components/product-preview/product-preview.component';
 import { OrderComponent } from './components/order/order.component';
+import { UserOrdersComponent } from './components/user-orders/user-orders.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http);
@@ -73,6 +75,7 @@ export function setupInitFactory(
         SearchComponent,
         ProductPreviewComponent,
         OrderComponent,
+        UserOrdersComponent,
     ],
     imports: [
         BrowserModule,
@@ -81,6 +84,7 @@ export function setupInitFactory(
         FormsModule,
         AppRoutingModule,
         HttpClientModule,
+        MatExpansionModule,
         StoreModule.forRoot(userReducers),
         StoreDevtoolsModule.instrument(),
         EffectsModule.forRoot(userEffects),

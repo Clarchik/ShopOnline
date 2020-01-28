@@ -68,7 +68,7 @@ export function reducer(state = initialState, action: CartActions.CartActions): 
 
 export const getCart = (state: CartState) => state.entities;
 export const getCartAsArray = (state: CartState) => Object.values(state.entities);
-export const getCartTotalPrice = (state: CartState) => Object.values(state.entities).reduce((prev, next) => prev + (next.qunatity * next.price), 0);
+export const getCartTotalPrice = (state: CartState) => Object.values(state.entities).reduce((prev, next) => prev + (next.quantity * next.price), 0);
 export const cartLength = (state: CartState) => Object.values(state.entities).length;
 export const isEmptyCart = (state: CartState) => Object.values(state.entities).length <= 0;
 export const isNotEmptyCart = (state: CartState) => Object.values(state.entities).length > 0;

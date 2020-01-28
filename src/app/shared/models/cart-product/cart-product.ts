@@ -6,16 +6,18 @@ export class CartProduct {
     public slides: any;
     public size: number;
     public price: number;
-    public qunatity: number;
+    public quantity: number;
+    public mainImage: string;
     constructor(
-        { _id, title, price, slides }: Product,
+        { _id, title, price, slides, mainImage }: Product,
         size: number = 0,
         quantity: number = 0) {
         this.id = _id;
         this.title = title;
         this.price = price;
         this.slides = slides;
+        this.mainImage = mainImage;
         this.size = size;
-        this.qunatity = quantity;
+        this.quantity = quantity;
     }
 }

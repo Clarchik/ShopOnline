@@ -16,7 +16,17 @@
         "fio": "Imię i nazwisko",
         "city": "Miasto",
         "address": "Adres",
-        "postindex": "Kod pocztowy"
+        "postindex": "Kod pocztowy",
+        "quantity": "Ilość",
+        "size": "Rozmiaz",
+        "price": "Cena"
+    },
+    "Orders": {
+        "title": "Twoje zamówienia",
+        "empty": "Nie masz żadnych zamówień",
+        "order": "Zamówienie",
+        "detailsTitle": "Szczegóły zamówienia",
+        "shippingAddress": "Adres wysyłki"
     },
     "Size": {
         "header": "Tabele rozmiarów",
@@ -39,7 +49,8 @@
     },
     "Profile": {
         "details": "Szczegóły profilu",
-        "logout": "Wyloguj"
+        "logout": "Wyloguj",
+        "orders": "Zamówienia"
     },
     "Authentication": {
         "login": "Login",

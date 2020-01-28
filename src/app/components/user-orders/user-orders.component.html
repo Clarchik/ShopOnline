@@ -1,0 +1,76 @@
+<div class="container">
+    <h2 class="orders-title mb-5">
+        {{ "Orders.title" | translate }}
+    </h2>
+    <div class="row">
+        <div class="col-12">
+            <mat-accordion>
+                <mat-expansion-panel class="order-accordion__panel" *ngFor="let order of userOrders; let i = index">
+                    <mat-expansion-panel-header class="order-accordion__header">
+                        <mat-panel-title>
+                            {{ "Orders.order" | translate }} №{{ i + 1 }}
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+
+                    <div class="order-wrapper pt-3">
+                        <div class="order-item" *ngFor="let product of order.products">
+                            <div class="row">
+                                <div class="col-3">
+                                    <img class="order-image" [src]="product.slides[0].imageUrl" alt="Product image">
+                                </div>
+                                <div class="col-5">
+                                    <h4 class="order-info-title">
+                                        {{ "Orders.detailsTitle" | translate }}
+                                    </h4>
+                                    <div class="order-details">
+                                        <p class="order-details__item">
+                                            {{ "Order.size" | translate }}:
+                                            <strong>
+                                                {{ product.size }}
+                                            </strong>
+                                        </p>
+
+                                        <p class="order-details__item">
+                                            {{ "Order.quantity" | translate }}:
+                                            <strong>{{ product.quantity }}</strong>
+                                        </p>
+
+                                        <p class="order-details__item">
+                                            {{ "Order.price" | translate }}:
+                                            <strong>{{ product.price }}$</strong>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <h4 class="order-info-title">
+                                        {{ "Orders.shippingAddress" | translate }}
+                                    </h4>
+
+                                    <p class="order-details__item">
+                                        {{ order.fio }}
+                                    </p>
+
+                                    <p class="order-details__item">
+                                        {{ order.city }}
+                                    </p>
+
+                                    <p class="order-details__item">
+                                        {{ order.address }}
+                                    </p>
+
+                                    <p class="order-details__item">
+                                        {{ order.index }}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </mat-expansion-panel>
+            </mat-accordion>
+        </div>
+    </div>
+
+    <div class="empty-orders" *ngIf="!userOrders.length">
+        {{ "Orders.empty" | translate }}
+    </div>
+</div>

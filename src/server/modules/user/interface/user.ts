@@ -7,6 +7,7 @@ export interface UserData extends Document {
     name: string;
     surname: string;
     sessions: Array<Session>;
+    orders: any;
 }
 
 export interface UserModel extends mongoose.Model<UserData> {

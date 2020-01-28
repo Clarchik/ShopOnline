@@ -2,15 +2,15 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Order } from '../../shared/models/order/order';
 import { OrderService } from '../../shared/services/order/order.service';
-import { ShopState, CartSelectors, UserSelectors, CartActions } from '../../store';
+import { ShopState, CartSelectors, CartActions } from '../../store';
 import { Store } from '@ngrx/store';
 import { CartProduct } from '../../shared/models/cart-product/cart-product';
 import { ToastrService } from 'ngx-toastr';
-import { finalize, switchMap, map } from 'rxjs/operators';
+import { switchMap, map } from 'rxjs/operators';
 import { Router } from '@angular/router';
-import { combineLatest, of, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { ShippingAddress } from '../../shared/models/shipping/shipping';
-import { User } from '../../shared/interfaces/user/user';
+import * as _ from 'lodash';
 
 @Component({
     selector: 'app-order',

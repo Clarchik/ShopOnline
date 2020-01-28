@@ -12,9 +12,10 @@ const OrderSchema = new mongoose.Schema({
     products: [
         {
             title: String,
-            qunatity: Number,
+            quantity: Number,
             price: Number,
             size: Number,
+            mainImage: String,
             slides: [
                 { imageUrl: String }
             ]

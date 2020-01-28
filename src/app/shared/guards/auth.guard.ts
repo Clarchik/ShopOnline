@@ -1,54 +1,30 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router } from '@angular/router';
-import { Observable, combineLatest, of } from 'rxjs';
-import { ShopState, UserSelectors, CartSelectors } from '../../store';
+import { Observable, of } from 'rxjs';
+import { ShopState, UserSelectors } from '../../store';
 import { Store } from '@ngrx/store';
-import { tap, combineAll, take, map, switchMap } from 'rxjs/operators';
+import { tap, switchMap } from 'rxjs/operators';
 
 @Injectable({
     providedIn: 'root'
 })
 export class AuthGuard implements CanActivate {
-
     constructor(
         private store: Store<ShopState>,
         private router: Router) { }
 
-    private getFromStore(): Observable<{ can: boolean, url: string }> {
-        return combineLatest([
-            this.store.select(UserSelectors.isUserLogged),
-            this.store.select(CartSelectors.isCartNotEmpty)
-        ]).pipe(
-            map(([user, cart]: [boolean, boolean]) => {
-                const obj = {
-                    url: '',
-                    can: false
-                };
-
-                if (!user) {
-                    obj.url = '/login';
-                } else if (!cart) {
-                    obj.url = '/products';
-                } else {
-                    obj.can = true;
-                }
-                return obj;
-            })
-        );
-    }
-
     canActivate(
         next: ActivatedRouteSnapshot,
         state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-        return this.getFromStore()
-            .pipe(
-                switchMap((value) => {
-                    if (value.url) {
-                        this.router.navigate([value.url]);
-                    }
-                    return of(value.can);
-                })
-            );
+        return this.store.select(UserSelectors.isUserLogged).pipe(
+            switchMap((logged) => {
+                if (logged) {
+                    return of(true);
+                } else {
+                    this.router.navigateByUrl('login');
+                    return of(false);
+                }
+            })
+        );
     }
-
 }

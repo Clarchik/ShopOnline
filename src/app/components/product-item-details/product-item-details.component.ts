@@ -42,8 +42,8 @@ export class ProductItemDetailsComponent implements OnInit {
 
     public sizeChanged(size: number) {
         this.productQuantity = 1;
-        const choosenSizeQunatity = this._product.sizes.find((item) => item.size === size).quantity;
-        this.productMaxPosibleQuantity = choosenSizeQunatity;
+        const choosenSizeQuantity = this._product.sizes.find((item) => item.size === size).quantity;
+        this.productMaxPosibleQuantity = choosenSizeQuantity;
     }
 
     public changeProductView(url: string) {

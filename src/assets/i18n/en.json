@@ -16,7 +16,17 @@
         "fio": "Name and surname",
         "city": "City",
         "address": "Address",
-        "postindex": "Index"
+        "postindex": "Index",
+        "quantity": "Quantity",
+        "size": "Size",
+        "price": "Price"
+    },
+    "Orders": {
+        "title": "Your orders",
+        "empty": "You doesnt have any orders",
+        "order": "Order",
+        "detailsTitle": "Order details",
+        "shippingAddress": "Shipping address"
     },
     "Size": {
         "header": "Size tables",
@@ -39,7 +49,8 @@
     },
     "Profile": {
         "details": "Profile details",
-        "logout": "Logout"
+        "logout": "Logout",
+        "orders": "Orders"
     },
     "Authentication": {
         "login": "Login",

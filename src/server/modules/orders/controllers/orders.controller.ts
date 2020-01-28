@@ -12,6 +12,10 @@ export default class OrdersController {
 
 
     private orderRoutes() {
+        // Save User Order
         this.app.route('/api/saveorder').post([verifyJWTToken, verifySession], this.ordersService.saveOrder);
+
+        // Get Current User Orders
+        this.app.route('/api/getUserOrders').get([verifyJWTToken, verifySession], this.ordersService.getUserOrders);
     }
 }
