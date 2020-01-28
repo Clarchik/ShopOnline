@@ -2,6 +2,7 @@ import express from 'express';
 import { Order } from '../models';
 import { User } from '../../user/models';
 import { createHTMLTemplate } from '../../../shared/utils';
+import { UserData } from '../../user/interface/user';
 const mailjet = require('node-mailjet').connect('850a29ef9d5d2b62a1e09fa3e437534d', 'b6023fb90acee91b5417318923b00cbd');
 
 export default class OrdersService {
@@ -56,6 +57,14 @@ export default class OrdersService {
         } else {
             res.status(403).send({ message: 'User not found' });
         }
+    }
+
+    public getUserOrders(req: express.Request, res: express.Response) {
+        const { user_id } = (req as any);
+        User.findById(user_id).populate('orders').exec((err, user: UserData) => {
+            if (err) { res.status(400).send({ message: 'User orders not found' }); }
+            res.status(200).send(user.orders);
+        });
     }
 }
 
