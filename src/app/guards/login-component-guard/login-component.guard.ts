@@ -1,14 +1,15 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router } from '@angular/router';
+import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router, NavigationEnd } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { ShopState, UserSelectors } from '../../store';
 import { Store } from '@ngrx/store';
-import { switchMap } from 'rxjs/operators';
+import { switchMap, filter } from 'rxjs/operators';
 
 @Injectable({
     providedIn: 'root'
 })
-export class AuthLoginGuard implements CanActivate {
+export class LoginComponentGuard implements CanActivate {
+    private previousUrl: string = '';
     constructor(
         private store: Store<ShopState>,
         private router: Router) { }

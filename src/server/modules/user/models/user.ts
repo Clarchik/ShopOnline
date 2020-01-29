@@ -97,8 +97,8 @@ UserSchema.methods.createSession = function() {
     }).then((refreshToken: string) => {
         return refreshToken;
     }).catch((e: any) => {
-        return Promise.reject({ message: 'Failed to save session to database.\n' + e });
-    })
+        return Promise.reject({ message: `Failed to save session to database.\n ${e}` });
+    });
 };
 
 UserSchema.methods.checkRefreshTokenOnExpiry = function(token: string) {

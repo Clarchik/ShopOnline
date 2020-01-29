@@ -1,3 +1,4 @@
+/* Modules */
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
@@ -13,33 +14,29 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
-import { CurrencyRatesService } from './shared/services/currency/currency-rates.service';
-import { GalleryShoesDirective } from './shared/directives/gallery-shoes/gallery-shoes.directive';
-import { ImageGridDirective } from './shared/directives/image-grid/image-grid.directive';
-import { CurrencyConverterPipe } from './shared/pipes/currency-converter/currency-converter.pipe';
-import { CurrencyRates } from './shared/models/currency/currency-rates';
-
-import { AppComponent } from './app.component';
-import { InitService } from './shared/services/authentication/init.service';
+/* Interceptors */
 import { WebReqInterceptor } from './interceptor/web-req.interceptor';
-import { RegistrationComponent } from './components/registration/registration.component';
-import { RegistrationAutoFocusDirective } from './shared/directives/registration/registration-auto-focus.directive';
-import { ProfileComponent } from './components/account/profile/profile.component';
-import { ProfileDetailsComponent } from './components/account/profile-details/profile-details.component';
-import { CopmareValidatorDirective } from './shared/validators/compare-validators/compare-validator.directive';
 
-import * as fromComponents from './components';
-import { reducers as userReducers, effects as userEffects } from './store';
-import { ProductsComponent } from './components/products/products.component';
-import { ProductItemComponent } from './components/product-item/product-item.component';
-import { ProductItemDetailsComponent } from './components/product-item-details/product-item-details.component';
-import { SizesComponent } from './components/sizes/sizes.component';
+/* Services */
+import { CurrencyRatesService } from './shared/services/currency/currency-rates.service';
+import { InitService } from './shared/services/authentication/init.service';
 import { ResizeService } from './shared/services/resize/resize.service';
 import { UtilsService } from './shared/services/utils/utils.service';
-import { SearchComponent } from './components/search/search.component';
-import { ProductPreviewComponent } from './components/product-preview/product-preview.component';
-import { OrderComponent } from './components/order/order.component';
-import { UserOrdersComponent } from './components/user-orders/user-orders.component';
+
+/* Pipes and Directives */
+import * as fromSharedDirectives from './shared/directives';
+import { CurrencyRates } from './shared/models/currency/currency-rates';
+import { CurrencyConverterPipe } from './shared/pipes/currency-converter/currency-converter.pipe';
+
+/* Root Store */
+import { reducers as userReducers, effects as userEffects } from './store';
+
+/* Components */
+import {AppComponent} from './app.component';
+import * as fromComponents from './components';
+
+/* Others */
+import {environment} from '../environments/environment.prod';
 
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http);
@@ -60,22 +57,8 @@ export function setupInitFactory(
     declarations: [
         AppComponent,
         ...fromComponents.Components,
-        GalleryShoesDirective,
-        ImageGridDirective,
+        ...fromSharedDirectives.Directives,
         CurrencyConverterPipe,
-        RegistrationComponent,
-        RegistrationAutoFocusDirective,
-        ProfileComponent,
-        ProfileDetailsComponent,
-        CopmareValidatorDirective,
-        ProductsComponent,
-        ProductItemComponent,
-        ProductItemDetailsComponent,
-        SizesComponent,
-        SearchComponent,
-        ProductPreviewComponent,
-        OrderComponent,
-        UserOrdersComponent,
     ],
     imports: [
         BrowserModule,
@@ -86,7 +69,10 @@ export function setupInitFactory(
         HttpClientModule,
         MatExpansionModule,
         StoreModule.forRoot(userReducers),
-        StoreDevtoolsModule.instrument(),
+        StoreDevtoolsModule.instrument({
+            maxAge: 25,
+            logOnly: environment.production
+        }),
         EffectsModule.forRoot(userEffects),
         MDBBootstrapModule.forRoot(),
         ToastrModule.forRoot(),

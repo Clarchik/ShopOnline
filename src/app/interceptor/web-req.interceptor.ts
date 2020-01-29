@@ -26,7 +26,7 @@ export class WebReqInterceptor implements HttpInterceptor {
         );
     }
 
-    addAuthHeader(request: HttpRequest<any>) {
+    private addAuthHeader(request: HttpRequest<any>) {
         const accessToken = this.utilsService.getAccessToken();
         const refreshToken = this.utilsService.getRefreshToken();
         const userId = this.utilsService.getUserId();

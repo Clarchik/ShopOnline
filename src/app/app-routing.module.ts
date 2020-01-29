@@ -8,22 +8,22 @@ import { ProductsComponent } from './components/products/products.component';
 import { ProductItemDetailsComponent } from './components/product-item-details/product-item-details.component';
 import { SizesComponent } from './components/sizes/sizes.component';
 import { OrderComponent } from './components/order/order.component';
-import { LoginGuard } from './shared/guards/login-guard.guard';
-import { AuthLoginGuard } from './shared/guards/auth-login.guard';
+import { MakeOrderGuard } from './guards/make-order-guard/make-order-component.guard';
+import { LoginComponentGuard } from './guards/login-component-guard/login-component.guard';
 import { UserOrdersComponent } from './components/user-orders/user-orders.component';
-import { AuthGuard } from './shared/guards/auth.guard';
+import { AuthGuard } from './guards/auth-guard/auth.guard';
 import { UserOrdersResolver } from './resolvers/user-orders/user-orders.resolver';
 
 const routes: Routes = [
     { path: '', redirectTo: 'orders', pathMatch: 'full' },
     { path: 'main', component: MainPageComponent, data: { animation: 'swipeLeft' } },
-    { path: 'login', component: LoginComponent, canActivate: [AuthLoginGuard], data: { animation: 'swipeRight' } },
+    { path: 'login', component: LoginComponent, canActivate: [LoginComponentGuard], data: { animation: 'swipeRight' } },
     { path: 'registration', component: RegistrationComponent, data: { animation: 'FlipY' } },
     { path: 'profile-details', component: ProfileDetailsComponent },
     { path: 'products', component: ProductsComponent },
     { path: 'product/:id', component: ProductItemDetailsComponent },
     { path: 'size-guide', component: SizesComponent },
-    { path: 'make-order', component: OrderComponent, canActivate: [LoginGuard] },
+    { path: 'make-order', component: OrderComponent, canActivate: [MakeOrderGuard] },
     {
         path: 'orders',
         component: UserOrdersComponent,
