@@ -1,7 +1,6 @@
-import { Component, OnInit, OnChanges, DoCheck, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { HttpClient } from '@angular/common/http';
 import { RegistrationValidators } from '../../shared/validators/registration-validators/registration.validators';
 import { AuthenticationService } from '../../shared/services/authentication/authentication.service';
 import { UtilsService } from '../../shared/services/utils/utils.service';
@@ -9,6 +8,7 @@ import { transition, trigger, useAnimation } from '@angular/animations';
 import { wobble, shake, zoomOutRight, rubberBand } from 'ng-animate';
 
 import { ShopState, UserActions } from '../../store';
+import {Subscription} from 'rxjs';
 
 @Component({
     selector: 'app-registration',
@@ -29,17 +29,15 @@ import { ShopState, UserActions } from '../../store';
         ])
     ]
 })
-export class RegistrationComponent implements OnInit, OnChanges {
-
+export class RegistrationComponent implements OnInit, OnDestroy {
+    public subscription: Subscription = new Subscription();
     public registrationForm: FormGroup;
     public difficulty = '';
-    public passwordToRead = true;
-    @ViewChild('passwordInput', { static: false }) passwordInput: ElementRef;
-
+    public passwordToRead = false;
 
     constructor(
         private fb: FormBuilder, private store: Store<ShopState>,
-        private http: HttpClient, private authService: AuthenticationService, private utils: UtilsService) {
+        private authService: AuthenticationService, private utils: UtilsService) {
         this.registrationForm = this.fb.group({
             email: [
                 null,
@@ -63,34 +61,25 @@ export class RegistrationComponent implements OnInit, OnChanges {
         }, {
             validators: RegistrationValidators.checkPassword
         });
-
-        this.ngOnChanges();
     }
 
     ngOnInit() {
+        this.subscription.add(this.registrationForm.get('password').valueChanges.subscribe((val) => {
+            this.difficulty = this.utils.getPasswordDifficulty(val);
+        }));
     }
 
-    ngOnChanges() {
-        this.registrationForm.get('password').valueChanges.subscribe((val) => {
-            this.utils.getPasswordDifficulty(val).subscribe((value) => {
-                this.difficulty = value;
-            });
-        });
+    ngOnDestroy() {
+        this.subscription.unsubscribe();
     }
 
-    SignUp() {
+    signUp() {
         const { email, password, name, surname } = this.registrationForm.value;
         this.store.dispatch(new UserActions.RegistrationUser({ email, password, name, surname }));
     }
 
     showHidePassword() {
-        if (this.passwordToRead) {
-            this.passwordInput.nativeElement.setAttribute('type', 'text');
-            this.passwordToRead = false;
-        } else {
-            this.passwordInput.nativeElement.setAttribute('type', 'password');
-            this.passwordToRead = true;
-        }
+        this.passwordToRead = !this.passwordToRead;
     }
 
     get email() {

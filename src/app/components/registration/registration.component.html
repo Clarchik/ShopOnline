@@ -81,23 +81,21 @@
         </div>
         <div class="col-lg-5 col-md-5 col-xl-5 col-10 col-sm-10">
             <div class="md-form">
-                <input mdbInput mdbValidate type="password" #passwordInput id="form4" class="form-control"
-                    formControlName="password" autocomplete="off">
+                <input mdbInput mdbValidate type="password" id="form4" class="form-control"
+                    [attr.type]="passwordToRead ? 'text': 'password'" formControlName="password" autocomplete="off">
                 <label for="form4">
                     Password
                 </label>
+
                 <div class="registration-form__icons">
                     <mdb-icon [@bird] fas icon="check" class="green-text icon__margin"
                         *ngIf="password.valid && password.dirty">
                     </mdb-icon>
 
                     <mdb-icon [@cancel] fas icon="times" class="red-text icon__margin" *ngIf="password.invalid && password.dirty ||
-                    password.invalid && password.touched"></mdb-icon>
-
-                    <div class="spinner-border text-light" *ngIf="password.status === 'PENDING'" role="status">
-                        <span class="sr-only">Loading...</span>
-                    </div>
+                                    password.invalid && password.touched"></mdb-icon>
                 </div>
+
                 <div *ngIf="password.invalid && password.dirty || password.invalid && password.touched">
                     <small [@errors] *ngIf="password.errors['required']">
                         Required field
@@ -107,16 +105,16 @@
                     </small>
                 </div>
                 <!-- SHOULD REFACTORING THIS PART (RUDOLF) -->
-                <div [@bird] *ngIf="password.valid && password.dirty" class="login__password-protection">
-                    <div class="password__difficulty">
-                        <div *ngIf="difficulty === 'weak'" style="width: 30%; background-color: #f44336; height: 100%;">
+                <div [ngClass]="{'show': password.valid && password.dirty}" class="login__password-protection">
+                    <div class="password-difficulty" [ngClass]="{'show': password.valid && password.dirty}">
+                        <div [ngClass]="{
+                            'password-difficulty__empty': difficulty === '',
+                            'password-difficulty__weak': difficulty === 'weak',
+                            'password-difficulty__common': difficulty === 'common',
+                            'password-difficulty__well': difficulty === 'well',
+                            'password-difficulty__super': difficulty === 'super'
+                            }">
                         </div>
-                        <div *ngIf="difficulty === 'common'"
-                            style="width: 50%; background-color: #ffc107; height: 100%;"></div>
-                        <div *ngIf="difficulty === 'well'" style="width: 80%; background-color: #80ba29; height: 100%;">
-                        </div>
-                        <div *ngIf="difficulty === 'super'"
-                            style="width: 100%; background-color: #00c851; height: 100%;"></div>
                     </div>
                     <span>Password protection level</span>
                 </div>
@@ -161,7 +159,7 @@
     </form>
     <div class="row registration__button">
         <div class="col-12  registration__button_block">
-            <button (click)="SignUp()" lass="w-100" type="button" mdbBtn color="dark" mdbWavesEffect
+            <button (click)="signUp()" lass="w-100" type="button" mdbBtn color="dark" mdbWavesEffect
                 [disabled]="registrationForm.invalid || registrationForm.pending">
                 Sign Up
             </button>

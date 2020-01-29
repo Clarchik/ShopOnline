@@ -17,6 +17,7 @@
         opacity: 1;
         transition: 0.5s all ease-in-out;
     }
+
     &--pending {
         display: flex;
         justify-content: center;
@@ -33,12 +34,15 @@
     align-items: center;
     justify-content: center;
 }
+
 .error-message {
     top: 50px !important;
 }
+
 .success-message {
     top: 50px !important;
 }
+
 small {
     display: block;
     font-size: .8rem;
@@ -50,16 +54,20 @@ small {
     border-bottom: 1px solid #f44336 !important;
     box-shadow: 0 1px 0 0 #f44336 !important;
 }
+
 .success_input {
     border-bottom: 1px solid #00c851 !important;
     box-shadow: 0 1px 0 0 #00c851 !important;
 }
+
 .protected_label {
     color: #f44336 !important;
 }
+
 .success_label {
     color: #00c851 !important;
 }
+
 .registration__button {
     width: 100%;
 
@@ -75,9 +83,57 @@ small {
         }
     }
 }
-.password__difficulty {
+
+.login__password-protection {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 0.3rem;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+
+    &.show {
+        opacity: 1;
+        transition: opacity .65s ease-in-out;
+    }
+}
+
+.password-difficulty {
     background-color: gainsboro;
     width: 60%;
+    &.show {
+        width: 60%;
+        transition: width .5s ease-in-out;
+    }
+
+    > div {
+        height: 100%;
+        transition: all .65s ease-in-out;
+    }
+
+    &__empty {
+        width: 0%;
+    }
+
+    &__weak {
+        width: 25% !important;
+        background-color: #f44336;
+    }
+
+    &__common {
+        width: 50%;
+        background-color: #ffc107;
+    }
+
+    &__well {
+        width: 75%;
+        background-color: #80ba29;
+    }
+
+    &__super {
+        width: 100%;
+        background-color: #00c851;
+    }
+
 }
 
 .registration-form__icons--block {
@@ -86,28 +142,28 @@ small {
     align-items: center;
     cursor: pointer;
 }
+
 .icon__margin {
     margin-bottom: 20px;
 }
+
 .registration__confirm-pass {
     position: absolute;
     display: flex;
     flex-direction: column;
 }
+
 .icon__animated {
     position: absolute;
     top: 40px;
     transition: 0.3s all ease-in-out;
     color: #212529;
+
     &:hover {
         transform: scale(1.2);
     }
 }
-.login__password-protection {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 0.3rem;
-}
+
 span {
     font-size: .7rem;
     color: #00c851;
@@ -122,15 +178,18 @@ span {
     .section__login-h1 {
         font-size: 28px;
     }
+
     span {
         font-size: .5rem;
     }
 }
+
 @media screen and (min-device-width: 442px) and (max-device-width: 528px) {
     span {
         font-size: .6rem;
     }
 }
+
 @media screen and (min-device-width: 767px) and (max-device-width: 991px) {
     span {
         font-size: .5rem;

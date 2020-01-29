@@ -49,7 +49,7 @@ export class UtilsService {
         return localStorage.getItem(SESSION._id);
     }
 
-    public getPasswordDifficulty(password: string) {
+    public getPasswordDifficulty(password: string): string {
         const smallLetters = '([a-z]+)';
         const bigLetters = '([A-Z]+)';
         const numb = '([0-9]+)';
@@ -57,9 +57,7 @@ export class UtilsService {
         let difficulty = '';
         let protect = 0;
 
-        if (password.length < 8) {
-            difficulty = 'weak';
-        }
+
 
         if (password.match(smallLetters)) {
             protect++;
@@ -88,7 +86,12 @@ export class UtilsService {
                 difficulty = 'weak';
                 break;
         }
-        return of(difficulty);
+
+        if (password.length < 8) {
+            difficulty = '';
+        }
+
+        return difficulty;
     }
 
     public offset(el): { top, left } {
