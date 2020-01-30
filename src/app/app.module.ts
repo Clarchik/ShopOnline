@@ -19,7 +19,7 @@ import { WebReqInterceptor } from './interceptor/web-req.interceptor';
 
 /* Services */
 import { CurrencyRatesService } from './shared/services/currency/currency-rates.service';
-import { InitService } from './shared/services/authentication/init.service';
+import { InitService } from './shared/services/init/init.service';
 import { ResizeService } from './shared/services/resize/resize.service';
 import { UtilsService } from './shared/services/utils/utils.service';
 

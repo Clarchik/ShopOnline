@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { switchMap, map, catchError } from 'rxjs/operators';
-import { AuthenticationService } from './authentication.service';
+import { map, catchError } from 'rxjs/operators';
+import { AuthenticationService } from '../authentication/authentication.service';
 import { of } from 'rxjs';
 
 import { UserActions, ShopState } from '../../../store';
