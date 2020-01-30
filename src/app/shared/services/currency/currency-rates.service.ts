@@ -13,18 +13,18 @@ export class CurrencyRatesService {
 
     constructor(private http: HttpClient, private cr: CurrencyRates) {}
 
-    public getCurrencyRates(): Promise<Array<Currency>> {
-        return new Promise<Array<Currency>>((resolve) => {
+    public getCurrencyRates(): Promise<boolean> {
+        return new Promise<boolean>((resolve) => {
             this.http.get('/api/exchange').pipe(
                 map((response: any) => this.getAllRequiredCurrency(response))
             ).subscribe({
-                next: (response) => {
-                    resolve(response);
-                    this.cr.rates = response;
+                next: (rates) => {
+                    resolve(true);
+                    this.cr.rates = rates ? rates : [this.cr.defaultCurrency];
                 },
                 error: () => {
-                    resolve([]);
-                    this.cr.rates = [];
+                    resolve(true);
+                    this.cr.rates = [this.cr.defaultCurrency];
                 }
             });
         });

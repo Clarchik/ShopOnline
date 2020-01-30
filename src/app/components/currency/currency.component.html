@@ -1,15 +1,18 @@
 <div class="dropdown" *ngIf="currensiesSize >= 1" mdbDropdown>
+
     <button mdbDropdownToggle class="btn" *ngIf="availableCurrenciesSize >= 1"
         [ngClass]="{'dropdown-toggle dropdown__toggle': availableCurrenciesSize >= 1}">
         <img src="../../../assets/flags/{{currentCurrency.name.toLowerCase()}}.svg" alt="Currency icon"
             class="dropdown__image">
         <span>{{ currentCurrency.name.toUpperCase() }}</span>
     </button>
+
     <button class="btn dropdown__toggle" *ngIf="availableCurrenciesSize < 1">
         <img src="../../../assets/flags/{{currentCurrency.name.toLowerCase()}}.svg" alt="Currency icon"
             class="dropdown__image">
         <span>{{ currentCurrency.name.toUpperCase() }}</span>
     </button>
+
     <div class="dropdown-menu header__dropdown" *ngIf="availableCurrenciesSize >= 1">
         <a (click)="switchCurrency(currency)" class="dropdown-item" *ngFor="let currency of availableCurrencies">
             <img src="../../../assets/flags/{{currency.name.toLowerCase()}}.svg" class="dropdown__image"

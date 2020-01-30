@@ -10,27 +10,24 @@ import { CurrencyStorageService } from '../../shared/services/currency/currency-
 })
 export class CurrencyComponent {
     public currentCurrency: Currency;
-    public allCurencies: Array<Currency> = [];
     public availableCurrencies: Array<Currency> = [];
+    private allCurencies: Array<Currency> = [];
     constructor(private css: CurrencyStorageService, private cs: CurrencyRates) {
         this.initCurrencies();
     }
 
     initCurrencies() {
         const currencyRates = this.cs.rates;
-        const currencyFromLocalStorage: Currency = localStorage.getItem('currency') ? JSON.parse(localStorage.getItem('currency')) : null;
-        const currencyFromServiceStorage: Currency = this.css.lastCurrency ? this.css.lastCurrency : null;
-        const currencyFromStorage = currencyFromLocalStorage || currencyFromServiceStorage;
-        const refreshIfFound = currencyRates.length && currencyFromStorage ? currencyRates.find(((item) => item.name === currencyFromStorage.name)) : null;
-        const currency = refreshIfFound ? refreshIfFound : this.cs.defaultCurrency;
-        this.allCurencies = currencyRates.length ? currencyRates : [currency];
+        const currencyNameFromStorage = this.css.lastCurrencyName;
+        const foundCurrency = currencyRates.find(((item) => item.name === currencyNameFromStorage));
+        const currency = foundCurrency ? foundCurrency : this.cs.defaultCurrency;
+        this.allCurencies = currencyRates;
         this.switchCurrency(currency);
 
     }
 
     public switchCurrency(currency: Currency) {
         this.css.onCurrencyChange(currency);
-        localStorage.setItem('currency', JSON.stringify(currency));
         this.currentCurrency = currency;
         this.availableCurrencies = this.allCurencies.filter((singleCurrency) => singleCurrency.name !== this.currentCurrency.name);
     }
