@@ -15,7 +15,7 @@ import { AuthGuard } from './guards/auth-guard/auth.guard';
 import { UserOrdersResolver } from './resolvers/user-orders/user-orders.resolver';
 
 const routes: Routes = [
-    { path: '', redirectTo: 'orders', pathMatch: 'full' },
+    { path: '', redirectTo: 'main', pathMatch: 'full' },
     { path: 'main', component: MainPageComponent, data: { animation: 'swipeLeft' } },
     { path: 'login', component: LoginComponent, canActivate: [LoginComponentGuard], data: { animation: 'swipeRight' } },
     { path: 'registration', component: RegistrationComponent, data: { animation: 'FlipY' } },

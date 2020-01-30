@@ -27,9 +27,9 @@ export class CurrencyComponent {
     }
 
     public switchCurrency(currency: Currency) {
-        this.css.onCurrencyChange(currency);
         this.currentCurrency = currency;
         this.availableCurrencies = this.allCurencies.filter((singleCurrency) => singleCurrency.name !== this.currentCurrency.name);
+        this.css.onCurrencyChange(currency);
     }
 
     get currensiesSize(): number {

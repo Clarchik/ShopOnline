@@ -5,6 +5,7 @@ import {Currency} from '../../models/currency/currency';
 import {CURRENCY_NAME} from '../../models/currency/currency-names';
 import {CURRENCY_SIGN} from '../../models/currency/currency-sign';
 import {CurrencyRates} from '../../models/currency/currency-rates';
+import {environment} from '../../../../environments/environment';
 
 @Injectable({
     providedIn: 'root'
@@ -15,7 +16,7 @@ export class CurrencyRatesService {
 
     public getCurrencyRates(): Promise<boolean> {
         return new Promise<boolean>((resolve) => {
-            this.http.get('/api/exchange').pipe(
+            this.http.get(`${environment.apiPath}/api/exchange`).pipe(
                 map((response: any) => this.getAllRequiredCurrency(response))
             ).subscribe({
                 next: (rates) => {

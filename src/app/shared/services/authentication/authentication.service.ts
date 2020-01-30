@@ -7,6 +7,7 @@ import { UtilsService } from '../utils/utils.service';
 import { UserData } from '../../models/user/user-data';
 import { UserPasswords } from '../../models/user/user-passwords';
 import { Router } from '@angular/router';
+import {environment} from '../../../../environments/environment';
 
 
 
@@ -21,11 +22,11 @@ export class AuthenticationService {
         private utilsService: UtilsService) { }
 
     public signInFromSession() {
-        return this.http.get('/api/users/login/session');
+        return this.http.get(`${environment.apiPath}/api/users/login/session`);
     }
 
     public signInWithEmailAndPassword(email: string, password: string): Observable<any> {
-        return this.http.post('/api/users/login', { email, password }, { observe: 'response' }).pipe(
+        return this.http.post(`${environment.apiPath}/api/users/login`, { email, password }, { observe: 'response' }).pipe(
             tap((response: HttpResponse<any>) => {
                 const id = response.body._id;
                 const accessToken = response.headers.get(SESSION['x-access-token']);
@@ -37,20 +38,20 @@ export class AuthenticationService {
     }
 
     public signUpUser(email: string, password: string, name: string, surname: string): Observable<any> {
-        return this.http.post('/api/users', { email, password, name, surname });
+        return this.http.post(`${environment.apiPath}/api/users`, { email, password, name, surname });
     }
 
     public chekUserEmail(email: string): Observable<any> {
-        return this.http.post('/api/users/login/exists', { email });
+        return this.http.post(`${environment.apiPath}/api/users/login/exists`, { email });
     }
 
     public updateUserData(userData: UserData): Observable<any> {
         const { name, surname, email } = userData;
-        return this.http.put(`/api/users/update/${userData._id}`, { name, surname, email });
+        return this.http.put(`${environment.apiPath}/api/users/update/${userData._id}`, { name, surname, email });
     }
 
     public updateUserPasswords(userPasswords: UserPasswords, id: string): Observable<any> {
-        return this.http.put(`/api/users/updatePassword/${id}`, userPasswords);
+        return this.http.put(`${environment.apiPath}/api/users/updatePassword/${id}`, userPasswords);
     }
 
     public logoutUser() {

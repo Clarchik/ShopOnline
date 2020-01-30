@@ -9,7 +9,7 @@ import { Language } from '../../shared/models/languages/language';
     styleUrls: ['./language.component.scss'],
 })
 export class LanguageComponent {
-    public allLanguages: Array<Language>;
+    private allLanguages: Array<Language>;
     public availableLanguages: Array<Language>;
     public currentLanguage: LANGUAGE_NAMES;
     constructor(private translate: TranslateService) {
