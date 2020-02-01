@@ -1,0 +1,36 @@
+<li class="nav-item brands-link">
+    <a class="nav-link nav-link__effect">
+        {{ 'Header.brands' | translate }}
+    </a>
+    <div class="brands-menu container-fluid">
+        <div class="row">
+            <div class="col-12 brands-menu__wrapper">
+                <h3 class="brands-menu__title">Brands available</h3>
+                <ul class="brands-menu__list">
+                    <li class="brands-menu__list-item">
+                        <a class="nav-link nav-link__effect list-item__link" [routerLink]="['/products']"
+                            [queryParams]="{category: 'nike'}">
+                            <img src="assets/images/nike.svg">
+                            <span>Nike</span>
+                        </a>
+                    </li>
+                    <li class="brands-menu__list-item">
+                        <a class="nav-link nav-link__effect list-item__link" [routerLink]="['/products']"
+                            [queryParams]="{category: 'adidas'}">
+                            <img src="assets/images/adidas.svg">
+                            <span>Adidas</span>
+                        </a>
+                    </li>
+                    <li class="brands-menu__list-item">
+                        <a class="nav-link nav-link__effect list-item__link" [routerLink]="['/products']"
+                            [queryParams]="{category: 'reebok'}">
+                            <img src="assets/images/reebok.svg">
+                            <span>Reebok</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</li>
+

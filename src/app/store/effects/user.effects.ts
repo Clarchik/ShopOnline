@@ -26,10 +26,10 @@ export class UserEffects {
     @Effect()
     loginInUser$ = this.actions$.pipe(
         ofType(userActions.LOGIN_USER),
-        map((action: userActions.LoginUser) => action.payload),
-        switchMap(({ email, password }) => this.authService.signInWithEmailAndPassword(email, password)
+        map((action: userActions.LoginUser) => ({ ...action.payload, redirectUrl: action.redirectUrl })),
+        switchMap(({ email, password, redirectUrl }) => this.authService.signInWithEmailAndPassword(email, password)
             .pipe(
-                map((user) => new userActions.LoginUserSuccess(user)),
+                map((user) => new userActions.LoginUserSuccess(user, redirectUrl)),
                 catchError(({ error }) => of(new userActions.LoginUserFail({ message: error.message }))),
             )
         )
@@ -38,9 +38,11 @@ export class UserEffects {
     @Effect({ dispatch: false })
     loginInUserSuccess$ = this.actions$.pipe(
         ofType(userActions.LOGIN_USER_SUCCESS),
-        map((action: userActions.LoginUserSuccess) => action.payload),
+        map((action: userActions.LoginUserSuccess) => ({ ...action.payload, redirectUrl: action.redirectUrl })),
         tap((data) => {
-            // this.router.navigateByUrl('/main');
+            if (data.redirectUrl) {
+                this.router.navigateByUrl(data.redirectUrl);
+            }
             this.toastr.success(`${this.translate.instant('Shared.hello')}, ${data.email}`, `${this.translate.instant('Authorization.success')}`);
         })
     );

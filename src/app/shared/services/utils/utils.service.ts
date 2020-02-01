@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { SCREEN_SIZE, } from '../../models/screen-size/screen-size';
 import { SCREEN_COFIG } from '../../models/screen-size/screen-size-config';
 import { SESSION } from '../../models/session/session';
-import { of } from 'rxjs';
+import * as _ from 'lodash';
 
 @Injectable({
     providedIn: 'root'
@@ -94,10 +94,7 @@ export class UtilsService {
         return difficulty;
     }
 
-    public offset(el): { top, left } {
-        const rect = el.getBoundingClientRect();
-        const scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
-        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        return { top: rect.top + scrollTop, left: rect.left + scrollLeft };
+    public chunkArrayBySize(items: Array<any>, chunkSize: number) {
+        return _.chunk(items, 3);
     }
 }

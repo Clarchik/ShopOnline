@@ -3,13 +3,12 @@ import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Rout
 import { Observable, of } from 'rxjs';
 import { ShopState, UserSelectors } from '../../store';
 import { Store } from '@ngrx/store';
-import { switchMap, filter } from 'rxjs/operators';
+import { switchMap } from 'rxjs/operators';
 
 @Injectable({
     providedIn: 'root'
 })
 export class LoginComponentGuard implements CanActivate {
-    private previousUrl: string = '';
     constructor(
         private store: Store<ShopState>,
         private router: Router) { }

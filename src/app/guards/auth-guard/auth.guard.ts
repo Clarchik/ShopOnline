@@ -3,7 +3,7 @@ import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Rout
 import { Observable, of } from 'rxjs';
 import { ShopState, UserSelectors } from '../../store';
 import { Store } from '@ngrx/store';
-import { tap, switchMap } from 'rxjs/operators';
+import { switchMap } from 'rxjs/operators';
 
 @Injectable({
     providedIn: 'root'
@@ -21,7 +21,11 @@ export class AuthGuard implements CanActivate {
                 if (logged) {
                     return of(true);
                 } else {
-                    this.router.navigateByUrl('login');
+                    this.router.navigate(['/login'], {
+                        queryParams: {
+                            return: state.url
+                        }
+                    });
                     return of(false);
                 }
             })

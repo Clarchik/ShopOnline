@@ -2,7 +2,10 @@
     "Shared": {
         "hello": "Cześć",
         "sale": "Wyprzedaż",
-        "empty": "Przepraszamy, nie ma produktów w tej kolekcji."
+        "empty": "Przepraszamy, nie ma produktów w tej kolekcji.",
+        "searchProduct": "Wyszukaj produkt po nazwie",
+        "quickShop": "Szybki zakup",
+        "shopNow": "Kupuj teraz"
     },
     "Product": {
         "size": "Rozmiar",

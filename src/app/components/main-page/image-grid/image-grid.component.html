@@ -1,67 +1,49 @@
-<!-- ALL STATIC WITHOUT ANY DYNAMIC( ONLY LAYOUT )   -->
-<!-- WAITING FOR BASE ! WAITING FOR REFACTORING  -->
 <section class="container-fluid">
-
     <!-- 1 ROW -->
-    <div class="row">
-        <div class="col-12 grid__row-block" appImageGrid>
-            <img src="http://cdn.shopify.com/s/files/1/0208/5268/files/ellesse-ww-banner.jpeg?v=1571507565" alt="shoes" title="shoes">
-            <a class="grid__row-link">
-                <div class="grid__row-element">
-                    <h2 class="grid__row-h2"> ELLESSE X WOOD WOOD </h2>
-                    <button class="grid__row-button"> SHOP NOW </button>
+    <div class="row grid-row">
+        <div class="col-12 grid-row__item" appImageGrid>
+            <img src="http://cdn.shopify.com/s/files/1/0208/5268/files/ellesse-ww-banner.jpeg?v=1571507565" alt="shoes"
+                title="shoes">
+            <a class="grid-row__link">
+                <div class="grid-row__link-description">
+                    <h2 class="grid-row__h2"> ELLESSE X WOOD WOOD </h2>
+                    <button class="grid-row__button">
+                        {{ 'Shared.shopNow' | translate }}
+                    </button>
                 </div>
             </a>
         </div>
     </div>
+
     <!-- 2 ROW -->
-    <div class="row grid__row">
-        <div class="col-lg-4 col-md-4 col-xs-12 col-sm-12 grid__row-block" style="overflow: hidden;" appImageGrid>
-            <img src="//cdn.shopify.com/s/files/1/0208/5268/files/homepage2_9-6_800x.jpg?v=1567794828" alt="shoes" title="shoes">
-            <a class="grid__row-link">
-                <div class="grid__row-element">
-                    <h3 class="grid__row-h3"> ELLESSE X WOOD WOOD </h3>
-                    <button class="grid__row-button"> SHOP NOW </button>
-                </div>
-            </a>
-        </div>
-        <div class="col-lg-4 col-md-4 col-xs-12 col-sm-12 grid__row-block" appImageGrid>
-            <img src="//cdn.shopify.com/s/files/1/0208/5268/files/homepage3_9-6_800x.jpg?v=1567795000" alt="shoes" title="shoes">
-            <a class="grid__row-link">
-                <div class="grid__row-element">
-                    <h3 class="grid__row-h3"> ELLESSE X WOOD WOOD </h3>
-                    <button class="grid__row-button"> SHOP NOW </button>
-                </div>
-            </a>
-        </div>
-        <div class="col-lg-4 col-md-4  col-xs-12 col-sm-12 grid__row-block" appImageGrid>
-            <img src="//cdn.shopify.com/s/files/1/0208/5268/files/CARHARTTWEBPANEL-3_800x.jpeg?v=1568392605" alt="shoes" title="shoes">
-            <a class="grid__row-link">
-                <div class="grid__row-element">
-                    <h3 class="grid__row-h3"> ELLESSE X WOOD WOOD </h3>
-                    <button class="grid__row-button"> SHOP NOW </button>
+    <div class="row grid-row">
+        <div *ngFor="let item of secondGridRow" class="col-lg-4 col-md-4 col-xs-12 col-sm-12 grid-row__item" appImageGrid>
+            <img src="{{item.imgUrl}}" alt="Product Image">
+            <a class="grid-row__link">
+                <div class="grid-row__link-description">
+                    <h3 class="grid-row__h3">
+                        {{ item.title }}
+                    </h3>
+                    <button class="grid-row__button">
+                        {{ 'Shared.shopNow' | translate }}
+                    </button>
                 </div>
             </a>
         </div>
     </div>
 
     <!-- 3 ROW -->
-    <div class="row grid__row">
-        <div class="col-lg-6 col-md-6 col-xs-12 col-sm-12 grid__row-block" style="overflow: hidden;" appImageGrid>
-            <img src="//cdn.shopify.com/s/files/1/0208/5268/files/NB-990-homepageC_9-18_800x.jpeg?v=1569950832" alt="shoes" title="shoes">
-            <a class="grid__row-link">
-                <div class="grid__row-element">
-                    <h3 class="grid__row-h3"> ELLESSE X WOOD WOOD </h3>
-                    <button class="grid__row-button"> SHOP NOW </button>
-                </div>
-            </a>
-        </div>
-        <div class="col-lg-6 col-md-6 col-xs-12 col-sm-12 grid__row-block" style="overflow: hidden;" appImageGrid>
-            <img src="//cdn.shopify.com/s/files/1/0208/5268/files/NB-990-homepage_9-18_800x.jpg?v=1568836074" alt="shoes" title="shoes">
-            <a class="grid__row-link">
-                <div class="grid__row-element">
-                    <h3 class="grid__row-h3"> ELLESSE X WOOD WOOD </h3>
-                    <button class="grid__row-button"> SHOP NOW </button>
+    <div class="row grid-row">
+        <div *ngFor="let item of thirdGridRow" class="col-lg-6 col-md-6 col-xs-12 col-sm-12 grid-row__item"  appImageGrid>
+            <img src="{{item.imgUrl}}" alt="Produc Image">
+            <a class="grid-row__link">
+                <div class="grid-row__link-description">
+                    <h3 class="grid-row__h3">
+                        {{ item.title }}
+                    </h3>
+                    <button class="grid-row__button">
+                        {{ 'Shared.shopNow' | translate }}
+                    </button>
                 </div>
             </a>
         </div>

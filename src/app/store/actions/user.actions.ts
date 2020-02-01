@@ -27,12 +27,12 @@ export const UPDATE_USER_PASSWORDS_FAIL = '[Update] Update User Passwords Fail';
 
 export class LoginUser implements Action {
     readonly type = LOGIN_USER;
-    constructor(public payload: Authenticate) { }
+    constructor(public payload: Authenticate, public redirectUrl: string) { }
 }
 
 export class LoginUserSuccess implements Action {
     readonly type = LOGIN_USER_SUCCESS;
-    constructor(public payload: User) { }
+    constructor(public payload: User, public redirectUrl) { }
 }
 
 export class LoginUserFail implements Action {

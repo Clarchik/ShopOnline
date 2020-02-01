@@ -14,54 +14,19 @@
     <!-- Always visible links -->
     <ul class="nav navbar-nav nav-flex-icons ml-auto navbar-nav__lg navbar-nav__sm navbar__container">
 
-        <li class="nav-item">
-            <app-search [iconSize]="iconSize"></app-search>
-        </li>
+        <app-search></app-search>
 
-        <li class="nav-item nav-item__container favorite" [ngClass]="{empty: emptyFavorites}">
-            <a class="nav-link nav-link__effect" [ngClass]="{disabled: emptyFavorites}">
-                <mdb-icon *ngIf="iconSize === 'lg'" far icon="star" size="lg"></mdb-icon>
-                <mdb-icon *ngIf="iconSize === 'sm'" far icon="star" size="sm"></mdb-icon>
-                <span class="icon-counter" *ngIf="!emptyFavorites">
-                    {{ favoritesLength$ | async }}
-                </span>
-            </a>
-            <div class="favorite-products">
-                <app-product-preview [isFavorite]="true"></app-product-preview>
-            </div>
-        </li>
-
-        <li class="nav-item nav-item__container cart" [ngClass]="{empty: emptyCart}">
-            <a class="nav-link nav-link__effect" [ngClass]="{disabled: emptyCart}">
-                <mdb-icon *ngIf="iconSize === 'lg'" class="icon-container" fas icon="shopping-cart" size="lg">
-                </mdb-icon>
-                <mdb-icon *ngIf="iconSize === 'sm'" class="icon-container" fas icon="shopping-cart" size="sm">
-                </mdb-icon>
-                <span class="icon-counter" *ngIf="!emptyCart">
-                    {{ cartLength$ | async }}
-                </span>
-            </a>
-            <!-- Cart Products -->
-            <div class="cart-products">
-                <app-product-preview [isCart]="true"></app-product-preview>
-            </div>
-        </li>
+        <app-products-preview></app-products-preview>
 
         <li class="nav-item">
             <a class="nav-link nav-link__effect" (click)="openPreferencesModal();">
-                <mdb-icon *ngIf="iconSize === 'lg'" fas icon="exchange-alt" size="lg"></mdb-icon>
-                <mdb-icon *ngIf="iconSize === 'sm'" far icon="exchange-alt" size="sm"></mdb-icon>
+                <mdb-icon fas icon="exchange-alt" size="lg"></mdb-icon>
             </a>
         </li>
-        <li class="nav-item" *ngIf="!isLogged">
-            <a class="nav-link nav-link__effect" routerLink="/login" routerLinkActive="nav-link__activated">
-                <mdb-icon *ngIf="iconSize === 'lg'" fas icon="user" size="lg"></mdb-icon>
-                <mdb-icon *ngIf="iconSize === 'sm'" far icon="user" size="sm"></mdb-icon>
-            </a>
-        </li>
-        <li class="nav-item" *ngIf="isLogged">
-            <app-profile></app-profile>
-        </li>
+
+        <app-profile></app-profile>
+
+
         <button id="bottom-toggler" (click)="toggleHambugerView($event);" class="navbar-toggler navbar-toggler__md"
             type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
             <span [ngClass]="{'button-close__image': toggleHambugerView('bottom-toggler')}"
@@ -76,39 +41,8 @@
                     {{ 'Header.shop' | translate }}
                 </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link nav-link__effect" (mouseenter)="showMenu = true">
-                    {{ 'Header.brands' | translate }}
-                </a>
-            </li>
+            <app-brands></app-brands>
         </ul>
-    </div>
-    <div (mouseleave)="showMenu = false" [@pulse] *ngIf="showMenu" class="nav__showHide-menu container-fluid">
-        <div class="row">
-            <div class="col-12 nav__showHide-menu-wrapper">
-                <h1>Brands available</h1>
-                <ul>
-                    <li>
-                        <a class="nav-link nav-link__effect flex__link" [routerLink]="['/products']" [queryParams]="{category: 'nike'}">
-                            <img src="../../../assets/images/nike.svg">
-                            <span>Nike</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="nav-link nav-link__effect flex__link" [routerLink]="['/products']" [queryParams]="{category: 'adidas'}">
-                            <img src="../../../assets/images/adidas.svg">
-                            <span>Adidas</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="nav-link nav-link__effect flex__link" [routerLink]="['/products']" [queryParams]="{category: 'reebok'}">
-                            <img src="../../../assets/images/reebok.svg">
-                            <span>Reebok</span>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </div>
     </div>
 </mdb-navbar>
 

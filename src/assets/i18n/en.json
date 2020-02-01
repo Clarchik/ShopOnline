@@ -2,7 +2,10 @@
     "Shared": {
         "hello": "Hello",
         "sale": "Sale",
-        "empty": "Sorry, there are no products in this collection."
+        "empty": "Sorry, there are no products in this collection.",
+        "searchProduct": "Find product by name",
+        "quickshop": "Quick Shop",
+        "shopNow": "Shop Now"
     },
     "Product": {
         "size": "Size",

@@ -12,10 +12,9 @@ import { MDBBootstrapModule, MDBModalRef } from 'angular-bootstrap-md';
 import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 /* Interceptors */
-import { WebReqInterceptor } from './interceptor/web-req.interceptor';
+import { WebReqInterceptor } from './interceptors/web-req.interceptor';
 
 /* Services */
 import { CurrencyRatesService } from './shared/services/currency/currency-rates.service';
@@ -32,26 +31,16 @@ import { CurrencyConverterPipe } from './shared/pipes/currency-converter/currenc
 import { reducers as userReducers, effects as userEffects } from './store';
 
 /* Components */
-import {AppComponent} from './app.component';
+import { AppComponent } from './app.component';
 import * as fromComponents from './components';
 
 /* Others */
-import {environment} from '../environments/environment.prod';
+import { environment } from '../environments/environment.prod';
+import { SetupFactory } from './setup-factory/setup-factory.service';
+import { ProductsPreviewComponent } from './components/products-preview/products-preview.component';
+import { BrandsComponent } from './components/brands/brands.component';
 
-export function HttpLoaderFactory(http: HttpClient) {
-    return new TranslateHttpLoader(http);
-}
-
-export function setupInitFactory(
-    crs: CurrencyRatesService,
-    sessionService: InitService
-) {
-    return (): Promise<any[]> => Promise.all([
-        crs.getCurrencyRates(),
-        sessionService.findUserFromSessinon(),
-        sessionService.setLanguage()
-    ]);
-}
+const setupFactory = new SetupFactory();
 
 @NgModule({
     declarations: [
@@ -59,6 +48,8 @@ export function setupInitFactory(
         ...fromComponents.Components,
         ...fromSharedDirectives.Directives,
         CurrencyConverterPipe,
+        ProductsPreviewComponent,
+        BrandsComponent,
     ],
     imports: [
         BrowserModule,
@@ -79,7 +70,7 @@ export function setupInitFactory(
         TranslateModule.forRoot({
             loader: {
                 provide: TranslateLoader,
-                useFactory: HttpLoaderFactory,
+                useFactory: setupFactory.HttpLoaderFactory,
                 deps: [HttpClient]
             }
         }),
@@ -92,7 +83,7 @@ export function setupInitFactory(
         UtilsService,
         {
             provide: APP_INITIALIZER,
-            useFactory: setupInitFactory,
+            useFactory: setupFactory.setupInitFactory,
             deps: [CurrencyRatesService, InitService],
             multi: true
         },

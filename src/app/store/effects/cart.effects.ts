@@ -23,7 +23,7 @@ export class CartEffects {
         ofType(CartActions.Actions.REMOVE_PRODUCT),
         switchMap(() => this.store.select(CartSelectors.isCartEmpty)),
         tap((isEmpty) => {
-            if (isEmpty && this.router.url === '/order') {
+            if (isEmpty && this.router.url === '/make-order') {
                 this.router.navigate(['/products']);
             }
         })

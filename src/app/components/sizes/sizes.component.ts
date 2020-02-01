@@ -39,7 +39,6 @@ export class SizesComponent implements OnInit {
         switch (gender) {
             case 'male':
                 return 'man';
-                break;
             case 'female':
                 return 'wooman';
             default:

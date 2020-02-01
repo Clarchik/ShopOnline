@@ -1,34 +1,44 @@
-<div class="btn-group" mdbDropdown>
-    <a mdbDropdownToggle mdbWavesEffect type="button" class="dropdown-toggle waves-light" mdbWavesEffect
-        style="height: auto; width: 30px">
-        <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-2.jpg" alt="Profile image"
-            class="img-fluid rounded-circle z-depth-0"></a>
-    <div class="dropdown-menu dropdown-primary">
-        <a class="dropdown-item profile-item" routerLinkActive="nav-link__activated" routerLink="profile-details">
-            <span class="profile-item__icon">
-                <i class="fas fa-user-cog"></i>
-            </span>
-            <span class="profile-item__text">
-                {{ "Profile.details" | translate }}
-            </span>
-        </a>
+<li class="nav-item" *ngIf="isLogged">
+    <div class="btn-group" mdbDropdown>
+        <a mdbDropdownToggle mdbWavesEffect type="button" class="dropdown-toggle waves-light" mdbWavesEffect
+            style="height: auto; width: 30px">
+            <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-2.jpg" alt="Profile image"
+                class="img-fluid rounded-circle z-depth-0"></a>
+        <div class="dropdown-menu dropdown-primary">
+            <a class="dropdown-item profile-item" routerLinkActive="nav-link__activated" routerLink="profile-details">
+                <span class="profile-item__icon">
+                    <i class="fas fa-user-cog"></i>
+                </span>
+                <span class="profile-item__text">
+                    {{ "Profile.details" | translate }}
+                </span>
+            </a>
 
-        <a class="dropdown-item profile-item" routerLinkActive="nav-link__activated" routerLink="orders">
-            <span class="profile-item__icon">
-                <i class="fas fa-clipboard-list"></i>
-            </span>
-            <span class="profile-item__text">
-                {{ "Profile.orders" | translate }}
-            </span>
-        </a>
-        <div class="dropdown-divider"></div>
-        <a class="dropdown-item profile-item" (click)="logout();">
-            <span class="profile-item__icon">
-                <i class="fas fa-power-off"></i>
-            </span>
-            <span class="profile-item__text">
-                {{ "Profile.logout" | translate }}
-            </span>
-        </a>
+            <a class="dropdown-item profile-item" routerLinkActive="nav-link__activated" routerLink="orders">
+                <span class="profile-item__icon">
+                    <i class="fas fa-clipboard-list"></i>
+                </span>
+                <span class="profile-item__text">
+                    {{ "Profile.orders" | translate }}
+                </span>
+            </a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item profile-item" (click)="logout();">
+                <span class="profile-item__icon">
+                    <i class="fas fa-power-off"></i>
+                </span>
+                <span class="profile-item__text">
+                    {{ "Profile.logout" | translate }}
+                </span>
+            </a>
+        </div>
     </div>
-</div>
+
+
+</li>
+
+<li class="nav-item" *ngIf="!isLogged">
+    <a class="nav-link nav-link__effect" routerLink="/login" routerLinkActive="nav-link__activated">
+        <mdb-icon fas icon="user" size="lg"></mdb-icon>
+    </a>
+</li>

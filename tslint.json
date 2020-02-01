@@ -10,6 +10,7 @@
                 "require-const-for-all-caps"
             ]
         },
+        "no-implicit-dependencies": [true, "dev"],
         "deprecation": {
             "severity": "warn"
         },

@@ -10,7 +10,6 @@ import { Router } from '@angular/router';
 export class SearchComponent implements OnInit {
     public isOpen: boolean;
     public searchFormGroup: FormGroup;
-    @Input() iconSize: string;
     constructor(
         private fb: FormBuilder,
         private router: Router) { }

@@ -3,14 +3,15 @@ img {
     height: 100%;
     display: inline-block;
 }
-.grid__row {
+.grid-row {
     margin-top: 35px;
 
-    &-block {
+    &__item {
         overflow: hidden;
         cursor: pointer;
     }
-    &-link {
+
+    &__link {
         position: absolute;
         opacity: 1;
         top: 0;
@@ -29,17 +30,18 @@ img {
         }
     }
 
-    &-element {
+    &__link-description{
         padding-bottom: 25px;
     }
 
-    &-h2 {
+    &__h2 {
         color: #fff;
         text-transform: uppercase;
         font-size: 2.25rem;
         letter-spacing: 1.5px;
     }
-    &-button {
+
+    &__button {
         font-size: .75rem;
         padding: .5rem 0rem;
         text-transform: uppercase;
@@ -62,8 +64,8 @@ img {
         }
     }
 
-    &-h3 {
-        @extend .grid__row-h2;
+    &__h3 {
+        @extend .grid-row__h2;
         font-size: 1.5rem;
         letter-spacing: 1px;
     }
@@ -71,27 +73,35 @@ img {
 
 
 @media screen and (min-device-width: 0px) and (max-device-width: 575.98px) {
-    .grid__row-h2 {
-        font-size: 1.2rem;
-    }
-    .grid__row-h3 {
-        font-size: 1.2rem;
-    }
-    .grid__row-link {
-        opacity: 0.8;
-    }
-    .grid__row-link:hover {
-        background-color: #0000005c;
-    }
-    .grid__row-block {
-        margin-top: 15px;
+    .grid-row {
+        &__h2 {
+            font-size: 1.2rem;
+        }
+
+        &__h3 {
+            font-size: 1.2rem;
+        }
+
+        &__link {
+            opacity: 0.8;
+            &:hover {
+                background-color: #0000005c;
+            }
+        }
+
+        &__item {
+            margin-top: 15px;
+        }
     }
 }
 @media screen and (min-device-width: 576px) and (max-device-width: 767.98px) {
-    .grid__row-block {
-        margin-top: 15px;
-    }
-    .grid__row-h3 {
-        font-size: 1.3rem;
+    .grid-row {
+        &__item {
+            margin-top: 15px;
+        }
+
+        &__h3 {
+            font-size: 1.3rem;
+        }
     }
 }
