@@ -7,6 +7,7 @@ import { UserPasswords } from '../../shared/models/user/user-passwords';
 
 export const LOGIN_USER = '[Auth] Login User';
 export const LOGIN_USER_SUCCESS = '[Auth] Login User Success';
+export const LOGIN_USER_FROM_SESSION_SUCCESS = '[Auth] Login User From Session Success';
 export const LOGIN_USER_FAIL = '[Auth] Login User Fail';
 
 export const LOGOUT_USER = '[Auth] Logout User';
@@ -33,6 +34,11 @@ export class LoginUser implements Action {
 export class LoginUserSuccess implements Action {
     readonly type = LOGIN_USER_SUCCESS;
     constructor(public payload: User, public redirectUrl) { }
+}
+
+export class LoginUserFromSessionSuccess implements Action {
+    readonly type = LOGIN_USER_FROM_SESSION_SUCCESS;
+    constructor(public payload: User) { }
 }
 
 export class LoginUserFail implements Action {
@@ -95,6 +101,7 @@ export class UpdateUserPasswordsFail implements Action {
 export type UserActions =
     LoginUser |
     LoginUserSuccess |
+    LoginUserFromSessionSuccess |
     LoginUserFail |
     RegistrationUser |
     RegistrationUserSuccess |

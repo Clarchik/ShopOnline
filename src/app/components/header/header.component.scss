@@ -1,75 +1,79 @@
-@import '../../styles/variables.scss';
+@import "../../styles/variables.scss";
 
 .navbar__container {
-    align-items: center;
+	align-items: center;
 }
 .navbar.scrolling-navbar {
-    padding: 10px 0;
+	padding: 10px 0;
 }
+
+.nav-link {
+	display: flex;
+	align-items: center;
+}
+
 .nav-item {
-    letter-spacing: 0.1rem;
-    text-transform: uppercase;
-    font-size: 12px;
+	letter-spacing: 0.1rem;
+	text-transform: uppercase;
+	font-size: 12px;
 }
 
 .nav-link__activated,
 .nav-link__effect:hover {
-    color: $main-color !important;
+	color: $main-color !important;
 }
 
 .button-close__image {
-    transition: all .3s ease-in-out;
-    background-image: url('/assets/images/close-button.svg') !important;
+	transition: all 0.3s ease-in-out;
+	background-image: url("/assets/images/close-button.svg") !important;
 }
 
-
 @media only screen and (max-width: 575.98px) {
-    .navbar-sm {
-        display: flex;
-        width: 100%;
-        justify-content: space-between;
-    }
+	.navbar-sm {
+		display: flex;
+		width: 100%;
+		justify-content: space-between;
+	}
 
-    .navbar-nav__sm {
-        margin-left: 0;
-        width: 100%;
-        justify-content: space-around;
-    }
+	.navbar-nav__sm {
+		margin-left: 0;
+		width: 100%;
+		justify-content: space-around;
+	}
 
-    .navbar-toggler__sm {
-        display: flex;
-    }
+	.navbar-toggler__sm {
+		display: flex;
+	}
 
-    .navbar-toggler__md {
-        display: none;
-    }
+	.navbar-toggler__md {
+		display: none;
+	}
 }
 
 @media only screen and (min-width: 576px) {
-    .navbar-toggler__sm {
-        display: none;
-    }
+	.navbar-toggler__sm {
+		display: none;
+	}
 
-    .navbar-toggler__md {
-        display: flex;
-    }
+	.navbar-toggler__md {
+		display: flex;
+	}
 
-    .nav__showHide-menu {
-        bottom: -95%;
-    }
+	.nav__showHide-menu {
+		bottom: -95%;
+	}
 }
 
 @media only screen and (min-width: 768px) {
-    .navbar-nav__lg {
-        order: 2;
-    }
-    .nav__showHide-menu {
-        bottom: -168%;
-    }
+	.navbar-nav__lg {
+		order: 2;
+	}
+	.nav__showHide-menu {
+		bottom: -168%;
+	}
 }
 @media only screen and (max-width: 393px) {
-    .nav__showHide-menu {
-        bottom: -80%;
-    }
+	.nav__showHide-menu {
+		bottom: -80%;
+	}
 }
-

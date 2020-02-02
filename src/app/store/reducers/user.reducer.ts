@@ -28,6 +28,7 @@ export function reducer(state = initialState, action: UserActions.UserActions): 
         }
 
         case UserActions.LOGIN_USER_SUCCESS:
+        case UserActions.LOGIN_USER_FROM_SESSION_SUCCESS:
         case UserActions.UPDATE_USER_DATA_SUCCESS: {
             const data = action.payload;
             return { ...state, data, loggining: false, logged: true };

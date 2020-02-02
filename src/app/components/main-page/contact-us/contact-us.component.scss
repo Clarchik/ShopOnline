@@ -1,81 +1,89 @@
-@import '../../../styles/variables.scss';
+@import "../../../styles/variables.scss";
 
 .contact {
-    color: #ffffff;
-    margin-top: 45px;
-    height: 330px;
-    background-image: url(//cdn.shopify.com/s/files/1/0208/5268/files/Opt-in-footer_1.jpg?v=1551112475);
-    background-size: cover;
-    background-repeat: no-repeat;
+	color: #ffffff;
+	margin-top: 45px;
+	height: 330px;
+	background-image: url("/assets/images/static/contact-us-bg.jpg");
+	background-size: cover;
+	background-repeat: no-repeat;
 
-    &__container {
+	&__container {
+		height: 100%;
+		display: flex;
+		justify-content: center;
+	}
+	&__col {
+		display: flex;
+		justify-content: space-evenly;
+		align-items: center;
+		flex-direction: column;
+		text-align: center;
+		h2 {
+			font-family: $avenir-m;
+			text-transform: uppercase;
+		}
+		p {
+            max-width: 550px;
+			font-family: $avenir-m;
+			margin-top: -50px;
+			text-transform: uppercase;
+		}
+	}
+
+	&__block {
+		display: flex;
+		justify-content: space-evenly;
+		align-items: center;
+		width: 100%;
+		margin-top: -50px;
+	}
+
+	&__input {
         height: 100%;
-        display: flex;
-        justify-content: center;
-    }
-    &__col {
-        display: flex;
-        justify-content: space-evenly;
-        align-items: center;
-        flex-direction: column;
-        text-align: center;
-        h2 {
-            text-transform: uppercase;
-        }
-        p {
-            margin-top: -50px;
-            text-transform: uppercase;
-        }
-    }
+		width: 85%;
+		border-radius: 2px;
+		color: black;
+		border: none;
+		border-radius: 0px;
+		text-indent: 10px;
+		&::placeholder {
+			color: #222323;
+			font-size: 16px;
+			font-family: $avenir-r;
+			opacity: 1;
+		}
+	}
 
-    &__block {
-        display: flex;
-        justify-content: space-evenly;
-        align-items: center;
-        width: 100%;
-        margin-top: -50px;
-    }
-
-    &__input {
-        width: 85%;
-        height: 40px;
-        border-radius: 2px;
-        color: black;
-        border: none;
-        border-radius: 0px;
-        text-indent: 10px;
-    }
-
-    &__button {
-        transition: background-color .35s ease-out;
-        font-family: $avenir-r;
-        background-color: #1c1d1d;
-        border: none;
-        border-radius: 0;;
-        color: #fff;
-        font-size: 0.8125em;
-        letter-spacing: 0.1em;
-        padding: 12px 20px;
-        &:hover {
-            background-color: #3a3c3c;
-        }
-    }
+	&__button {
+		transition: background-color 0.35s ease-out;
+		font-family: $avenir-r;
+		background-color: #1c1d1d;
+		border: none;
+		border-radius: 0;
+		color: #fff;
+		font-size: 0.8125em;
+		letter-spacing: 0.1em;
+		padding: 12px 20px;
+		&:hover {
+			background-color: #3a3c3c;
+		}
+	}
 }
 
-
 @media screen and (min-device-width: 0px) and (max-device-width: 575.98px) {
-    .contact__block {
-        display: flex;
-        justify-content: space-evenly;
-        align-items: center;
-        flex-direction: column;
-        text-align: center;
-    }
-    .contact__button {
-        margin-top: 15px;
-        width: 100%;
-    }
-    .contact__input {
-        width: 100%;
-    }
+	.contact__block {
+		display: flex;
+		justify-content: space-evenly;
+		align-items: center;
+		flex-direction: column;
+		text-align: center;
+	}
+	.contact__button {
+		margin-top: 15px;
+		width: 100%;
+	}
+	.contact__input {
+		width: 100%;
+	}
 }

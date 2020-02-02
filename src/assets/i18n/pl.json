@@ -5,7 +5,8 @@
         "empty": "Przepraszamy, nie ma produktów w tej kolekcji.",
         "searchProduct": "Wyszukaj produkt po nazwie",
         "quickShop": "Szybki zakup",
-        "shopNow": "Kupuj teraz"
+        "shopNow": "Kupuj teraz",
+        "subscribe": "Subskrybuj"
     },
     "Product": {
         "size": "Rozmiar",
@@ -67,5 +68,10 @@
     },
     "Store": {
         "backToStore": "Powrót do sklepu"
+    },
+    "Contact": {
+        "title": "Bądź na bieżąco",
+        "descriptionOne": "Zapisz się, aby otrzymywać e-maile, aby otrzymywać najnowsze informacje o nadchodzących wersjach,",
+        "descriptionTwo": "nowościach, wyprzedażach i nie tylko."
     }
 }

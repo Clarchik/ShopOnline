@@ -22,7 +22,7 @@ export class InitService {
         return new Promise<any>((resolve) => {
             this.authService.signInFromSession().pipe(
                 map((user) => {
-                    this.store.dispatch(new UserActions.LoginUserSuccess(user, '/main'));
+                    this.store.dispatch(new UserActions.LoginUserFromSessionSuccess(user));
                     resolve(true);
                 }),
                 catchError((err) => {

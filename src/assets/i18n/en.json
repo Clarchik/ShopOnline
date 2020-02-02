@@ -5,7 +5,8 @@
         "empty": "Sorry, there are no products in this collection.",
         "searchProduct": "Find product by name",
         "quickshop": "Quick Shop",
-        "shopNow": "Shop Now"
+        "shopNow": "Shop Now",
+        "subscribe": "Subscribe"
     },
     "Product": {
         "size": "Size",
@@ -67,5 +68,10 @@
     },
     "Store": {
         "backToStore": "Return to Store"
+    },
+    "Contact": {
+        "title": "Stay in the know",
+        "descriptionOne": "Sign up for emails to get the latest on upcoming releases,",
+        "descriptionTwo": "new arrivals, sales and more."
     }
 }

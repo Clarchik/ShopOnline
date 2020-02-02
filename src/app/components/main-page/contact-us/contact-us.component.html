@@ -2,15 +2,17 @@
     <div class="container contact__container">
         <div class="row">
             <div class="col-12 contact__col">
-                <h2>Stay in the know</h2>
+                <h2>{{"Contact.title" | translate}}</h2>
                 <p>
-                    Sign up for emails to get the latest on upcoming releases,
+                    {{ "Contact.descriptionOne" | translate }}
                     <br>
-                    new arrivals, sales and more.
+                    {{ "Contact.descriptionTwo" | translate }}
                 </p>
                 <div class="contact__block">
-                    <input class="contact__input" type="email" placeholder="Your email">
-                    <button class="contact__button">SUBSCRIBE</button>
+                    <input class="contact__input" type="email" placeholder="Email">
+                    <button class="contact__button">
+                        {{"Shared.subscribe" | translate}}
+                    </button>
                 </div>
             </div>
         </div>

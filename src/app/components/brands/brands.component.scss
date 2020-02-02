@@ -2,6 +2,10 @@
 .brands-link {
     padding-top: 17px;
     padding-bottom: 17px;
+    a {
+        display: flex;
+        align-items: center;
+    }
 }
 
 .brands-link:hover > .brands-menu {
