@@ -6,7 +6,13 @@
         "searchProduct": "Wyszukaj produkt po nazwie",
         "quickShop": "Szybki zakup",
         "shopNow": "Kupuj teraz",
-        "subscribe": "Subskrybuj"
+        "subscribe": "Subskrybuj",
+        "name": "Imię",
+        "surname": "Nazwisko",
+        "email": "Email",
+        "password": "Hasło",
+        "confirmPassword": "Potwierdź hasło",
+        "required": "Pole wymagane"
     },
     "Product": {
         "size": "Rozmiar",
@@ -56,11 +62,20 @@
         "logout": "Wyloguj",
         "orders": "Zamówienia"
     },
+    "Errors": {
+        "emailInUse": "Taka poczta już istnieje",
+        "emailIsFree": "E-mail jest dostępny!",
+        "emailIncorect": "Incorect email",
+        "passwordLength": "Hasło musi mieć co najmniej 8 znaków",
+        "passwordDoestMatch": "Hasła nie pasują do siebie"
+    },
     "Authentication": {
         "login": "Login",
         "password": "Hasło",
         "signIn": "Zaloguj się",
-        "createAccount": "Utwórz konto"
+        "signUp": "Zarejestruj się",
+        "createAccount": "Utwórz konto",
+        "passwordLvl": "Poziom ochrony hasłem"
     },
     "Authorization": {
         "success": "Z powodzeniem zalogowany",

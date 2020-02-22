@@ -1,4 +1,4 @@
-.section__login {
+.registration-section {
     height: 100vh;
     display: flex;
     justify-content: space-evenly;
@@ -13,26 +13,11 @@
     opacity: 0;
     transition: 0.5s all ease-in-out;
 
-    &--opacity {
-        opacity: 1;
-        transition: 0.5s all ease-in-out;
+    &__icons {
+        position: absolute;
+        right: 0;
+        top: 10px;
     }
-
-    &--pending {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-}
-
-.registration-form__icons {
-    position: absolute;
-    height: 100%;
-    right: 0;
-    top: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
 .error-message {
@@ -143,10 +128,6 @@ small {
     cursor: pointer;
 }
 
-.icon__margin {
-    margin-bottom: 20px;
-}
-
 .registration__confirm-pass {
     position: absolute;
     display: flex;
@@ -154,13 +135,11 @@ small {
 }
 
 .icon__animated {
-    position: absolute;
-    top: 40px;
     transition: 0.3s all ease-in-out;
-    color: #212529;
-
+    margin-right: 5px;
     &:hover {
         transform: scale(1.2);
+        cursor: pointer;
     }
 }
 
@@ -169,13 +148,9 @@ span {
     color: #00c851;
 }
 
-.md-form .prefix {
-    right: 0;
-}
-
 
 @media screen and (min-device-width: 0px) and (max-device-width: 442px) {
-    .section__login-h1 {
+    .registration-section__header {
         font-size: 28px;
     }
 

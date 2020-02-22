@@ -6,7 +6,13 @@
         "searchProduct": "Find product by name",
         "quickshop": "Quick Shop",
         "shopNow": "Shop Now",
-        "subscribe": "Subscribe"
+        "subscribe": "Subscribe",
+        "name": "Name",
+        "surname": "Surname",
+        "email": "Email",
+        "password": "Password",
+        "confirmPassword": "Confirm password",
+        "required": "Required field"
     },
     "Product": {
         "size": "Size",
@@ -56,11 +62,20 @@
         "logout": "Logout",
         "orders": "Orders"
     },
+    "Errors": {
+        "emailInUse": "Such mail already exists",
+        "emailIsFree": "Email is available!",
+        "emailIncorect": "Incorect email",
+        "passwordLength": "Password must be at least 8 characters long",
+        "passwordDoestMatch": "Passwords do not match"
+    },
     "Authentication": {
         "login": "Login",
         "password": "Password",
         "signIn": "Sign in",
-        "createAccount": "Create Account"
+        "signUp": "Sign Up",
+        "createAccount": "Create Account",
+        "passwordLvl": "Password protection level"
     },
     "Authorization": {
         "success": "Successfully logged in",

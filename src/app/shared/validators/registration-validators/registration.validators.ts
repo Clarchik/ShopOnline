@@ -9,15 +9,27 @@ export class RegistrationValidators {
             distinctUntilChanged(),
             debounceTime(750),
             switchMap((email) => authService.chekUserEmail(email)),
-            map((response) => response ? { uniqEmail: true} : null),
-        first()
+            map((response) => (response ? { uniqEmail: true } : null)),
+            first()
         );
     }
 
-    static checkPassword(group: FormGroup) {
-        const pass = group.controls.password.value;
-        const confirmPass = group.controls.confirmPassword.value;
+    static mustMatch(controlName: string, matchingControlName: string) {
+        return (formGroup: FormGroup) => {
+            const control = formGroup.controls[controlName];
+            const matchingControl = formGroup.controls[matchingControlName];
 
-        return pass === confirmPass ? null : { notSame: true };
+            if (matchingControl.errors && !matchingControl.errors.notSame) {
+                // return if another validator has already found an error on the matchingControl
+                return;
+            }
+
+            // set error on matchingControl if validation fails
+            if (control.value !== matchingControl.value) {
+                matchingControl.setErrors({ notSame: true });
+            } else {
+                matchingControl.setErrors(null);
+            }
+        };
     }
 }

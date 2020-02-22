@@ -8,7 +8,7 @@ import { transition, trigger, useAnimation } from '@angular/animations';
 import { wobble, shake, zoomOutRight, rubberBand } from 'ng-animate';
 
 import { ShopState, UserActions } from '../../store';
-import {Subscription} from 'rxjs';
+import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'app-registration',
@@ -59,7 +59,7 @@ export class RegistrationComponent implements OnInit, OnDestroy {
                 null, Validators.required
             ]
         }, {
-            validators: RegistrationValidators.checkPassword
+            validators: RegistrationValidators.mustMatch('password', 'confirmPassword')
         });
     }
 
