@@ -10,7 +10,7 @@ export default class StaticController {
 
         this.app.use(express.static(pathdir));
 
-        this.app.get('*', (req, res) => {
+        this.app.get('*', (_, res) => {
             res.status(200)
                 .sendFile(`${pathdir}/index.html`);
         });

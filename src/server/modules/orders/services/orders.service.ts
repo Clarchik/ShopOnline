@@ -1,9 +1,8 @@
 import express from 'express';
 import { Order } from '../models';
 import { User } from '../../user/models';
-import { createHTMLTemplate } from '../../../shared/utils';
+import { createOrderHTMLTemplate, sendOrderTemplate } from '../../../shared/html-service';
 import { UserData } from '../../user/interface/user';
-const mailjet = require('node-mailjet').connect('850a29ef9d5d2b62a1e09fa3e437534d', 'b6023fb90acee91b5417318923b00cbd');
 
 export default class OrdersService {
 
@@ -21,38 +20,23 @@ export default class OrdersService {
                     { _id },
                     { $push: { orders: savedOrder } }
                 ).then(() => {
-                    createHTMLTemplate(fio, products).then((html) => {
-                        const request = mailjet
-                            .post('send', { version: 'v3.1' })
-                            .request({
-                                Messages: [{
-                                    From: {
-                                        Email: 'shoesonlineshop4@gmail.com',
-                                        Name: 'Online Shop'
-                                    },
-                                    To: [{
-                                        Email: email,
-                                    }],
-                                    Subject: 'Order confirmation',
-                                    TextPart: `Dear customer. Thank you for ordering products in our store.`,
-                                    HTMLPart: html
-                                }]
-                            });
-                        request
-                            .then(() => {
-                                res.status(200).send({ message: 'Order have been saved' });
-                            })
-                            .catch((err: any) => {
-                                res.status(400).send({ message: 'Order have not been saved' });
-                            });
-                    }).catch((err) => {
-                        console.log(err, 'err');
-                    });
+                    createOrderHTMLTemplate(fio, products)
+                        .then((html) => {
+                            sendOrderTemplate(email, html)
+                                .then(() => {
+                                    res.status(200).send({ message: 'Order have been sent' });
+                                })
+                                .catch((e: any) => {
+                                    res.status(400).send({ e, message: 'Order have not been sent' });
+                                });
+                        }).catch((e) => {
+                            res.status(400).send({ e, message: 'Couldt create Html Template' });
+                        });
                 }).catch((e) => {
-                    res.status(400).send({ message: 'Some errors occured' });
+                    res.status(400).send({ e, message: 'Couldnt add order to User' });
                 });
             }).catch((e: any) => {
-                res.status(400).send(e);
+                res.status(400).send({ e, message: 'Could save order' });
             });
         } else {
             res.status(403).send({ message: 'User not found' });

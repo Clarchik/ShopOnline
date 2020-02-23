@@ -15,7 +15,7 @@ export class UserService {
 
         const newUser = new User(body);
         User.checkIfUserExists(newUser.email).then(() => {
-            return newUser.save().then(() => {
+            newUser.save().then(() => {
                 res.status(200).send({ message: 'Successfuly registered' });
             }).catch((e: any) => {
                 res.status(400).send(e);
@@ -111,18 +111,18 @@ export class UserService {
                             message: 'Couldnt update user',
                             err
                         });
-                    })
+                    });
                 }
             }).catch(() => {
                 res.status(400).send({
                     message: 'User to update not found'
                 });
-            })
+            });
         }).catch(() => {
             res.status(400).send({
                 message: 'Email is already taken'
-            })
-        })
+            });
+        });
     }
 
     public changeUserPassword(req: Request, res: Response) {
