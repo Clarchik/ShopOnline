@@ -12,7 +12,9 @@
         "email": "Email",
         "password": "Hasło",
         "confirmPassword": "Potwierdź hasło",
-        "required": "Pole wymagane"
+        "required": "Pole wymagane",
+        "success": "Sukces",
+        "error": "Błąd"
     },
     "Product": {
         "size": "Rozmiar",
@@ -88,5 +90,12 @@
         "title": "Bądź na bieżąco",
         "descriptionOne": "Zapisz się, aby otrzymywać e-maile, aby otrzymywać najnowsze informacje o nadchodzących wersjach,",
         "descriptionTwo": "nowościach, wyprzedażach i nie tylko."
+    },
+    "NewsSeller": {
+        "noEmail": "E-mail nie został podany",
+        "alreadySubscribed": "Podany adres e-mail jest już subskrybowany",
+        "successfullySubscribed": "Pomyślnie zasubskrybowano na nowości",
+        "errorSaving": "Błąd podczas zapisywania",
+        "errorFinding": "Błąd podczas wyszukiwania"
     }
 }

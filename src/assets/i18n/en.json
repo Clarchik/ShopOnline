@@ -12,7 +12,9 @@
         "email": "Email",
         "password": "Password",
         "confirmPassword": "Confirm password",
-        "required": "Required field"
+        "required": "Required field",
+        "success": "Success",
+        "error": "Error"
     },
     "Product": {
         "size": "Size",
@@ -88,5 +90,12 @@
         "title": "Stay in the know",
         "descriptionOne": "Sign up for emails to get the latest on upcoming releases,",
         "descriptionTwo": "new arrivals, sales and more."
+    },
+    "NewsSeller": {
+        "noEmail": "Email was not provided",
+        "alreadySubscribed": "Provided email is already subscribed",
+        "successfullySubscribed": "Successfuly subscribed on news",
+        "errorSaving": "Error while saving",
+        "errorFinding": "Error while finding"
     }
 }

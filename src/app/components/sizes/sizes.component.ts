@@ -7,19 +7,11 @@ import { map } from 'rxjs/operators';
     templateUrl: './sizes.component.html',
     styleUrls: ['./sizes.component.scss']
 })
-export class SizesComponent implements OnInit {
+export class SizesComponent {
     public gender: Array<string> = ['man', 'woomen'];
     public choosedGender: string;
     public sizes: Array<any>;
-    constructor(private router: ActivatedRoute) { }
-
-    ngOnInit() {
-        this.router.queryParams.pipe(
-            map(({ gender }) => this.mapGender(gender))
-        ).subscribe((gender) => {
-            this.onChange(gender);
-        });
-    }
+    constructor() { }
 
     public onChange(name: string) {
         this.changeSize(name);
@@ -33,17 +25,6 @@ export class SizesComponent implements OnInit {
         this.highlightRow(rowNumber, tdNumber);
         this.highlightColumn(rowNumber, tdNumber);
         this.highlightHeader(tdNumber);
-    }
-
-    private mapGender(gender: string) {
-        switch (gender) {
-            case 'male':
-                return 'man';
-            case 'female':
-                return 'wooman';
-            default:
-                break;
-        }
     }
 
     private highlightRow(rowNumber, tdNumber) {

@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 
 import { Observable } from 'rxjs';
 import { slideInAnimation } from './shared/models/animations/animation';
-import { RouterOutlet } from '@angular/router';
+import { RouterOutlet, Router, NavigationEnd } from '@angular/router';
 
 import { UtilsService } from './shared/services/utils/utils.service';
 import { ResizeService } from './shared/services/resize/resize.service';
@@ -20,6 +20,7 @@ export class AppComponent implements OnInit {
     public title = 'OnlineShop';
     public noUser$: Observable<boolean>;
     constructor(
+        private router: Router,
         private store: Store<ShopState>,
         private utilsService: UtilsService,
         private resizeService: ResizeService) { }
@@ -40,6 +41,12 @@ export class AppComponent implements OnInit {
         if (userFavoriteProducts) {
             this.store.dispatch(new FavoriteActions.LoadProducts(userFavoriteProducts));
         }
+        this.router.events.subscribe((evt) => {
+            if (!(evt instanceof NavigationEnd)) {
+                return;
+            }
+            window.scrollTo(0, 0)
+        });
     }
 
     getRouteAnimation(outlet: RouterOutlet) {

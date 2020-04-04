@@ -21,7 +21,7 @@ export class ProductsComponent implements OnInit {
     public isNotLoading: Observable<boolean>;
     constructor(
         private route: ActivatedRoute,
-        private ps: ProductsService,
+        private productService: ProductsService,
         private store: Store<ShopState>) { }
 
     ngOnInit() {
@@ -29,7 +29,7 @@ export class ProductsComponent implements OnInit {
             map((params) => ({ category: params.category, page: params.page, title: params.title })),
             switchMap(({ category, page, title }) => {
                 this._category = category;
-                return this.ps.getProducts(category, page, title);
+                return this.productService.getProducts(category, page, title);
             }),
             tap((data: any) => {
                 this._emptyProducts = !data.items.length;
@@ -37,12 +37,11 @@ export class ProductsComponent implements OnInit {
                 this._pager = data.pager;
             })
         ).subscribe();
-
         this.isNotLoading = this.store.select(notLoadingStatus);
     }
 
     public loadPage(page: number) {
-        this.ps.getProducts(this._category, page).subscribe((data: any) => {
+        this.productService.getProducts(this._category, page).subscribe((data: any) => {
             this._pager = data.pager;
             this._products = data.items;
         });

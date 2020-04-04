@@ -16,12 +16,12 @@ import { UserOrdersResolver } from './resolvers/user-orders/user-orders.resolver
 
 const routes: Routes = [
     { path: '', redirectTo: 'main', pathMatch: 'full' },
-    { path: 'main', component: MainPageComponent, data: { animation: 'swipeLeft' } },
-    { path: 'login', component: LoginComponent, canActivate: [LoginComponentGuard], data: { animation: 'swipeRight' } },
-    { path: 'registration', component: RegistrationComponent, data: { animation: 'FlipY' } },
+    { path: 'main', component: MainPageComponent, data: { animation: 'MainPage' } },
+    { path: 'login', component: LoginComponent, canActivate: [LoginComponentGuard], data: { animation: 'LoginPage' } },
+    { path: 'registration', component: RegistrationComponent, data: { animation: 'RegPage' } },
     { path: 'profile-details', component: ProfileDetailsComponent },
-    { path: 'products', component: ProductsComponent },
-    { path: 'product/:id', component: ProductItemDetailsComponent },
+    { path: 'products', component: ProductsComponent, data: {animation: 'ProductPage'} },
+    { path: 'product/:id', component: ProductItemDetailsComponent, data: {animation: 'ProductDetPage'} },
     { path: 'size-guide', component: SizesComponent },
     { path: 'make-order', component: OrderComponent, canActivate: [MakeOrderGuard] },
     {
@@ -33,7 +33,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forRoot(routes)],
+    imports: [RouterModule.forRoot(routes, {scrollPositionRestoration: 'disabled'})],
     exports: [RouterModule],
     providers: [
         UserOrdersResolver

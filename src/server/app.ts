@@ -1,11 +1,12 @@
-import express, { Application } from 'express';
+import express, {Application} from 'express';
 import path from 'path';
-import { UserController } from './modules/user/controllers';
-import { MongoDB } from './db/mongoose';
+import {UserController} from './modules/user/controllers';
+import {MongoDB} from './db/mongoose';
 import Cors from './cors/cors';
-import { ProductsController } from './modules/products/controllers';
-import StaticController from './modules/static/controller/static.controller';
-import { OrdersController } from './modules/orders/controllers';
+import {ProductsController} from './modules/products/controllers';
+import {OrdersController} from './modules/orders/controllers';
+import {NewsSellerController} from './modules/news-seller/controllers/inex';
+import {StaticController} from './modules/static/controller';
 
 class App {
     public app: Application;
@@ -15,6 +16,7 @@ class App {
     private productsController: ProductsController;
     private staticController: StaticController;
     private ordersController: OrdersController;
+    private newsSellerContorller: NewsSellerController;
     constructor() {
         const pathdir = path.resolve(__dirname, '..');
         (global as any).pathdir = pathdir;
@@ -31,6 +33,7 @@ class App {
         this.userController = new UserController(this.app);
         this.productsController = new ProductsController(this.app);
         this.staticController = new StaticController(this.app);
+        this.newsSellerContorller = new NewsSellerController(this.app);
     }
 }
 

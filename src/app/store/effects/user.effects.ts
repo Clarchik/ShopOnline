@@ -83,9 +83,8 @@ export class UserEffects {
         map((action: userActions.RegistrationUserSuccess) => action.payload),
         tap((data) => {
             this.toastr.success('', `${data}`);
-            // LOCATION AND ROUTER DOESN'T WORKK , THAT'S WHY I MADE SIMPLE MOOVE, BUT SHOUD REMAKE IT !
             setTimeout(() => {
-                window.location.href = '/login';
+                this.router.navigateByUrl('login');
             }, 1500);
         })
     );

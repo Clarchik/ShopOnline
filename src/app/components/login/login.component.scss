@@ -2,6 +2,10 @@
     margin: 150px 0;
 }
 
+:root {
+    min-height: 100vh;
+}
+
 .login-header {
     display: flex;
     align-items: center;

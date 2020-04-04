@@ -9,10 +9,12 @@
                     {{ "Contact.descriptionTwo" | translate }}
                 </p>
                 <div class="contact__block">
-                    <input class="contact__input" type="email" placeholder="Email">
-                    <button class="contact__button">
-                        {{"Shared.subscribe" | translate}}
-                    </button>
+                    <form [formGroup]="newsForm">
+                        <input formControlName="email" class="contact__input" type="email" placeholder="Email">
+                        <button [disabled]="newsForm.invalid" (click)="subscribeOnNews();" class="contact__button" type="button">
+                            {{"Shared.subscribe" | translate}}
+                        </button>
+                    </form>
                 </div>
             </div>
         </div>

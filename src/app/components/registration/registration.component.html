@@ -1,172 +1,183 @@
-<section class="container registration-section">
-    <h1 class="registration-section__header">
-        {{ "Authentication.createAccount" | translate }}
-    </h1>
-    <form [formGroup]="registrationForm" class="row">
-        <div class="col-lg-6 col-md-6 col-xl-6 col-12 col-sm-12">
-            <div class="md-form">
-                <input mdbInput mdbValidate type="text" id="name" class="form-control input-field__input"
-                    formControlName="name" appRegistrationAutoFocus autocomplete="off">
-                <label for="name">
-                    {{ "Shared.name" | translate }}
-                </label>
+<div class="container">
+    <div class="align-items-center">
+        <section class="registration-section">
+            <h1 class="registration-section__header d-flex justify-content-center">
+                {{ "Authentication.createAccount" | translate }}
+            </h1>
+            <form [formGroup]="registrationForm" class="row">
+                <div class="col-lg-6 col-md-6 col-xl-6 col-12 col-sm-12">
+                    <div class="md-form">
+                        <input mdbInput mdbValidate type="text" id="name" class="form-control input-field__input"
+                            formControlName="name" appRegistrationAutoFocus autocomplete="off">
+                        <label for="name">
+                            {{ "Shared.name" | translate }}
+                        </label>
 
-                <div class="registration-form__icons">
-                    <mdb-icon [@bird] fas icon="check" class="green-text" *ngIf="name.valid && name.dirty">
-                    </mdb-icon>
-                    <mdb-icon [@cancel] fas icon="times" class="red-text" *ngIf="name.invalid && name.dirty ||
-                    name.invalid && name.touched">
-                    </mdb-icon>
-                </div>
+                        <div class="registration-form__icons">
+                            <mdb-icon [@bird] fas icon="check" class="green-text" *ngIf="name.valid && name.dirty">
+                            </mdb-icon>
+                            <mdb-icon [@cancel] fas icon="times" class="red-text" *ngIf="name.invalid && name.dirty ||
+                            name.invalid && name.touched">
+                            </mdb-icon>
+                        </div>
 
-                <div [@errors_wrapper] *ngIf="name.invalid && name.dirty
-                    || name.invalid && name.touched">
-                    <mdb-error [@errors] *ngIf="name.errors['required']">
-                        {{ "Shared.required" | translate }}
-                    </mdb-error>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-6 col-md-6 col-xl-6 col-12 col-sm-12">
-            <div class="md-form">
-                <input mdbInput mdbValidate type="text" id="surname" class="form-control" formControlName="surname"
-                    autocomplete="off">
-                <label for="surname">
-                    {{ "Shared.surname" | translate }}
-                </label>
-                <div class="registration-form__icons">
-                    <mdb-icon [@bird] fas icon="check" class="green-text" *ngIf="surname.valid && surname.dirty">
-                    </mdb-icon>
-                    <mdb-icon [@cancel] fas icon="times" class="red-text" *ngIf="surname.invalid && surname.dirty ||
-                    surname.invalid && surname.touched">
-                    </mdb-icon>
-                </div>
-                <div [@errors_wrapper] *ngIf="surname.invalid && surname.dirty
-                || surname.invalid && surname.touched">
-                    <mdb-error [@errors] *ngIf="surname.errors['required']">
-                        {{ "Shared.required" | translate }}
-                    </mdb-error>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-12 col-md-12 col-xl-12 col-12 col-sm-12">
-            <div class="md-form">
-                <input mdbInput mdbValidate type="text" id="email" class="form-control" formControlName="email"
-                    autocomplete="off">
-                <label for="email">
-                    {{ "Shared.email" | translate }}
-                </label>
-                <div class="registration-form__icons">
-                    <mdb-icon [@bird] fas icon="check" class="green-text" *ngIf="email.valid && email.dirty"></mdb-icon>
-
-                    <mdb-icon [@cancel] fas icon="times" class="red-text" *ngIf="email.invalid && email.dirty||
-                    email.invalid && email.touched"></mdb-icon>
-
-                    <div class="spinner-border text-light" *ngIf="email.status === 'PENDING'" role="status">
-                        <span class="sr-only">Loading...</span>
+                        <div [@errors_wrapper] *ngIf="name.invalid && name.dirty
+                            || name.invalid && name.touched">
+                            <mdb-error [@errors] *ngIf="name.errors['required']">
+                                {{ "Shared.required" | translate }}
+                            </mdb-error>
+                        </div>
                     </div>
                 </div>
-                <div [@errors_wrapper] *ngIf="email.invalid && email.dirty
-                || email.invalid && email.touched">
-                    <mdb-error [@errors] *ngIf="email.errors['required']">
-                        {{ "Shared.required" | translate }}
-                    </mdb-error>
-                    <mdb-error [@errors] *ngIf="email.errors['uniqEmail']">
-                        {{ "Errors.emailInUse" | translate }}
-                    </mdb-error>
-                    <mdb-error [@errors] *ngIf="email.errors['pattern']">
-                        {{ "Errors.emailIncorect" | translate }}
-                    </mdb-error>
-                </div>
-                <mdb-success *ngIf="email.status === 'VALID'">
-                    {{ "Errors.emailIsFree" | translate }}
-                </mdb-success>
-            </div>
-        </div>
-        <div class="col-lg-6 col-md-6 col-xl-6 col-12 col-sm-12">
-            <div class="md-form">
-                <input mdbInput mdbValidate type="password" id="password" class="form-control"
-                    [attr.type]="passwordToRead ? 'text': 'password'" formControlName="password" autocomplete="off">
-                <label for="password">
-                    {{ "Shared.password" | translate }}
-                </label>
-
-                <div class="registration-form__icons">
-                    <mdb-icon fas icon="eye" class="icon__animated" (click)="showHidePassword()"></mdb-icon>
-                    <mdb-icon [@bird] fas icon="check" class="green-text" *ngIf="password.valid && password.dirty">
-                    </mdb-icon>
-                    <mdb-icon [@cancel] fas icon="times" class="red-text" *ngIf="password.invalid && password.dirty ||
-                                    password.invalid && password.touched"></mdb-icon>
-                </div>
-
-                <div *ngIf="password.invalid && password.dirty || password.invalid && password.touched">
-                    <small [@errors] *ngIf="password.errors['required']">
-                        {{ "Shared.required" | translate }}
-                    </small>
-                    <small [@errors] *ngIf="password.errors['minlength']">
-                        {{ "Errors.passwordLength" | translate }}
-                    </small>
-                </div>
-
-                <div [ngClass]="{'show': password.valid && password.dirty}" class="login__password-protection">
-                    <div class="password-difficulty" [ngClass]="{'show': password.valid && password.dirty}">
-                        <div [ngClass]="{
-                            'password-difficulty__empty': difficulty === '',
-                            'password-difficulty__weak': difficulty === 'weak',
-                            'password-difficulty__common': difficulty === 'common',
-                            'password-difficulty__well': difficulty === 'well',
-                            'password-difficulty__super': difficulty === 'super'
-                        }">
+                <div class="col-lg-6 col-md-6 col-xl-6 col-12 col-sm-12">
+                    <div class="md-form">
+                        <input mdbInput mdbValidate type="text" id="surname" class="form-control"
+                            formControlName="surname" autocomplete="off">
+                        <label for="surname">
+                            {{ "Shared.surname" | translate }}
+                        </label>
+                        <div class="registration-form__icons">
+                            <mdb-icon [@bird] fas icon="check" class="green-text"
+                                *ngIf="surname.valid && surname.dirty">
+                            </mdb-icon>
+                            <mdb-icon [@cancel] fas icon="times" class="red-text" *ngIf="surname.invalid && surname.dirty ||
+                            surname.invalid && surname.touched">
+                            </mdb-icon>
+                        </div>
+                        <div [@errors_wrapper] *ngIf="surname.invalid && surname.dirty
+                        || surname.invalid && surname.touched">
+                            <mdb-error [@errors] *ngIf="surname.errors['required']">
+                                {{ "Shared.required" | translate }}
+                            </mdb-error>
+                        </div>
                     </div>
                 </div>
-                <span>
-                    {{ "Authentication.passwordLvl" | translate }}
-                </span>
+                <div class="col-lg-12 col-md-12 col-xl-12 col-12 col-sm-12">
+                    <div class="md-form">
+                        <input mdbInput mdbValidate type="text" id="email" class="form-control" formControlName="email"
+                            autocomplete="off">
+                        <label for="email">
+                            {{ "Shared.email" | translate }}
+                        </label>
+                        <div class="registration-form__icons">
+                            <mdb-icon [@bird] fas icon="check" class="green-text" *ngIf="email.valid && email.dirty">
+                            </mdb-icon>
+
+                            <mdb-icon [@cancel] fas icon="times" class="red-text" *ngIf="email.invalid && email.dirty||
+                            email.invalid && email.touched"></mdb-icon>
+
+                            <div class="spinner-border text-light" *ngIf="email.status === 'PENDING'" role="status">
+                                <span class="sr-only">Loading...</span>
+                            </div>
+                        </div>
+                        <div [@errors_wrapper] *ngIf="email.invalid && email.dirty
+                        || email.invalid && email.touched">
+                            <mdb-error [@errors] *ngIf="email.errors['required']">
+                                {{ "Shared.required" | translate }}
+                            </mdb-error>
+                            <mdb-error [@errors] *ngIf="email.errors['uniqEmail']">
+                                {{ "Errors.emailInUse" | translate }}
+                            </mdb-error>
+                            <mdb-error [@errors] *ngIf="email.errors['pattern']">
+                                {{ "Errors.emailIncorect" | translate }}
+                            </mdb-error>
+                        </div>
+                        <mdb-success *ngIf="email.status === 'VALID'">
+                            {{ "Errors.emailIsFree" | translate }}
+                        </mdb-success>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-xl-6 col-12 col-sm-12">
+                    <div class="md-form">
+                        <input mdbInput mdbValidate type="password" id="password" class="form-control"
+                            [attr.type]="passwordToRead ? 'text': 'password'" formControlName="password"
+                            autocomplete="off">
+                        <label for="password">
+                            {{ "Shared.password" | translate }}
+                        </label>
+
+                        <div class="registration-form__icons">
+                            <mdb-icon fas icon="eye" class="icon__animated" (click)="showHidePassword()"></mdb-icon>
+                            <mdb-icon [@bird] fas icon="check" class="green-text"
+                                *ngIf="password.valid && password.dirty">
+                            </mdb-icon>
+                            <mdb-icon [@cancel] fas icon="times" class="red-text" *ngIf="password.invalid && password.dirty ||
+                                            password.invalid && password.touched"></mdb-icon>
+                        </div>
+
+                        <div *ngIf="password.invalid && password.dirty || password.invalid && password.touched">
+                            <small [@errors] *ngIf="password.errors['required']">
+                                {{ "Shared.required" | translate }}
+                            </small>
+                            <small [@errors] *ngIf="password.errors['minlength']">
+                                {{ "Errors.passwordLength" | translate }}
+                            </small>
+                        </div>
+
+                        <div [ngClass]="{'show': password.valid && password.dirty}" class="login__password-protection">
+                            <div class="password-difficulty" [ngClass]="{'show': password.valid && password.dirty}">
+                                <div [ngClass]="{
+                                    'password-difficulty__empty': difficulty === '',
+                                    'password-difficulty__weak': difficulty === 'weak',
+                                    'password-difficulty__common': difficulty === 'common',
+                                    'password-difficulty__well': difficulty === 'well',
+                                    'password-difficulty__super': difficulty === 'super'
+                                }">
+                                </div>
+                            </div>
+                            <span>
+                                {{ "Authentication.passwordLvl" | translate }}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-xl-6 col-12 col-sm-12">
+                    <div class="md-form">
+                        <input mdbInput [attr.type]="passwordToRead ? 'text': 'password'" type="password" id="form5"
+                            class="form-control"
+                            [ngClass]="{protected_input: ( registrationForm.hasError('notSame') && confirmPassword.dirty ) ||
+                                        ( confirmPassword.invalid && confirmPassword.dirty ) || ( confirmPassword.invalid && confirmPassword.touched ),
+                                        success_input: confirmPassword.valid && confirmPassword.dirty && !!registrationForm.errors === false}"
+                            formControlName="confirmPassword" autocomplete="off">
+
+                        <label for="form5"
+                            [ngClass]="{protected_label: ( registrationForm.hasError('notSame') && confirmPassword.dirty ) ||
+                                        ( confirmPassword.invalid && confirmPassword.dirty) || ( confirmPassword.invalid && confirmPassword.touched ),
+                                    success_label: confirmPassword.valid && confirmPassword.dirty && !!registrationForm.errors === false}">
+                            {{ "Shared.confirmPassword" | translate }}
+                        </label>
+
+                        <div class="registration-form__icons">
+                            <mdb-icon [@bird] fas icon="check" class="green-text"
+                                [hidden]="registrationForm.hasError('notSame')"
+                                *ngIf="confirmPassword.valid && confirmPassword.dirty">
+                            </mdb-icon>
+                            <mdb-icon [@cancel] fas icon="times" class="red-text"
+                                *ngIf="(confirmPassword.invalid && confirmPassword.dirty)  ||  confirmPassword.dirty && registrationForm.hasError('notSame') || ( confirmPassword.invalid && confirmPassword.touched )">
+                            </mdb-icon>
+                        </div>
+
+                        <div class="registration__confirm-pass"
+                            *ngIf="confirmPassword.invalid && confirmPassword.dirty || confirmPassword.invalid && confirmPassword.touched">
+                            <small [@errors] *ngIf="confirmPassword.errors['required']">
+                                {{ "Shared.required" | translate }}
+                            </small>
+                            <small [@errors] *ngIf="confirmPassword.errors['notSame']">
+                                {{ "Errors.passwordDoestMatch" | translate }}
+                            </small>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <div class="row registration__button">
+                <div class="col-12  registration__button_block">
+                    <button (click)="signUp()" class="w-100" type="button" mdbBtn color="dark" mdbWavesEffect
+                        [disabled]="registrationForm.invalid || registrationForm.pending">
+                        {{ "Shared.signUp" | translate }}
+                    </button>
+                    <a routerLink="/login">Back to Login</a>
                 </div>
             </div>
-        </div>
-        <div class="col-lg-6 col-md-6 col-xl-6 col-12 col-sm-12">
-            <div class="md-form">
-                <input mdbInput [attr.type]="passwordToRead ? 'text': 'password'" type="password" id="form5" class="form-control"
-                    [ngClass]="{protected_input: ( registrationForm.hasError('notSame') && confirmPassword.dirty ) ||
-                                ( confirmPassword.invalid && confirmPassword.dirty ) || ( confirmPassword.invalid && confirmPassword.touched ),
-                                success_input: confirmPassword.valid && confirmPassword.dirty && !!registrationForm.errors === false}"
-                    formControlName="confirmPassword" autocomplete="off">
-
-                <label for="form5" [ngClass]="{protected_label: ( registrationForm.hasError('notSame') && confirmPassword.dirty ) ||
-                                ( confirmPassword.invalid && confirmPassword.dirty) || ( confirmPassword.invalid && confirmPassword.touched ),
-                            success_label: confirmPassword.valid && confirmPassword.dirty && !!registrationForm.errors === false}">
-                    {{ "Shared.confirmPassword" | translate }}
-                </label>
-
-                <div class="registration-form__icons">
-                    <mdb-icon [@bird] fas icon="check" class="green-text" [hidden]="registrationForm.hasError('notSame')"
-                        *ngIf="confirmPassword.valid && confirmPassword.dirty">
-                    </mdb-icon>
-                    <mdb-icon [@cancel] fas icon="times" class="red-text"
-                        *ngIf="(confirmPassword.invalid && confirmPassword.dirty)  ||  confirmPassword.dirty && registrationForm.hasError('notSame') || ( confirmPassword.invalid && confirmPassword.touched )">
-                    </mdb-icon>
-                </div>
-
-                <div class="registration__confirm-pass"
-                    *ngIf="confirmPassword.invalid && confirmPassword.dirty || confirmPassword.invalid && confirmPassword.touched">
-                    <small [@errors] *ngIf="confirmPassword.errors['required']">
-                        {{ "Shared.required" | translate }}
-                    </small>
-                    <small [@errors] *ngIf="confirmPassword.errors['notSame']">
-                        {{ "Errors.passwordDoestMatch" | translate }}
-                    </small>
-                </div>
-            </div>
-        </div>
-    </form>
-    <div class="row registration__button">
-        <div class="col-12  registration__button_block">
-            <button (click)="signUp()" lass="w-100" type="button" mdbBtn color="dark" mdbWavesEffect
-                [disabled]="registrationForm.invalid || registrationForm.pending">
-                {{ "Shared.signUp" | translate }}
-            </button>
-            <a routerLink="/login">Back to Login</a>
-        </div>
+        </section>
     </div>
-</section>
+</div>
