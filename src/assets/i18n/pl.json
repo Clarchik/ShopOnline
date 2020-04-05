@@ -18,6 +18,7 @@
     },
     "Product": {
         "size": "Rozmiar",
+        "color": "Kolor",
         "quantity": "Ilość",
         "addToCart": "Dodaj do koszyka",
         "sizeGuide": "Tabela rozmiarów"

@@ -18,6 +18,7 @@
     },
     "Product": {
         "size": "Size",
+        "color": "Color",
         "quantity": "Quantity",
         "addToCart": "Add to bag",
         "sizeGuide": "Size guide"

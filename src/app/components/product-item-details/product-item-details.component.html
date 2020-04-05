@@ -12,7 +12,10 @@
         </div>
         <div class="col-md-7">
             <div class="product-view">
-                <img [src]="productViewImage" alt="Product main Image">
+                <img [src]="productViewImage" alt="Product main Image" class="imagePreview">
+                <div class="gradients">
+                    <div class="gradient" *ngFor="let color of product?.colors" [attr.color]="color.name"></div>
+                </div>
             </div>
         </div>
         <div class="col-md-4">
@@ -44,6 +47,14 @@
                         </label>
                     </div>
                 </div>
+                <div class="product-color">
+                    <div class="title">
+                        {{ "Product.color" | translate }}
+                    </div>
+                    <div class="colors">
+                        <span *ngFor="let color of product?.colors" (click)="changeColor($event);" class="color" [attr.primary]="color.primary" [attr.color]="color.name"></span>
+                    </div>
+                </div>
                 <div class="product-quantity">
                     <div class="title">
                         {{ "Product.quantity" | translate }}
@@ -61,8 +72,9 @@
                     </div>
                 </div>
 
+
                 <div class="product-add">
-                    <button [disabled]="!sizeChoice" (click)="addToBag(product, sizeChoice, productQuantity);"
+                    <button [disabled]="!sizeChoice || !selectedColor" (click)="addToBag(product, sizeChoice, productQuantity);"
                         type="button" mdbBtn color="dark" mdbWavesEffect
                         class="w-100 m-0">{{ "Product.addToCart" | translate }}</button>
                 </div>
