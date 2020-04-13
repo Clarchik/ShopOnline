@@ -95,5 +95,8 @@
     "tslint": "~5.15.0",
     "tslint-eslint-rules": "^5.4.0",
     "typescript": "~3.7.5"
+  },
+  "engines": {
+      "node": "10.16.0"
   }
 }
