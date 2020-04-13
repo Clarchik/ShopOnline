@@ -9,7 +9,7 @@ export default class ProductsService {
         const {category} = req.query;
         const {title} = req.query;
         const {page} = req.query;
-        const pageNumber = parseInt(page, undefined) || 1;
+        const pageNumber = parseInt(page.toString(), null) || 1;
         const titleRegex = {title: {$regex: title, $options: title}};
         const param = category === 'all' ? {...titleRegex} : {...titleRegex, category};
         const query = {
