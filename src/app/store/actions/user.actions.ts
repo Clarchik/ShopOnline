@@ -1,6 +1,6 @@
 import { Action } from '@ngrx/store';
 import { User } from '../../shared/interfaces/user/user';
-import { Authenticate } from '../../shared/interfaces/user/authenticate';
+import { UserCredentials } from '../../shared/interfaces/user/user-credentials';
 import { AuthError } from '../../shared/interfaces/auth/auth-error';
 import { UserData } from '../../shared/models/user/user-data';
 import { UserPasswords } from '../../shared/models/user/user-passwords';
@@ -28,7 +28,7 @@ export const UPDATE_USER_PASSWORDS_FAIL = '[Update] Update User Passwords Fail';
 
 export class LoginUser implements Action {
     readonly type = LOGIN_USER;
-    constructor(public payload: Authenticate, public redirectUrl: string) { }
+    constructor(public payload: UserCredentials, public redirectUrl: string) { }
 }
 
 export class LoginUserSuccess implements Action {

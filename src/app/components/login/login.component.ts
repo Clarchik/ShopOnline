@@ -2,10 +2,10 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 
-import { Observable, Subscription } from 'rxjs';
+import { Observable, Subscription, BehaviorSubject } from 'rxjs';
 
 import { UserActions, UserSelectors, ShopState } from '../../store';
-import { Authenticate } from '../../shared/interfaces/user/authenticate';
+import { UserCredentials } from '../../shared/interfaces/user/user-credentials';
 import { ActivatedRoute } from '@angular/router';
 
 
@@ -27,7 +27,10 @@ export class LoginComponent implements OnInit, OnDestroy {
         this._loginForm = this.fb.group({
             email: [
                 null,
-                Validators.required,
+                [
+                    Validators.required,
+                    Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')
+                ]
             ],
             password: [
                 null,
@@ -49,7 +52,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
     public loginIn() {
         const { email, password } = this._loginForm.value;
-        const credentials: Authenticate = { email, password };
+        const credentials: UserCredentials = { email, password };
         this.store.dispatch(new UserActions.LoginUser(credentials, this.returnUrl));
     }
 

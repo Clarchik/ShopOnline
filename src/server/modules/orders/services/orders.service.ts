@@ -14,29 +14,31 @@ export default class OrdersService {
             const { shippingAddress } = req.body;
             const { products } = req.body;
             const fio = `${name} ${surname}`;
-            const newOrder = new Order({ ...shippingAddress, products, fio });
-            newOrder.save().then((savedOrder) => {
-                User.update(
-                    { _id },
-                    { $push: { orders: savedOrder } }
-                ).then(() => {
-                    createOrderHTMLTemplate(fio, products)
-                        .then((html) => {
-                            sendOrderTemplate(email, html)
-                                .then(() => {
-                                    res.status(200).send({ message: 'Order have been sent' });
-                                })
-                                .catch((e: any) => {
-                                    res.status(400).send({ e, message: 'Order have not been sent' });
-                                });
-                        }).catch((e) => {
-                            res.status(400).send({ e, message: 'Couldt create Html Template' });
-                        });
-                }).catch((e) => {
-                    res.status(400).send({ e, message: 'Couldnt add order to User' });
+            Order.countDocuments({}, (error: any, totalCount: number) => {
+                const newOrder = new Order({...shippingAddress, products, fio, number: totalCount + 1});
+                newOrder.save().then((savedOrder) => {
+                    User.update(
+                        {_id},
+                        {$push: {orders: savedOrder}}
+                    ).then(() => {
+                        createOrderHTMLTemplate(fio, products)
+                            .then((html) => {
+                                sendOrderTemplate(email, html)
+                                    .then(() => {
+                                        res.status(200).send({message: 'Order have been sent'});
+                                    })
+                                    .catch((e: any) => {
+                                        res.status(400).send({e, message: 'Order have not been sent'});
+                                    });
+                            }).catch((e) => {
+                                res.status(400).send({e, message: 'Couldt create Html Template'});
+                            });
+                    }).catch((e) => {
+                        res.status(400).send({e, message: 'Couldnt add order to User'});
+                    });
+                }).catch((e: any) => {
+                    res.status(400).send({e, message: 'Couldnt save order'});
                 });
-            }).catch((e: any) => {
-                res.status(400).send({ e, message: 'Could save order' });
             });
         } else {
             res.status(403).send({ message: 'User not found' });

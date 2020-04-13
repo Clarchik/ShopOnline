@@ -12,7 +12,7 @@
                     <a [routerLink]="['/product', product.id]" class="products__link">
                         <div class="row no-gutters">
                             <div class="col-4">
-                                <img class="item-image" [src]="product.slides[0].imageUrl" alt="Product Image">
+                                <img class="item-image" [src]="product.mainImage" alt="Product Image">
                             </div>
                             <div class="col-7">
                                 <div class="products__item-description">
@@ -50,7 +50,7 @@
                     <a class="products__link">
                         <div class="row no-gutters">
                             <div class="col-4">
-                                <img class="item-image" [src]="product.slides[0].imageUrl" alt="Product Image">
+                                <img class="item-image" [src]="product.mainImage" alt="Product Image">
                             </div>
                             <div class="col-7">
                                 <div class="products__item-description">

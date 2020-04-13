@@ -19,6 +19,7 @@ import { UserOrdersComponent } from './user-orders/user-orders.component';
 import { ProfileComponent } from './account/profile/profile.component';
 import { ProfileDetailsComponent } from './account/profile-details/profile-details.component';
 import { RegistrationComponent } from './registration/registration.component';
+import {NotAllowedComponent} from './screens/not-allowed/not-allowed.component';
 
 
 
@@ -43,7 +44,8 @@ export const Components: any[] = [
     UserOrdersComponent,
     ProfileComponent,
     ProfileDetailsComponent,
-    RegistrationComponent
+    RegistrationComponent,
+    NotAllowedComponent
 ];
 
 

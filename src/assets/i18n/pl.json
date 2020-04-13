@@ -7,6 +7,7 @@
         "quickShop": "Szybki zakup",
         "shopNow": "Kupuj teraz",
         "subscribe": "Subskrybuj",
+        "signUp": "Zarejestruj się",
         "name": "Imię",
         "surname": "Nazwisko",
         "email": "Email",
@@ -63,7 +64,8 @@
     "Profile": {
         "details": "Szczegóły profilu",
         "logout": "Wyloguj",
-        "orders": "Zamówienia"
+        "orders": "Zamówienia",
+        "dashboard": "Dashboard"
     },
     "Errors": {
         "emailInUse": "Taka poczta już istnieje",

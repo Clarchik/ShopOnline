@@ -9,13 +9,12 @@ export class CartProduct {
     public quantity: number;
     public mainImage: string;
     constructor(
-        { _id, title, price, slides, mainImage }: Product,
+        { _id, title, price, mainImage }: Product,
         size: number = 0,
         quantity: number = 0) {
         this.id = _id;
         this.title = title;
         this.price = price;
-        this.slides = slides;
         this.mainImage = mainImage;
         this.size = size;
         this.quantity = quantity;

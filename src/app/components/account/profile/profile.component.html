@@ -21,6 +21,14 @@
                     {{ "Profile.orders" | translate }}
                 </span>
             </a>
+            <a class="dropdown-item profile-item" routerLinkActive="nav-link__activated" routerLink="dashboard">
+                <span class="profile-item__icon">
+                    <i class="fas fa-clipboard-list"></i>
+                </span>
+                <span class="profile-item__text">
+                    {{ "Profile.dashboard" | translate }}
+                </span>
+            </a>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item profile-item" (click)="logout();">
                 <span class="profile-item__icon">

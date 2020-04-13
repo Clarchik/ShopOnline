@@ -7,6 +7,7 @@
         "quickshop": "Quick Shop",
         "shopNow": "Shop Now",
         "subscribe": "Subscribe",
+        "signUp": "SignUp",
         "name": "Name",
         "surname": "Surname",
         "email": "Email",
@@ -63,7 +64,8 @@
     "Profile": {
         "details": "Profile details",
         "logout": "Logout",
-        "orders": "Orders"
+        "orders": "Orders",
+        "dashboard": "Dashboard"
     },
     "Errors": {
         "emailInUse": "Such mail already exists",

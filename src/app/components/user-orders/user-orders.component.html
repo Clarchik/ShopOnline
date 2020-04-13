@@ -16,7 +16,7 @@
                         <div class="order-item" *ngFor="let product of order.products">
                             <div class="row">
                                 <div class="col-3">
-                                    <img class="order-image" [src]="product.slides[0].imageUrl" alt="Product image">
+                                    <img class="order-image" [src]="product.mainImage" alt="Product image">
                                 </div>
                                 <div class="col-5">
                                     <h4 class="order-info-title">

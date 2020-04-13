@@ -59,6 +59,7 @@ export class UserEffects {
     logoutUser = this.actions$.pipe(
         ofType(userActions.LOGOUT_USER),
         tap(() => {
+            console.log('logout');
             this.router.navigateByUrl('/main');
             return this.authService.logoutUser();
         }),

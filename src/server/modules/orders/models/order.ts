@@ -9,6 +9,7 @@ const OrderSchema = new mongoose.Schema({
         ref: 'User'
     },
     fio: String,
+    number: Number,
     products: [
         {
             title: String,

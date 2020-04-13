@@ -35,6 +35,13 @@ const UserSchema = new mongoose.Schema({
         trim: true,
         unique: false
     },
+    role: {
+        type: String,
+        default: 'Customer',
+        required: false,
+        trim: true,
+        unique: false,
+    },
     orders: [
         { type: Schema.Types.ObjectId, ref: 'Order' }
     ],

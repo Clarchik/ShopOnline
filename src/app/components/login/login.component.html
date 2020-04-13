@@ -9,7 +9,7 @@
                     <hr class="hr__small">
                 </header>
                 <section class="login-form">
-                    <form [formGroup]="loginForm">
+                    <form [formGroup]="loginForm" (ngSubmit)="loginIn();" (keyup.enter)="loginIn();">
                         <div class="md-form">
                             <input mdbInput type="text" id="email" class="form-control" formControlName="email">
                             <label for="email">
@@ -22,7 +22,7 @@
                                 {{ 'Authentication.password' | translate }}
                             </label>
                         </div>
-                        <button [disabled]="loginForm.invalid" class="w-100" type="button" mdbBtn color="dark" mdbWavesEffect (click)="loginIn();">
+                        <button [disabled]="loginForm.invalid" type="submit" class="w-100" mdbBtn color="dark" mdbWavesEffect>
                             <span [hidden]="userIsLoading$ | async">
                                 {{ 'Authentication.signIn' | translate }}
                             </span>
