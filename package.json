@@ -7,13 +7,13 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "force:build:prod": "npm run clean:dist && npm run build:prod",
-    "build:prod": "ng build --prod --aot",
-    "clean:dist": "rm -rf dist",
+    "watch-node": "nodemon dist/server/server.js",
     "serve": "node dist/server/server.js",
-    "watch-node": "nodemon dist/server.js",
-    "postinstall": "npm run force:build:prod && npm run --prefix ./src/server build",
-    "build:dev": "ng build --prod --aot && npm run --prefix ./src/server build && nodemon dist/server/server.js"
+    "clean": "rm -rf dist && rm -rf package-lock.json && rf -rf node_modules",
+    "build:prod": "ng build --prod --aot",
+    "force:build:prod": "npm run clean && npm run build:prod",
+    "force:build:dev": "ng build --prod --aot && npm run --prefix ./src/server build && npm run watch-node",
+    "postinstall": "npm run force:build:prod && npm run --prefix ./src/server build"
   },
   "private": true,
   "dependencies": {
