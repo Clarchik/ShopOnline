@@ -39,7 +39,8 @@ import { environment } from '../environments/environment.prod';
 import { SetupFactory } from './setup-factory/setup-factory.service';
 import { ProductsPreviewComponent } from './components/products-preview/products-preview.component';
 import { BrandsComponent } from './components/brands/brands.component';
-import {DashBoardModule} from './modules/manager/dashboard.module';
+import {DashBoardModule} from './modules/dashboard/dashboard.module';
+
 
 const setupFactory = new SetupFactory();
 
@@ -50,7 +51,7 @@ const setupFactory = new SetupFactory();
         ...fromSharedDirectives.Directives,
         CurrencyConverterPipe,
         ProductsPreviewComponent,
-        BrandsComponent,
+        BrandsComponent
     ],
     imports: [
         BrowserModule,

@@ -15,14 +15,19 @@
         "confirmPassword": "Confirm password",
         "required": "Required field",
         "success": "Success",
-        "error": "Error"
+        "error": "Error",
+        "general": "General",
+        "customerInformation": "Customer Information",
+        "shippingInfo": "Shipping address"
     },
     "Product": {
+        "product": "Product",
         "size": "Size",
         "color": "Color",
         "quantity": "Quantity",
         "addToCart": "Add to bag",
-        "sizeGuide": "Size guide"
+        "sizeGuide": "Size guide",
+        "productsInfo": "Products Information"
     },
     "Order": {
         "title": "Place an order",
@@ -33,7 +38,16 @@
         "postindex": "Index",
         "quantity": "Quantity",
         "size": "Size",
-        "price": "Price"
+        "price": "Price",
+        "subtotal": "Subtotal",
+        "total": "Total",
+        "summary": "Summary",
+        "received": "Received",
+        "proccessing": "Proccessing",
+        "shipped": "Shipped",
+        "complete": "Complete"
+    },
+    "OrderDetails": {
     },
     "Orders": {
         "title": "Your orders",

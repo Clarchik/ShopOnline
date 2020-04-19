@@ -14,6 +14,7 @@ import {UserOrdersComponent} from './components/user-orders/user-orders.componen
 import {AuthGuard} from './guards/auth-guard/auth.guard';
 import {UserOrdersResolver} from './resolvers/user-orders/user-orders.resolver';
 import {NotAllowedComponent} from './components/screens/not-allowed/not-allowed.component';
+import {OrderDetailsComponent} from './components/order-details/order-details.component';
 
 const routes: Routes = [
     {path: '', redirectTo: '/main', pathMatch: 'full'},
@@ -31,9 +32,14 @@ const routes: Routes = [
         canActivate: [AuthGuard],
         resolve: {orders: UserOrdersResolver}
     },
+    {
+        path: 'orders/:id',
+        component: OrderDetailsComponent,
+        canActivate: [AuthGuard],
+    },
     {path: 'not-allowed', component: NotAllowedComponent},
     {path: '**', redirectTo: '/main'},
-    {path: 'dashboard', loadChildren: () => import('./modules/manager/dashboard.module').then((m) => m.DashBoardModule)}
+    {path: 'dashboard', loadChildren: () => import('./modules/dashboard/dashboard.module').then((m) => m.DashBoardModule)}
 ];
 
 @NgModule({

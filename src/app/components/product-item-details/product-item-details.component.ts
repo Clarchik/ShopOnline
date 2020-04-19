@@ -36,7 +36,7 @@ export class ProductItemDetailsComponent implements OnInit, OnDestroy {
             switchMap((id) => this.ps.getSingleProduct(id))
         ).subscribe((product: Product) => {
             this._product = product;
-            this.productViewImage = this._product.slides[0].imageUrl;
+            this.productViewImage = this._product.mainImage;
         });
     }
 

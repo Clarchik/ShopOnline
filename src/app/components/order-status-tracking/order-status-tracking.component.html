@@ -1,0 +1,24 @@
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="order-progress-bar">
+            <div *ngFor="let step of steps" class="order-step">
+                <div class="order-step__bullet">
+                    <figure class="order-step__bullet-figure">
+                        <figcaption class="order-step__bullet-mask"></figcaption>
+                        <div class="order-step__bullet-icon">
+                            <i [class]="step.icon"></i>
+                        </div>
+                        <svg height="45" width="45" xmlns="http://www.w3.org/2000/svg" class="order-step__bullet-circle">
+                            <circle cx="25" cy="20" r="19"></circle>
+                        </svg>
+                    </figure>
+                    <div class="order-step__bullet-line-mask"></div>
+                    <div class="order-step__bullet-line-fill"></div>
+                </div>
+                <div class="order-step__text">
+                    {{step.description | translate}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

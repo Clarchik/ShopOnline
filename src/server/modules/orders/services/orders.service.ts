@@ -3,6 +3,8 @@ import { Order } from '../models';
 import { User } from '../../user/models';
 import { createOrderHTMLTemplate, sendOrderTemplate } from '../../../shared/html-service';
 import { UserData } from '../../user/interface/user';
+import {Order as IOrder} from '../../../../app/shared/interfaces/order/order';
+
 
 export default class OrdersService {
 
@@ -15,7 +17,7 @@ export default class OrdersService {
             const { products } = req.body;
             const fio = `${name} ${surname}`;
             Order.countDocuments({}, (error: any, totalCount: number) => {
-                const newOrder = new Order({...shippingAddress, products, fio, number: totalCount + 1});
+                const newOrder = new Order({...shippingAddress, products, fio, orderNumber: totalCount + 1});
                 newOrder.save().then((savedOrder) => {
                     User.update(
                         {_id},
@@ -50,6 +52,22 @@ export default class OrdersService {
         User.findById(user_id).populate('orders').exec((err, user: UserData) => {
             if (err) { res.status(400).send({ message: 'User orders not found' }); }
             res.status(200).send(user.orders);
+        });
+    }
+
+    public getUserOrderDetails(req: express.Request, res: express.Response) {
+        const {user_id} = (req as any);
+        const orderId = req.query.id as string;
+        User.findById(user_id).exec((err, user) => {
+            if (err) {res.status(400).send({message: 'User orders not found'}); return;}
+            if (!(user.orders as Array<string>).includes(orderId)) {
+                res.status(403).send({message: 'You are not allowed to see this order or order doesnt exist'});
+                return;
+            }
+            Order.findById(orderId, null, (error, order: IOrder) => {
+                if (error) {res.status(400).send({message: 'Order doesnt exist'});}
+                res.status(200).send(order);
+            });
         });
     }
 }

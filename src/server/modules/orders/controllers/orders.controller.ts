@@ -17,5 +17,8 @@ export default class OrdersController {
 
         // Get Current User Orders
         this.app.route('/api/getUserOrders').get([verifyJWTToken, verifySession], this.ordersService.getUserOrders);
+
+        // Get Current User Order Deatils By ID
+        this.app.route('/api/getOrderDetails').get([verifyJWTToken, verifySession], this.ordersService.getUserOrderDetails);
     }
 }

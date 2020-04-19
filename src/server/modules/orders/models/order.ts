@@ -9,19 +9,19 @@ const OrderSchema = new mongoose.Schema({
         ref: 'User'
     },
     fio: String,
-    number: Number,
+    orderNumber: Number,
+    orderStatus: String,
     products: [
         {
             title: String,
             quantity: Number,
             price: Number,
             size: Number,
-            mainImage: String,
-            slides: [
-                { imageUrl: String }
-            ]
+            mainImage: String
         }
     ]
+}, {
+    timestamps: true
 });
 
 const Order = mongoose.model('Order', OrderSchema);

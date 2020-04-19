@@ -95,6 +95,13 @@ export class UtilsService {
     }
 
     public chunkArrayBySize(items: Array<any>, chunkSize: number) {
-        return _.chunk(items, 3);
+        return _.chunk(items, chunkSize);
+    }
+
+    public formatDate(date: Date) {
+        return `
+            ${new Date(date).getDate()}/${new Date(date).getMonth()}/${new Date(date).getFullYear()},
+            ${new Date(date).getUTCHours()}:${new Date(date).getMinutes()}
+        `;
     }
 }

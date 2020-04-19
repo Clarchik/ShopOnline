@@ -15,14 +15,19 @@
         "confirmPassword": "Potwierdź hasło",
         "required": "Pole wymagane",
         "success": "Sukces",
-        "error": "Błąd"
+        "error": "Błąd",
+        "general": "General",
+        "customerInformation": "Informacje o kliencie",
+        "shippingInfo": "Adres wysyłki"
     },
     "Product": {
+        "product": "Produkt",
         "size": "Rozmiar",
         "color": "Kolor",
         "quantity": "Ilość",
         "addToCart": "Dodaj do koszyka",
-        "sizeGuide": "Tabela rozmiarów"
+        "sizeGuide": "Tabela rozmiarów",
+        "productsInfo": "Informacje o produktach"
     },
     "Order": {
         "title": "Złóż zamówienie",
@@ -33,7 +38,14 @@
         "postindex": "Kod pocztowy",
         "quantity": "Ilość",
         "size": "Rozmiaz",
-        "price": "Cena"
+        "price": "Cena",
+        "subtotal": "Suma częściowa",
+        "total": "Suma",
+        "summary": "Podsumowanie",
+        "received": "Otrzymano",
+        "proccessing": "Przetwarzanie",
+        "shipped": "Wysłane",
+        "complete": "Zrealizowany"
     },
     "Orders": {
         "title": "Twoje zamówienia",

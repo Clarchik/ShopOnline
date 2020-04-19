@@ -1,5 +1,6 @@
 import { Session } from '../models/session';
 import mongoose, { Document } from 'mongoose';
+import {Order as IOrder} from '../../../../app/shared/interfaces/order/order';
 
 export interface UserData extends Document {
     email: string;
@@ -7,7 +8,7 @@ export interface UserData extends Document {
     name: string;
     surname: string;
     sessions: Array<Session>;
-    orders: any;
+    orders: Array<IOrder> | Array<string>;
 }
 
 export interface UserModel extends mongoose.Model<UserData> {

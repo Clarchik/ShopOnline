@@ -1,0 +1,88 @@
+:host {
+    margin-top: 20px;
+}
+
+
+.order {
+    &-header {
+        font-weight: bold;
+        font-size: 17px;
+    }
+
+    &-date {
+        font-size: 13px;
+    }
+
+    &-general__divider {
+        margin-bottom: 30px;
+        span {
+            font-size: 15px;
+            background-color: #969696;
+            color: #ffffff;
+            padding: 2px 20px;
+            display: inline-block;
+        }
+        border-bottom: 3px solid #969696;
+
+    }
+
+    &-status {
+        margin: 30px 0;
+    }
+
+    &-customer {
+        &__block {
+            margin-bottom: 20px;
+            &-title {
+                font-weight: bold;
+                margin-bottom: 25px;
+                font-size: 18px;
+            }
+            &-item {
+                &-title {
+                    margin-bottom: 10px;
+                    font-weight: bold;
+                }
+                &-info {
+                    p {
+                        margin-bottom: 5px;
+                        font-size: 14px;
+                        color: gray;
+                    }
+                }
+            }
+            &-products {
+                table {
+                    thead.table-thead {
+                        background-color: lighten($color: lightgrey, $amount: 13);
+                        font-size: 13px;
+                        border-color: #f8f8f8;
+                        th:first-child {
+                            width: 40%;
+                        }
+                        tr th {
+                            color: black;
+                        }
+                    }
+                    td {
+                        color: lighten($color: black, $amount: 30);
+                        font-size: 14px;
+                    }
+                }
+            }
+
+            &-summary {
+                table.table {
+                    width: 50%;
+                }
+                tr td span {
+                    display: block;
+                }
+                td {
+                    font-size: 14px;
+                    background-color: lighten($color: lightgrey, $amount: 13);
+                }
+            }
+        }
+    }
+}
