@@ -17,7 +17,7 @@ const customFields = {
 
 const routes: Routes = [
     {
-        path: '', component: DashboardComponent,
+        path: '', component: DashboardComponent, ...customFields,
         children: [
             {
                 path: 'manage-orders',
