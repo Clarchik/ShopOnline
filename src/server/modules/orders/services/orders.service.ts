@@ -18,7 +18,7 @@ export default class OrdersService {
             const fio = `${name} ${surname}`;
             Order.countDocuments({}, (error: any, totalCount: number) => {
                 const newOrder = new Order({...shippingAddress, products, fio, orderNumber: totalCount + 1});
-                newOrder.save().then((savedOrder) => {
+                newOrder.save().then((savedOrder: any) => {
                     User.update(
                         {_id},
                         {$push: {orders: savedOrder}}
@@ -35,7 +35,7 @@ export default class OrdersService {
                             }).catch((e) => {
                                 res.status(400).send({e, message: 'Couldt create Html Template'});
                             });
-                    }).catch((e) => {
+                    }).catch((e: any) => {
                         res.status(400).send({e, message: 'Couldnt add order to User'});
                     });
                 }).catch((e: any) => {
