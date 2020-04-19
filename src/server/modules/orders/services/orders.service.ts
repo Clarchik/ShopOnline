@@ -3,7 +3,7 @@ import { Order } from '../models';
 import { User } from '../../user/models';
 import { createOrderHTMLTemplate, sendOrderTemplate } from '../../../shared/html-service';
 import { UserData } from '../../user/interface/user';
-import {Order as IOrder} from '../../../../shared/interfaces/order';
+import {Order as IOrder} from '../../../shared/interfaces/order';
 
 
 export default class OrdersService {

@@ -1,9 +1,9 @@
 import {Component, OnInit, AfterViewInit, Input} from '@angular/core';
 import {interval} from 'rxjs';
 import {takeWhile, startWith} from 'rxjs/operators';
-import {OrderStatus} from '../../../shared/interfaces/order-status';
 import {isNumber} from 'lodash';
 import {Step} from '../../shared/interfaces/step/step';
+import {OrderStatus} from '../../../shared/interfaces/order-status';
 
 @Component({
     selector: 'app-order-status-tracking',

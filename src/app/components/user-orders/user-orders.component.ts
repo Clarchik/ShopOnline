@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Order } from '../../shared/models/order/order';
-import { UserOrder } from '../../shared/interfaces/user-order/user-order';
+import {Order} from '../../shared/interfaces/order/order';
+import {UtilsService} from '../../shared/services/utils/utils.service';
+import {OrderStatus} from '../../../shared/interfaces/order-status';
 
 @Component({
     selector: 'app-user-orders',
@@ -9,12 +10,16 @@ import { UserOrder } from '../../shared/interfaces/user-order/user-order';
     styleUrls: ['./user-orders.component.scss']
 })
 export class UserOrdersComponent implements OnInit {
-    userOrders: UserOrder[];
-    constructor(private route: ActivatedRoute) { }
+    public userOrders: Order[];
+    constructor(private route: ActivatedRoute, private us: UtilsService) {}
 
     ngOnInit() {
         const { orders } = this.route.snapshot.data;
         this.userOrders = orders;
+    }
+
+    public getOrderColor(orderStatus: OrderStatus): string {
+        return this.us.getOrderStatusColorByName(orderStatus);
     }
 
 }

@@ -1,5 +1,5 @@
 import {NgModule} from '@angular/core';
-import {Routes, RouterModule} from '@angular/router';
+import {Routes, RouterModule, PreloadAllModules} from '@angular/router';
 import {LoginComponent} from './components/login/login.component';
 import {MainPageComponent} from './components/main-page/main-page.component';
 import {RegistrationComponent} from './components/registration/registration.component';
@@ -17,6 +17,9 @@ import {NotAllowedComponent} from './components/screens/not-allowed/not-allowed.
 import {OrderDetailsComponent} from './components/order-details/order-details.component';
 
 const routes: Routes = [
+    // Modules
+    {path: 'dashboard', loadChildren: () => import('./modules/dashboard/dashboard.module').then((m) => m.DashBoardModule)},
+    // Components
     {path: '', redirectTo: '/main', pathMatch: 'full'},
     {path: 'main', component: MainPageComponent, data: {animation: 'MainPage'}},
     {path: 'login', component: LoginComponent, canActivate: [LoginComponentGuard], data: {animation: 'LoginPage'}},
@@ -39,14 +42,11 @@ const routes: Routes = [
     },
     {path: 'not-allowed', component: NotAllowedComponent},
     {path: '**', redirectTo: '/main'},
-    {path: 'dashboard', loadChildren: () => import('./modules/dashboard/dashboard.module').then((m) => m.DashBoardModule)}
 ];
 
 @NgModule({
     imports: [RouterModule.forRoot(routes, {scrollPositionRestoration: 'disabled'})],
     exports: [RouterModule],
-    providers: [
-        UserOrdersResolver
-    ]
+    providers: [UserOrdersResolver]
 })
 export class AppRoutingModule {}

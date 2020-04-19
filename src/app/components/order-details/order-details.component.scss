@@ -68,6 +68,13 @@
                         color: lighten($color: black, $amount: 30);
                         font-size: 14px;
                     }
+
+                    td span.color {
+                        width: 15px;
+                        height: 15px;
+                        display: inline-block;
+                        border-radius: 50%;
+                    }
                 }
             }
 

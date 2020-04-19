@@ -1,5 +1,5 @@
 import {Component, OnInit, OnDestroy} from '@angular/core';
-import {Product} from '../../../shared/interfaces/product';
+import {Product} from '../../../server/shared/interfaces/product';
 import {ActivatedRoute} from '@angular/router';
 import {switchMap, map} from 'rxjs/operators';
 import {ProductsService} from '../../services/products/products.service';
@@ -78,8 +78,8 @@ export class ProductItemDetailsComponent implements OnInit, OnDestroy {
         });
     }
 
-    public addToBag(product, size, quantity) {
-        const productToAdd = new CartProduct(product, size, quantity);
+    public addToBag(product, size, quantity, selectedColor) {
+        const productToAdd = new CartProduct(product, size, quantity, selectedColor);
         this.store.dispatch(new CartActions.AddProduct(productToAdd));
     }
 

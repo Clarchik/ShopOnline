@@ -53,7 +53,9 @@
                             </a>
                         </td>
                         <td>{{product.quantity}}</td>
-                        <td>Color</td>
+                        <td>
+                            <span class="color" [style.background-color]="product.color"></span>
+                        </td>
                         <td>{{product.size}}</td>
                         <td>{{product.price}}</td>
                         <td>{{product.price * product.quantity}}</td>
@@ -71,9 +73,8 @@
                 <thead class="table-thed">
                     <tr>
                         <td style="vertical-align: inherit;">{{"Order.subtotal" | translate}}</td>
-                        <td *ngFor="let product of order.products">
-                            <span>{{product.price * product.quantity}}</span>
-                            <span>{{product.price * product.quantity}}</span>
+                        <td>
+                            <span *ngFor="let product of order.products">{{product.price * product.quantity}}</span>
                         </td>
                     </tr>
                     <tr>

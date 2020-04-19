@@ -3,6 +3,8 @@ import { SCREEN_SIZE, } from '../../models/screen-size/screen-size';
 import { SCREEN_COFIG } from '../../models/screen-size/screen-size-config';
 import { SESSION } from '../../models/session/session';
 import * as _ from 'lodash';
+import {OrderStatus} from '../../../../shared/interfaces/order-status';
+import {OrderColor} from '../../interfaces/order/order-color';
 
 @Injectable({
     providedIn: 'root'
@@ -103,5 +105,9 @@ export class UtilsService {
             ${new Date(date).getDate()}/${new Date(date).getMonth()}/${new Date(date).getFullYear()},
             ${new Date(date).getUTCHours()}:${new Date(date).getMinutes()}
         `;
+    }
+
+    public getOrderStatusColorByName(orderStatus: OrderStatus): string {
+        return OrderColor[orderStatus];
     }
 }

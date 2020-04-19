@@ -1,5 +1,5 @@
-import { ProductSize } from './size';
-import {ProductColor} from './color';
+import { ProductSize } from '../../../shared/interfaces/size';
+import {ProductColor} from '../../../shared/interfaces/color';
 
 export interface Product {
     _id: string;

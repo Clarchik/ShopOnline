@@ -74,7 +74,7 @@
 
 
                 <div class="product-add">
-                    <button [disabled]="!sizeChoice || !selectedColor" (click)="addToBag(product, sizeChoice, productQuantity);"
+                    <button [disabled]="!sizeChoice || !selectedColor" (click)="addToBag(product, sizeChoice, productQuantity, selectedColor);"
                         type="button" mdbBtn color="dark" mdbWavesEffect
                         class="w-100 m-0">{{ "Product.addToCart" | translate }}</button>
                 </div>

@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import {OrderStatus} from '../../../../shared/interfaces/order-status';
 
 const OrderSchema = new mongoose.Schema({
     city: String,
@@ -10,13 +11,21 @@ const OrderSchema = new mongoose.Schema({
     },
     fio: String,
     orderNumber: Number,
-    orderStatus: String,
+    orderStatus: {
+        type: String,
+        default: OrderStatus[0],
+        required: true,
+        trim: true,
+        unique: false,
+    },
+    color: String,
     products: [
         {
             title: String,
             quantity: Number,
             price: Number,
             size: Number,
+            color: String,
             mainImage: String
         }
     ]

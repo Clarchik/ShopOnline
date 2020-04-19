@@ -3,10 +3,10 @@ import {ActivatedRoute} from '@angular/router';
 import {Observable} from 'rxjs';
 import {switchMap, delay} from 'rxjs/operators';
 import {OrderService} from '../../shared/services/order/order.service';
-import {Order as IOrder} from '../../../shared/interfaces/order';
 import {UtilsService} from '../../shared/services/utils/utils.service';
 
 import {reduce} from 'lodash';
+import {Order as IOrder} from '../../shared/interfaces/order/order';
 
 @Component({
     selector: 'app-order-details',
@@ -32,6 +32,6 @@ export class OrderDetailsComponent implements OnInit {
     }
 
     countTotalSum(order: IOrder) {
-        return reduce(order.products, (sum, current) => sum + (current.price * current.quantity), 150);
+        return reduce(order.products, (sum, current) => sum + (current.price * current.quantity), 0);
     }
 }
