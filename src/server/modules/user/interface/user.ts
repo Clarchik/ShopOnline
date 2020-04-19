@@ -1,6 +1,6 @@
 import { Session } from '../models/session';
 import mongoose, { Document } from 'mongoose';
-import {Order as IOrder} from '../../../../app/shared/interfaces/order/order';
+import {Order as IOrder} from '../../../../shared/interfaces/order';
 
 export interface UserData extends Document {
     email: string;

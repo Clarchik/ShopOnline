@@ -1,5 +1,5 @@
 import {Component, OnInit, OnDestroy} from '@angular/core';
-import {Product} from '../../shared/interfaces/product/product';
+import {Product} from '../../../shared/interfaces/product';
 import {ActivatedRoute} from '@angular/router';
 import {switchMap, map} from 'rxjs/operators';
 import {ProductsService} from '../../services/products/products.service';

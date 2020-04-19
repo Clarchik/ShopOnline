@@ -1,4 +1,4 @@
-import { Product } from '../../interfaces/product/product';
+import { Product } from '../../../../shared/interfaces/product';
 
 export class CartProduct {
     public id: string;

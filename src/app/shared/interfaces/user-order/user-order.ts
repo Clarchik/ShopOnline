@@ -1,4 +1,4 @@
-import { Product } from '../product/product';
+import { Product } from '../../../../shared/interfaces/product';
 import { CartProduct } from '../../models/cart-product/cart-product';
 
 export interface UserOrder {

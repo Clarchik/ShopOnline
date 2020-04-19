@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Product } from '../../shared/interfaces/product/product';
+import { Product } from '../../../shared/interfaces/product';
 import { FavoriteActions, FavoriteSelectors, ShopState } from '../../store';
 import { Store } from '@ngrx/store';
 import { CartProduct } from '../../shared/models/cart-product/cart-product';

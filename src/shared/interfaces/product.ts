@@ -9,6 +9,7 @@ export interface Product {
     category: string;
     gender: string;
     price: number;
+    quantity: number;
     sale: boolean;
     slides: Array<{ imageUrl: string }>;
     salePrice: number;

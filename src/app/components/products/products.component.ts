@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { tap, map, switchMap } from 'rxjs/operators';
 import { ProductsService } from '../../services/products/products.service';
-import { Product } from '../../shared/interfaces/product/product';
+import { Product } from '../../../shared/interfaces/product';
 import { Store } from '@ngrx/store';
 import { ShopState } from '../../store';
 import { Observable } from 'rxjs';

@@ -1,5 +1,5 @@
 import {OrderStatus} from './order-status';
-import {Product as IProduct} from '../product/product';
+import {Product as IProduct} from './product';
 
 export interface Order {
     _id: string;

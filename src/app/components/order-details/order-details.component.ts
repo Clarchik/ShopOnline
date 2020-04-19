@@ -3,7 +3,7 @@ import {ActivatedRoute} from '@angular/router';
 import {Observable} from 'rxjs';
 import {switchMap, delay} from 'rxjs/operators';
 import {OrderService} from '../../shared/services/order/order.service';
-import {Order as IOrder} from '../../shared/interfaces/order/order';
+import {Order as IOrder} from '../../../shared/interfaces/order';
 import {UtilsService} from '../../shared/services/utils/utils.service';
 
 import {reduce} from 'lodash';
