@@ -9,12 +9,12 @@
     "e2e": "ng e2e",
     "watch-node": "nodemon dist/server/server.js",
     "serve": "node dist/server/server.js",
-    "build:prod": "ng build --prod --aot",
     "clean": "rm -rf dist && rm -rf package-lock.json && rm -rf node_modules",
     "preinstall": "npm run clean",
-    "postinstall": "npm run force:build:prod && npm run --prefix ./src/server build",
-    "force:build:prod": "npm run clean:dist && npm run build:prod",
-    "force:build:dev": "ng build --prod --aot && npm run --prefix ./src/server build && npm run watch-node"
+    "postinstall": "npm run force:build:prod",
+    "build:prod": "ng build --prod --aot",
+    "force:build:prod": "npm run build:prod && npm run --prefix ./src/server build",
+    "force:build:dev": "npm run build:prod && npm run --prefix ./src/server build && npm run watch-node"
   },
   "private": true,
   "dependencies": {
