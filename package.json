@@ -9,7 +9,7 @@
     "e2e": "ng e2e",
     "force:build:prod": "npm run clean:dist && npm run build:prod",
     "build:prod": "ng build --prod --aot",
-    "clean:dist": "rm -rf dist && rm -rf package-lock.json && rm -rf node_modules",
+    "clean:dist": "rm -rf dist && rm -rf package-lock.json",
     "serve": "node dist/server/server.js",
     "watch-node": "nodemon dist/server.js",
     "postinstall": "npm run force:build:prod && npm run --prefix ./src/server build",
