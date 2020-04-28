@@ -28,4 +28,14 @@ export class CartEffects {
             }
         })
     );
+
+    @Effect({ dispatch: false })
+    clearProducts = this.actions$.pipe(
+        ofType(CartActions.Actions.CLEAR_PRODUCTS),
+        tap(() => {
+            setTimeout(() => {
+                this.router.navigate(['/main']);
+            }, 1000);
+        })
+    );
 }

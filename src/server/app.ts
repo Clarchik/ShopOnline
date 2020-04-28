@@ -32,8 +32,8 @@ class App {
         this.ordersController = new OrdersController(this.app);
         this.userController = new UserController(this.app);
         this.productsController = new ProductsController(this.app);
-        this.staticController = new StaticController(this.app);
         this.newsSellerContorller = new NewsSellerController(this.app);
+        this.staticController = new StaticController(this.app);
     }
 }
 

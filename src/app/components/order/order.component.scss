@@ -7,4 +7,19 @@
         padding: 2rem;
         background-color: #f4f4f4;
     }
+
+    &-error {
+        margin-top: -15px;
+        margin-bottom: 10px;
+        font-size: 14px;
+    }
+}
+
+button {
+    margin-top: 15px;
+}
+
+
+.example-option-img {
+    margin-right: 8px;
 }

@@ -15,6 +15,8 @@ import {AuthGuard} from './guards/auth-guard/auth.guard';
 import {UserOrdersResolver} from './resolvers/user-orders/user-orders.resolver';
 import {NotAllowedComponent} from './components/screens/not-allowed/not-allowed.component';
 import {OrderDetailsComponent} from './components/order-details/order-details.component';
+import {CountriesResolver} from './resolvers/countries/countries.resolver';
+import {ProductsResolver} from './resolvers/products/products.resolver';
 
 const routes: Routes = [
     // Modules
@@ -28,7 +30,7 @@ const routes: Routes = [
     {path: 'products', component: ProductsComponent, data: {animation: 'ProductPage'}},
     {path: 'product/:id', component: ProductItemDetailsComponent, data: {animation: 'ProductDetPage'}},
     {path: 'size-guide', component: SizesComponent},
-    {path: 'make-order', component: OrderComponent, canActivate: [MakeOrderGuard]},
+    {path: 'make-order', component: OrderComponent, canActivate: [MakeOrderGuard], resolve: {countries: CountriesResolver, products: ProductsResolver}},
     {
         path: 'orders',
         component: UserOrdersComponent,

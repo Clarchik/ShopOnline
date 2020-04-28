@@ -2,14 +2,50 @@ import mongoose from 'mongoose';
 import {OrderStatus} from '../../../../shared/interfaces/order-status';
 
 const OrderSchema = new mongoose.Schema({
-    city: String,
-    address: String,
-    index: String,
+    country: {
+        required: true,
+        trim: true,
+        type: String
+    },
+    state: {
+        required: false,
+        trim: true,
+        type: String
+    },
+    city: {
+        required: false,
+        trim: true,
+        type: String
+    },
+    address: {
+        required: true,
+        trim: true,
+        type: String
+    },
+    index: {
+        required: true,
+        trim: true,
+        type: Number
+    },
+    name: {
+        required: true,
+        trim: true,
+        type: String
+    },
+    surname: {
+        required: true,
+        trim: true,
+        type: String
+    },
+    phone: {
+        required: true,
+        trim: true,
+        type: Number
+    },
     userId: {
         type: String,
         ref: 'User'
     },
-    fio: String,
     orderNumber: Number,
     orderStatus: {
         type: String,
@@ -18,7 +54,6 @@ const OrderSchema = new mongoose.Schema({
         trim: true,
         unique: false,
     },
-    color: String,
     products: [
         {
             title: String,

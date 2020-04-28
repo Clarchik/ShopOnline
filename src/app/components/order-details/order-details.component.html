@@ -23,8 +23,13 @@
                     {{ "Shared.shippingInfo" | translate}}
                 </h6>
                 <div class="order-customer__block-item-info">
-                    <p>{{order.fio}}</p>
+                    <p>{{order.name}} {{order.surname}}</p>
+                    <p>{{order.country}}</p>
+                    <p>{{order.state}}</p>
+                    <p>{{order.city}}</p>
                     <p>{{order.address}}</p>
+                    <p>{{order.index}}</p>
+                    <p>{{order.phone}}</p>
                 </div>
             </div>
         </div>

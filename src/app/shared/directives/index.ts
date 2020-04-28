@@ -5,6 +5,6 @@ import {CopmareValidatorDirective} from '../validators/compare-validators/compar
 export const Directives: any = [
     ImageGridDirective,
     GalleryShoesDirective,
-    CopmareValidatorDirective
+    CopmareValidatorDirective,
 ];
 

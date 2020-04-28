@@ -1,48 +1,164 @@
 <div class="container">
-    <div class="row justify-content-center">
+    <div class="row">
         <div class="col-6">
             <div class="form-wrapper">
                 <h4 class="form-title">
                     {{ 'Order.title' | translate }}
                 </h4>
                 <form [formGroup]="orderForm" class="form-ordering">
-
-                    <div class="md-form">
-                        <input mdbInput type="text" id="city" class="form-control" formControlName="city">
-                        <label for="city">
-                            {{ 'Order.city' | translate }}
-                        </label>
-
-                        <div *ngIf="city.invalid && city.dirty || city.invalid && city.touched">
-                            <mdb-error *ngIf="city.errors['required']">
-                                Required field
-                            </mdb-error>
+                    <!-- Email -->
+                    <div>
+                        <mat-form-field class="w-100">
+                            <input matInput formControlName="email" id="email" placeholder="{{ 'Order.email' | translate }}">
+                        </mat-form-field>
+                        <div class="form-error" *ngIf="controls.email.invalid && controls.email.dirty || controls.email.invalid && controls.email.touched">
+                            <mat-error *ngIf="controls.email.hasError('required')">
+                                {{ 'Shared.required' | translate }}
+                            </mat-error>
+                            <mat-error *ngIf="controls.email.hasError('pattern')">
+                                {{ 'Shared.pattern' | translate }}
+                            </mat-error>
                         </div>
                     </div>
 
-                    <div class="md-form">
-                        <input mdbInput type="text" id="address" class="form-control" formControlName="address">
-                        <label for="address">
-                            {{ 'Order.address' | translate }}
-                        </label>
-
-                        <div *ngIf="city.invalid && city.dirty || city.invalid && city.touched">
-                            <mdb-error *ngIf="city.errors['required']">
-                                Required field
-                            </mdb-error>
+                    <!-- Name -->
+                    <div>
+                        <mat-form-field class="w-100">
+                            <input matInput formControlName="name" id="name" placeholder="{{ 'Order.name' | translate }}">
+                        </mat-form-field>
+                        <div class="form-error" *ngIf="controls.name.invalid && controls.name.dirty || controls.name.invalid && controls.name.touched">
+                            <mat-error *ngIf="controls.name.hasError('required')">
+                                {{ 'Shared.required' | translate }}
+                            </mat-error>
                         </div>
                     </div>
 
-                    <div class="md-form">
-                        <input mdbInput type="text" id="index" class="form-control" formControlName="index">
-                        <label for="index">
-                            {{ 'Order.postindex' | translate }}
-                        </label>
+                    <!-- Surname -->
+                    <div>
+                        <mat-form-field class="w-100">
+                            <input matInput formControlName="surname" id="name" placeholder="{{ 'Order.surname' | translate }}">
+                        </mat-form-field>
+                        <div class="form-error" *ngIf="controls.surname.invalid && controls.surname.dirty || controls.surname.invalid && controls.surname.touched">
+                            <mat-error *ngIf="controls.surname.hasError('required')">
+                                {{ 'Shared.required' | translate }}
+                            </mat-error>
+                        </div>
+                    </div>
 
-                        <div *ngIf="index.invalid && index.dirty || index.invalid && index.touched">
-                            <mdb-error *ngIf="index.errors['required']">
-                                Required field
-                            </mdb-error>
+                    <!-- Country -->
+                    <div>
+                        <mat-form-field class="w-100 country-field">
+                            <input matInput placeholder="{{ 'Order.country' | translate }}" aria-label="State" [matAutocomplete]="formCountry"
+                                formControlName="country" [(ngModel)]="selectedCountry">
+
+                            <mat-autocomplete #formCountry="matAutocomplete">
+                                <mat-option *ngFor="let country of filteredCountries | async" [value]="country.name" class="country-option">
+                                    <img class="example-option-img" aria-hidden [src]="country.flag" height="25" width="40">
+                                    <span>{{country.name}}</span>
+                                </mat-option>
+                            </mat-autocomplete>
+                        </mat-form-field>
+
+                        <div class="form-error" *ngIf="controls.country.invalid && controls.country.dirty || controls.country.invalid && controls.country.touched">
+                            <mat-error class="form-error" *ngIf="controls.country.errors['required']">
+                                {{ 'Shared.required' | translate }}
+                            </mat-error>
+                            <mat-error *ngIf="controls.country.hasError('notInclude')">
+                                {{ 'Shared.notInclude' | translate }}
+                            </mat-error>
+                        </div>
+                    </div>
+
+                    <!-- States -->
+                    <div *ngIf="states.length">
+                        <mat-form-field class="w-100 country-field" >
+                            <input matInput placeholder="State" aria-label="State" [matAutocomplete]="formState"
+                                formControlName="state" [(ngModel)]="selectedState">
+                            <mat-autocomplete #formState="matAutocomplete">
+                                <mat-option *ngFor="let state of filteredStates | async" [value]="state" class="country-option">
+                                    <span>{{state}}</span>
+                                </mat-option>
+                            </mat-autocomplete>
+                        </mat-form-field>
+
+                        <div class="form-error" *ngIf="controls.state.invalid && controls.state.dirty || controls.state.invalid && controls.state.touched">
+                            <mat-error *ngIf="controls.state.hasError('required')">
+                                {{ 'Shared.required' | translate }}
+                            </mat-error>
+                            <mat-error *ngIf="controls.state.hasError('notInclude')">
+                                {{ 'Shared.notInclude' | translate }}
+                            </mat-error>
+                        </div>
+                    </div>
+
+                    <!-- Cities -->
+                    <div *ngIf="cities.length">
+                        <mat-form-field class="w-100 country-field" >
+                            <input matInput placeholder="City" aria-label="City" [matAutocomplete]="formCity"
+                                formControlName="city" [(ngModel)]="selectedCity">
+                            <mat-autocomplete #formCity="matAutocomplete">
+                                <mat-option *ngFor="let city of filteredCities | async" [value]="city" class="country-option">
+                                    <span>{{city}}</span>
+                                </mat-option>
+                            </mat-autocomplete>
+                        </mat-form-field>
+
+                        <div class="form-error" *ngIf="controls.city.invalid && controls.city.dirty || controls.city.invalid && controls.city.touched">
+                            <mat-error *ngIf="controls.city.hasError('required')">
+                                {{ 'Shared.required' | translate }}
+                            </mat-error>
+                            <mat-error *ngIf="controls.city.hasError('notInclude')">
+                                {{ 'Shared.notInclude' | translate }}
+                            </mat-error>
+                        </div>
+                    </div>
+
+                    <!-- Address -->
+                    <div>
+                        <mat-form-field class="w-100">
+                            <input matInput id="address" formControlName="address" placeholder="{{ 'Order.address' | translate }}">
+                        </mat-form-field>
+
+                        <div class="form-error" *ngIf="controls.address.invalid && controls.address.dirty || controls.address.invalid && controls.address.touched">
+                            <mat-error *ngIf="controls.address.hasError('required')">
+                                {{ 'Shared.required' | translate }}
+                            </mat-error>
+                        </div>
+                    </div>
+
+                    <!-- Phone -->
+                    <div>
+                        <mat-form-field class="w-100">
+                            <input matInput id="phone" maxlength="12" formControlName="phone" placeholder="{{ 'Order.phone' | translate }}">
+                        </mat-form-field>
+
+
+                        <div class="form-error" *ngIf="controls.phone.invalid && controls.phone.dirty || controls.phone.invalid && controls.phone.touched">
+                            <mat-error *ngIf="controls.phone.hasError('required')">
+                                {{ 'Shared.required' | translate }}
+                            </mat-error>
+                            <mat-error *ngIf="controls.phone.hasError('pattern')">
+                                {{ 'Shared.pattern' | translate }}
+                            </mat-error>
+                            <mat-error *ngIf="controls.phone.hasError('maxlength')">
+                                {{ 'Shared.maxLength' | translate }}
+                            </mat-error>
+                        </div>
+                    </div>
+
+                    <!-- Postal code -->
+                    <div>
+                        <mat-form-field class="w-100">
+                            <input matInput maxlength="12" formControlName="index" id="index" placeholder="{{ 'Order.postindex' | translate }}">
+                        </mat-form-field>
+
+                        <div class="form-error" *ngIf="controls.index.invalid && controls.index.dirty || controls.index.invalid && controls.index.touched">
+                            <mat-error *ngIf="controls.index.hasError('required')">
+                                {{ 'Shared.required' | translate }}
+                            </mat-error>
+                            <mat-error *ngIf="controls.index.hasError('pattern')">
+                                {{ 'Shared.pattern' | translate }}
+                            </mat-error>
                         </div>
                     </div>
 
@@ -51,6 +167,9 @@
                     </button>
                 </form>
             </div>
+        </div>
+        <div class="col-6">
+            sdf
         </div>
     </div>
 </div>

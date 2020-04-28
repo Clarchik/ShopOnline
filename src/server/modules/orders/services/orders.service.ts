@@ -1,9 +1,12 @@
-import express from 'express';
+import express, { Request, Response } from 'express';
 import { Order } from '../models';
 import { User } from '../../user/models';
 import { createOrderHTMLTemplate, sendOrderTemplate } from '../../../shared/html-service';
 import { UserData } from '../../user/interface/user';
 import {Order as IOrder} from '../../../shared/interfaces/order';
+import {countries} from '../../../data/countries/countries';
+import {countriesWithStates} from '../../../data/cities/cities';
+import {keys} from 'lodash';
 
 
 export default class OrdersService {
@@ -12,18 +15,16 @@ export default class OrdersService {
         const user = (req as any).userObject;
 
         if (user) {
-            const { _id, email, name, surname } = user;
-            const { shippingAddress } = req.body;
-            const { products } = req.body;
-            const fio = `${name} ${surname}`;
+            const { _id} = user;
+            const { email, country, state, city, address, index, phone, name, surname, products } = req.body;
             Order.countDocuments({}, (error: any, totalCount: number) => {
-                const newOrder = new Order({...shippingAddress, products, fio, orderNumber: totalCount + 1});
+                const newOrder = new Order({country, state, city, address, name, surname, phone, index, products, orderNumber: totalCount + 1});
                 newOrder.save().then((savedOrder: any) => {
                     User.update(
                         {_id},
                         {$push: {orders: savedOrder}}
                     ).then(() => {
-                        createOrderHTMLTemplate(fio, products)
+                        createOrderHTMLTemplate(`${name} ${surname}`, products)
                             .then((html) => {
                                 sendOrderTemplate(email, html)
                                     .then(() => {
@@ -69,6 +70,25 @@ export default class OrdersService {
                 res.status(200).send(order);
             });
         });
+    }
+
+    public getCountries(req: Request, res: Response) {
+        res.status(200).send(countries);
+    }
+
+    public getStateByCountryId(req: Request, res: Response) {
+        const countryId = req.query.id;
+        const {states} = countriesWithStates[`${countryId}`];
+        const onlyStates: any = states ? keys(states) : [];
+        res.status(200).send(onlyStates);
+    }
+
+    public getCitiesByStateAndCountry(req: Request, res: Response) {
+        const countryId = req.query.id;
+        const stateName = req.query.name;
+        const cities = countriesWithStates[`${countryId}`].states[`${stateName}`];
+        const onlyStates: any = cities ? cities : [];
+        res.status(200).send(onlyStates);
     }
 }
 

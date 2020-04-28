@@ -3,11 +3,15 @@ import {Product as IProduct} from '../product/product';
 
 export interface Order {
     _id: string;
+    country: string;
+    state: string;
     city: string;
     address: string;
-    index: string;
+    index: number;
+    phone: number;
     products?: Array<IProduct>;
-    fio: string;
+    name: string;
+    surname: string;
     orderNumber: number;
     orderStatus: OrderStatus;
     createdAt: Date;

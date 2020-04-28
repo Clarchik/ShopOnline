@@ -20,5 +20,14 @@ export default class OrdersController {
 
         // Get Current User Order Deatils By ID
         this.app.route('/api/getOrderDetails').get([verifyJWTToken, verifySession], this.ordersService.getUserOrderDetails);
+
+        // Get All Countries
+        this.app.route('/api/getCountries').get(this.ordersService.getCountries);
+
+        // Get States By Country Id
+        this.app.route('/api/getCountryState').get(this.ordersService.getStateByCountryId);
+
+        // Get Citoes By State name and Country Id
+        this.app.route('/api/getStateCities').get(this.ordersService.getCitiesByStateAndCountry);
     }
 }

@@ -10,7 +10,8 @@ import { EffectsModule } from '@ngrx/effects';
 import { ToastrModule } from 'ngx-toastr';
 import { MDBBootstrapModule, MDBModalRef } from 'angular-bootstrap-md';
 import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { MatExpansionModule } from '@angular/material/expansion';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatInputModule } from '@angular/material/input';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 
 /* Interceptors */
@@ -59,7 +60,8 @@ const setupFactory = new SetupFactory();
         ReactiveFormsModule,
         FormsModule,
         HttpClientModule,
-        MatExpansionModule,
+        MatInputModule,
+        MatAutocompleteModule,
         StoreModule.forRoot(userReducers),
         StoreDevtoolsModule.instrument({
             maxAge: 25,
