@@ -1,6 +1,6 @@
 <mdb-navbar SideClass="navbar navbar-light navbar-expand-md white scrolling-navbar top-nav-collapse">
     <mdb-navbar-brand class="navbar-sm">
-        <a class="navbar-brand" routerLink="/main">
+        <a class="navbar-brand" [routerLink]="'/main'">
             <!-- TODO Change Logo image on our own -->
             <img src="../../../assets/images/logo.svg" alt="Logo image">
         </a>
@@ -37,7 +37,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto align-items-center">
             <li class="nav-item">
-                <a class="nav-link nav-link__effect" [routerLink]="['/products']" [queryParams]="{category: 'all'}">
+                <a class="nav-link nav-link__effect" [routerLink]="'/products'" [queryParams]="{category: 'all'}">
                     {{ 'Header.shop' | translate }}
                 </a>
             </li>

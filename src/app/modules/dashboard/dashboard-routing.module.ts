@@ -17,12 +17,11 @@ const customFields = {
 
 const routes: Routes = [
     {
-        path: '', component: DashboardComponent, ...customFields,
+        path: '', component: DashboardComponent,
         children: [
             {
                 path: 'manage-orders',
                 component: ManageOrdersComponent,
-                ...customFields
             },
         ]
     },

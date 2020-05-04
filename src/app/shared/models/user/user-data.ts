@@ -1,4 +1,4 @@
-export class UserData {
+export class  UserData {
     constructor(
         public _id: string,
         public email: string,

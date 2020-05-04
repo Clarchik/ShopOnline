@@ -18,7 +18,6 @@ import { UserSelectors, FavoriteActions, CartActions, ShopState } from './store'
 })
 export class AppComponent implements OnInit {
     public title = 'OnlineShop';
-    public noUser$: Observable<boolean>;
     constructor(
         private router: Router,
         private store: Store<ShopState>,
@@ -34,7 +33,6 @@ export class AppComponent implements OnInit {
     ngOnInit() {
         const userCartProducts = JSON.parse(localStorage.getItem('cartProducts'));
         const userFavoriteProducts = JSON.parse(localStorage.getItem('favoriteProducts'));
-        this.noUser$ = this.store.select(UserSelectors.isNotUserLogged);
         if (userCartProducts) {
             this.store.dispatch(new CartActions.LoadProducts(userCartProducts));
         }
@@ -45,7 +43,7 @@ export class AppComponent implements OnInit {
             if (!(evt instanceof NavigationEnd)) {
                 return;
             }
-            window.scrollTo(0, 0)
+            window.scrollTo(0, 0);
         });
     }
 

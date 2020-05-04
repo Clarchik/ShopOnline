@@ -1,10 +1,12 @@
-<div class="container-fluid">
+<div class="container">
     <div class="row">
         <div class="col-md-3">
-            dsdf
+            <a class="dropdown-item profile-item" routerLinkActive="nav-link__activated" [routerLink]="['manage-orders']">
+                123
+            </a>
         </div>
         <div class="col-md-9">
-            sfsf
+            <router-outlet></router-outlet>
         </div>
     </div>
 </div>

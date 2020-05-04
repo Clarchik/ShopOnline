@@ -17,7 +17,6 @@ export class RoleGuard implements CanActivate {
         return this.store.select(UserSelectors.getUser).pipe(
             map((user: User) => expectedRole.includes(user.role)),
             switchMap((isAllowed: boolean) => {
-                console.log(isAllowed, 'gg');
                 if (!isAllowed) {
                     this.router.navigate(['/not-allowed']);
                 }

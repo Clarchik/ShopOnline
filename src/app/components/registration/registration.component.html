@@ -175,7 +175,7 @@
                         [disabled]="registrationForm.invalid || registrationForm.pending">
                         {{ "Shared.signUp" | translate }}
                     </button>
-                    <a routerLink="/login">Back to Login</a>
+                    <a [routerLink]="'/login'">Back to Login</a>
                 </div>
             </div>
         </section>

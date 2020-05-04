@@ -33,10 +33,10 @@
 
                 </section>
                 <footer class="login-footer">
-                    <a class="login-footer__link" routerLink="/registration">
+                    <a class="login-footer__link" [routerLink]="'/registration'">
                         {{ 'Authentication.createAccount' | translate }}
                     </a>
-                    <a class="login-footer__link" routerLink="/main">
+                    <a class="login-footer__link" [routerLink]="'/main'">
                         {{ 'Store.backToStore' | translate }}
                     </a>
                 </footer>

@@ -1,10 +1,10 @@
-<li class="nav-item" *ngIf="isLogged">
+<li class="nav-item" *appAuthed="true">
     <div class="btn-group" mdbDropdown>
         <a mdbDropdownToggle mdbWavesEffect type="button" class="dropdown-toggle waves-light profile-toggle" mdbWavesEffect>
             <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-2.jpg" alt="Profile image"
                 class="img-fluid rounded-circle z-depth-0"></a>
         <div class="dropdown-menu dropdown-primary">
-            <a class="dropdown-item profile-item" routerLinkActive="nav-link__activated" routerLink="profile-details">
+            <a class="dropdown-item profile-item" routerLinkActive="nav-link__activated" [routerLink]="'profile-details'">
                 <span class="profile-item__icon">
                     <i class="fas fa-user-cog"></i>
                 </span>
@@ -13,7 +13,7 @@
                 </span>
             </a>
 
-            <a class="dropdown-item profile-item" routerLinkActive="nav-link__activated" routerLink="orders">
+            <a class="dropdown-item profile-item" routerLinkActive="nav-link__activated" [routerLink]="'orders'">
                 <span class="profile-item__icon">
                     <i class="fas fa-clipboard-list"></i>
                 </span>
@@ -21,9 +21,9 @@
                     {{ "Profile.orders" | translate }}
                 </span>
             </a>
-            <a class="dropdown-item profile-item" routerLinkActive="nav-link__activated" routerLink="dashboard">
+            <a class="dropdown-item profile-item" *appHasRole="allowedRoles" routerLinkActive="nav-link__activated" [routerLink]="'dashboard'">
                 <span class="profile-item__icon">
-                    <i class="fas fa-clipboard-list"></i>
+                    <i class="fas fa-tachometer-alt"></i>
                 </span>
                 <span class="profile-item__text">
                     {{ "Profile.dashboard" | translate }}
@@ -42,8 +42,8 @@
     </div>
 </li>
 
-<li class="nav-item" *ngIf="!isLogged">
-    <a class="nav-link nav-link__effect" routerLink="/login" routerLinkActive="nav-link__activated">
+<li class="nav-item" *appAuthed="false">
+    <a class="nav-link nav-link__effect" [routerLink]="'/login'" routerLinkActive="nav-link__activated">
         <mdb-icon fas icon="user" size="lg"></mdb-icon>
     </a>
 </li>
