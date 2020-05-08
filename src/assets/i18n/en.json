@@ -21,7 +21,8 @@
         "error": "Error",
         "general": "General",
         "customerInformation": "Customer Information",
-        "shippingInfo": "Shipping address"
+        "shippingInfo": "Shipping address",
+        "products": "Products"
     },
     "Product": {
         "product": "Product",
@@ -53,14 +54,15 @@
         "shipped": "Shipped",
         "complete": "Complete"
     },
-    "OrderDetails": {
-    },
     "Orders": {
         "title": "Your orders",
         "empty": "You doesnt have any orders",
         "order": "Order",
         "detailsTitle": "Order details",
-        "shippingAddress": "Shipping address"
+        "shippingAddress": "Shipping address",
+        "customer": "Customer",
+        "date": "Date",
+        "action": "Action"
     },
     "Size": {
         "header": "Size tables",
@@ -120,5 +122,10 @@
         "successfullySubscribed": "Successfuly subscribed on news",
         "errorSaving": "Error while saving",
         "errorFinding": "Error while finding"
+    },
+    "Manage": {
+        "Orders": {
+            "title": "Manage orders"
+        }
     }
 }

@@ -46,6 +46,10 @@ const OrderSchema = new mongoose.Schema({
         type: String,
         ref: 'User'
     },
+    totalSum: {
+        type: Number,
+        required: true
+    },
     orderNumber: Number,
     orderStatus: {
         type: String,

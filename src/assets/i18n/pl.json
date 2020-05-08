@@ -5,7 +5,7 @@
         "empty": "Przepraszamy, nie ma produktów w tej kolekcji.",
         "searchProduct": "Wyszukaj produkt po nazwie",
         "quickShop": "Szybki zakup",
-        "shopNow": "Kupuj teraz",
+    "shopNow": "Kupuj teraz",
         "subscribe": "Subskrybuj",
         "signUp": "Zarejestruj się",
         "name": "Imię",
@@ -21,7 +21,8 @@
         "error": "Błąd",
         "general": "General",
         "customerInformation": "Informacje o kliencie",
-        "shippingInfo": "Adres wysyłki"
+        "shippingInfo": "Adres wysyłki",
+        "products": "Produkty"
     },
     "Product": {
         "product": "Produkt",
@@ -58,7 +59,10 @@
         "empty": "Nie masz żadnych zamówień",
         "order": "Zamówienie",
         "detailsTitle": "Szczegóły zamówienia",
-        "shippingAddress": "Adres wysyłki"
+        "shippingAddress": "Adres wysyłki",
+        "customer": "Klient",
+        "date": "Data",
+        "action": "Akcja"
     },
     "Size": {
         "header": "Tabele rozmiarów",
@@ -118,5 +122,10 @@
         "successfullySubscribed": "Pomyślnie zasubskrybowano na nowości",
         "errorSaving": "Błąd podczas zapisywania",
         "errorFinding": "Błąd podczas wyszukiwania"
+    },
+    "Manage": {
+        "Orders": {
+            "title": "Zarządzaj zamówieniami"
+        }
     }
 }

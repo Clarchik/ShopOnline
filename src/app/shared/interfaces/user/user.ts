@@ -1,4 +1,4 @@
-import {UserRoles} from './user-roles';
+import {UserRoles} from '../../../../shared/interfaces/user-roles';
 
 export interface User {
     email?: string;

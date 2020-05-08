@@ -1,0 +1,44 @@
+<ng-template #orderRowTemplate>
+    <tr>
+        <td>{{order.orderNumber}}</td>
+        <td>{{order.totalSum}}$</td>
+        <td *ngIf="!editingMode">
+            <span class="order-status" [style.background-color]="getOrderColor(order.orderStatus)">
+                {{ 'Order.' + (order.orderStatus | lowercase) | translate }}
+            </span>
+        </td>
+        <td *ngIf="editingMode">
+            <mat-form-field>
+                <mat-label>Status</mat-label>
+                <mat-select [(value)]="orderStatus">
+                    <mat-option [value]="order.orderStatus" [disabled]="true" selected>
+                        {{ 'Order.' + (order.orderStatus | lowercase) | translate }}
+                    </mat-option>
+                    <mat-option *ngFor="let status of availableOrderStatues" [value]="status">
+                        {{ 'Order.' + (status | lowercase) | translate }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </td>
+        <td>
+            <span>{{order.name}}</span>
+            <br />
+            <span>{{order.surname}}</span>
+        </td>
+        <td class="text-underline">{{formatDate(order.createdAt)}}</td>
+        <td>
+            <div style="display: flex;">
+                <button type="button" class="manage-btn" (click)="changeMode();">
+                    <i *ngIf="!editingMode" class="far fa-edit"></i>
+                    <i *ngIf="editingMode" class="fas fa-times"></i>
+                </button>
+                <button type="button" class="manage-btn" (click)="showOrderPage();">
+                    <i class="fas fa-eye"></i>
+                </button>
+                <button type="button" class="manage-btn" *ngIf="editingMode && orderStatus !== order.orderStatus" (click)="changeOrderStatus();">
+                    <i class="fas fa-check"></i>
+                </button>
+            </div>
+        </td>
+    </tr>
+ </ng-template>

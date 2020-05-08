@@ -27,6 +27,7 @@ export default class ProductsService {
                     res.status(400).send({
                         message: 'Error occured'
                     });
+                    return;
                 }
                 const pageSize = CONFIG.itemsPerPage;
                 const pager = paginate(totalCount, pageNumber, pageSize, CONFIG.pageSizeToShow);

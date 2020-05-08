@@ -49,9 +49,8 @@ export class UserService {
 
             if (refToken) {
                 if (!expired) {
-                    const refreshToken = refToken;
                     backFunction = foundUser.generateAccessAuthToken().then((accessToken: any) => {
-                        return { accessToken, refreshToken };
+                        return { accessToken, refreshToken: refToken };
                     });
                 }
             }

@@ -3,9 +3,10 @@ import {ManageOrdersComponent} from './components/manage-orders/manage-orders.co
 import {SyncGuardHelperGuard} from '../../guards/sync-guard-helper/sync-guard-helper.guard';
 import {AuthGuard} from '../../guards/auth-guard/auth.guard';
 import {RoleGuard} from '../../guards/role-guard/role.guard';
-import {UserRoles} from '../../shared/interfaces/user/user-roles';
+import {UserRoles} from '../../../shared/interfaces/user-roles';
 import {NgModule} from '@angular/core';
 import {DashboardComponent} from './components/dashboard/dashboard.component';
+import {ManageProductsComponent} from './components/manage-products/manage-products.component';
 
 const customFields = {
     canActivate: [SyncGuardHelperGuard],
@@ -17,12 +18,18 @@ const customFields = {
 
 const routes: Routes = [
     {
-        path: '', component: DashboardComponent,
+        path: '', component: DashboardComponent, ...customFields,
         children: [
             {
                 path: 'manage-orders',
                 component: ManageOrdersComponent,
+                ...customFields
             },
+            {
+                path: 'manage-products',
+                component: ManageProductsComponent,
+                ...customFields
+            }
         ]
     },
 

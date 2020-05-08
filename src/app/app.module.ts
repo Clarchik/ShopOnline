@@ -38,8 +38,6 @@ import * as fromComponents from './components';
 /* Others */
 import { environment } from '../environments/environment.prod';
 import { SetupFactory } from './setup-factory/setup-factory.service';
-import { ProductsPreviewComponent } from './components/products-preview/products-preview.component';
-import { BrandsComponent } from './components/brands/brands.component';
 import { AuthedDirective } from './shared/directives/authed/authed.directive';
 
 
@@ -51,9 +49,7 @@ const setupFactory = new SetupFactory();
         ...fromComponents.Components,
         ...fromSharedDirectives.Directives,
         CurrencyConverterPipe,
-        ProductsPreviewComponent,
-        BrandsComponent,
-        AuthedDirective
+        AuthedDirective,
     ],
     imports: [
         BrowserModule,

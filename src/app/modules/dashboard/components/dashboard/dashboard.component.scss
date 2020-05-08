@@ -1,0 +1,49 @@
+:host {
+    margin-top: 20px;
+    height: 100%;
+}
+.dashboard {
+    &-navigation {
+        background-color: #242424;
+    }
+    &-link {
+        padding: 15px 20px;
+        transition: background-color .5s ease-in-out, transform .35s ease;
+        color: #ffffff;
+        position: relative;
+        display: flex;
+        align-items: center;
+
+        &::after {
+            opacity: 0;
+            content: '';
+            position: absolute;
+            top: 50%;
+            right: 0;
+            transform: translate(0, -50%);
+            width: 0;
+            height: 0;
+            border-top: 12px solid transparent;
+            border-bottom: 12px solid transparent;
+            border-right: 12px solid #ffffff;
+        }
+
+        &__active {
+            background-color: #f05025;
+            &::after {
+                opacity: 1;
+                transition: opacity .5s ease-in-out;
+            }
+        }
+
+        .icon {
+            color: #ffffff;
+            margin-right: 15px;
+        }
+
+        &:not(.dashboard-link__active):hover {
+            transform: rotate(4deg);
+            cursor: pointer;
+        }
+    }
+}

@@ -175,7 +175,7 @@ UserSchema.pre('save', function(next) {
 
 const generateRefreshTokenExpiryTime = () => {
     const daysUntilExpire: any = CONFIG.refreshTokenExpiryTime;
-    const secondsUntilExpire = ((daysUntilExpire * 24) * 60) + 60;
+    const secondsUntilExpire = daysUntilExpire * 86400;
     return ((Date.now() / 1000) + secondsUntilExpire);
 };
 

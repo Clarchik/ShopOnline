@@ -22,6 +22,8 @@ import { RegistrationComponent } from './registration/registration.component';
 import {NotAllowedComponent} from './screens/not-allowed/not-allowed.component';
 import {OrderDetailsComponent} from './order-details/order-details.component';
 import {OrderStatusTrackingComponent} from './order-status-tracking/order-status-tracking.component';
+import {ProductsPreviewComponent} from './products-preview/products-preview.component';
+import {BrandsComponent} from './brands/brands.component';
 
 
 
@@ -49,7 +51,9 @@ export const Components: any[] = [
     RegistrationComponent,
     NotAllowedComponent,
     OrderDetailsComponent,
-    OrderStatusTrackingComponent
+    OrderStatusTrackingComponent,
+    ProductsPreviewComponent,
+    BrandsComponent,
 ];
 
 

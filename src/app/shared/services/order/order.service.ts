@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import {environment} from '../../../../environments/environment';
 import {OrderDTO} from '../../models/order-dto/order-dto';
+import {Order} from '../../interfaces/order/order';
 
 @Injectable({
     providedIn: 'root'
@@ -20,12 +21,20 @@ export class OrderService {
         return this.http.get(`${environment.apiPath}/api/getUserOrders`);
     }
 
+    public getAllUsersOrders(): Observable<Order[]> {
+        return this.http.get<Order[]>(`${environment.apiPath}/api/getAllUsersOrders`);
+    }
+
+    public updateOrderStatus(orderId: string, orderStatus: string): Observable<any> {
+        return this.http.post(`${environment.apiPath}/api/updateOrderStatus`, {orderId, orderStatus});
+    }
+
     public getOrderDetails(id: string): Observable<any> {
         return this.http.get(`${environment.apiPath}/api/getOrderDetails?id=${id}`);
     }
 
     public getStateByCountryId(id: number): Observable<any> {
-        return this.http.get(`${environment.apiPath}/api/getCountryState?id=${id}`)
+        return this.http.get(`${environment.apiPath}/api/getCountryState?id=${id}`);
     }
 
     public getCitiesByState(countryId: number, stateName: string): Observable<any> {

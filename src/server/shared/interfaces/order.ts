@@ -8,6 +8,7 @@ export interface Order {
     products?: Array<IProduct>;
     fio: string;
     orderNumber: number;
+    totalSum: number;
     orderStatus: OrderStatus;
     createdAt: Date;
     updatedAt: Date;

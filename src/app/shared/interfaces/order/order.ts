@@ -12,6 +12,7 @@ export interface Order {
     products?: Array<IProduct>;
     name: string;
     surname: string;
+    totalSum: number;
     orderNumber: number;
     orderStatus: OrderStatus;
     createdAt: Date;

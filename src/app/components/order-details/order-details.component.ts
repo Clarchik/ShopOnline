@@ -28,7 +28,7 @@ export class OrderDetailsComponent implements OnInit {
     }
 
     formatDate(date: Date) {
-        return this.utilsService.formatDate(date);
+        return this.utilsService.formatDate(date, true);
     }
 
     countTotalSum(order: IOrder) {

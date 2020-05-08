@@ -1,6 +1,7 @@
 import { Application } from 'express';
 import { OrdersService } from '../services';
-import { verifyJWTToken, verifySession } from '../../../shared/middlewares';
+import { verifyJWTToken, verifySession, verifyUserRole } from '../../../shared/middlewares';
+import {UserRoles} from '../../../../shared/interfaces/user-roles';
 
 export default class OrdersController {
     private ordersService: OrdersService;
@@ -20,6 +21,14 @@ export default class OrdersController {
 
         // Get Current User Order Deatils By ID
         this.app.route('/api/getOrderDetails').get([verifyJWTToken, verifySession], this.ordersService.getUserOrderDetails);
+
+        // Get All Users Orders
+        this.app.route('/api/getAllUsersOrders')
+            .get([verifyJWTToken, verifySession, verifyUserRole([UserRoles.Manager, UserRoles.Admin])], this.ordersService.getAllUsersOrders);
+
+        // Change Order Status
+        this.app.route('/api/updateOrderStatus')
+            .post([verifyJWTToken, verifySession, verifyUserRole([UserRoles.Manager, UserRoles.Admin])], this.ordersService.changeOrderStatus);
 
         // Get All Countries
         this.app.route('/api/getCountries').get(this.ordersService.getCountries);

@@ -100,11 +100,18 @@ export class UtilsService {
         return _.chunk(items, chunkSize);
     }
 
-    public formatDate(date: Date) {
-        return `
+
+    public formatDate(date: Date, withHours = false) {
+        if (withHours) {
+            return `
             ${new Date(date).getDate()}/${new Date(date).getMonth()}/${new Date(date).getFullYear()},
-            ${new Date(date).getUTCHours()}:${new Date(date).getMinutes()}
+            ${new Date(date).getHours()}:${new Date(date).getMinutes()}
         `;
+        } else {
+            return `
+                ${new Date(date).getDate()}/${new Date(date).getMonth()}/${new Date(date).getFullYear()}
+            `;
+        }
     }
 
     public getOrderStatusColorByName(orderStatus: OrderStatus): string {

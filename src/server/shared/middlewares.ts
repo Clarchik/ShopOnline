@@ -1,4 +1,5 @@
 import * as jwt from 'jsonwebtoken';
+import express, { Request, Response } from 'express';
 
 import CONFIG from './config';
 import User from '../modules/user/models/user';
@@ -57,5 +58,17 @@ const verifySession = (req: any, res: any, next: any) => {
     });
 };
 
+// tslint:disable-next-line:ter-arrow-body-style
+const verifyUserRole = (roles: string[]) => {
+    return (req: express.Request, res: express.Response, next: express.NextFunction) => {
+        const {userObject} = req as any;
+        if (roles.includes(userObject.role)) {
+            next();
+        } else {
+            res.status(403).send({message: 'Your are not allowed to see this page'});
+        }
+    };
+};
 
-export { verifyJWTToken, verifySession };
+
+export { verifyJWTToken, verifySession, verifyUserRole };

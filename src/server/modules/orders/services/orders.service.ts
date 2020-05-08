@@ -6,7 +6,9 @@ import { UserData } from '../../user/interface/user';
 import {Order as IOrder} from '../../../shared/interfaces/order';
 import {countries} from '../../../data/countries/countries';
 import {countriesWithStates} from '../../../data/cities/cities';
-import {keys} from 'lodash';
+import {keys, reduce} from 'lodash';
+import {OrderStatus} from '../../../../shared/interfaces/order-status';
+import {UserRoles} from '../../../../shared/interfaces/user-roles';
 
 
 export default class OrdersService {
@@ -17,8 +19,9 @@ export default class OrdersService {
         if (user) {
             const { _id} = user;
             const { email, country, state, city, address, index, phone, name, surname, products } = req.body;
+            const totalSum = reduce(products, (sum, current) => sum + (current.price * current.quantity), 0);
             Order.countDocuments({}, (error: any, totalCount: number) => {
-                const newOrder = new Order({country, state, city, address, name, surname, phone, index, products, orderNumber: totalCount + 1});
+                const newOrder = new Order({country, state, city, address, name, surname, phone, index, products, orderNumber: totalCount + 1, totalSum});
                 newOrder.save().then((savedOrder: any) => {
                     User.update(
                         {_id},
@@ -56,20 +59,56 @@ export default class OrdersService {
         });
     }
 
+    public getAllUsersOrders(req: express.Request, res: express.Response) {
+        Order.find(null, null, null, (err, orders) => {
+            if (err) {
+                res.status(400).send({
+                    message: 'Error occured'
+                });
+                return;
+            }
+            res.status(200).json(orders);
+        });
+    }
+
+    public changeOrderStatus(req: express.Request, res: express.Response) {
+        const {orderStatus, orderId} = req.body;
+        if (!!!OrderStatus[orderStatus]) {
+            res.status(400).send({message: 'Status is invalid'});
+            return;
+        }
+        Order.update({_id: orderId}, {$set: {orderStatus}}, (err, order) => {
+            if (err) {
+                res.status(400).send({message: 'Couldnt update order status'});
+            }
+            res.status(200).send({message: 'Order status is updated'});
+        });
+    }
+
     public getUserOrderDetails(req: express.Request, res: express.Response) {
         const {user_id} = (req as any);
         const orderId = req.query.id as string;
-        User.findById(user_id).exec((err, user) => {
-            if (err) {res.status(400).send({message: 'User orders not found'}); return;}
-            if (!(user.orders as Array<string>).includes(orderId)) {
-                res.status(403).send({message: 'You are not allowed to see this order or order doesnt exist'});
-                return;
-            }
-            Order.findById(orderId, null, (error, order: IOrder) => {
-                if (error) {res.status(400).send({message: 'Order doesnt exist'});}
-                res.status(200).send(order);
+        const allowedUsersRole = [UserRoles.Admin, UserRoles.Manager];
+        const {userObject} = (req as any);
+
+        const findOrderCallback = (error: any, order: IOrder) => {
+            if (error) {res.status(400).send({message: 'Order doesnt exist'}); return; }
+            res.status(200).send(order);
+        };
+
+        if (allowedUsersRole.includes(userObject.role)) {
+            Order.findById(orderId, null, findOrderCallback);
+        } else {
+            User.findById(user_id).exec((err, user) => {
+                if (err) {res.status(400).send({message: 'User orders not found'}); return; }
+
+                if (!(user.orders as Array<string>).includes(orderId)) {
+                    res.status(403).send({message: 'You are not allowed to see this order or order doesnt exist'});
+                    return;
+                }
+                Order.findById(orderId, null, findOrderCallback);
             });
-        });
+        }
     }
 
     public getCountries(req: Request, res: Response) {

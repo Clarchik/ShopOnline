@@ -80,6 +80,15 @@ i.arrow {
     font-weight: bold;
 }
 
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.text-underline {
+    text-decoration: underline;
+}
 
 
 @media screen and (min-device-width: 0px) and (max-device-width: 991.98px) {
