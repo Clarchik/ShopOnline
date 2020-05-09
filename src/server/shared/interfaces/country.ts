@@ -1,4 +1,4 @@
-import {States} from './states';
+import { States } from './states';
 
 export interface Country {
     id: number;
@@ -8,5 +8,5 @@ export interface Country {
     phone_code: string;
     capital: string;
     currency: string;
-    states: States;
+    states?: States;
 }
