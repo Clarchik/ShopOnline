@@ -22,7 +22,8 @@
         "general": "General",
         "customerInformation": "Customer Information",
         "shippingInfo": "Shipping address",
-        "products": "Products"
+        "products": "Products",
+        "filters": "Filters"
     },
     "Product": {
         "product": "Product",
@@ -49,6 +50,7 @@
         "subtotal": "Subtotal",
         "total": "Total",
         "summary": "Summary",
+        "orderNumber": "Order number",
         "received": "Received",
         "proccessing": "Proccessing",
         "shipped": "Shipped",

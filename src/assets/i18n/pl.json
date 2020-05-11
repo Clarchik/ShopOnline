@@ -5,7 +5,7 @@
         "empty": "Przepraszamy, nie ma produktów w tej kolekcji.",
         "searchProduct": "Wyszukaj produkt po nazwie",
         "quickShop": "Szybki zakup",
-    "shopNow": "Kupuj teraz",
+        "shopNow": "Kupuj teraz",
         "subscribe": "Subskrybuj",
         "signUp": "Zarejestruj się",
         "name": "Imię",
@@ -22,7 +22,8 @@
         "general": "General",
         "customerInformation": "Informacje o kliencie",
         "shippingInfo": "Adres wysyłki",
-        "products": "Produkty"
+        "products": "Produkty",
+        "filters": "Filtry"
     },
     "Product": {
         "product": "Produkt",
@@ -49,6 +50,7 @@
         "subtotal": "Suma częściowa",
         "total": "Suma",
         "summary": "Podsumowanie",
+        "orderNumber": "Numer zamówienia",
         "received": "Otrzymano",
         "proccessing": "Przetwarzanie",
         "shipped": "Wysłane",

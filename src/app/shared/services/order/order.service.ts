@@ -21,8 +21,8 @@ export class OrderService {
         return this.http.get(`${environment.apiPath}/api/getUserOrders`);
     }
 
-    public getAllUsersOrders(): Observable<Order[]> {
-        return this.http.get<Order[]>(`${environment.apiPath}/api/getAllUsersOrders`);
+    public getAllUsersOrders(filters?): Observable<Order[]> {
+        return this.http.get<Order[]>(`${environment.apiPath}/api/getAllUsersOrders`, {params: filters});
     }
 
     public updateOrderStatus(orderId: string, orderStatus: string): Observable<any> {

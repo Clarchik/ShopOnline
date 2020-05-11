@@ -9,6 +9,7 @@ import {countriesWithStates} from '../../../data/cities/cities';
 import {keys, reduce} from 'lodash';
 import {OrderStatus} from '../../../../shared/interfaces/order-status';
 import {UserRoles} from '../../../../shared/interfaces/user-roles';
+import {OrderFilterDTO} from '../models/order-filters-dto';
 
 
 export default class OrdersService {
@@ -60,7 +61,12 @@ export default class OrdersService {
     }
 
     public getAllUsersOrders(req: express.Request, res: express.Response) {
-        Order.find(null, null, null, (err, orders) => {
+        const {orderStatus, orderNumber, createdAt} = req.query as any;
+        const filters = new OrderFilterDTO({orderNumber, orderStatus});
+        const startDate = new Date(createdAt);
+        const finishDate = new Date(new Date(createdAt).valueOf() + 86400000 - 1);
+        const date = createdAt !== 'null' ? {createdAt: {$gt: startDate, $lt: finishDate}} : {};
+        Order.find({...filters, ...date}, null, null, (err, orders) => {
             if (err) {
                 res.status(400).send({
                     message: 'Error occured'

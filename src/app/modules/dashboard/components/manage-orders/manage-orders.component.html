@@ -1,21 +1,71 @@
-<div class="row">
-    <h4>{{ "Manage.Orders.title" | translate }}</h4>
-    <div class="container" *ngIf="allOrders$ | async as allOrders; else loading">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th scope="col">{{ "Orders.order" | translate }}</th>
-                    <th scope="col">{{ "Order.total" | translate }}</th>
-                    <th scope="col">Status</th>
-                    <th scope="col">{{ "Orders.customer" | translate }}</th>
-                    <th scope="col">{{ "Orders.date" | translate }}</th>
-                    <th scope="col">{{ "Orders.action" | translate }}</th>
-                </tr>
-            </thead>
-            <tbody>
-                <app-manage-order-row *ngFor="let order of allOrders" [order]="order" (statusChanged)="changedStatus($event);"></app-manage-order-row>
-            </tbody>
-        </table>
+<div class="container">
+    <h4 class="d-flex">{{ "Manage.Orders.title" | translate }}</h4>
+    <div class="manage-filters">
+        <h4 class="manage-filter__title">
+            {{'Shared.filters' | translate }}
+        </h4>
+        <div class="row">
+            <div class="col">
+                <!-- Order date orderId -->
+                <div class="manage-filter__date">
+                    <mat-form-field class="example-full-width">
+                        <input placeholder="{{'Order.orderNumber' | translate}}"  matInput #orderId maxlength="10" [formControl]="filterOrderId">
+                        <mat-hint align="end">{{orderId.value.length}} / 10</mat-hint>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="col">
+                <!-- Order status filter -->
+                <div class="manage-filter__status">
+                    <mat-form-field>
+                        <mat-label>Status</mat-label>
+                        <mat-select [(value)]="filterOrderStatus">
+                            <mat-option *ngFor="let status of availableOrderStatues" [value]="status">
+                                {{ 'Order.' + (status | lowercase) | translate }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="col">
+                <!-- Order date filter -->
+                <div class="manage-filter__date">
+                    <mat-form-field>
+                        <input placeholder="{{'Orders.date' | translate}}" matInput [matDatepicker]="date" [formControl]="filterDate">
+                        <mat-datepicker-toggle matSuffix [for]="date"></mat-datepicker-toggle>
+                        <mat-datepicker #date></mat-datepicker>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="col">
+                <!-- Filter button -->
+                <button mat-raised-button color="primary" (click)="applyFilters();">Filter</button>
+            </div>
+        </div>
+
+    </div>
+    <div *ngIf="allOrders$ | async as allOrders; else loading">
+        <div *ngIf="allOrders.length; else empty">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">{{ "Orders.order" | translate }}</th>
+                        <th scope="col">{{ "Order.total" | translate }}</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">{{ "Orders.customer" | translate }}</th>
+                        <th scope="col">{{ "Orders.date" | translate }}</th>
+                        <th scope="col">{{ "Orders.action" | translate }}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <app-manage-order-row *ngFor="let order of allOrders" [order]="order"
+                        (statusChanged)="changedStatus($event);"></app-manage-order-row>
+                </tbody>
+            </table>
+        </div>
+        <ng-template #empty>
+            Empty data
+        </ng-template>
     </div>
 </div>
 <ng-template #loading>
