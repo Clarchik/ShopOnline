@@ -28,7 +28,7 @@
         <td class="text-underline">{{formatDate(order.createdAt)}}</td>
         <td>
             <div style="display: flex;">
-                <button type="button" class="manage-btn" (click)="changeMode();">
+                <button *ngIf="canEdit" type="button" class="manage-btn" (click)="changeMode();">
                     <i *ngIf="!editingMode" class="far fa-edit"></i>
                     <i *ngIf="editingMode" class="fas fa-times"></i>
                 </button>

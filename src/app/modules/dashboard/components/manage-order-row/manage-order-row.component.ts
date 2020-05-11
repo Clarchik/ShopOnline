@@ -1,10 +1,10 @@
-import {Component, OnInit, Input, ViewChild, ViewContainerRef, Output, EventEmitter} from '@angular/core';
-import {Order as IOrder} from '../../../../shared/interfaces/order/order';
-import {UtilsService} from '../../../../shared/services/utils/utils.service';
-import {OrderStatus} from '../../../../../shared/interfaces/order-status';
-import {OrderService} from '../../../../shared/services/order/order.service';
-import {Subscription} from 'rxjs';
-import {Router} from '@angular/router';
+import { Component, OnInit, Input, ViewChild, ViewContainerRef, Output, EventEmitter } from '@angular/core';
+import { Order as IOrder } from '../../../../shared/interfaces/order/order';
+import { UtilsService } from '../../../../shared/services/utils/utils.service';
+import { OrderStatus } from '../../../../../shared/interfaces/order-status';
+import { OrderService } from '../../../../shared/services/order/order.service';
+import { Subscription } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-manage-order-row',
@@ -13,22 +13,26 @@ import {Router} from '@angular/router';
 })
 export class ManageOrderRowComponent implements OnInit {
     private subscription = new Subscription();
+
     public orderStatus: any;
     public editingMode: boolean = false;
+    public canEdit: boolean = false;
     public availableOrderStatues: string[];
-    @ViewChild('orderRowTemplate', {static: true}) template;
+
     @Input('order') order: IOrder;
     @Output('statusChanged') changeStatus = new EventEmitter();
+    @ViewChild('orderRowTemplate', { static: true }) template;
 
     constructor(
         private router: Router,
         private utilsService: UtilsService,
         private viewContainerRef: ViewContainerRef,
-        private orderService: OrderService) {}
+        private orderService: OrderService) { }
 
     ngOnInit(): void {
         this.viewContainerRef.createEmbeddedView(this.template);
         this.orderStatus = this.order.orderStatus;
+        this.canEdit = Number(OrderStatus[this.order.orderStatus]) !== OrderStatus.Complete;
         this.availableOrderStatues = this.getAvailableStatuses(this.order.orderStatus);
     }
 
