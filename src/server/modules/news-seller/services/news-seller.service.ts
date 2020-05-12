@@ -13,7 +13,6 @@ export default class NewsSellerService {
 
         NewsEmail.findOne({email}).then((foudndEmail) => {
             if (foudndEmail) {
-                console.log('found');
                 res.status(400).send({message: 'alreadySubscribed'});
             } else {
                 newsEmail.save().then(() => {

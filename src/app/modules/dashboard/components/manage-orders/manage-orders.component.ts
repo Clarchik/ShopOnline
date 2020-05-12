@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {OrderService} from '../../../../shared/services/order/order.service';
 import {Observable} from 'rxjs';
 import {Order as IOrder} from '../../../../shared/interfaces/order/order';
-import {delay, tap} from 'rxjs/operators';
+import {delay} from 'rxjs/operators';
 import {OrderStatus} from '../../../../../shared/interfaces/order-status';
 import {FormControl} from '@angular/forms';
 import {Pager} from '../../../../shared/interfaces/pager/pager';
@@ -45,7 +45,7 @@ export class ManageOrdersComponent implements OnInit {
 
     getOrders() {
         const filters = this.getFilters;
-        this.allOrders$ = this.orderService.getAllUsersOrders(filters).pipe(delay(1000), tap((res) => console.log(res, 'res')));
+        this.allOrders$ = this.orderService.getAllUsersOrders(filters).pipe(delay(1000));
     }
 
     private allOrderStatuses() {
