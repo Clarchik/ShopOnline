@@ -23,7 +23,9 @@
         "customerInformation": "Informacje o kliencie",
         "shippingInfo": "Adres wysyłki",
         "products": "Produkty",
-        "filters": "Filtry"
+        "filters": "Filtry",
+        "emptyDate": "Nic nie znaleziono",
+        "filter": "Filtruj"
     },
     "Product": {
         "product": "Produkt",

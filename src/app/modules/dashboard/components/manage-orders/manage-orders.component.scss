@@ -12,5 +12,16 @@
             margin-bottom: 10px;
         }
     }
+    &-footer {
+        display: flex;
+        justify-content: center;
+    }
 }
 
+
+.page-item.active a {
+    pointer-events: none;
+    &:hover {
+        cursor: pointer;
+    }
+}

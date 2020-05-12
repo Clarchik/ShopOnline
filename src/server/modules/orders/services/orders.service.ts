@@ -10,6 +10,8 @@ import {keys, reduce} from 'lodash';
 import {OrderStatus} from '../../../../shared/interfaces/order-status';
 import {UserRoles} from '../../../../shared/interfaces/user-roles';
 import {OrderFilterDTO} from '../models/order-filters-dto';
+import CONFIG from '../../../shared/config';
+const paginate = require('jw-paginate');
 
 
 export default class OrdersService {
@@ -61,20 +63,35 @@ export default class OrdersService {
     }
 
     public getAllUsersOrders(req: express.Request, res: express.Response) {
-        const {orderStatus, orderNumber, createdAt} = req.query as any;
+        const {orderStatus, orderNumber, createdAt, page} = req.query as any;
         const filters = new OrderFilterDTO({orderNumber, orderStatus});
         const startDate = new Date(createdAt);
         const finishDate = new Date(new Date(createdAt).valueOf() + 86400000 - 1);
         const date = createdAt !== 'null' ? {createdAt: {$gt: startDate, $lt: finishDate}} : {};
-        Order.find({...filters, ...date}, null, null, (err, orders) => {
-            if (err) {
-                res.status(400).send({
-                    message: 'Error occured'
-                });
+        const pageNumber = page ? parseInt(page.toString(), null) : 1;
+        const query = {
+            skip: CONFIG.itemsPerPage * (pageNumber - 1),
+            limit: CONFIG.itemsPerPage
+        };
+
+        Order.countDocuments({...filters, ...date}, (error: any, totalCount: number) => {
+            if (error) {
+                res.status(400).send({message: 'Error occured'});
                 return;
             }
-            res.status(200).json(orders);
+            Order.find({...filters, ...date}, null, query, (err, orders) => {
+                if (err) {
+                    res.status(400).send({
+                        message: 'Error occured'
+                    });
+                    return;
+                }
+                const pageSize = CONFIG.itemsPerPage;
+                const pager = paginate(totalCount, pageNumber, pageSize, CONFIG.pageSizeToShow);
+                res.status(200).json({pager, orders});
+            });
         });
+
     }
 
     public changeOrderStatus(req: express.Request, res: express.Response) {

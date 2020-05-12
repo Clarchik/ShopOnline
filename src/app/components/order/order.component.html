@@ -130,7 +130,7 @@
                     <div>
                         <mat-form-field class="w-100">
                             <input matInput id="phone" maxlength="12" formControlName="phone" placeholder="{{ 'Order.phone' | translate }}">
-                            <mat-hint align="end">{{controls.phone.value.length}} / 12</mat-hint>
+                            <mat-hint align="end">{{controls?.phone?.value?.length}} / 12</mat-hint>
                         </mat-form-field>
 
 
@@ -151,7 +151,7 @@
                     <div>
                         <mat-form-field class="w-100">
                             <input matInput maxlength="12" formControlName="index" id="index" placeholder="{{ 'Order.postindex' | translate }}">
-                            <mat-hint align="end">{{controls.index.value.length}} / 12</mat-hint>
+                            <mat-hint align="end">{{controls?.index?.value?.length}} / 12</mat-hint>
                         </mat-form-field>
 
                         <div class="form-error" *ngIf="controls.index.invalid && controls.index.dirty || controls.index.invalid && controls.index.touched">

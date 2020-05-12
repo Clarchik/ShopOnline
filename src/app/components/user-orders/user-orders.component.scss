@@ -12,6 +12,7 @@
         box-shadow: 0 0 10px .5px rgba(0, 0, 0, 0.2);
         transition: transform .35s ease-in-out;
         padding: 20px;
+        margin-bottom: 20px;
         &:hover {
             transform: scale(1.1);
             cursor: pointer;
@@ -29,52 +30,5 @@
         color: #ffffff
     }
 }
-
-// .orders-title {
-//     font-family: $avenir-m;
-// }
-
-// .order-accordion {
-// 	&__panel {
-//         border-radius: 0 !important;
-// 	}
-
-// 	&__header {
-//         border-radius: 0;
-// 		padding: 30px 15px;
-// 		background-color: rgba(0, 0, 0, 0.03);
-// 		height: 0 !important;
-// 		&.mat-expanded {
-//             background-color: rgba(0, 0, 0, 0.03) !important;
-//             border-bottom: 1px solid rgba(0, 0, 0, 0.125);
-// 			height: 0 !important;
-// 		}
-// 		&:hover {
-// 			background-color: rgba(0, 0, 0, 0.03);
-// 		}
-//     }
-// }
-
-// .order {
-//     &-item {
-//         margin-bottom: 10px;
-//     }
-
-//     &-image {
-//         width: 100%;
-//     }
-
-//     &-info-title {
-//         font-size: 1.5rem;
-//         font-family: $avenir-m;
-//     }
-
-//     &-details {
-//         &__item {
-//             margin-bottom: 5px;
-//             font-family: $primary-font;
-//         }
-//     }
-// }
 
 

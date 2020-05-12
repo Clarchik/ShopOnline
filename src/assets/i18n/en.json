@@ -23,7 +23,9 @@
         "customerInformation": "Customer Information",
         "shippingInfo": "Shipping address",
         "products": "Products",
-        "filters": "Filters"
+        "filters": "Filters",
+        "emptyDate": "Nothing found",
+        "filter": "Filter"
     },
     "Product": {
         "product": "Product",
