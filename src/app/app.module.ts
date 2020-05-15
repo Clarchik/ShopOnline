@@ -1,7 +1,7 @@
 /* Modules */
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { StoreModule } from '@ngrx/store';
@@ -38,7 +38,7 @@ import * as fromComponents from './components';
 /* Others */
 import { environment } from '../environments/environment.prod';
 import { SetupFactory } from './setup-factory/setup-factory.service';
-import { AuthedDirective } from './shared/directives/authed/authed.directive';
+import {CustomCommonModule} from './modules/common/common/custom-common.module';
 
 
 const setupFactory = new SetupFactory();
@@ -48,14 +48,13 @@ const setupFactory = new SetupFactory();
         AppComponent,
         ...fromComponents.Components,
         ...fromSharedDirectives.Directives,
-        CurrencyConverterPipe,
-        AuthedDirective,
+        CurrencyConverterPipe
     ],
     imports: [
         BrowserModule,
         AppRoutingModule,
         BrowserAnimationsModule,
-        ReactiveFormsModule,
+        CustomCommonModule,
         FormsModule,
         HttpClientModule,
         MatInputModule,
@@ -91,6 +90,7 @@ const setupFactory = new SetupFactory();
         { provide: HTTP_INTERCEPTORS, useClass: WebReqInterceptor, multi: true }
     ],
     bootstrap: [AppComponent],
+    exports: [],
     entryComponents: [fromComponents.PreferencesModalComponent]
 })
 export class AppModule { }

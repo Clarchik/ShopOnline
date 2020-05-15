@@ -31,7 +31,7 @@ export default class ProductsService {
                 }
                 const pageSize = CONFIG.itemsPerPage;
                 const pager = paginate(totalCount, pageNumber, pageSize, CONFIG.pageSizeToShow);
-                res.status(200).json({pager, items: products});
+                res.status(200).json({pager, products});
             });
         });
     }

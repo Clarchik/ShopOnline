@@ -45,7 +45,7 @@ export class ManageOrdersComponent implements OnInit {
 
     getOrders() {
         const filters = this.getFilters;
-        this.allOrders$ = this.orderService.getAllUsersOrders(filters).pipe(delay(1000));
+        this.allOrders$ = this.orderService.getAllUsersOrders(filters).pipe(delay(3000));
     }
 
     private allOrderStatuses() {

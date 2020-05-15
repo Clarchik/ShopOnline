@@ -5,26 +5,30 @@ import {TranslateModule} from '@ngx-translate/core';
 
 import {MatSelectModule} from '@angular/material/select';
 import {MatDatepickerModule} from '@angular/material/datepicker';
-import {ReactiveFormsModule} from '@angular/forms';
 
 import {MatNativeDateModule} from '@angular/material/core';
 import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button'
 
-import * as fromComponents from './components';
+import {CustomCommonModule} from '../common/common/custom-common.module';
 
+import * as fromComponents from './components';
+import { ManageProductRowComponent } from './components/manage-product-row/manage-product-row.component';
 @NgModule({
-    declarations: [...fromComponents.dashboardComponent],
+    declarations: [
+        ...fromComponents.dashboardComponent,
+        ManageProductRowComponent,
+    ],
     imports: [
         CommonModule,
-        ReactiveFormsModule,
+        CustomCommonModule,
         DashboardRoutingModule,
         TranslateModule,
         MatButtonModule,
         MatInputModule,
         MatSelectModule,
         MatDatepickerModule,
-        MatNativeDateModule
+        MatNativeDateModule,
     ],
     providers: [],
     entryComponents: [fromComponents.ManageOrderRowComponent],

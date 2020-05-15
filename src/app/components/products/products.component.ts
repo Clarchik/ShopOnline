@@ -1,61 +1,35 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { tap, map, switchMap } from 'rxjs/operators';
+import { map, delay } from 'rxjs/operators';
 import { ProductsService } from '../../services/products/products.service';
 import { Product } from '../../../server/shared/interfaces/product';
-import { Store } from '@ngrx/store';
-import { ShopState } from '../../store';
-import { Observable } from 'rxjs';
-import { notLoadingStatus } from '../../store/selectors/loader.selectors';
+import { Observable, Subscription } from 'rxjs';
+import {Pager} from '../../shared/interfaces/pager/pager';
 
 @Component({
     selector: 'app-products',
     templateUrl: './products.component.html',
     styleUrls: ['./products.component.scss']
 })
-export class ProductsComponent implements OnInit {
-    private _products: Product[] = [];
-    public _category: string;
-    private _pager: any;
-    private _emptyProducts: boolean = false;
-    public isNotLoading: Observable<boolean>;
+export class ProductsComponent implements OnInit, OnDestroy {
+    private subscription: Subscription = new Subscription();
+
+    public allProducts$: Observable<{pager: Pager, products: Product[]}>;
     constructor(
         private route: ActivatedRoute,
-        private productService: ProductsService,
-        private store: Store<ShopState>) { }
+        private productService: ProductsService) { }
 
     ngOnInit() {
-        this.route.queryParams.pipe(
-            map((params) => ({ category: params.category, page: params.page, title: params.title })),
-            switchMap(({ category, page, title }) => {
-                this._category = category;
-                return this.productService.getProducts(category, page, title);
-            }),
-            tap((data: any) => {
-                this._emptyProducts = !data.items.length;
-                this._products = data.items;
-                this._pager = data.pager;
-            })
-        ).subscribe();
-        this.isNotLoading = this.store.select(notLoadingStatus);
+        this.subscription.add(this.route.queryParams.pipe(
+            map((params) => ({category: params.category, page: params.page, title: params.title}))
+        ).subscribe({
+            next: ({category, page, title}) => {
+                this.allProducts$ = this.productService.getProducts(category, page, title).pipe(delay(2000));
+            }
+        }));
     }
 
-    public loadPage(page: number) {
-        this.productService.getProducts(this._category, page).subscribe((data: any) => {
-            this._pager = data.pager;
-            this._products = data.items;
-        });
-    }
-
-    public get products() {
-        return this._products;
-    }
-
-    public get pager() {
-        return this._pager;
-    }
-
-    public get emptyProducts(): boolean {
-        return this._emptyProducts;
+    ngOnDestroy() {
+        this.subscription.unsubscribe();
     }
 }

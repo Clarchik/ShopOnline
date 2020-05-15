@@ -8,7 +8,7 @@ import {NgModule} from '@angular/core';
 import {DashboardComponent} from './components/dashboard/dashboard.component';
 import {ManageProductsComponent} from './components/manage-products/manage-products.component';
 
-const customFields = {
+const AdminOrManagerAccess = {
     canActivate: [SyncGuardHelperGuard],
     data: {
         syncGuards: [AuthGuard, RoleGuard],
@@ -16,19 +16,27 @@ const customFields = {
     }
 };
 
+const AdminAccess = {
+    canActivate: [SyncGuardHelperGuard],
+    data: {
+        syncGuards: [AuthGuard, RoleGuard],
+        expectedRole: [UserRoles.Admin]
+    }
+};
+
 const routes: Routes = [
     {
-        path: '', component: DashboardComponent, ...customFields,
+        path: '', component: DashboardComponent, ...AdminOrManagerAccess,
         children: [
             {
                 path: 'manage-orders',
                 component: ManageOrdersComponent,
-                ...customFields
+                ...AdminOrManagerAccess
             },
             {
                 path: 'manage-products',
                 component: ManageProductsComponent,
-                ...customFields
+                ...AdminAccess
             }
         ]
     },

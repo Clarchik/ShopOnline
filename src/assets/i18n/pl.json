@@ -24,7 +24,7 @@
         "shippingInfo": "Adres wysyłki",
         "products": "Produkty",
         "filters": "Filtry",
-        "emptyDate": "Nic nie znaleziono",
+        "emptyData": "Nic nie znaleziono",
         "filter": "Filtruj"
     },
     "Product": {

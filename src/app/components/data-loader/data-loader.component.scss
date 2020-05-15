@@ -1,0 +1,24 @@
+.loading-text {
+    display: flex;
+    justify-content: center;
+	width: 100%;
+    min-height: 400px;
+    align-items: center;
+	span {
+		display: inline-block;
+		margin: 0 5px;
+		color: black;
+        font-family: 'Quattrocento Sans', sans-serif;
+		@for $i from 0 through 9 {
+			&:nth-child(#{$i + 1}) {
+				filter: blur(0px);
+				animation: blur-text 1.5s (#{$i/5})+s infinite linear alternate;
+			}
+		}
+	}
+}
+
+@keyframes blur-text {
+	0% {filter: blur(0px);}
+	100% {filter: blur(4px);}
+}

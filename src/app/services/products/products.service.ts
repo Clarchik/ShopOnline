@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Product } from '../../../server/shared/interfaces/product';
 import { environment } from '../../../environments/environment';
+import {Pager} from '../../shared/interfaces/pager/pager';
 
 @Injectable({
     providedIn: 'root'
@@ -12,8 +13,8 @@ export class ProductsService {
     constructor(private http: HttpClient) { }
 
 
-    public getProducts(category: string = 'all', page: number = 1, title: string = ''): Observable<{ pager: any, items: Product[] }> {
-        return this.http.get<{ pager: any, items: Product[] }>(`${environment.apiPath}/api/products?category=${category}&page=${page}&title=${title}`);
+    public getProducts(category: string = 'all', page: number = 1, title: string = ''): Observable<{ pager: Pager, products: Product[] }> {
+        return this.http.get<{ pager: Pager, products: Product[] }>(`${environment.apiPath}/api/products?category=${category}&page=${page}&title=${title}`);
     }
 
     public getSingleProduct(id: number): Observable<Product> {

@@ -8,7 +8,7 @@ import { RouterOutlet, Router, NavigationEnd } from '@angular/router';
 import { UtilsService } from './shared/services/utils/utils.service';
 import { ResizeService } from './shared/services/resize/resize.service';
 
-import { UserSelectors, FavoriteActions, CartActions, ShopState } from './store';
+import { FavoriteActions, CartActions, ShopState } from './store';
 
 @Component({
     selector: 'app-root',

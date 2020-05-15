@@ -24,7 +24,7 @@
         "shippingInfo": "Shipping address",
         "products": "Products",
         "filters": "Filters",
-        "emptyDate": "Nothing found",
+        "emptyData": "Nothing found",
         "filter": "Filter"
     },
     "Product": {
