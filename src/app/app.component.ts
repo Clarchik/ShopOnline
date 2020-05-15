@@ -1,7 +1,6 @@
 import { Component, OnInit, HostListener } from '@angular/core';
 import { Store } from '@ngrx/store';
 
-import { Observable } from 'rxjs';
 import { slideInAnimation } from './shared/models/animations/animation';
 import { RouterOutlet, Router, NavigationEnd } from '@angular/router';
 
@@ -22,7 +21,8 @@ export class AppComponent implements OnInit {
         private router: Router,
         private store: Store<ShopState>,
         private utilsService: UtilsService,
-        private resizeService: ResizeService) { }
+        private resizeService: ResizeService) {
+        }
 
     @HostListener('window:resize', ['$event'])
     onResize(event) {

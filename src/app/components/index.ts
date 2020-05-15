@@ -19,7 +19,6 @@ import { UserOrdersComponent } from './user-orders/user-orders.component';
 import { ProfileComponent } from './account/profile/profile.component';
 import { ProfileDetailsComponent } from './account/profile-details/profile-details.component';
 import { RegistrationComponent } from './registration/registration.component';
-import {NotAllowedComponent} from './screens/not-allowed/not-allowed.component';
 import {OrderDetailsComponent} from './order-details/order-details.component';
 import {OrderStatusTrackingComponent} from './order-status-tracking/order-status-tracking.component';
 import {ProductsPreviewComponent} from './products-preview/products-preview.component';
@@ -49,7 +48,6 @@ export const Components: any[] = [
     ProfileComponent,
     ProfileDetailsComponent,
     RegistrationComponent,
-    NotAllowedComponent,
     OrderDetailsComponent,
     OrderStatusTrackingComponent,
     ProductsPreviewComponent,

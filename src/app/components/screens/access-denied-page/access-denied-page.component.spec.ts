@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { NotAllowedComponent } from './not-allowed.component';
+import { AccessDeniedPageComponent } from './access-denied-page.component';
 
-describe('NotAllowedComponent', () => {
-  let component: NotAllowedComponent;
-  let fixture: ComponentFixture<NotAllowedComponent>;
+describe('AccessDeniedPageComponent', () => {
+  let component: AccessDeniedPageComponent;
+  let fixture: ComponentFixture<AccessDeniedPageComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ NotAllowedComponent ]
+      declarations: [ AccessDeniedPageComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(NotAllowedComponent);
+    fixture = TestBed.createComponent(AccessDeniedPageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -90,9 +90,65 @@ ul {
     text-decoration: underline;
 }
 
+.screen-container .top {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    padding-top: 120px;
+}
+
+.screen-container .bottom {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.screen-container .bottom h4,
+.screen-container .bottom p {
+    color: #787878;
+}
+
+.left-bracket,
+.right-bracket {
+    height: 108px;
+    width: auto;
+    vertical-align: middle;
+}
+
+.center-image {
+    height: 250px;
+    width: auto;
+    vertical-align: middle;
+    margin: 30px;
+}
+
+.screen-divider {
+    height: 1px;
+    width: 600px;
+    margin: 30px auto;
+    background-color: #E2E2E2;
+}
+
 
 @media screen and (min-device-width: 0px) and (max-device-width: 991.98px) {
 	.routeContainer {
 		min-height: calc(100vh - 500px);
 	}
+}
+
+@media (max-width: 960px) {
+    .screen-divider {
+        width: 300px;
+    }
+
+    .left-bracket,
+    .right-bracket {
+        display: none;
+    }
+
+    .center-image {
+        margin: 0;
+        height: 160px;
+    }
 }

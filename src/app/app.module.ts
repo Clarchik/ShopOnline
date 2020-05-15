@@ -39,6 +39,9 @@ import * as fromComponents from './components';
 import { environment } from '../environments/environment.prod';
 import { SetupFactory } from './setup-factory/setup-factory.service';
 import {CustomCommonModule} from './modules/common/common/custom-common.module';
+import { AccessDeniedPageComponent } from './components/screens/access-denied-page/access-denied-page.component';
+import { NotFoundPageComponent } from './components/screens/not-found-page/not-found-page.component';
+import { ErrorPageComponent } from './components/screens/error-page/error-page.component';
 
 
 const setupFactory = new SetupFactory();
@@ -48,7 +51,10 @@ const setupFactory = new SetupFactory();
         AppComponent,
         ...fromComponents.Components,
         ...fromSharedDirectives.Directives,
-        CurrencyConverterPipe
+        CurrencyConverterPipe,
+        AccessDeniedPageComponent,
+        NotFoundPageComponent,
+        ErrorPageComponent
     ],
     imports: [
         BrowserModule,

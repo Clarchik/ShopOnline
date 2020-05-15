@@ -13,10 +13,12 @@ import {LoginComponentGuard} from './guards/login-component-guard/login-componen
 import {UserOrdersComponent} from './components/user-orders/user-orders.component';
 import {AuthGuard} from './guards/auth-guard/auth.guard';
 import {UserOrdersResolver} from './resolvers/user-orders/user-orders.resolver';
-import {NotAllowedComponent} from './components/screens/not-allowed/not-allowed.component';
 import {OrderDetailsComponent} from './components/order-details/order-details.component';
 import {CountriesResolver} from './resolvers/countries/countries.resolver';
 import {ProductsResolver} from './resolvers/products/products.resolver';
+import {AccessDeniedPageComponent} from './components/screens/access-denied-page/access-denied-page.component';
+import {NotFoundPageComponent} from './components/screens/not-found-page/not-found-page.component';
+import {ErrorPageComponent} from './components/screens/error-page/error-page.component';
 
 const routes: Routes = [
     // Modules
@@ -42,7 +44,9 @@ const routes: Routes = [
         component: OrderDetailsComponent,
         canActivate: [AuthGuard],
     },
-    {path: 'not-allowed', component: NotAllowedComponent},
+    {path: '403', component: AccessDeniedPageComponent},
+    {path: '404', component: NotFoundPageComponent},
+    {path: '500', component: ErrorPageComponent},
     {path: '**', redirectTo: '/main'},
 ];
 
