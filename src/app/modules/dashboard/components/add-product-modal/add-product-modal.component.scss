@@ -1,0 +1,36 @@
+.product {
+    &-container {
+        position: relative;
+    }
+}
+
+.form-field {
+    width: 100%;
+}
+
+.close-button {
+    outline: none;
+    position: absolute;
+    top: -15px;
+    right: -20px;
+    background-color: transparent;
+}
+
+.group-row {
+    position: relative;
+    &__counter {
+        position: absolute;
+        top: 13px;
+        left: -25px;
+        font-size: 30px;
+    }
+    &__remove {
+        position: absolute;
+        top: 45px;
+        left: -36px;
+        color: red;
+        &:hover {
+            cursor: pointer;
+        }
+    }
+}

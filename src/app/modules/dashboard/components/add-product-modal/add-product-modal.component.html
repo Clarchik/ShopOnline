@@ -1,0 +1,184 @@
+<div class="product-container">
+    <mat-icon class="close-button" [mat-dialog-close]="true"><i class="fas fa-times"></i></mat-icon>
+    <div class="container">
+        <form [formGroup]="addProductForm">
+            <div class="row">
+                <!-- Title field -->
+                <div class="col-8">
+                    <mat-form-field class="form-field">
+                        <mat-label>Title</mat-label>
+                        <input matInput type="text" formControlName="title">
+                        <button mat-button *ngIf="controls.title.value" matSuffix mat-icon-button aria-label="Clear"
+                            (click)="controls.title.setValue('');">
+                            <mat-icon>
+                                <i class="fas fa-times"></i>
+                            </mat-icon>
+                        </button>
+                    </mat-form-field>
+                </div>
+                <!-- Category field -->
+                <div class="col-4">
+                    <mat-form-field class="form-field">
+                        <mat-label>Category</mat-label>
+                        <mat-select formControlName="category">
+                            <mat-option *ngFor="let category of availableCategories" [value]="category">
+                                {{ category }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <!-- Price field -->
+                <div class="col-4">
+                    <mat-form-field class="form-field">
+                        <mat-label>Price</mat-label>
+                        <input matInput type="text" formControlName="price" (ngModelChange)="checkSalePrice('price');">
+                        <button mat-button *ngIf="controls.price.value" matSuffix mat-icon-button aria-label="Clear"
+                            (click)="controls.price.setValue('');">
+                            <mat-icon>
+                                <i class="fas fa-times"></i>
+                            </mat-icon>
+                        </button>
+                    </mat-form-field>
+                </div>
+                <!-- Price field -->
+                <div class="col-4">
+                    <mat-form-field class="form-field">
+                        <mat-label>Sale</mat-label>
+                        <mat-select formControlName="sale" (ngModelChange)="saleChanged($event);">
+                            <mat-option *ngFor="let sale of saleOptions" [value]="sale">
+                                {{ sale }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <!-- Sale price filed -->
+                <div class="col-4">
+                    <mat-form-field  class="form-field">
+                        <mat-label>Sale price</mat-label>
+                        <input disabled matInput type="text" formControlName="salePrice" (ngModelChange)="checkSalePrice('salePrice');">
+                        <button mat-button *ngIf="controls.salePrice.value" matSuffix mat-icon-button aria-label="Clear"
+                            (click)="controls.salePrice.setValue('');">
+                            <mat-icon>
+                                <i class="fas fa-times"></i>
+                            </mat-icon>
+                        </button>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <!-- Main image field -->
+                <div class="col-8">
+                    <mat-form-field class="form-field">
+                        <mat-label>Main Image</mat-label>
+                        <input matInput type="text" formControlName="mainImage">
+                        <button mat-button *ngIf="controls.mainImage.value" matSuffix mat-icon-button aria-label="Clear"
+                            (click)="controls.mainImage.setValue('');">
+                            <mat-icon>
+                                <i class="fas fa-times"></i>
+                            </mat-icon>
+                        </button>
+                    </mat-form-field>
+                </div>
+                <!-- Gender field -->
+                <div class="col-4">
+                    <mat-form-field class="form-field">
+                        <mat-label>Gender</mat-label>
+                        <mat-select formControlName="gender">
+                            <mat-option *ngFor="let gender of availableGenders" [value]="gender">
+                                {{ gender }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            <div class="row">
+                <!-- Colors field -->
+                <div class="col-4">
+                    <div class="group-row" [formGroup]="color" *ngFor="let color of controls.colors.controls; let i = index;">
+                        <span class="group-row__counter">
+                            {{ i + 1}}
+                        </span>
+                        <button class="group-row__remove" mat-icon-button [disabled]="controls.colors.controls.length <= 1" (click)="removeFormRow('colors', i);">
+                            <mat-icon><i class="fas fa-minus-circle"></i></mat-icon>
+                        </button>
+                        <mat-form-field class="form-field">
+                            <mat-label>Color name</mat-label>
+                            <input matInput type="text" formControlName="name">
+                            <button mat-button *ngIf="color.value.name" matSuffix mat-icon-button aria-label="Clear"
+                                (click)="color.controls.name.setValue('');">
+                                <mat-icon>
+                                    <i class="fas fa-times"></i>
+                                </mat-icon>
+                            </button>
+                        </mat-form-field>
+                        <mat-form-field class="form-field">
+                            <mat-label>Color</mat-label>
+                            <input matInput type="text" formControlName="primary">
+                            <button mat-button *ngIf="color.value.primary" matSuffix mat-icon-button aria-label="Clear"
+                                (click)="color.controls.primary.setValue('');">
+                                <mat-icon>
+                                    <i class="fas fa-times"></i>
+                                </mat-icon>
+                            </button>
+                        </mat-form-field>
+                    </div>
+                    <button mat-raised-button color="primary" (click)="addFormRow('colors');">Add color row</button>
+                </div>
+
+                <!-- Sizes field -->
+                <div class="col-4">
+                    <div class="group-row" [formGroup]="size" *ngFor="let size of controls.sizes.controls; let i = index;">
+                        <span class="group-row__counter">
+                            {{ i + 1}}
+                        </span>
+                        <button class="group-row__remove" mat-icon-button [disabled]="controls.sizes.controls.length <= 1" (click)="removeFormRow('sizes', i);">
+                            <mat-icon><i class="fas fa-minus-circle"></i></mat-icon>
+                        </button>
+                        <mat-form-field class="form-field">
+                            <mat-label>Size</mat-label>
+                            <input matInput type="text" formControlName="size">
+                            <button mat-button *ngIf="size.value.size" matSuffix mat-icon-button aria-label="Clear"
+                                (click)="size.controls.size.setValue('');">
+                                <mat-icon>
+                                    <i class="fas fa-times"></i>
+                                </mat-icon>
+                            </button>
+                        </mat-form-field>
+                        <mat-form-field class="form-field">
+                            <mat-label>Quantity</mat-label>
+                            <input matInput type="text" formControlName="quantity">
+                            <button mat-button *ngIf="size.value.quantity" matSuffix mat-icon-button aria-label="Clear"
+                                (click)="size.controls.quantity.setValue('');">
+                                <mat-icon>
+                                    <i class="fas fa-times"></i>
+                                </mat-icon>
+                            </button>
+                        </mat-form-field>
+                    </div>
+                    <button mat-raised-button color="primary"  (click)="addFormRow('sizes');">Add size row</button>
+                </div>
+
+                <!-- Images field -->
+                <div class="col-4">
+                    <div class="group-row" [formGroup]="image" *ngFor="let image of controls.slides.controls; let i = index;">
+                        <mat-form-field class="form-field">
+                            <mat-label>Small image url</mat-label>
+                            <input matInput type="text" formControlName="imageUrl">
+                        </mat-form-field>
+                    </div>
+                </div>
+            </div>
+
+            </div>
+        </form>
+        <button mat-button color="primary" type="button" (click)="createOrUpdateProduct();" [disabled]="addProductForm.invalid">
+            <span *ngIf="isEditing">
+                Update product
+            </span>
+            <span *ngIf="!isEditing">
+                Create new product
+            </span>
+        </button>
+    </div>
+</div>

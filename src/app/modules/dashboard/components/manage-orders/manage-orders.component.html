@@ -59,7 +59,7 @@
                 </thead>
                 <tbody>
                     <app-manage-order-row *ngFor="let order of allOrders.orders" [order]="order"
-                        (statusChanged)="changedStatus($event);"></app-manage-order-row>
+                        (statusChanged)="changedStatus();"></app-manage-order-row>
                 </tbody>
             </table>
             <div class="manage-footer" *ngIf="allOrders.pager as pager">

@@ -1,0 +1,28 @@
+.product {
+    &-placeholder {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 300px;
+        width: 200px;
+        background-color: #ffffff;
+        border: 2px solid lightgrey;
+        border-radius: 2px;
+        transition: transform .5s ease-in-out;
+        &:hover {
+            cursor: pointer;
+            transform: scale(1.2);
+            .add-icon {
+                transform: rotate(90deg);
+            }
+        }
+
+        .add-icon {
+            transition: transform .5s ease-in-out;
+            color: lightgreen;
+            font-size: 3em;
+        }
+    }
+
+
+}

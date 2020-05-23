@@ -1,0 +1,24 @@
+.image-preview {
+    max-width: 200px;
+    height: auto;
+}
+
+.edit-btn {
+    background-color: #ffffff;
+    outline: none;
+    border: 1px solid lightgrey;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+    padding: 5px;
+    transition: transform .35s ease-in-out;
+    margin-left: 5px;
+    &:first-child {
+        margin-left: 0;
+    }
+    &:hover {
+        transform: scale(1.3);
+    }
+}

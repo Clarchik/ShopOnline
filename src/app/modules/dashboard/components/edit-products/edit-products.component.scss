@@ -1,0 +1,15 @@
+.manage {
+    &-filters {
+        margin-top: 30px;
+        margin-bottom: 30px;
+    }
+    &-filter {
+        &__title {
+            margin-bottom: 10px;
+        }
+    }
+    &-footer {
+        display: flex;
+        justify-content: center;
+    }
+}

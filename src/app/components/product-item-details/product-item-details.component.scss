@@ -101,6 +101,11 @@
             border-color: #444;
         }
 
+        .color[color="yellow"] {
+            background-color: yellow;
+            border-color: yellow;
+        }
+
         .color.active {
             border-color: #fff;
             box-shadow: 0 0 10px .5px rgba(0, 0, 0, 0.2);
@@ -238,6 +243,10 @@
 
         .gradient[color="black"] {
             background-image: linear-gradient(45deg, #111, #666);
+        }
+
+        .gradient[color="yellow"] {
+            background-image: linear-gradient(45deg, #f7b733, yellow);
         }
 
 

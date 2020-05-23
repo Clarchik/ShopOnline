@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { map, delay } from 'rxjs/operators';
-import { ProductsService } from '../../services/products/products.service';
+import { ProductsService } from '../../shared/services/products/products.service';
 import { Product } from '../../../server/shared/interfaces/product';
 import { Observable, Subscription } from 'rxjs';
 import {Pager} from '../../shared/interfaces/pager/pager';

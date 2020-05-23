@@ -9,15 +9,22 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
 import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button'
-
 import {CustomCommonModule} from '../common/common/custom-common.module';
 
-import * as fromComponents from './components';
 import { ManageProductRowComponent } from './components/manage-product-row/manage-product-row.component';
+import {ManageProductsAddComponent} from './components/manage-products-add/manage-products-add.component';
+
+import * as fromComponents from './components';
+import { AddProductModalComponent } from './components/add-product-modal/add-product-modal.component';
+import { EditProductsComponent } from './components/edit-products/edit-products.component';
+
 @NgModule({
     declarations: [
         ...fromComponents.dashboardComponent,
         ManageProductRowComponent,
+        ManageProductsAddComponent,
+        AddProductModalComponent,
+        EditProductsComponent
     ],
     imports: [
         CommonModule,

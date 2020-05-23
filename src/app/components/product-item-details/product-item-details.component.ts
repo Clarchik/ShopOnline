@@ -2,7 +2,7 @@ import {Component, OnInit, OnDestroy} from '@angular/core';
 import {Product} from '../../../server/shared/interfaces/product';
 import {ActivatedRoute} from '@angular/router';
 import {switchMap, map} from 'rxjs/operators';
-import {ProductsService} from '../../services/products/products.service';
+import {ProductsService} from '../../shared/services/products/products.service';
 import {Store} from '@ngrx/store';
 
 import {CartActions, ShopState} from '../../store';

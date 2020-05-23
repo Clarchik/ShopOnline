@@ -69,7 +69,7 @@ export class WebReqInterceptor implements HttpInterceptor {
                 this.router.navigate(['/404']);
                 break;
             }
-            case 400: {
+            case 500: {
                 this.router.navigate(['/500']);
                 break;
             }

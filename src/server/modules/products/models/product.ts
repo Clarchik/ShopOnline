@@ -9,7 +9,7 @@ const ProductSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    genger: {
+    gender: {
         type: String,
         required: true,
     },
@@ -17,10 +17,12 @@ const ProductSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
-    color: {
-        type: String,
-        required: true
-    },
+    colors: [
+        {
+            name: String,
+            primary: String
+        }
+    ],
     sale: {
         type: Boolean,
         required: true
@@ -31,7 +33,8 @@ const ProductSchema = new mongoose.Schema({
     },
     salePrice: {
         type: Number,
-        required: true
+        required: false,
+        default: 0
     },
     mainImage: {
         type: String,

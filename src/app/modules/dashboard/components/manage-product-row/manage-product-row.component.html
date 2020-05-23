@@ -1,1 +1,17 @@
-<p>manage-product-row works!</p>
+<ng-template #productRowTemplate>
+    <tr>
+        <td>
+            <img class="image-preview" [src]="product.mainImage" alt="">
+        </td>
+        <td>{{product.title}}</td>
+        <td>{{product.category}}</td>
+        <td>{{product.price}}$</td>
+        <td>{{product.salePrice}}$</td>
+        <td>{{product.sale}}</td>
+        <td>
+            <button type="button" class="edit-btn" (click)="editProduct();">
+                <i class="far fa-edit"></i>
+            </button>
+        </td>
+    </tr>
+</ng-template>

@@ -22,7 +22,7 @@ export class OrderDetailsComponent implements OnInit {
 
     ngOnInit(): void {
         this.order$ = this.route.params.pipe(
-            delay(1000),
+            delay(3000),
             switchMap(({id}) => this.ordersService.getOrderDetails(id))
         );
     }
