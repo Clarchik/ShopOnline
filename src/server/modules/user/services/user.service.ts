@@ -110,6 +110,7 @@ export class UserService {
 
     public checkIfUserExists(req: Request, res: Response) {
         const { email } = req.body;
+        console.log(req.headers.host, 'host');
         User.checkIfUserExists(email).then(() => {
             res.status(200).send(false);
         }).catch(() => {
