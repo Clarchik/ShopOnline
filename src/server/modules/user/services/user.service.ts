@@ -39,7 +39,7 @@ export class UserService {
             newUser.save().then((savedUser: any) => {
                 savedUser.generateVerificationToken().then((token: string) => {
                     const {email, name, surname} = savedUser;
-                    const verificationPath = `${environment.apiPath}/api/user/verify/`;
+                    const verificationPath = `${req.headers.origin}/api/user/verify/`;
                     creatVerificationTemplate(`${name} ${surname}`, verificationPath, token)
                         .then((html) => {
                             sendHTMLTemplate(email, html, 'Verification', '')
@@ -110,7 +110,6 @@ export class UserService {
 
     public checkIfUserExists(req: Request, res: Response) {
         const { email } = req.body;
-        console.log(req.headers.host, 'host');
         User.checkIfUserExists(email).then(() => {
             res.status(200).send(false);
         }).catch(() => {
