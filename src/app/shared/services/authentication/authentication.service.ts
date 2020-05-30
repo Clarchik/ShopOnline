@@ -6,7 +6,6 @@ import { SESSION } from '../../models/session/session';
 import { UtilsService } from '../utils/utils.service';
 import { UserData } from '../../models/user/user-data';
 import { UserPasswords } from '../../models/user/user-passwords';
-import { Router } from '@angular/router';
 import { environment } from '../../../../environments/environment';
 
 

@@ -1,30 +1,53 @@
 import express, { Request, Response } from 'express';
-import { environment } from '../../../../environments/environment';
+import {creatVerificationTemplate, sendHTMLTemplate} from '../../../shared/html-service';
 import axios from 'axios';
 import CONFIG from '../../../shared/config';
 import { User } from '../models';
+import { environment } from '../../../../environments/environment';
 
 import * as jwt from 'jsonwebtoken';
 import * as bcrypt from 'bcryptjs';
-import {creatVerificationTemplate, sendHTMLTemplate} from '../../../shared/html-service';
 
 export class UserService {
 
     public verifyUser(req: express.Request, res: express.Response) {
         const {token} = req.params;
         if (!token) {
-            res.status(500).send();
+            res.end('<h1 style="display: flex; justify-content:center;align-items: center">Token is invalid!</h1>');
             return;
         }
-        jwt.verify(token, CONFIG.verificationSecret, (err, userData) => {
+        jwt.verify(token, CONFIG.verificationSecret, (err, userData: any) => {
             if (err) {
-                console.log(err, 'ff');
-                res.status(400).send();
+                switch (err.message) {
+                    case 'jwt malformed': {
+                        res.end('<h1 style="display: flex; justify-content:center;align-items: center">Your token is invalid!</h1>');
+                        break;
+                    }
+                    case 'jwt expired': {
+                        res.end('<h1 style="display: flex; justify-content:center;align-items: center">Your token is expired!</h1>');
+                    }
+                }
                 return;
             }
-            console.log(userData, 'sdfsdf');
+            User.findById({_id: userData._id}, (error: any, foundUser) => {
+                if (error) {
+                    res.end('<h1 style="display: flex; justify-content:center;align-items: center">Account not found!</h1>');
+                    return;
+                }
+                if (foundUser.isActive) {
+                    res.send('<h1 style="display: flex; justify-content:center;align-items: center">Account verified already!</h1>');
+                } else {
+                    User.update({_id: userData._id}, {$set: {isActive: true}}, (errorUpdate) => {
+                        if (errorUpdate) {
+                            res.end('<h1 style="display: flex; justify-content:center;align-items: center">Account cannot be updated!</h1>');
+                        } else {
+                            res.end('<h1 style="display: flex; justify-content:center;align-items: center">Your account has been verified!</h1>');
+                        }
+                    });
+                }
+            });
         });
-        res.end('<h1>YA TUT</h1>');
+
     }
 
     public signUpUser(req: express.Request, res: express.Response) {
@@ -40,7 +63,7 @@ export class UserService {
             newUser.save().then((savedUser: any) => {
                 savedUser.generateVerificationToken().then((token: string) => {
                     const {email, name, surname} = savedUser;
-                    const verificationPath = `${req.headers.origin}1/api/user/verify/`;
+                    const verificationPath = environment.production ? `${req.headers.origin}/api/user/verify/` : `${req.headers.host}/api/user/verify/`;
                     creatVerificationTemplate(`${name} ${surname}`, verificationPath, token)
                         .then((html) => {
                             sendHTMLTemplate(email, html, 'Verification', '')
@@ -48,7 +71,7 @@ export class UserService {
                                     res.status(200).send({ message: `Successfuly registered. Your verification link sent on email.` });
                                 })
                                 .catch((e: any) => {
-                                    // res.status(400).send({e, message: 'Order have not been sent'});
+                                    res.status(400).send({e, message: 'Order have not been sent'});
                                 });
                         }).catch((e) => {
                             // res.status(400).send({e, message: 'Couldt create Html Template'});
