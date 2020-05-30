@@ -6,13 +6,15 @@ import {MatInputModule} from '@angular/material/input';
 import {MatDialogModule} from '@angular/material/dialog';
 import {RoleDirective} from '../../../shared/directives/roles/role.directive';
 import {DataLoaderComponent} from '../../../components/data-loader/data-loader.component';
+import {EmptyDataComponent} from '../../../components/screens/empty-data/empty-data.component';
 
 
 
 @NgModule({
     declarations: [
         RoleDirective,
-        DataLoaderComponent
+        DataLoaderComponent,
+        EmptyDataComponent
     ],
     imports: [
         ReactiveFormsModule,
@@ -21,7 +23,16 @@ import {DataLoaderComponent} from '../../../components/data-loader/data-loader.c
         MatInputModule,
         MatDialogModule
     ],
-    exports: [ReactiveFormsModule, MatTabsModule, MatIconModule, MatInputModule, MatDialogModule, RoleDirective, DataLoaderComponent],
+    exports: [
+        ReactiveFormsModule,
+        MatTabsModule,
+        MatIconModule,
+        MatInputModule,
+        MatDialogModule,
+        RoleDirective,
+        DataLoaderComponent,
+        EmptyDataComponent
+    ],
     entryComponents: [DataLoaderComponent]
 })
 export class CustomCommonModule {}

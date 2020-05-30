@@ -9,6 +9,7 @@ export interface UserData extends Document {
     surname: string;
     sessions: Array<Session>;
     orders: Array<IOrder> | Array<string>;
+    isActive: boolean;
 }
 
 export interface UserModel extends mongoose.Model<UserData> {

@@ -23,6 +23,9 @@ import {OrderDetailsComponent} from './order-details/order-details.component';
 import {OrderStatusTrackingComponent} from './order-status-tracking/order-status-tracking.component';
 import {ProductsPreviewComponent} from './products-preview/products-preview.component';
 import {BrandsComponent} from './brands/brands.component';
+import {AccessDeniedPageComponent} from './screens/access-denied-page/access-denied-page.component';
+import {NotFoundPageComponent} from './screens/not-found-page/not-found-page.component';
+import {ErrorPageComponent} from './screens/error-page/error-page.component';
 
 
 
@@ -52,6 +55,9 @@ export const Components: any[] = [
     OrderStatusTrackingComponent,
     ProductsPreviewComponent,
     BrandsComponent,
+    AccessDeniedPageComponent,
+    NotFoundPageComponent,
+    ErrorPageComponent
 ];
 
 

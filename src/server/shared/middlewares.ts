@@ -25,6 +25,11 @@ const verifySession = (req: any, res: any, next: any) => {
                 error: 'User not found. Make sure that the refresh token and user id are correct'
             });
         }
+        if (!user.isActive) {
+            return Promise.reject({
+                error: 'notActivated'
+            });
+        }
         // if the code reaches here - the user was found
         // therefore the refresh token exists in the database - but we still have to check if it has expired or not
 

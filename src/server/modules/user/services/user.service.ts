@@ -1,12 +1,33 @@
 import express, { Request, Response } from 'express';
-import * as bcrypt from 'bcryptjs';
+import { environment } from '../../../../environments/environment';
 import axios from 'axios';
+import CONFIG from '../../../shared/config';
 import { User } from '../models';
+
+import * as jwt from 'jsonwebtoken';
+import * as bcrypt from 'bcryptjs';
+import {creatVerificationTemplate, sendHTMLTemplate} from '../../../shared/html-service';
 
 export class UserService {
 
+    public verifyUser(req: express.Request, res: express.Response) {
+        const {token} = req.params;
+        if (!token) {
+            res.status(500).send();
+            return;
+        }
+        jwt.verify(token, CONFIG.verificationSecret, (err, userData) => {
+            if (err) {
+                console.log(err, 'ff');
+                res.status(400).send();
+                return;
+            }
+            console.log(userData, 'sdfsdf');
+        });
+    }
+
     public signUpUser(req: express.Request, res: express.Response) {
-        const { body } = req;
+        const {body} = req;
         if (!body.email || !body.password) {
             res.send(400).send({
                 message: 'You didnt provide credentials'
@@ -15,8 +36,23 @@ export class UserService {
 
         const newUser = new User(body);
         User.checkIfUserExists(newUser.email).then(() => {
-            newUser.save().then(() => {
-                res.status(200).send({ message: 'Successfuly registered' });
+            newUser.save().then((savedUser: any) => {
+                savedUser.generateVerificationToken().then((token: string) => {
+                    const {email, name, surname} = savedUser;
+                    const verificationPath = `${environment.apiPath}/api/user/verify/`;
+                    creatVerificationTemplate(`${name} ${surname}`, verificationPath, token)
+                        .then((html) => {
+                            sendHTMLTemplate(email, html, 'Verification', '')
+                                .then(() => {
+                                    res.status(200).send({ message: `Successfuly registered. Your verification link sent on email.` });
+                                })
+                                .catch((e: any) => {
+                                    // res.status(400).send({e, message: 'Order have not been sent'});
+                                });
+                        }).catch((e) => {
+                            // res.status(400).send({e, message: 'Couldt create Html Template'});
+                        });
+                });
             }).catch((e: any) => {
                 res.status(400).send(e);
             });
@@ -35,6 +71,10 @@ export class UserService {
         }
 
         User.findByCredentials(email, password).then((foundUser: any) => {
+            if (!foundUser.isActive) {
+                res.status(400).send({message: 'notActivated'});
+                return;
+            }
             const refToken = req.get('x-refresh-token');
             const expired = foundUser.checkRefreshTokenOnExpiry(refToken);
             let backFunction;
@@ -46,7 +86,6 @@ export class UserService {
                     });
                 });
             }
-
             if (refToken) {
                 if (!expired) {
                     backFunction = foundUser.generateAccessAuthToken().then((accessToken: any) => {
@@ -61,6 +100,8 @@ export class UserService {
                     .header('x-access-token', authTokens.accessToken)
                     .status(200)
                     .send(foundUser);
+            }).catch((er: any) => {
+                res.status(400).send(er);
             });
         }).catch((e: any) => {
             res.status(400).send(e);

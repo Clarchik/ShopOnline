@@ -172,7 +172,7 @@
 
             </div>
         </form>
-        <button mat-button color="primary" type="button" (click)="createOrUpdateProduct();" [disabled]="addProductForm.invalid">
+        <button mat-raised-button color="primary" type="button" (click)="createOrUpdateProduct();" [disabled]="addProductForm.invalid">
             <span *ngIf="isEditing">
                 Update product
             </span>

@@ -45,6 +45,11 @@ const UserSchema = new mongoose.Schema({
     orders: [
         { type: Schema.Types.ObjectId, ref: 'Order' }
     ],
+    isActive: {
+        type: Boolean,
+        default: false,
+        required: true
+    },
     sessions: [{
         token: {
             type: String,
@@ -63,7 +68,7 @@ UserSchema.methods.toJSON = function() {
     const user = this;
     const userObject = user.toObject();
 
-    return _.omit(userObject, ['password', 'sessions', '__v']);
+    return _.omit(userObject, ['password', 'isActive', 'sessions', '__v']);
 };
 
 UserSchema.methods.generateAccessAuthToken = function() {
@@ -83,6 +88,23 @@ UserSchema.methods.generateAccessAuthToken = function() {
             });
     });
 };
+
+UserSchema.methods.generateVerificationToken = function() {
+    const user = this;
+    return new Promise((resolve, reject) => {
+        jwt.sign(
+            { _id: user._id.toHexString() },
+            CONFIG.verificationSecret,
+            { expiresIn: CONFIG.verificationExpiryTime },
+            (err, token) => {
+                if (!err) {
+                    resolve(token);
+                } else {
+                    reject();
+                }
+            });
+    });
+}
 
 UserSchema.methods.generateRefreshAuthToken = function() {
     return new Promise((resolve, reject) => {
@@ -104,7 +126,7 @@ UserSchema.methods.createSession = function() {
     }).then((refreshToken: string) => {
         return refreshToken;
     }).catch((e: any) => {
-        return Promise.reject({ message: `Failed to save session to database.\n ${e}` });
+        return Promise.reject({ message: `Something went wrong.\n ${e}` });
     });
 };
 

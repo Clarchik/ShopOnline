@@ -1,7 +1,7 @@
 import express, { Request, Response } from 'express';
 import { Order } from '../models';
 import { User } from '../../user/models';
-import { createOrderHTMLTemplate, sendOrderTemplate } from '../../../shared/html-service';
+import { createOrderHTMLTemplate, sendHTMLTemplate } from '../../../shared/html-service';
 import { UserData } from '../../user/interface/user';
 import {Order as IOrder} from '../../../shared/interfaces/order';
 import {countries} from '../../../data/countries/countries';
@@ -32,7 +32,7 @@ export default class OrdersService {
                     ).then(() => {
                         createOrderHTMLTemplate(`${name} ${surname}`, products)
                             .then((html) => {
-                                sendOrderTemplate(email, html)
+                                sendHTMLTemplate(email, html, 'Order confirmation', 'Dear customer. Thank you for ordering products in our store.')
                                     .then(() => {
                                         res.status(200).send({message: 'Order have been sent'});
                                     })

@@ -8,7 +8,13 @@ export const createOrderHTMLTemplate = (fio: string, products: any): Promise<any
     return html;
 };
 
-export const sendOrderTemplate = (email: string, html: any): Promise<any> => {
+export const creatVerificationTemplate = (fio: string, path: string, token: string): Promise<any> => {
+    const { pathdir } = (global as any);
+    const html = ejs.renderFile(`${pathdir}/server/ejs/verification.ejs`, { fio, path, token });
+    return html;
+};
+
+export const sendHTMLTemplate = (email: string, html: any, subject: string, textPart: string): Promise<any> => {
     const request = mailjet
         .post('send', { version: 'v3.1' })
         .request({
@@ -20,8 +26,8 @@ export const sendOrderTemplate = (email: string, html: any): Promise<any> => {
                 To: [{
                     Email: email,
                 }],
-                Subject: 'Order confirmation',
-                TextPart: `Dear customer. Thank you for ordering products in our store.`,
+                Subject: subject,
+                TextPart: textPart,
                 HTMLPart: html
             }]
         });

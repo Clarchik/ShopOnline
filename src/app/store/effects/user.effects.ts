@@ -82,7 +82,7 @@ export class UserEffects {
         ofType(userActions.REGISTRATION_USER_SUCCESS),
         map((action: userActions.RegistrationUserSuccess) => action.payload),
         tap((data) => {
-            this.toastr.success('', `${data}`);
+            this.toastr.success(`${data}`, 'Success');
             setTimeout(() => {
                 this.router.navigateByUrl('login');
             }, 1500);
