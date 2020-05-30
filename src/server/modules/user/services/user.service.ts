@@ -24,6 +24,7 @@ export class UserService {
             }
             console.log(userData, 'sdfsdf');
         });
+        res.end('<h1>YA TUT</h1>');
     }
 
     public signUpUser(req: express.Request, res: express.Response) {
@@ -39,7 +40,7 @@ export class UserService {
             newUser.save().then((savedUser: any) => {
                 savedUser.generateVerificationToken().then((token: string) => {
                     const {email, name, surname} = savedUser;
-                    const verificationPath = `${req.headers.origin}/api/user/verify/`;
+                    const verificationPath = `${req.headers.origin}1/api/user/verify/`;
                     creatVerificationTemplate(`${name} ${surname}`, verificationPath, token)
                         .then((html) => {
                             sendHTMLTemplate(email, html, 'Verification', '')
