@@ -114,7 +114,7 @@ export default class OrdersService {
         const allowedUsersRole = [UserRoles.Admin, UserRoles.Manager];
         const {userObject} = (req as any);
 
-        const findOrderCallback = (error: any, order: IOrder) => {
+        const findOrderCallback = (error: any, order: any) => {
             if (error) {res.status(400).send({message: 'Order doesnt exist'}); return; }
             res.status(200).send(order);
         };
