@@ -134,6 +134,10 @@ ul {
     margin-top: 20px;
 }
 
+.mat-tab-body-content {
+    overflow: hidden !important;
+}
+
 
 @media screen and (min-device-width: 0px) and (max-device-width: 991.98px) {
 	.routeContainer {

@@ -69,7 +69,7 @@ const setupFactory = new SetupFactory();
             loader: {
                 provide: TranslateLoader,
                 useFactory: setupFactory.HttpLoaderFactory,
-                deps: [HttpClient]
+                deps: [HttpClient],
             }
         }),
     ],

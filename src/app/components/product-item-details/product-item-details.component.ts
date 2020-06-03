@@ -1,24 +1,24 @@
-import {Component, OnInit, OnDestroy} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Product} from '../../../server/shared/interfaces/product';
 import {ActivatedRoute} from '@angular/router';
-import {switchMap, map} from 'rxjs/operators';
+import {switchMap, map, tap, delay} from 'rxjs/operators';
 import {ProductsService} from '../../shared/services/products/products.service';
 import {Store} from '@ngrx/store';
 
 import {CartActions, ShopState} from '../../store';
 import {CartProduct} from '../../shared/models/cart-product/cart-product';
-import {Subscription} from 'rxjs';
+import {Observable} from 'rxjs';
 
 @Component({
     selector: 'app-product-item-details',
     templateUrl: './product-item-details.component.html',
     styleUrls: ['./product-item-details.component.scss']
 })
-export class ProductItemDetailsComponent implements OnInit, OnDestroy {
-    private subscription: Subscription;
+export class ProductItemDetailsComponent implements OnInit {
+    public inited = false;
     private animationEnd: boolean = true;
     private prevColor: string = '';
-    private _product: Product;
+    public product$: Observable<Product>;
     public selectedColor: string = '';
     public sizeChoice: number;
     public productQuantity: number = 1;
@@ -31,17 +31,41 @@ export class ProductItemDetailsComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         document.documentElement.style.setProperty('--shoe-color', '#232323');
-        this.subscription = this.route.params.pipe(
+        this.product$ = this.route.params.pipe(
             map((params) => params.id),
-            switchMap((id) => this.ps.getSingleProduct(id))
-        ).subscribe((product: Product) => {
-            this._product = product;
-            this.productViewImage = this._product.mainImage;
-        });
+            delay(3000),
+            switchMap((id) => this.ps.getSingleProduct(id).pipe(
+                tap((product) => {
+                    this.productViewImage = product.mainImage;
+                    setTimeout(() => {
+                        this.inited = true;
+                    }, 500);
+                })
+            ))
+        );
     }
 
-    ngOnDestroy() {
-        this.subscription.unsubscribe();
+    public addToBag(product, size, quantity, selectedColor) {
+        const productToAdd = new CartProduct(product, size, quantity, selectedColor);
+        this.store.dispatch(new CartActions.AddProduct(productToAdd));
+    }
+
+    public sizeChanged(size: number, product: Product) {
+        this.productQuantity = 1;
+        const choosenSizeQuantity = product.sizes.find((item) => item.size === size).quantity;
+        this.productMaxPosibleQuantity = choosenSizeQuantity;
+    }
+
+    public changeProductView(url: string) {
+        this.productViewImage = url;
+    }
+
+    public increaseQuantity() {
+        this.productQuantity++;
+    }
+
+    public decreaseQuantity() {
+        this.productQuantity--;
     }
 
     changeColor(colorObject) {
@@ -76,32 +100,5 @@ export class ProductItemDetailsComponent implements OnInit, OnDestroy {
                 prevColor.classList.add('hide');
             }
         });
-    }
-
-    public addToBag(product, size, quantity, selectedColor) {
-        const productToAdd = new CartProduct(product, size, quantity, selectedColor);
-        this.store.dispatch(new CartActions.AddProduct(productToAdd));
-    }
-
-    public sizeChanged(size: number) {
-        this.productQuantity = 1;
-        const choosenSizeQuantity = this._product.sizes.find((item) => item.size === size).quantity;
-        this.productMaxPosibleQuantity = choosenSizeQuantity;
-    }
-
-    public changeProductView(url: string) {
-        this.productViewImage = url;
-    }
-
-    public increaseQuantity() {
-        this.productQuantity++;
-    }
-
-    public decreaseQuantity() {
-        this.productQuantity--;
-    }
-
-    get product(): Product {
-        return this._product;
     }
 }

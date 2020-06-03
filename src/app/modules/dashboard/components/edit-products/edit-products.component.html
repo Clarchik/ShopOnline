@@ -1,3 +1,32 @@
+<div class="manage-filters">
+    <h4 class="manage-filter__title">
+        {{'Shared.filters' | translate }}
+    </h4>
+    <div class="row">
+        <div class="col">
+            <!-- Category filter -->
+            <div class="manage-filter__date">
+                <mat-form-field class="example-full-width">
+                    <input placeholder="Category" matInput #category maxlength="20" [formControl]="filterCategory">
+                    <mat-hint align="end">{{category?.value?.length}} / 20</mat-hint>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="col">
+            <!-- Price filter -->
+            <div class="manage-filter__date">
+                <mat-form-field class="example-full-width">
+                    <input placeholder="Price" matInput #price maxlength="10" [formControl]="filterPrice">
+                    <mat-hint align="end">{{price?.value?.length}} / 10</mat-hint>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="col">
+            <!-- Filter button -->
+            <button mat-raised-button color="primary" (click)="applyFilters();">{{'Shared.filter' | translate}}</button>
+        </div>
+    </div>
+</div>
 <div *ngIf="allProducts$ | async as allProducts; else loading">
     <div *ngIf="allProducts.products.length; else empty">
         <table class="table">
@@ -38,7 +67,7 @@
         </div>
     </div>
     <ng-template #empty>
-        {{'Shared.emptyData' | translate}}
+        <app-empty-data></app-empty-data>
     </ng-template>
 </div>
 <ng-template #loading>

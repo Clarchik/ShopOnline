@@ -7,6 +7,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {RoleDirective} from '../../../shared/directives/roles/role.directive';
 import {DataLoaderComponent} from '../../../components/data-loader/data-loader.component';
 import {EmptyDataComponent} from '../../../components/screens/empty-data/empty-data.component';
+import {TranslateModule} from '@ngx-translate/core';
 
 
 
@@ -21,7 +22,8 @@ import {EmptyDataComponent} from '../../../components/screens/empty-data/empty-d
         MatTabsModule,
         MatIconModule,
         MatInputModule,
-        MatDialogModule
+        MatDialogModule,
+        TranslateModule.forChild()
     ],
     exports: [
         ReactiveFormsModule,

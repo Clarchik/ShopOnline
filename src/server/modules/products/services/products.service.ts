@@ -2,6 +2,7 @@ import express, {Response} from 'express';
 import Product from '../models/product';
 import CONFIG from '../../../shared/config';
 import {Product as IProduct} from '../../../shared/interfaces/product';
+import {FiltersDTO} from '../../orders/models/order-filters-dto';
 const paginate = require('jw-paginate');
 
 export default class ProductsService {
@@ -37,7 +38,6 @@ export default class ProductsService {
         });
     }
 
-
     public getProductById(req: express.Request, res: Response) {
         const {id} = req.params;
         Product.findById(id, null, (err: any, data: any) => {
@@ -51,19 +51,20 @@ export default class ProductsService {
     }
 
     public getProductForEdit(req: express.Request, res: express.Response) {
-        const {page} = req.query as any;
+        const {price, category, page} = req.query as any;
+        const filters = new FiltersDTO({price, category});
         const pageNumber = page ? parseInt(page.toString(), null) : 1;
         const query = {
             skip: CONFIG.itemsPerPage * (pageNumber - 1),
             limit: CONFIG.itemsPerPage
         };
 
-        Product.countDocuments(null, (error: any, totalCount: number) => {
+        Product.countDocuments({...filters}, (error: any, totalCount: number) => {
             if (error) {
                 res.status(400).send({message: 'Error occured'});
                 return;
             }
-            Product.find(null, null, query, (err, products) => {
+            Product.find({...filters}, null, query, (err, products) => {
                 if (err) {
                     res.status(400).send({
                         message: 'Error occured'
@@ -96,7 +97,6 @@ export default class ProductsService {
                 return;
             }
             foundProduct.updateOne(product, (updateError, updated) => {
-                console.log(updated, 'sdfsdf');
                 if (updateError) {
                     res.status(400).send({message: 'Couldnt update selected product. Try again'});
                     return;

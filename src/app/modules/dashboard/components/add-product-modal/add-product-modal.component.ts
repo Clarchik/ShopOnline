@@ -53,6 +53,7 @@ export class AddProductModalComponent implements OnDestroy {
 
     public createOrUpdateProduct() {
         const product = new ProductDTO(this.addProductForm.value);
+        console.log(product, 'gggg');
         const updateOrEditProduct$ = this.isEditing ? this.productService.updateProductById(this.data._id, product) : this.productService.addSingleProduct(product);
         this.subscription.add(updateOrEditProduct$.subscribe({
             next: () => {

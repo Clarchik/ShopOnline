@@ -26,8 +26,8 @@ export class ProductsService {
         return this.http.post(`${environment.apiPath}/api/addProduct`, {product});
     }
 
-    public getProductsToEdit(): Observable<{ pager: Pager, products: Product[] }> {
-        return this.http.get<{ pager: Pager, products: Product[] }>(`${environment.apiPath}/api/productsForEdit`);
+    public getProductsToEdit(filters?): Observable<{ pager: Pager, products: Product[] }> {
+        return this.http.get<{ pager: Pager, products: Product[] }>(`${environment.apiPath}/api/productsForEdit`, {params: filters});
     }
 
     public updateProductById(id: string, product: ProductDTO): Observable<any> {

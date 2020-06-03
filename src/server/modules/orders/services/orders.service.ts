@@ -9,7 +9,7 @@ import {countriesWithStates} from '../../../data/cities/cities';
 import {keys, reduce} from 'lodash';
 import {OrderStatus} from '../../../../shared/interfaces/order-status';
 import {UserRoles} from '../../../../shared/interfaces/user-roles';
-import {OrderFilterDTO} from '../models/order-filters-dto';
+import {FiltersDTO} from '../models/order-filters-dto';
 import CONFIG from '../../../shared/config';
 const paginate = require('jw-paginate');
 
@@ -64,7 +64,7 @@ export default class OrdersService {
 
     public getAllUsersOrders(req: express.Request, res: express.Response) {
         const {orderStatus, orderNumber, createdAt, page} = req.query as any;
-        const filters = new OrderFilterDTO({orderNumber, orderStatus});
+        const filters = new FiltersDTO({orderNumber, orderStatus});
         const startDate = new Date(createdAt);
         const finishDate = new Date(new Date(createdAt).valueOf() + 86400000 - 1);
         const date = createdAt !== 'null' ? {createdAt: {$gt: startDate, $lt: finishDate}} : {};

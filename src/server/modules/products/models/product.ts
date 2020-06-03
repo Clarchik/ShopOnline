@@ -27,6 +27,9 @@ const ProductSchema = new mongoose.Schema({
         type: Boolean,
         required: true
     },
+    slides: [
+        {imageUrl: String}
+    ],
     sizes: {
         type: Array,
         require: true

@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div class="container-fluid" *ngIf="product$ | async as product; else loading">
     <div class="row">
         <div class="col-md-1">
             <div class="product-slides">
@@ -13,8 +13,12 @@
         <div class="col-md-7">
             <div class="product-view">
                 <img [src]="productViewImage" alt="Product main Image" class="imagePreview">
-                <div class="gradients">
-                    <div class="gradient" *ngFor="let color of product?.colors" [attr.color]="color.name"></div>
+                <div class="gradients" *ngIf="inited">
+                    <div
+                        class="gradient"
+                        *ngFor="let color of product?.colors"
+                        [attr.color]="color.name"
+                        [style.background-color]="color.primary"></div>
                 </div>
             </div>
         </div>
@@ -40,7 +44,7 @@
                     <div class="size-wrapper">
                         <label *ngFor="let size of product?.sizes" [for]="size.size">
                             <input [id]="size.size" [value]="size.size" type="radio" name="radio"
-                                (ngModelChange)="sizeChanged($event);" [(ngModel)]="sizeChoice" />
+                                (ngModelChange)="sizeChanged($event, product);" [(ngModel)]="sizeChoice" />
                             <div class="size-box">
                                 <span class="size-number">{{ size.size }}</span>
                             </div>
@@ -52,7 +56,13 @@
                         {{ "Product.color" | translate }}
                     </div>
                     <div class="colors">
-                        <span *ngFor="let color of product?.colors" (click)="changeColor($event);" class="color" [attr.primary]="color.primary" [attr.color]="color.name"></span>
+                        <span
+                            *ngFor="let color of product?.colors"
+                            (click)="changeColor($event);" class="color"
+                            [attr.primary]="color.primary"
+                            [attr.color]="color.name"
+                            [style.backgroundColor]="color.primary"
+                            [style.border-color]="color.primary"></span>
                     </div>
                 </div>
                 <div class="product-quantity">
@@ -82,3 +92,7 @@
         </div>
     </div>
 </div>
+
+<ng-template #loading>
+    <app-data-loader></app-data-loader>
+</ng-template>

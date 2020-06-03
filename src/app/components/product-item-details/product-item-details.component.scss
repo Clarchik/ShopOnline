@@ -76,38 +76,8 @@
             }
         }
 
-        .color[color="blue"] {
-            background-color: #2175f5;
-            border-color: #2175f5;
-        }
-
-        .color[color="red"] {
-            background-color: #f84848;
-            border-color: #f84848;
-        }
-
-        .color[color="green"]{
-            background-color: #29b864;
-            border-color: #29b864;
-        }
-
-        .color[color="orange"] {
-            background-color: #ff5521;
-            border-color: #ff5521;
-        }
-
-        .color[color="black"] {
-            background-color: #444;
-            border-color: #444;
-        }
-
-        .color[color="yellow"] {
-            background-color: yellow;
-            border-color: yellow;
-        }
-
         .color.active {
-            border-color: #fff;
+            border-color: #fff !important;
             box-shadow: 0 0 10px .5px rgba(0, 0, 0, 0.2);
             transform: scale(1.1);
         }
@@ -224,32 +194,6 @@
                 display: none !important;
             }
         }
-
-        .gradient[color="blue"] {
-            background-image: linear-gradient(45deg, #0136af, #22abfa);
-        }
-
-        .gradient[color="red"] {
-            background-image: linear-gradient(45deg, #d62926, #ee625f);
-        }
-
-        .gradient[color="green"] {
-            background-image: linear-gradient(45deg, #11998e, #1ce669);
-        }
-
-        .gradient[color="orange"] {
-            background-image: linear-gradient(45deg, #fc4a1a, #f7b733);
-        }
-
-        .gradient[color="black"] {
-            background-image: linear-gradient(45deg, #111, #666);
-        }
-
-        .gradient[color="yellow"] {
-            background-image: linear-gradient(45deg, #f7b733, yellow);
-        }
-
-
     }
 }
 

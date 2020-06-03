@@ -1,4 +1,4 @@
-export class OrderFilterDTO {
+export class FiltersDTO {
     constructor(args: any) {
         const filters = args;
         for (const key in args) {
