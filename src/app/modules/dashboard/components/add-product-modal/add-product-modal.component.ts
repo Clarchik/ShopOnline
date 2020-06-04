@@ -6,7 +6,7 @@ import {ProductDTO} from '../../../../shared/models/product/product-dto';
 import {ProductsService} from '../../../../shared/services/products/products.service';
 import {Product} from '../../../../../server/shared/interfaces/product';
 import {ToastrService} from 'ngx-toastr';
-import {forEach, isNull} from 'lodash';
+import {forEach} from 'lodash';
 import {Subscription} from 'rxjs';
 
 @Component({
@@ -138,14 +138,13 @@ export class AddProductModalComponent implements OnDestroy {
     }
 
     private createFormInitValues(): {title, price, salePrice, sale, mainImage, gender, category, slides} {
-        console.log(this.data, 'ssgs');
         const values = {
             title: [this.data?.title ? this.data.title : null, [Validators.required]],
             category: [this.data?.category ? this.data.category : null, [Validators.required]],
             price: [this.data?.price ? this.data.price : null, [Validators.required, Validators.pattern('^[0-9]*$')]],
             salePrice: this.data?.salePrice ? this.data.salePrice : null,
             gender: [this.data?.gender ? this.data.gender : null, [Validators.required]],
-            sale: [!isNull(this.data?.sale) ? this.data.sale : null, [Validators.required]],
+            sale: [!this.data ? null : this.data?.sale, [Validators.required]],
             mainImage: [this.data?.mainImage ? this.data.mainImage : null, [Validators.required]],
             slides: this.createFormSlides()
         };
