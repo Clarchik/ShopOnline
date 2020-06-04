@@ -53,7 +53,6 @@ export class AddProductModalComponent implements OnDestroy {
 
     public createOrUpdateProduct() {
         const product = new ProductDTO(this.addProductForm.value);
-        console.log(product, 'gggg');
         const updateOrEditProduct$ = this.isEditing ? this.productService.updateProductById(this.data._id, product) : this.productService.addSingleProduct(product);
         this.subscription.add(updateOrEditProduct$.subscribe({
             next: () => {
@@ -89,11 +88,13 @@ export class AddProductModalComponent implements OnDestroy {
 
     public addFormRow(formControlName) {
         let rowObject = {};
+        const colorNameValidators = [Validators.required, Validators.pattern('^[A-Za-z]+$')];
+        const colorPrimaryValidators = [Validators.required, Validators.pattern('#[a-z]+')];
         switch (formControlName) {
             case 'colors': {
                 rowObject = {
-                    name: ['', [Validators.required]],
-                    primary: ['', [Validators.required]]
+                    name: ['', colorNameValidators],
+                    primary: ['', colorPrimaryValidators]
                 };
                 break;
             }
@@ -113,13 +114,13 @@ export class AddProductModalComponent implements OnDestroy {
     }
 
     public checkSalePrice(which) {
-        const regularPrice = Number(this.controls.price.value);
-        const salePrice = Number(this.controls.salePrice.value);
+        const regularPrice = this.controls.price.value ? Number(this.controls.price.value) : null;
+        const salePrice =  this.controls.salePrice.value ? Number(this.controls.salePrice.value) : null;
         const isOnSale = this.controls.sale;
-        if (isOnSale && salePrice >= regularPrice) {
+        if ((isOnSale && salePrice !== null) && salePrice > regularPrice) {
             this.controls.salePrice.setErrors({greaterThanRegular: true});
         }
-        if (which === 'price' && isOnSale && salePrice && salePrice <= regularPrice) {
+        if (which === 'price' && isOnSale && salePrice && salePrice < regularPrice) {
             this.controls.salePrice.setErrors(null);
         }
     }
@@ -177,13 +178,18 @@ export class AddProductModalComponent implements OnDestroy {
 
     private createFormColors(): FormArray {
         const formArray: FormArray = new FormArray([]);
+        const colorNameValidators = [Validators.required, Validators.pattern('^[A-Za-z]+$')];
+        const colorPrimaryValidators = [Validators.required, Validators.pattern('#[A-Za-z0-9]+')];
         if (this.data?.colors) {
             forEach(this.data.colors, (color) => {
-                const formGroup = this.fb.group({name: [color.name, [Validators.required]], primary: [color.primary, [Validators.required]]});
+                const formGroup = this.fb.group({
+                    name: [color.name, colorNameValidators],
+                    primary: [color.primary, colorPrimaryValidators]
+                });
                 formArray.push(formGroup);
             });
         } else {
-            formArray.push(this.fb.group({name: [null, [Validators.required]], primary: [null, [Validators.required]]}));
+            formArray.push(this.fb.group({name: [null, colorNameValidators], primary: [null, colorPrimaryValidators]}));
         }
         return formArray;
     }
