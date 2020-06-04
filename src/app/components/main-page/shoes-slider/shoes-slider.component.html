@@ -13,7 +13,7 @@
         <div class="col-md-3 gallery__container" *ngFor="let card of item">
             <mdb-card class="my-1 gallery__image" appGalleryShoes>
                 <mdb-card-img [src]="card.img" alt="Card image cap"></mdb-card-img>
-                <button class="gallery__image-button">
+                <button class="gallery__image-button" [routerLink]="['/product', card.link]">
                     {{ 'Shared.quickShop' | translate }}
                 </button>
             </mdb-card>

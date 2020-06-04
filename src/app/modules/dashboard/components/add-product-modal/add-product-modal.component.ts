@@ -6,7 +6,7 @@ import {ProductDTO} from '../../../../shared/models/product/product-dto';
 import {ProductsService} from '../../../../shared/services/products/products.service';
 import {Product} from '../../../../../server/shared/interfaces/product';
 import {ToastrService} from 'ngx-toastr';
-import {forEach} from 'lodash';
+import {forEach, isNull} from 'lodash';
 import {Subscription} from 'rxjs';
 
 @Component({
@@ -117,7 +117,7 @@ export class AddProductModalComponent implements OnDestroy {
         const regularPrice = this.controls.price.value ? Number(this.controls.price.value) : null;
         const salePrice =  this.controls.salePrice.value ? Number(this.controls.salePrice.value) : null;
         const isOnSale = this.controls.sale;
-        if ((isOnSale && salePrice !== null) && salePrice > regularPrice) {
+        if ((isOnSale && salePrice !== null) && salePrice >= regularPrice) {
             this.controls.salePrice.setErrors({greaterThanRegular: true});
         }
         if (which === 'price' && isOnSale && salePrice && salePrice < regularPrice) {
@@ -138,13 +138,14 @@ export class AddProductModalComponent implements OnDestroy {
     }
 
     private createFormInitValues(): {title, price, salePrice, sale, mainImage, gender, category, slides} {
+        console.log(this.data, 'ssgs');
         const values = {
             title: [this.data?.title ? this.data.title : null, [Validators.required]],
             category: [this.data?.category ? this.data.category : null, [Validators.required]],
             price: [this.data?.price ? this.data.price : null, [Validators.required, Validators.pattern('^[0-9]*$')]],
             salePrice: this.data?.salePrice ? this.data.salePrice : null,
             gender: [this.data?.gender ? this.data.gender : null, [Validators.required]],
-            sale: [this.data?.sale ? this.data.sale : null, [Validators.required]],
+            sale: [!isNull(this.data?.sale) ? this.data.sale : null, [Validators.required]],
             mainImage: [this.data?.mainImage ? this.data.mainImage : null, [Validators.required]],
             slides: this.createFormSlides()
         };

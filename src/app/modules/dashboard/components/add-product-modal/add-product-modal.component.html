@@ -8,14 +8,14 @@
                     <mat-form-field class="form-field">
                         <mat-label>Title</mat-label>
                         <input matInput type="text" formControlName="title">
-                        <button mat-button *ngIf="controls.title.value" matSuffix mat-icon-button aria-label="Clear"
-                            (click)="controls.title.setValue('');">
+                        <button mat-button *ngIf="controls?.title?.value" matSuffix mat-icon-button aria-label="Clear"
+                            (click)="controls?.title?.setValue('');">
                             <mat-icon>
                                 <i class="fas fa-times"></i>
                             </mat-icon>
                         </button>
-                        <mat-error *ngIf="controls.title.invalid && controls.title.dirty || controls.title.invalid && controls.title.touched">
-                            <span *ngIf="controls.title.errors['required']">
+                        <mat-error *ngIf="controls?.title?.invalid && controls?.title?.dirty || controls?.title?.invalid && controls?.title?.touched">
+                            <span *ngIf="controls?.title?.errors['required']">
                                 Title is <strong>required</strong>
                             </span>
                         </mat-error>
@@ -30,8 +30,8 @@
                                 {{ category }}
                             </mat-option>
                         </mat-select>
-                        <mat-error *ngIf="controls.category.invalid && controls.category.dirty || controls.category.invalid && controls.category.touched">
-                            <span *ngIf="controls.category.errors['required']">
+                        <mat-error *ngIf="controls?.category?.invalid && controls?.category?.dirty || controls?.category?.invalid && controls?.category.touched">
+                            <span *ngIf="controls?.category?.errors['required']">
                                 Category is <strong>required</strong>
                             </span>
                         </mat-error>
@@ -44,17 +44,17 @@
                     <mat-form-field class="form-field">
                         <mat-label>Price</mat-label>
                         <input matInput type="text" formControlName="price" (ngModelChange)="checkSalePrice('price');">
-                        <button mat-button *ngIf="controls.price.value" matSuffix mat-icon-button aria-label="Clear"
-                            (click)="controls.price.setValue('');">
+                        <button mat-button *ngIf="controls?.price?.value" matSuffix mat-icon-button aria-label="Clear"
+                            (click)="controls?.price?.setValue('');">
                             <mat-icon>
                                 <i class="fas fa-times"></i>
                             </mat-icon>
                         </button>
-                        <mat-error *ngIf="controls.price.invalid && controls.price.dirty || controls.price.invalid && controls.price.touched">
-                            <span *ngIf="controls.price.errors['required']">
+                        <mat-error *ngIf="controls?.price?.invalid && controls?.price.dirty || controls?.price.invalid && controls?.price.touched">
+                            <span *ngIf="controls?.price?.errors['required']">
                                 Price is <strong>required</strong>
                             </span>
-                            <span *ngIf="controls.price.errors['pattern']">
+                            <span *ngIf="controls?.price?.errors['pattern']">
                                 Price can contain only <strong>numbers</strong>
                             </span>
                         </mat-error>
@@ -69,8 +69,8 @@
                                 {{ sale }}
                             </mat-option>
                         </mat-select>
-                        <mat-error *ngIf="controls.sale.invalid && controls.sale.dirty || controls.sale.invalid && controls.sale.touched">
-                            <span *ngIf="controls.price.errors['required']">
+                        <mat-error *ngIf="controls?.sale?.invalid && controls?.sale?.dirty || controls?.sale?.invalid && controls?.sale?.touched">
+                            <span *ngIf="controls?.price?.errors['required']">
                                 Sale is <strong>required</strong>
                             </span>
                         </mat-error>
@@ -81,20 +81,20 @@
                     <mat-form-field  class="form-field">
                         <mat-label>Sale price</mat-label>
                         <input disabled matInput type="text" formControlName="salePrice" (ngModelChange)="checkSalePrice('salePrice');">
-                        <button mat-button *ngIf="controls.salePrice.value" matSuffix mat-icon-button aria-label="Clear"
-                            (click)="controls.salePrice.setValue('');">
+                        <button mat-button *ngIf="controls?.salePrice?.value" matSuffix mat-icon-button aria-label="Clear"
+                            (click)="controls?.salePrice?.setValue('');">
                             <mat-icon>
                                 <i class="fas fa-times"></i>
                             </mat-icon>
                         </button>
-                        <mat-error *ngIf="controls.salePrice.invalid && controls.salePrice.dirty || controls.salePrice.invalid && controls.salePrice.touched">
-                            <span *ngIf="controls.salePrice.errors['required']">
+                        <mat-error *ngIf="controls?.salePrice?.invalid && controls?.salePrice?.dirty || controls?.salePrice?.invalid && controls?.salePrice?.touched">
+                            <span *ngIf="controls?.salePrice?.errors['required']">
                                 Sale price is <strong>required</strong>
                             </span>
-                            <span *ngIf="controls.salePrice.errors['pattern']">
+                            <span *ngIf="controls?.salePrice?.errors['pattern']">
                                 Sale price can contain only <strong>numbers</strong>
                             </span>
-                            <span *ngIf="controls.salePrice.errors['greaterThanRegular']">
+                            <span *ngIf="controls?.salePrice?.errors['greaterThanRegular']">
                                 Sale price is greater or equal than <strong>normal price</strong>
                             </span>
                         </mat-error>
@@ -113,8 +113,8 @@
                                 <i class="fas fa-times"></i>
                             </mat-icon>
                         </button>
-                        <mat-error *ngIf="controls.mainImage.invalid && controls.mainImage.dirty || controls.mainImage.invalid && controls.mainImage.touched">
-                            <span *ngIf="controls.price.errors['required']">
+                        <mat-error *ngIf="controls?.mainImage?.invalid && controls?.mainImage?.dirty || controls?.mainImage?.invalid && controls?.mainImage?.touched">
+                            <span *ngIf="controls?.price?.errors['required']">
                                 Main image is <strong>required</strong>
                             </span>
                         </mat-error>
@@ -129,8 +129,8 @@
                                 {{ gender }}
                             </mat-option>
                         </mat-select>
-                        <mat-error *ngIf="controls.gender.invalid && controls.gender.dirty || controls.gender.invalid && controls.gender.touched">
-                            <span *ngIf="controls.price.errors['required']">
+                        <mat-error *ngIf="controls?.gender?.invalid && controls?.gender?.dirty || controls?.gender?.invalid && controls?.gender?.touched">
+                            <span *ngIf="controls?.price?.errors['required']">
                                 Gender is <strong>required</strong>
                             </span>
                         </mat-error>
@@ -143,24 +143,24 @@
                         <span class="group-row__counter">
                             {{ i + 1}}
                         </span>
-                        <button class="group-row__remove" mat-icon-button [disabled]="controls.colors.controls.length <= 1" (click)="removeFormRow('colors', i);">
+                        <button class="group-row__remove" mat-icon-button [disabled]="controls?.colors?.controls?.length <= 1" (click)="removeFormRow('colors', i);">
                             <mat-icon><i class="fas fa-minus-circle"></i></mat-icon>
                         </button>
                         <mat-form-field class="form-field">
                             <mat-label>Color name</mat-label>
                             <input matInput type="text" formControlName="name" maxlength="20">
-                            <button mat-button *ngIf="color.value.name" matSuffix mat-icon-button aria-label="Clear"
-                                (click)="color.controls.name.setValue('');">
+                            <button mat-button *ngIf="color?.value?.name" matSuffix mat-icon-button aria-label="Clear"
+                                (click)="color?.controls?.name?.setValue('');">
                                 <mat-icon>
                                     <i class="fas fa-times"></i>
                                 </mat-icon>
                             </button>
                             <mat-hint align="end">{{color?.controls?.name?.value?.length}} / 20</mat-hint>
-                            <mat-error *ngIf="color.controls.name.invalid && color.controls.name.dirty || color.controls.name.invalid && color.controls.name.touched">
-                                <span *ngIf="color.controls.name.errors['required']">
+                            <mat-error *ngIf="color?.controls?.name?.invalid && color?.controls?.name?.dirty || color?.controls?.name?.invalid && color?.controls?.name?.touched">
+                                <span *ngIf="color?.controls?.name?.errors['required']">
                                     Color name is <strong>required</strong>
                                 </span>
-                                <span *ngIf="color.controls.name.errors['pattern']">
+                                <span *ngIf="color?.controls?.name?.errors['pattern']">
                                     Color name can contain only <strong>letters</strong>
                                 </span>
                             </mat-error>
@@ -168,21 +168,21 @@
                         <mat-form-field class="form-field">
                             <mat-label>Color</mat-label>
                             <input matInput type="text" formControlName="primary" maxlength="7" minlength="7">
-                            <button mat-button *ngIf="color.value.primary" matSuffix mat-icon-button aria-label="Clear"
-                                (click)="color.controls.primary.setValue('');">
+                            <button mat-button *ngIf="color?.value?.primary" matSuffix mat-icon-button aria-label="Clear"
+                                (click)="color?.controls?.primary?.setValue('');">
                                 <mat-icon>
                                     <i class="fas fa-times"></i>
                                 </mat-icon>
                             </button>
                             <mat-hint align="end">{{color?.controls?.primary?.value?.length}} / 7</mat-hint>
-                            <mat-error *ngIf="color.controls.primary.invalid && color.controls.primary.dirty || color.controls.primary.invalid && color.controls.primary.touched">
+                            <mat-error *ngIf="color?.controls?.primary?.invalid && color?.controls?.primary?.dirty || color?.controls?.primary?.invalid && color?.controls?.primary?.touched">
                                 <span style="display: block" *ngIf="color.controls.primary.errors['required']">
                                     Color is <strong>required</strong>
                                 </span>
-                                <span style="display: block" *ngIf="color.controls.primary.errors['pattern']">
+                                <span style="display: block" *ngIf="color?.controls?.primary?.errors['pattern']">
                                     Color should be like<strong>#F0F0F0</strong>
                                 </span>
-                                <span style="display: block" *ngIf="color.controls.primary.errors['minlength']">
+                                <span style="display: block" *ngIf="color?.controls?.primary?.errors['minlength']">
                                     Color min length is <strong>7</strong>
                                 </span>
                             </mat-error>
@@ -193,31 +193,31 @@
 
                 <!-- Sizes field -->
                 <div class="col-4">
-                    <div class="group-row" [formGroup]="size" *ngFor="let size of controls.sizes.controls; let i = index;">
+                    <div class="group-row" [formGroup]="size" *ngFor="let size of controls?.sizes?.controls; let i = index;">
                         <span class="group-row__counter">
                             {{ i + 1}}
                         </span>
-                        <button class="group-row__remove" mat-icon-button [disabled]="controls.sizes.controls.length <= 1" (click)="removeFormRow('sizes', i);">
+                        <button class="group-row__remove" mat-icon-button [disabled]="controls?.sizes?.controls?.length <= 1" (click)="removeFormRow('sizes', i);">
                             <mat-icon><i class="fas fa-minus-circle"></i></mat-icon>
                         </button>
                         <mat-form-field class="form-field">
                             <mat-label>Size</mat-label>
                             <input matInput type="text" formControlName="size" maxlength="2" minlength="2">
-                            <button mat-button *ngIf="size.value.size" matSuffix mat-icon-button aria-label="Clear"
-                                (click)="size.controls.size.setValue('');">
+                            <button mat-button *ngIf="size?.value?.size" matSuffix mat-icon-button aria-label="Clear"
+                                (click)="size?.controls?.size?.setValue('');">
                                 <mat-icon>
                                     <i class="fas fa-times"></i>
                                 </mat-icon>
                             </button>
                             <mat-hint align="end">{{size?.controls?.size?.value?.length}} / 2</mat-hint>
-                            <mat-error *ngIf="size.controls.size.invalid && size.controls.size.dirty || size.controls.size.invalid && size.controls.size.touched">
-                                <span style="display: block" *ngIf="size.controls.size.errors['required']">
+                            <mat-error *ngIf="size?.controls?.size?.invalid && size?.controls?.size?.dirty || size?.controls?.size?.invalid && size?.controls?.size?.touched">
+                                <span style="display: block" *ngIf="size?.controls?.size?.errors['required']">
                                     Size is <strong>required</strong>
                                 </span>
-                                <span style="display: block" *ngIf="size.controls.size.errors['pattern']">
+                                <span style="display: block" *ngIf="size?.controls?.size?.errors['pattern']">
                                     Size can contain only <strong>numbers</strong>
                                 </span>
-                                <span style="display: block" *ngIf="size.controls.size.errors['minlength']">
+                                <span style="display: block" *ngIf="size?.controls?.size?.errors['minlength']">
                                     Size should contain <strong>2 numbers</strong>
                                 </span>
                             </mat-error>
@@ -225,18 +225,18 @@
                         <mat-form-field class="form-field">
                             <mat-label>Quantity</mat-label>
                             <input matInput type="text" formControlName="quantity" maxlength="4">
-                            <button mat-button *ngIf="size.value.quantity" matSuffix mat-icon-button aria-label="Clear"
-                                (click)="size.controls.quantity.setValue('');">
+                            <button mat-button *ngIf="size?.value?.quantity" matSuffix mat-icon-button aria-label="Clear"
+                                (click)="size?.controls?.quantity?.setValue('');">
                                 <mat-icon>
                                     <i class="fas fa-times"></i>
                                 </mat-icon>
                             </button>
                             <mat-hint align="end">{{size?.controls?.quantity?.value?.length}} / 4</mat-hint>
-                            <mat-error *ngIf="size.controls.quantity.invalid && size.controls.quantity.dirty || size.controls.quantity.invalid && size.controls.quantity.touched">
-                                <span style="display: block" *ngIf="size.controls.quantity.errors['required']">
+                            <mat-error *ngIf="size?.controls?.quantity?.invalid && size?.controls?.quantity?.dirty || size?.controls?.quantity?.invalid && size?.controls?.quantity?.touched">
+                                <span style="display: block" *ngIf="size?.controls?.quantity?.errors['required']">
                                     Size quantity is <strong>required</strong>
                                 </span>
-                                <span style="display: block" *ngIf="size.controls.quantity.errors['pattern']">
+                                <span style="display: block" *ngIf="size?.controls?.quantity?.errors['pattern']">
                                     Size quantity can contain only <strong>numbers</strong>
                                 </span>
                             </mat-error>
@@ -247,7 +247,7 @@
 
                 <!-- Images field -->
                 <div class="col-4">
-                    <div class="group-row" [formGroup]="image" *ngFor="let image of controls.slides.controls; let i = index;">
+                    <div class="group-row" [formGroup]="image" *ngFor="let image of controls?.slides?.controls; let i = index;">
                         <mat-form-field class="form-field">
                             <mat-label>Small image url</mat-label>
                             <input matInput type="text" formControlName="imageUrl">

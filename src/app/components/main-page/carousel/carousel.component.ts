@@ -16,16 +16,14 @@ export class CarouselComponent implements OnInit {
         const slides: Array<Slide> = [
             {
                 title: 'NIKE AIR FORCE 1 07', paragraph: 'MTAA QS "UNINTERRUPTED',
-                src: 'http://cdn.shopify.com/s/files/1/0208/5268/files/nike-AF1-uninterrupted-banner_10-9.jpg?v=1570726775'
+                src: 'http://cdn.shopify.com/s/files/1/0208/5268/files/nike-AF1-uninterrupted-banner_10-9.jpg?v=1570726775',
+                link: '5e9481211c9d44000054f2eb'
             },
             {
-                title: 'ADIDAS ULTRA BOOST 1.0 "OG', paragraph: 'MTAA QS "UNINTERRUPTED',
-                src: 'https://cdn.shopify.com/s/files/1/0208/5268/files/OGULTRABOOST-BANNER2.jpeg?v=1570114766'
-            },
-            {
-                title: 'NEW BALANCE MADE IN USA', paragraph: 'SUPER FABRIC PACK',
-                src: 'https://cdn.shopify.com/s/files/1/0208/5268/files/NBSUPERFABRICPACK-BANNER2.jpeg?v=1570665427'
-            },
+                title: 'ADIDAS ULTRA BOOST 1.0 "TRIPLE WHITE"', paragraph: 'RETURN OF THE OG',
+                src: 'https://cdn.shopify.com/s/files/1/0208/5268/files/WHITEULTRABOOSTOG-BANNER.jpeg?v=1591128586',
+                link: '5ed9423c3853a138384e3305'
+            }
         ];
         this.slides = slides;
     }

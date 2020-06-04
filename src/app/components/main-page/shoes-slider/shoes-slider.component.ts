@@ -16,15 +16,30 @@ export class ShoesSliderComponent implements OnInit {
 
     ngOnInit() {
         const cards: Array<GalleryShoes> = [
-            { img: '//cdn.shopify.com/s/files/1/0208/5268/products/DIADORAMAVERICK-SWEDISHBLUE-6_450x450.jpg?v=1571430706' },
-            { img: '//cdn.shopify.com/s/files/1/0208/5268/products/DIADORAMAVERICK-BLUEDENIM-6_450x450.jpg?v=1571431006' },
-            { img: '//cdn.shopify.com/s/files/1/0208/5268/products/DIADORAMAVERICK-SIMPLYGREEN-6_450x450.jpg?v=1571431172' },
-            { img: '//cdn.shopify.com/s/files/1/0208/5268/products/BLACKWOODWOODXELLESSE-6_450x450.jpg?v=1571488125' },
-            { img: '//cdn.shopify.com/s/files/1/0208/5268/products/GREYWOODWOODXELLESSE-6_450x450.jpg?v=1571488228' },
-            { img: '//cdn.shopify.com/s/files/1/0208/5268/products/SUPERFABRICNB998-6_450x450.jpg?v=1569945613' },
-            { img: '//cdn.shopify.com/s/files/1/0208/5268/products/OLIVENB801-1_500x.jpg?v=1571331780' },
-            { img: '//cdn.shopify.com/s/files/1/0208/5268/products/FD63AC3D-967E-4FDB-941C-77BB31587FC3_450x450.jpg?v=1570845116' },
-            { img: '//cdn.shopify.com/s/files/1/0208/5268/products/0439F0CD-6A83-4283-B6E6-4B5E927C402F_450x450.jpg?v=1570847446' },
+            {
+                img: 'https://online-shop4.herokuapp.com/assets/images/products/nike-air-force-1-low-mystic-green/WMNSCHROMEYELLOWAF1-main.jpg',
+                link: '5e94807a1c9d44000054f2ea'
+            },
+            {
+                img: 'https://online-shop4.herokuapp.com/assets/images/products/adidas-yeezy-700-utility-black/UTILITYBLACK700-main.jpg',
+                link: '5e9480121c9d44000054f2e9'
+            },
+            {
+                img: 'https://online-shop4.herokuapp.com/assets/images/products/nike-air-jordan-1-low-shattered-backboard/AIRJORDAN1LOWSBB-main.jpg',
+                link: '5e9482621c9d44000054f2ec'
+            },
+            {
+                img: 'https://online-shop4.herokuapp.com/assets/images/products/nike-jordan-12-retro-dark-grey/DARKGREYAIRJORDN12-main.jpg',
+                link: '5e9483931c9d44000054f2ee'
+            },
+            {
+                img: 'https://online-shop4.herokuapp.com/assets/images/products/nike-air-jordan-oreo/BLACK-GREYLEBRON17-main.jpg',
+                link: '5e9482e81c9d44000054f2ed'
+            },
+            {
+                img: 'https://online-shop4.herokuapp.com/assets/images/products/reebok-instapump-fury-boost/reebok-instapump-fury-boost-main.jpg',
+                link: '5e94844d1c9d44000054f2ef'
+            }
         ];
         this.cards = cards;
         this.slides = this.utilsService.chunkArrayBySize(this.cards, 3);
