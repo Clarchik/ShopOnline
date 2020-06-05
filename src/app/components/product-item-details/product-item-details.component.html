@@ -43,10 +43,12 @@
                     </div>
                     <div class="size-wrapper">
                         <label *ngFor="let size of product?.sizes" [for]="size.size">
-                            <input [id]="size.size" [value]="size.size" type="radio" name="radio"
+                            <div *ngIf="size.quantity > 0">
+                                <input [id]="size.size" [value]="size.size" type="radio" name="radio"
                                 (ngModelChange)="sizeChanged($event, product);" [(ngModel)]="sizeChoice" />
                             <div class="size-box">
                                 <span class="size-number">{{ size.size }}</span>
+                            </div>
                             </div>
                         </label>
                     </div>
