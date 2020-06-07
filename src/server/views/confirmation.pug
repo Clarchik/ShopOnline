@@ -1,0 +1,13 @@
+doctype html
+html(lang='en')
+    head
+        title Email confiramtion page
+        style
+            include style.css
+    body
+        h1= title
+        h1= message
+        script.
+            setTimeout(() => {
+                window.location = '/login'
+            }, 2000)
