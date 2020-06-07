@@ -7,8 +7,6 @@ export default class Cors {
     }
 
     private setConfig() {
-        this.app.set('views', './views');
-        this.app.set('view engine', 'pug');
         // Allows us to receive requests with data in json format
         this.app.use(bodyParser.json({ limit: '50mb' }));
 

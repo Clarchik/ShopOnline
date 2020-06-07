@@ -11,43 +11,43 @@ import * as bcrypt from 'bcryptjs';
 export class UserService {
 
     public verifyUser(req: express.Request, res: express.Response) {
-        res.render('confirmation', {title: 'New', message: 'Pug'});
-        // const {token} = req.params;
-        // if (!token) {
-        //     res.end('<h1 style="display: flex; justify-content:center;align-items: center">Token is invalid!</h1>');
-        //     return;
-        // }
-        // jwt.verify(token, CONFIG.verificationSecret, (err, userData: any) => {
-        //     if (err) {
-        //         switch (err.message) {
-        //             case 'jwt malformed': {
-        //                 res.end('<h1 style="display: flex; justify-content:center;align-items: center">Your token is invalid!</h1>');
-        //                 break;
-        //             }
-        //             case 'jwt expired': {
-        //                 res.end('<h1 style="display: flex; justify-content:center;align-items: center">Your token is expired!</h1>');
-        //             }
-        //         }
-        //         return;
-        //     }
-        //     User.findById({_id: userData._id}, (error: any, foundUser) => {
-        //         if (error) {
-        //             res.end('<h1 style="display: flex; justify-content:center;align-items: center">Account not found!</h1>');
-        //             return;
-        //         }
-        //         if (foundUser.isActive) {
-        //             res.send('<h1 style="display: flex; justify-content:center;align-items: center">Account verified already!</h1>');
-        //         } else {
-        //             User.update({_id: userData._id}, {$set: {isActive: true}}, (errorUpdate) => {
-        //                 if (errorUpdate) {
-        //                     res.end('<h1 style="display: flex; justify-content:center;align-items: center">Account cannot be updated!</h1>');
-        //                 } else {
-        //                     res.end('<h1 style="display: flex; justify-content:center;align-items: center">Your account has been verified!</h1>');
-        //                 }
-        //             });
-        //         }
-        //     });
-        // });
+        const {token} = req.params;
+        if (!token) {
+            res.render('confirmation', {title: 'Ooops!', message: 'Token is invalid!', state: 'error'});
+            return;
+        }
+        jwt.verify(token, CONFIG.verificationSecret, (err, userData: any) => {
+            if (err) {
+                switch (err.message) {
+                    case 'jwt malformed': {
+                        res.render('confirmation', {title: 'Ooops!', message: 'Your token is invalid!', state: 'error'});
+                        break;
+                    }
+                    case 'jwt expired': {
+                        res.render('confirmation', {title: 'Ooops!', message: 'Your token is expired!', state: 'error'});
+                        break;
+                    }
+                }
+                return;
+            }
+            User.findById({_id: userData._id}, (error: any, foundUser) => {
+                if (error) {
+                    res.render('confirmation', {title: 'Ooops!', message: 'Account not found!', state: 'error'});
+                    return;
+                }
+                if (foundUser.isActive) {
+                    res.render('confirmation', {title: 'Ooops!', message: 'Account verified already!', state: 'error'});
+                } else {
+                    User.update({_id: userData._id}, {$set: {isActive: true}}, (errorUpdate) => {
+                        if (errorUpdate) {
+                            res.render('confirmation', {title: 'Ooops!', message: 'Account cannot be updated!', state: 'error'});
+                        } else {
+                            res.render('confirmation', {title: 'Success!', message: 'Your account has been verified!', state: 'success'});
+                        }
+                    });
+                }
+            });
+        });
     }
 
     public signUpUser(req: express.Request, res: express.Response) {
