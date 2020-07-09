@@ -1,172 +1,180 @@
 <div class="container">
-    <div class="row">
-        <div class="profile-details__container">
-            <h3 class="component-header">
-                {{ "Profile.details" | translate }}
-            </h3>
-            <div class="profile-data">
-                <form [formGroup]="profileData">
-                    <div class="col-12">
-                        <div class="md-form">
-                            <input mdbInput mdbValidate type="text" id="form-name"
-                                class="form-control input-field__input" formControlName="name" autocomplete="off">
-                            <label for="form-name">Name</label>
+    <div class="profile-details__container">
+        <h3 class="component-header">
+            {{ "Profile.details" | translate }}
+        </h3>
+        <div class="row">
+            <div class="col-6">
+                <div class="profile-data">
+                    <form [formGroup]="profileData">
+                        <div class="col-12">
+                            <div class="md-form">
+                                <input mdbInput mdbValidate type="text" id="form-name"
+                                    class="form-control input-field__input" formControlName="name" autocomplete="off">
+                                <label for="form-name">Name</label>
 
-                            <div class="registration-form__icons">
-                                <mdb-icon [@bird] fas icon="check" class="green-text" *ngIf="name.valid && name.dirty">
-                                </mdb-icon>
-                                <mdb-icon [@cancel] fas icon="times" class="red-text"
-                                    *ngIf="name.invalid && (name.dirty || name.touched)">
-                                </mdb-icon>
-                            </div>
-                            <div [@errors_wrapper] *ngIf="name.invalid && (name.dirty || name.touched)">
-                                <mdb-error [@errors] *ngIf="name.errors['required']">
-                                    Required field
-                                </mdb-error>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12">
-                        <div class="md-form">
-                            <input mdbInput mdbValidate type="text" id="form-surname" class="form-control"
-                                formControlName="surname" autocomplete="off">
-                            <label for="form-surname">
-                                Surname
-                            </label>
-                            <div class="registration-form__icons">
-                                <mdb-icon [@bird] fas icon="check" class="green-text"
-                                    *ngIf="surname.valid && surname.dirty">
-                                </mdb-icon>
-                                <mdb-icon [@cancel] fas icon="times" class="red-text"
-                                    *ngIf="surname.invalid && (surname.dirty || surname.touched)">
-                                </mdb-icon>
-                            </div>
-                            <div [@errors_wrapper]
-                                *ngIf="surname.invalid && (surname.dirty || surname.touched)">
-                                <mdb-error [@errors] *ngIf="surname.errors['required']">
-                                    Required field
-                                </mdb-error>
+                                <div class="registration-form__icons">
+                                    <mdb-icon [@bird] fas icon="check" class="green-text"
+                                        *ngIf="name.valid && name.dirty">
+                                    </mdb-icon>
+                                    <mdb-icon [@cancel] fas icon="times" class="red-text"
+                                        *ngIf="name.invalid && (name.dirty || name.touched)">
+                                    </mdb-icon>
+                                </div>
+                                <div [@errors_wrapper] *ngIf="name.invalid && (name.dirty || name.touched)">
+                                    <mdb-error [@errors] *ngIf="name.errors['required']">
+                                        Required field
+                                    </mdb-error>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-12">
-                        <div class="md-form">
-                            <input mdbInput mdbValidate type="text" id="form-email" class="form-control"
-                                formControlName="email" autocomplete="off">
-                            <label for="form-email">
-                                Email
-                            </label>
-                            <div class="registration-form__icons">
-                                <mdb-icon [@bird] fas icon="check" class="green-text"
-                                    *ngIf="email.valid && email.dirty"></mdb-icon>
+                        <div class="col-12">
+                            <div class="md-form">
+                                <input mdbInput mdbValidate type="text" id="form-surname" class="form-control"
+                                    formControlName="surname" autocomplete="off">
+                                <label for="form-surname">
+                                    Surname
+                                </label>
+                                <div class="registration-form__icons">
+                                    <mdb-icon [@bird] fas icon="check" class="green-text"
+                                        *ngIf="surname.valid && surname.dirty">
+                                    </mdb-icon>
+                                    <mdb-icon [@cancel] fas icon="times" class="red-text"
+                                        *ngIf="surname.invalid && (surname.dirty || surname.touched)">
+                                    </mdb-icon>
+                                </div>
+                                <div [@errors_wrapper] *ngIf="surname.invalid && (surname.dirty || surname.touched)">
+                                    <mdb-error [@errors] *ngIf="surname.errors['required']">
+                                        Required field
+                                    </mdb-error>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="md-form">
+                                <input mdbInput mdbValidate type="text" id="form-email" class="form-control"
+                                    formControlName="email" autocomplete="off">
+                                <label for="form-email">
+                                    Email
+                                </label>
+                                <div class="registration-form__icons">
+                                    <mdb-icon [@bird] fas icon="check" class="green-text"
+                                        *ngIf="email.valid && email.dirty"></mdb-icon>
 
-                                <mdb-icon [@cancel] fas icon="times" class="red-text"
-                                    *ngIf="email.invalid && (email.dirty || email.touched)"></mdb-icon>
-                            </div>
-                            <div [@errors_wrapper] *ngIf="email.invalid && (email.dirty || email.touched)">
-                                <mdb-error [@errors] *ngIf="email.errors['required']">
-                                    Required field
-                                </mdb-error>
-                                <mdb-error [@errors] *ngIf="email.errors['pattern']">
-                                    Incorrect input
-                                </mdb-error>
+                                    <mdb-icon [@cancel] fas icon="times" class="red-text"
+                                        *ngIf="email.invalid && (email.dirty || email.touched)"></mdb-icon>
+                                </div>
+                                <div [@errors_wrapper] *ngIf="email.invalid && (email.dirty || email.touched)">
+                                    <mdb-error [@errors] *ngIf="email.errors['required']">
+                                        Required field
+                                    </mdb-error>
+                                    <mdb-error [@errors] *ngIf="email.errors['pattern']">
+                                        Incorrect input
+                                    </mdb-error>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <button [disabled]="profileData.invalid" class="w-100" type="button" mdbBtn color="dark"
-                        mdbWavesEffect (click)="changeProfileData();">
-                        Save
-                        <!-- <span [hidden]="userIsLoading$ | async">
-                            {{ 'Authentication.signIn' | translate }}
-                        </span>
-                        <mdb-icon *ngIf="userIsLoading$ | async" fas icon="spinner" class="animated rotateOut infinite">
-                        </mdb-icon> -->
-                    </button>
-                </form>
+                        <button [disabled]="profileData.invalid" class="w-100" type="button" mdbBtn color="dark"
+                            mdbWavesEffect (click)="changeProfileData();">
+                            Save
+                            <!-- <span [hidden]="userIsLoading$ | async">
+                                    {{ 'Authentication.signIn' | translate }}
+                                </span>
+                                <mdb-icon *ngIf="userIsLoading$ | async" fas icon="spinner" class="animated rotateOut infinite">
+                                </mdb-icon> -->
+                        </button>
+                    </form>
+                </div>
             </div>
-            <div class="profile-passwors">
-                <form [formGroup]="profilePassword">
-                    <div class="col-12">
-                        <div class="md-form">
-                            <input mdbInput type="password" id="form-oldPassword" class="form-control" compareTo="password"
-                                formControlName="oldPassword" autocomplete="off">
-                            <label for="form-oldPassword">
-                                Old password
-                            </label>
-                            <div class="registration-form__icons">
-                                <mdb-icon [@bird] fas icon="check" class="green-text"
-                                    *ngIf="oldPassword.valid && oldPassword.dirty">
-                                </mdb-icon>
-                                <mdb-icon [@cancel] fas icon="times" class="red-text"
-                                    *ngIf="oldPassword.invalid && (oldPassword.dirty || oldPassword.touched)">
-                                </mdb-icon>
-                            </div>
-                            <div [@errors_wrapper]
-                                *ngIf="oldPassword.invalid && (oldPassword.dirty || oldPassword.touched)">
-                                <mdb-error [@errors] *ngIf="oldPassword.errors['required']">
-                                    Required field
-                                </mdb-error>
-                                <mdb-error [@errors] *ngIf="oldPassword.errors['minlength']">
-                                        Password must be at least 8 characters long
-                                </mdb-error>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12">
-                        <div class="md-form">
-                            <input mdbInput mdbValidate type="password" id="form-password"
-                                class="form-control" formControlName="newPassword" autocomplete="off">
-                            <label for="form-password">
-                                Password
-                            </label>
-                            <div class="registration-form__icons">
-                                <mdb-icon [@bird] fas icon="check" class="green-text icon__margin"
-                                    *ngIf="newPassword.valid && newPassword.dirty">
-                                </mdb-icon>
 
-                                <mdb-icon [@cancel] fas icon="times" class="red-text icon__margin"
+            <div class="col-6">
+                <div class="profile-passwors">
+                    <form [formGroup]="profilePassword">
+                        <div class="col-12">
+                            <div class="md-form">
+                                <input mdbInput type="password" id="form-oldPassword" class="form-control"
+                                    compareTo="password" formControlName="oldPassword" autocomplete="off">
+                                <label for="form-oldPassword">
+                                    Old password
+                                </label>
+                                <div class="registration-form__icons">
+                                    <mdb-icon [@bird] fas icon="check" class="green-text"
+                                        *ngIf="oldPassword.valid && oldPassword.dirty">
+                                    </mdb-icon>
+                                    <mdb-icon [@cancel] fas icon="times" class="red-text"
+                                        *ngIf="oldPassword.invalid && (oldPassword.dirty || oldPassword.touched)">
+                                    </mdb-icon>
+                                </div>
+                                <div [@errors_wrapper]
+                                    *ngIf="oldPassword.invalid && (oldPassword.dirty || oldPassword.touched)">
+                                    <mdb-error [@errors] *ngIf="oldPassword.errors['required']">
+                                        Required field
+                                    </mdb-error>
+                                    <mdb-error [@errors] *ngIf="oldPassword.errors['minlength']">
+                                        Password must be at least 8 characters long
+                                    </mdb-error>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="md-form">
+                                <input mdbInput mdbValidate type="password" id="form-password" class="form-control"
+                                    formControlName="newPassword" autocomplete="off">
+                                <label for="form-password">
+                                    Password
+                                </label>
+                                <div class="registration-form__icons">
+                                    <mdb-icon [@bird] fas icon="check" class="green-text icon__margin"
+                                        *ngIf="newPassword.valid && newPassword.dirty">
+                                    </mdb-icon>
+
+                                    <mdb-icon [@cancel] fas icon="times" class="red-text icon__margin"
+                                        *ngIf="newPassword.invalid && (newPassword.dirty || newPassword.touched)">
+                                    </mdb-icon>
+                                </div>
+                                <div [@errors_wrapper]
                                     *ngIf="newPassword.invalid && (newPassword.dirty || newPassword.touched)">
-                                </mdb-icon>
-                            </div>
-                            <div [@errors_wrapper] *ngIf="newPassword.invalid && (newPassword.dirty || newPassword.touched)">
-                                <mdb-error [@errors] *ngIf="newPassword.errors['required']">
-                                    Required field
-                                </mdb-error>
-                                <mdb-error [@errors] *ngIf="newPassword.errors['minlength']">
-                                    Password must be at least 8 characters long
-                                </mdb-error>
+                                    <mdb-error [@errors] *ngIf="newPassword.errors['required']">
+                                        Required field
+                                    </mdb-error>
+                                    <mdb-error [@errors] *ngIf="newPassword.errors['minlength']">
+                                        Password must be at least 8 characters long
+                                    </mdb-error>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-12">
-                        <div class="md-form">
-                            <input mdbInput type="password" id="form-confirmPassword" class="form-control"
-                                compareTo="newPassword" formControlName="newPasswordConfirm" autocomplete="off">
-                            <label for="form-confirmPassword">
-                                Confirm Password
-                            </label>
-                            <div class="registration-form__icons">
-                                <mdb-icon [@bird] fas icon="check" class="green-text"
-                                    *ngIf="newPasswordConfirm.valid && newPasswordConfirm.dirty">
-                                </mdb-icon>
-                                <mdb-icon [@cancel] fas icon="times" class="red-text"
+                        <div class="col-12">
+                            <div class="md-form">
+                                <input mdbInput type="password" id="form-confirmPassword" class="form-control"
+                                    compareTo="newPassword" formControlName="newPasswordConfirm" autocomplete="off">
+                                <label for="form-confirmPassword">
+                                    Confirm Password
+                                </label>
+                                <div class="registration-form__icons">
+                                    <mdb-icon [@bird] fas icon="check" class="green-text"
+                                        *ngIf="newPasswordConfirm.valid && newPasswordConfirm.dirty">
+                                    </mdb-icon>
+                                    <mdb-icon [@cancel] fas icon="times" class="red-text"
+                                        *ngIf="newPasswordConfirm.invalid && (newPasswordConfirm.dirty || newPasswordConfirm.touched)">
+                                    </mdb-icon>
+                                </div>
+                                <div [@errors_wrapper]
                                     *ngIf="newPasswordConfirm.invalid && (newPasswordConfirm.dirty || newPasswordConfirm.touched)">
-                                </mdb-icon>
-                            </div>
-                            <div [@errors_wrapper] *ngIf="newPasswordConfirm.invalid && (newPasswordConfirm.dirty || newPasswordConfirm.touched)">
-                                <mdb-error [@errors] *ngIf="newPasswordConfirm.errors['required']">
-                                    Required field
-                                </mdb-error>
-                                <mdb-error [@errors] *ngIf="newPasswordConfirm.errors['notEqual']">
-                                    Passwords do not match
-                                </mdb-error>
+                                    <mdb-error [@errors] *ngIf="newPasswordConfirm.errors['required']">
+                                        Required field
+                                    </mdb-error>
+                                    <mdb-error [@errors] *ngIf="newPasswordConfirm.errors['notEqual']">
+                                        Passwords do not match
+                                    </mdb-error>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <button (click)="changeProfilePassword();" [disabled]="profilePassword.invalid" class="w-100" type="button" mdbBtn color="dark" mdbWavesEffect>
-                        Save
-                    </button>
-                </form>
+                        <button (click)="changeProfilePassword();" [disabled]="profilePassword.invalid" class="w-100"
+                            type="button" mdbBtn color="dark" mdbWavesEffect>
+                            Save
+                        </button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>

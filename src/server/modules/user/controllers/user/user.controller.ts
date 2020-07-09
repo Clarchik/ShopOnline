@@ -15,7 +15,7 @@ export default class UserController {
         this.app.route('/api/user/verify/:token').get(this.userService.verifyUser);
 
         /* SIGN UP */
-        this.app.route('/api/users').post(this.userService.signUpUser);
+        this.app.route('/api/users/registration').post(this.userService.signUpUser);
 
         /* SIGN IN */
         this.app.route('/api/users/login').post(this.userService.signInUser);

@@ -35,7 +35,7 @@ export class AuthenticationService {
     }
 
     public signUpUser(email: string, password: string, name: string, surname: string): Observable<any> {
-        return this.http.post(`${environment.apiPath}/api/users`, { email, password, name, surname });
+        return this.http.post(`${environment.apiPath}/api/users/registration`, { email, password, name, surname });
     }
 
     public chekUserEmail(email: string): Observable<any> {

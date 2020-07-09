@@ -1,13 +1,13 @@
-import {Component, Inject, OnDestroy} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-import {FormBuilder, FormGroup, Validators, FormArray} from '@angular/forms';
-import {Categories} from '../../../../shared/models/categories/categories';
-import {ProductDTO} from '../../../../shared/models/product/product-dto';
-import {ProductsService} from '../../../../shared/services/products/products.service';
-import {Product} from '../../../../../server/shared/interfaces/product';
-import {ToastrService} from 'ngx-toastr';
-import {forEach} from 'lodash';
-import {Subscription} from 'rxjs';
+import { Component, Inject, OnDestroy } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
+import { Categories } from '../../../../shared/models/categories/categories';
+import { ProductDTO } from '../../../../shared/models/product/product-dto';
+import { ProductsService } from '../../../../shared/services/products/products.service';
+import { Product } from '../../../../../server/shared/interfaces/product';
+import { ToastrService } from 'ngx-toastr';
+import { forEach } from 'lodash';
+import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'app-add-product-modal',
@@ -42,7 +42,7 @@ export class AddProductModalComponent implements OnDestroy {
             category: values.category,
             price: values.price,
             sale: values.sale,
-            salePrice: [{value: values.salePrice, disabled: !!!values.salePrice}],
+            salePrice: [{ value: values.salePrice, disabled: !!!values.salePrice }],
             colors: this.createFormColors(),
             sizes: this.createFormSizes(),
             slides: values.slides,
@@ -115,10 +115,10 @@ export class AddProductModalComponent implements OnDestroy {
 
     public checkSalePrice(which) {
         const regularPrice = this.controls.price.value ? Number(this.controls.price.value) : null;
-        const salePrice =  this.controls.salePrice.value ? Number(this.controls.salePrice.value) : null;
+        const salePrice = this.controls.salePrice.value ? Number(this.controls.salePrice.value) : null;
         const isOnSale = this.controls.sale;
         if ((isOnSale && salePrice !== null) && salePrice >= regularPrice) {
-            this.controls.salePrice.setErrors({greaterThanRegular: true});
+            this.controls.salePrice.setErrors({ greaterThanRegular: true });
         }
         if (which === 'price' && isOnSale && salePrice && salePrice < regularPrice) {
             this.controls.salePrice.setErrors(null);
@@ -137,7 +137,7 @@ export class AddProductModalComponent implements OnDestroy {
         return [true, false];
     }
 
-    private createFormInitValues(): {title, price, salePrice, sale, mainImage, gender, category, slides} {
+    private createFormInitValues(): { title, price, salePrice, sale, mainImage, gender, category, slides } {
         const values = {
             title: [this.data?.title ? this.data.title : null, [Validators.required]],
             category: [this.data?.category ? this.data.category : null, [Validators.required]],
@@ -170,7 +170,7 @@ export class AddProductModalComponent implements OnDestroy {
         const slides = this.fb.array([]);
         for (let i = 0; i < 6; i++) {
             const imageUrl = this.data?.slides[i]?.imageUrl ? this.data?.slides[i].imageUrl : null;
-            const object = this.fb.group({imageUrl: [imageUrl, Validators.required]});
+            const object = this.fb.group({ imageUrl: [imageUrl, Validators.required] });
             slides.push(object);
         }
         return slides;
@@ -189,7 +189,7 @@ export class AddProductModalComponent implements OnDestroy {
                 formArray.push(formGroup);
             });
         } else {
-            formArray.push(this.fb.group({name: [null, colorNameValidators], primary: [null, colorPrimaryValidators]}));
+            formArray.push(this.fb.group({ name: [null, colorNameValidators], primary: [null, colorPrimaryValidators] }));
         }
         return formArray;
     }
@@ -198,7 +198,7 @@ export class AddProductModalComponent implements OnDestroy {
         const formArray: FormArray = new FormArray([]);
         if (this.data?.sizes) {
             forEach(this.data.sizes, (size) => {
-                const formGroup =  this.fb.group({
+                const formGroup = this.fb.group({
                     size: [size.size, [Validators.required, Validators.pattern('^[0-9]*$')]],
                     quantity: [size.quantity, [Validators.required, Validators.pattern('^[0-9]*$')]]
                 });
@@ -206,7 +206,7 @@ export class AddProductModalComponent implements OnDestroy {
             });
         } else {
             formArray.push(
-                this.fb.group({size: [null, [Validators.required, Validators.pattern('^[0-9]*$')]], quantity: [null, [Validators.required, Validators.pattern('^[0-9]*$')]]})
+                this.fb.group({ size: [null, [Validators.required, Validators.pattern('^[0-9]*$')]], quantity: [null, [Validators.required, Validators.pattern('^[0-9]*$')]] })
             );
         }
         return formArray;

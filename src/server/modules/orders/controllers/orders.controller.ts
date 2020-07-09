@@ -1,7 +1,7 @@
 import { Application } from 'express';
 import { OrdersService } from '../services';
 import { verifyJWTToken, verifySession, verifyUserRole } from '../../../shared/middlewares';
-import {UserRoles} from '../../../../shared/interfaces/user-roles';
+import { UserRoles } from '../../../../shared/interfaces/user-roles';
 
 export default class OrdersController {
     private ordersService: OrdersService;
@@ -28,7 +28,7 @@ export default class OrdersController {
 
         // Change Order Status
         this.app.route('/api/updateOrderStatus')
-            .post([verifyJWTToken, verifySession, verifyUserRole([UserRoles.Manager, UserRoles.Admin])], this.ordersService.changeOrderStatus);
+            .put([verifyJWTToken, verifySession, verifyUserRole([UserRoles.Manager, UserRoles.Admin])], this.ordersService.changeOrderStatus);
 
         // Get All Countries
         this.app.route('/api/getCountries').get(this.ordersService.getCountries);

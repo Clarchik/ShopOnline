@@ -9,9 +9,10 @@ import { map, startWith, tap, debounceTime, distinctUntilChanged, delay } from '
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription, Observable, pipe } from 'rxjs';
 import * as _ from 'lodash';
-import {CountryValidator} from '../../shared/validators/country-validator/country.validator';
-import {Country} from '../../shared/interfaces/country/country';
-import {OrderDTO} from '../../shared/models/order-dto/order-dto';
+import { CountryValidator } from '../../shared/validators/country-validator/country.validator';
+import { Country } from '../../shared/interfaces/country/country';
+import { OrderDTO } from '../../shared/models/order-dto/order-dto';
+import { CountryService } from '../../shared/services/countries/country.service';
 
 @Component({
     selector: 'app-order',
@@ -40,12 +41,13 @@ export class OrderComponent implements OnInit, OnDestroy {
     constructor(
         private fb: FormBuilder,
         private orderSerivce: OrderService,
+        private countryService: CountryService,
         private store: Store<ShopState>,
         private toastr: ToastrService,
         private route: ActivatedRoute) {
-            this.countries = this.route.snapshot.data.countries;
-            this.products = this.route.snapshot.data.products;
-        }
+        this.countries = this.route.snapshot.data.countries;
+        this.products = this.route.snapshot.data.products;
+    }
 
     ngOnInit() {
         this.orderForm = this.fb.group({
@@ -146,19 +148,19 @@ export class OrderComponent implements OnInit, OnDestroy {
                 if (isStateCorrect) {
                     this.controls.state.setErrors(null);
                 } else {
-                    this.controls.state.setErrors({notInclude: true});
+                    this.controls.state.setErrors({ notInclude: true });
                     this.resetStateAndCityFields('city');
                 }
                 break;
             case 'city':
                 const isCityCorrect = !!this.cities.find((city) => city === fieldValue);
-                isCityCorrect ? this.controls.city.setErrors(null) : this.controls.city.setErrors({notInclude: true});
+                isCityCorrect ? this.controls.city.setErrors(null) : this.controls.city.setErrors({ notInclude: true });
                 break;
         }
     }
 
     private _findStatesByCountryId(id) {
-        this.subscription.add(this.orderSerivce.getStateByCountryId(id).subscribe({
+        this.subscription.add(this.countryService.getStateByCountryId(id).subscribe({
             next: (states) => {
                 this.states = states;
             }
@@ -167,7 +169,7 @@ export class OrderComponent implements OnInit, OnDestroy {
 
     private _findCitiesByStateNameAndCountryId(stateName: string) {
         const countryId = this.findCountryIdByName(this.selectedCountry);
-        this.subscription.add(this.orderSerivce.getCitiesByState(countryId, stateName).subscribe({
+        this.subscription.add(this.countryService.getCitiesByState(countryId, stateName).subscribe({
             next: (cities) => {
                 this.cities = cities;
             }

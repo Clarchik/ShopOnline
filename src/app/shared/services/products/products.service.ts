@@ -3,8 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Product } from '../../../../server/shared/interfaces/product';
 import { environment } from '../../../../environments/environment';
-import {Pager} from '../../interfaces/pager/pager';
-import {ProductDTO} from '../../models/product/product-dto';
+import { Pager } from '../../interfaces/pager/pager';
+import { ProductDTO } from '../../models/product/product-dto';
 
 @Injectable({
     providedIn: 'root'
@@ -23,14 +23,14 @@ export class ProductsService {
     }
 
     public addSingleProduct(product: ProductDTO) {
-        return this.http.post(`${environment.apiPath}/api/addProduct`, {product});
+        return this.http.post(`${environment.apiPath}/api/addProduct`, { product });
     }
 
     public getProductsToEdit(filters?): Observable<{ pager: Pager, products: Product[] }> {
-        return this.http.get<{ pager: Pager, products: Product[] }>(`${environment.apiPath}/api/productsForEdit`, {params: filters});
+        return this.http.get<{ pager: Pager, products: Product[] }>(`${environment.apiPath}/api/productsForEdit`, { params: filters });
     }
 
     public updateProductById(id: string, product: ProductDTO): Observable<any> {
-        return this.http.post(`${environment.apiPath}/api/updateProduct?id=${id}`, {product});
+        return this.http.put(`${environment.apiPath}/api/updateProduct?id=${id}`, { product });
     }
 }
