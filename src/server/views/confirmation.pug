@@ -1,0 +1,26 @@
+doctype html
+html(lang='en')
+    head
+        title Email confiramtion page
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        style
+            include style.css
+    body
+        case state
+            when 'success'
+                div(class='box success')
+                    i.fa.fa-check.icon(aria-hidden='true')
+                    h2= title
+                    p= message
+                    p.info You will be redirected after few seconds...
+            when 'error'
+                div(class='box error')
+                    i.fa.fa-times-circle.icon(aria-hidden='true')
+                    h2= title
+                    p= message
+                    p.info You will be redirected after few seconds...
+
+        script.
+            setTimeout(() => {
+                window.location = '/login'
+            }, 3500)

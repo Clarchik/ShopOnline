@@ -22,6 +22,9 @@ class App {
         (global as any).pathdir = pathdir;
         this.app = express();
 
+        this.app.set('views', `${pathdir}/server/views/`);
+        this.app.set('view engine', 'pug');
+
         // CORS
         this.cors = new Cors(this.app);
 
