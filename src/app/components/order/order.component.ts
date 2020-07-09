@@ -89,7 +89,7 @@ export class OrderComponent implements OnInit, OnDestroy {
             next: () => {
                 this.toastr.success('Your order have been saved', 'Success');
                 this.orderForm.reset();
-                this.store.dispatch(new CartActions.ClearProducts());
+                this.store.dispatch(new CartActions.ClearProducts('saved-order'));
             },
             error: () => {
                 this.toastr.error('Your order have not been saved', 'Error');

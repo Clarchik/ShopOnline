@@ -25,6 +25,7 @@ export class RemoveProduct implements Action {
 
 export class ClearProducts implements Action {
     readonly type = Actions.CLEAR_PRODUCTS;
+    constructor(public payload?: string) { }
 }
 
 export type CartActions =

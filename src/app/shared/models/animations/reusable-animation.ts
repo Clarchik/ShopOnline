@@ -1,7 +1,7 @@
-import {animation, style, query, animateChild, group, animate} from '@angular/animations';
+import { animation, style, query, animateChild, group, animate } from '@angular/animations';
 
 export const swipeRight = animation([
-    style({position: 'relative'}),
+    style({ position: 'relative' }),
     query(':enter, :leave', [
         style({
             position: 'absolute',
@@ -9,24 +9,24 @@ export const swipeRight = animation([
             right: 0,
             width: '100%'
         })
-    ]),
+    ], { optional: true }),
     query(':enter', [
-        style({right: '-100%'})
-    ]),
-    query(':leave', animateChild()),
+        style({ right: '-100%' })
+    ], { optional: true }),
+    query(':leave', animateChild(), { optional: true }),
     group([
         query(':leave', [
-            animate('{{ time }} ease-out', style({right: '100%'}))
-        ]),
+            animate('{{ time }} ease-out', style({ right: '100%' }))
+        ], { optional: true }),
         query(':enter', [
-            animate('{{ time }} ease-out', style({right: '0%'}))
-        ])
+            animate('{{ time }} ease-out', style({ right: '0%' }))
+        ], { optional: true })
     ]),
-    query(':enter', animateChild()),
+    query(':enter', animateChild(), { optional: true }),
 ]);
 
 export const swipeLeft = animation([
-    style({position: 'relative'}),
+    style({ position: 'relative' }),
     query(':enter, :leave', [
         style({
             position: 'absolute',
@@ -34,18 +34,18 @@ export const swipeLeft = animation([
             left: 0,
             width: '100%'
         })
-    ]),
+    ], { optional: true }),
     query(':enter', [
-        style({left: '-100%'})
-    ]),
-    query(':leave', animateChild()),
+        style({ left: '-100%' })
+    ], { optional: true }),
+    query(':leave', animateChild(), { optional: true }),
     group([
         query(':leave', [
-            animate('{{ time }} ease-out', style({left: '100%'}))
+            animate('{{ time }} ease-out', style({ left: '100%' }))
         ]),
         query(':enter', [
-            animate('{{ time }} ease-out', style({left: '0%'}))
+            animate('{{ time }} ease-out', style({ left: '0%' }))
         ])
     ]),
-    query(':enter', animateChild()),
+    query(':enter', animateChild(), { optional: true }),
 ])

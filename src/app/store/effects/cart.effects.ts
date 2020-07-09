@@ -5,7 +5,7 @@ import { tap, switchMap } from 'rxjs/operators';
 import { CartSelectors } from '../selectors';
 import { ShopState } from '../reducers';
 import { Store } from '@ngrx/store';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 
 
 
@@ -32,9 +32,13 @@ export class CartEffects {
     @Effect({ dispatch: false })
     clearProducts = this.actions$.pipe(
         ofType(CartActions.Actions.CLEAR_PRODUCTS),
-        tap(() => {
+        tap((data: CartActions.ClearProducts) => {
             setTimeout(() => {
-                this.router.navigate(['/main']);
+                if (data.payload && data.payload === 'saved-order') {
+                    this.router.navigate(['/orders']);
+                } else {
+                    this.router.navigate(['/main']);
+                }
             }, 1000);
         })
     );
