@@ -7,7 +7,7 @@ export class MongoDB {
 
     private setMongoConfig() {
         mongoose.Promise = global.Promise;
-        mongoose.connect('mongodb+srv://admin:adminnimda@cluster0-lppdm.azure.mongodb.net/test?retryWrites=true&w=majority',
+        mongoose.connect('URL',
             {
                 useNewUrlParser: true,
                 useUnifiedTopology: true,
